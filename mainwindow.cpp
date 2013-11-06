@@ -38,6 +38,12 @@ MainWindow::MainWindow(QWidget *parent) :
     undoButton->setText("Undo");
     connect(undoButton, SIGNAL(clicked()), this, SLOT(undoButtonClicked()));
 
+    cursorButton = new QToolButton;
+    cursorButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    cursorButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/cursor.png"));
+    cursorButton->setText("Cursor");
+    connect(cursorButton, SIGNAL(clicked()), this, SLOT(cursorButtonClicked()));
+
     colorsButton = new QToolButton;
     colorsButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     colorsButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/colors.png"));
@@ -90,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addWidget(openButton);
     ui->mainToolBar->addWidget(saveButton);
     ui->mainToolBar->addWidget(undoButton);
+    ui->mainToolBar->addWidget(cursorButton);
     ui->mainToolBar->addWidget(colorsButton);
     ui->mainToolBar->addWidget(shapesButton);
     ui->mainToolBar->addWidget(stampsButton);
@@ -117,6 +124,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(shapesWidgetShapes->pathButton, SIGNAL(clicked()), this, SLOT(pathButtonClicked()));
     connect(shapesWidgetShapes->textButton, SIGNAL(clicked()), this, SLOT(textButtonClicked()));
 
+    shapesWidgetEndPath = new ShapesWidgetEndPath();
+    connect(shapesWidgetEndPath->endPathButton, SIGNAL(clicked()), this, SLOT(endPathButtonClicked()));
+
     //Canvas
     canvas = new Canvas();
 
@@ -124,10 +134,11 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout = new QVBoxLayout;
     vLayout->addWidget(prompt);
     vLayout->addWidget(shapesWidgetShapes);
+    vLayout->addWidget(shapesWidgetEndPath);
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
-    hideWidgets();
 
+    hideWidgets();
 }
 
 MainWindow::~MainWindow()
@@ -138,7 +149,9 @@ MainWindow::~MainWindow()
 void MainWindow::hideWidgets()
 {
     shapesWidgetShapes->hide();
+    shapesWidgetEndPath->hide();
 }
+
 //Toolbar
 void MainWindow::newButtonClicked()
 {
@@ -163,6 +176,14 @@ void MainWindow::undoButtonClicked()
     QMessageBox::information(this, "title", "Undo");
 }
 
+void MainWindow::cursorButtonClicked()
+{
+    hideWidgets();
+    canvas->drawState = canvas->CURSOR;
+
+    prompt->promptLabel->setText("Click an item on the canvas to change its properties");
+}
+
 void MainWindow::colorsButtonClicked()
 {
     QMessageBox::information(this, "title", "Colors");
@@ -180,7 +201,6 @@ void MainWindow::shapesButtonClicked()
 void MainWindow::stampsButtonClicked()
 {
     QMessageBox::information(this, "title", "Stamps");
-
 }
 
 void MainWindow::brushEffectsButtonClicked()
@@ -211,21 +231,19 @@ void MainWindow::previousShapeButtonClicked()
 
 void MainWindow::lineButtonClicked()
 {
-    QMessageBox::information(this, "title", "Line");
-
-    prompt->promptLabel->setText(tr("Click two points on the canvas: 1)First end point 2)Second end point"));
-
+    canvas->shapeState = canvas->LINE;
+    prompt->promptLabel->setText(tr("Click two points on the canvas: 1)First endpoint 2)Second endpoint"));
 }
 
 void MainWindow::pointButtonClicked()
 {
-    QMessageBox::information(this, "title", "Point");
+    canvas->shapeState = canvas->POINT;
     prompt->promptLabel->setText(tr("Click one point on the canvas"));
 }
 
 void MainWindow::circleButtonClicked()
 {
-    QMessageBox::information(this, "title", "Circle");
+    canvas->shapeState = canvas->CIRCLE;
     prompt->promptLabel->setText(tr("Click two points on the canvas: 1)Top left corner 2)Bottom right corner"));
 }
 
@@ -237,34 +255,42 @@ void MainWindow::rectangleButtonClicked()
 
 void MainWindow::roundedRectangleButtonClicked()
 {
-    canvas->shapeState = canvas->NOSHAPE;
-    QMessageBox::information(this, "title", "Rounded Rectangle");
-
+    canvas->shapeState = canvas->ROUNDRECT;
+    prompt->promptLabel->setText(tr("Click two points on the canvas: 1)Top left corner 2)Bottom right corner"));
 }
 
 void MainWindow::polygonButtonClicked()
 {
-    QMessageBox::information(this, "title", "Polygon");;
+    canvas->shapeState = canvas->POLYGON;
+    prompt->promptLabel->setText(tr("Click points on the canvas to be your polygon path and click the 'end path' button to draw the polygon"));
+    shapesWidgetShapes->hide();
+    shapesWidgetEndPath->show();
 }
 
 void MainWindow::arcButtonClicked()
 {
-    QMessageBox::information(this, "title", "Arc");
+    canvas->shapeState = canvas->ARC;
+    prompt->promptLabel->setText(tr("Click two points on the canvas: 1)Top left corner 2)Bottom right corner"));
 }
 
 void MainWindow::chordButtonClicked()
 {
-    QMessageBox::information(this, "title", "Chord");
+    canvas->shapeState = canvas->CHORD;
+    prompt->promptLabel->setText(tr("Click two points on the canvas: 1)Top left corner 2)Bottom right corner"));
 }
 
 void MainWindow::pieButtonClicked()
 {
-    QMessageBox::information(this, "title", "Pie");
+    canvas->shapeState = canvas->PIE;
+    prompt->promptLabel->setText(tr("Click two points on the canvas: 1)Top left corner 2)Bottom right corner"));
 }
 
 void MainWindow::pathButtonClicked()
 {
-    QMessageBox::information(this, "title", "Path");
+    canvas->shapeState = canvas->PATH;
+    prompt->promptLabel->setText(tr("Click points on the canvas to be your path and click the 'end path' button to draw the path"));
+    shapesWidgetShapes->hide();
+    shapesWidgetEndPath->show();
 }
 
 void MainWindow::textButtonClicked()
@@ -272,5 +298,29 @@ void MainWindow::textButtonClicked()
     QMessageBox::information(this, "title", "Text");
 }
 
+void MainWindow::endPathButtonClicked()
+{
+    QPolygonF polygon;
+    for(int i = 0; i < canvas->mousePressCount; i++){
+        polygon << canvas->points[i];
+    }
+    if(canvas->shapeState == canvas->POLYGON) {
+        QGraphicsPolygonItem *polygonItem = canvas->scene->addPolygon(polygon,*(canvas->pen),*(canvas->brush));
+        polygonItem->setTransformOriginPoint(polygonItem->boundingRect().center());
+    } else if(canvas->shapeState == canvas->PATH) {
+        PathItem *pathItem = new PathItem(polygon,canvas->points,*(canvas->pen),*(canvas->brush));
+        canvas->scene->addItem(pathItem);
+        pathItem->setTransformOriginPoint(pathItem->boundingRect().center());
+
+    } else {
+    }
+
+    update();
+    canvas->shapeState = canvas->NOSHAPE;
+
+    canvas->mousePressCount = 0;
+    canvas->points.clear();
+
+}
 
 

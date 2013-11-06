@@ -8,21 +8,92 @@
 #include <QPoint>
 #include <QList>
 
-
-
-class RectangleItem : public QGraphicsItem
+class PointItem : public QGraphicsItem
 {
 public:
-    RectangleItem(QList<QPointF> & vertices);
+    PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
-    //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
 };
 
+class RoundRectangleItem : public QGraphicsItem
+{
+public:
+    RoundRectangleItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
 
+protected:
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+};
+
+class ArcItem : public QGraphicsItem
+{
+public:
+    ArcItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+
+protected:
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float startAngle;
+    float spanAngle;
+};
+
+class ChordItem : public QGraphicsItem
+{
+public:
+    ChordItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+
+protected:
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float startAngle;
+    float spanAngle;
+};
+
+class PieItem : public QGraphicsItem
+{
+public:
+    PieItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+
+protected:
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float startAngle;
+    float spanAngle;
+};
+
+class PathItem : public QGraphicsItem
+{
+public:
+    PathItem(QPolygonF &curPolygon,QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+
+protected:
+    QPolygonF *polygon;
+    QPen *pen;
+    QBrush *brush;
+    float left;
+    float right;
+    float top;
+    float bottom;
+};
 
 #endif // ITEM_H

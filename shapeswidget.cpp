@@ -91,9 +91,23 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     hLayout->addWidget(pieButton);
     hLayout->addWidget(pathButton);
     hLayout->addWidget(textButton);
-
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addSpacerItem(horizSpacer);
 
     this->setLayout(hLayout);
+}
+
+ShapesWidgetEndPath::ShapesWidgetEndPath()
+{
+    endPathButton = new QPushButton("end path");
+    endPathButton->setFixedWidth(dim);
+    endPathButton->setFixedHeight(dim);
+
+    hLayout = new QHBoxLayout;
+    hLayout->addWidget(endPathButton);
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+
+    this->setLayout(hLayout);
+
 }

@@ -38,6 +38,7 @@ private:
     QToolButton *openButton;
     QToolButton *saveButton;
     QToolButton *undoButton;
+    QToolButton *cursorButton;
     QToolButton *colorsButton;
     QToolButton *shapesButton;
     QToolButton *stampsButton;
@@ -47,9 +48,11 @@ private:
     QToolButton *insertPictureButton;
     QToolButton *closeButton;
 
-    //Tool Widgets
+ //Tool Widgets
     Prompt *prompt;
+    //Shapes
     ShapesWidgetShapes *shapesWidgetShapes;
+    ShapesWidgetEndPath *shapesWidgetEndPath;
 
     //Canvas
     Canvas *canvas;
@@ -63,6 +66,7 @@ private slots:
     void openButtonClicked();
     void saveButtonClicked();
     void undoButtonClicked();
+    void cursorButtonClicked();
     void colorsButtonClicked();
     void shapesButtonClicked();
     void stampsButtonClicked();
@@ -85,6 +89,8 @@ private slots:
     void pieButtonClicked();
     void pathButtonClicked();
     void textButtonClicked();
+
+    void endPathButtonClicked();
 
 };
 

@@ -33,7 +33,6 @@ private:
 //Select a shape
 class ShapesWidgetShapes : public ShapesWidget
 {
-    Q_OBJECT
 public:
     explicit ShapesWidgetShapes();
     QPushButton *previousShapeButton;
@@ -49,12 +48,18 @@ public:
     QPushButton *pathButton;
     QPushButton *textButton;
 
-signals:
+private:
+    QHBoxLayout *hLayout;
+};
 
-public slots:
+//End path
+class ShapesWidgetEndPath : public ShapesWidget
+{
+public:
+    explicit ShapesWidgetEndPath();
+    QPushButton *endPathButton;
 
 private:
     QHBoxLayout *hLayout;
-
 };
 #endif // SHAPESWIDGET_H
