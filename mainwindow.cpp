@@ -15,100 +15,105 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->setIconSize(QSize(dim,dim));
 
     newButton = new QToolButton;
-    newButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     newButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/new.png"));
     newButton->setText("New");
+    setToolButtonProperties(newButton);
     connect(newButton, SIGNAL(clicked()), this, SLOT(newButtonClicked()));
 
     openButton = new QToolButton;
-    openButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     openButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/open.png"));
     openButton->setText("Open");
+    setToolButtonProperties(openButton);
     connect(openButton, SIGNAL(clicked()), this, SLOT(openButtonClicked()));
 
     saveButton = new QToolButton;
-    saveButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     saveButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/save.png"));
     saveButton->setText("Save");
+    setToolButtonProperties(saveButton);
     connect(saveButton, SIGNAL(clicked()), this, SLOT(saveButtonClicked()));
 
     undoButton = new QToolButton;
-    undoButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     undoButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/undo.png"));
     undoButton->setText("Undo");
+    setToolButtonProperties(undoButton);
     connect(undoButton, SIGNAL(clicked()), this, SLOT(undoButtonClicked()));
 
     cursorButton = new QToolButton;
-    cursorButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     cursorButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/cursor.png"));
     cursorButton->setText("Cursor");
+    setToolButtonProperties(cursorButton);
     connect(cursorButton, SIGNAL(clicked()), this, SLOT(cursorButtonClicked()));
 
     colorsButton = new QToolButton;
-    colorsButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     colorsButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/colors.png"));
     colorsButton->setText("Colors");
+    setToolButtonProperties(colorsButton);
     connect(colorsButton, SIGNAL(clicked()), this, SLOT(colorsButtonClicked()));
 
     shapesButton = new QToolButton;
-    shapesButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     shapesButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/shapes.png"));
     shapesButton->setText("Shapes");
+    setToolButtonProperties(shapesButton);
     connect(shapesButton, SIGNAL(clicked()), this, SLOT(shapesButtonClicked()));
 
     stampsButton = new QToolButton;
-    stampsButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     stampsButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/stamps.png"));
     stampsButton->setText("Stamps");
+    setToolButtonProperties(stampsButton);
     connect(stampsButton, SIGNAL(clicked()), this, SLOT(stampsButtonClicked()));
 
     brushEffectsButton = new QToolButton;
-    brushEffectsButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     brushEffectsButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/brushEffects.png"));
     brushEffectsButton->setText("Brush Effects");
+    setToolButtonProperties(brushEffectsButton);
     connect(brushEffectsButton, SIGNAL(clicked()), this, SLOT(brushEffectsButtonClicked()));
 
     drawButton = new QToolButton;
-    drawButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     drawButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/draw.png"));
     drawButton->setText("Draw");
+    setToolButtonProperties(drawButton);
     connect(drawButton, SIGNAL(clicked()), this, SLOT(drawButtonClicked()));
 
     eraserButton = new QToolButton;
-    eraserButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     eraserButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/eraser.png"));
     eraserButton->setText("Eraser");
+    setToolButtonProperties(eraserButton);
     connect(eraserButton, SIGNAL(clicked()), this, SLOT(eraserButtonClicked()));
 
     insertPictureButton = new QToolButton;
-    insertPictureButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     insertPictureButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/insertPicture.png"));
     insertPictureButton->setText("Insert Picture");
+    setToolButtonProperties(insertPictureButton);
     connect(insertPictureButton, SIGNAL(clicked()), this, SLOT(insertPictureButtonClicked()));
 
     closeButton = new QToolButton;
-    closeButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     closeButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/close.png"));
     closeButton->setText("Close");
+    setToolButtonProperties(closeButton);
     connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
-
-    ui->mainToolBar->addWidget(newButton);
-    ui->mainToolBar->addWidget(openButton);
-    ui->mainToolBar->addWidget(saveButton);
-    ui->mainToolBar->addWidget(undoButton);
-    ui->mainToolBar->addWidget(cursorButton);
-    ui->mainToolBar->addWidget(colorsButton);
-    ui->mainToolBar->addWidget(shapesButton);
-    ui->mainToolBar->addWidget(stampsButton);
-    ui->mainToolBar->addWidget(brushEffectsButton);
-    ui->mainToolBar->addWidget(drawButton);
-    ui->mainToolBar->addWidget(eraserButton);
-    ui->mainToolBar->addWidget(insertPictureButton);
-    ui->mainToolBar->addWidget(closeButton);
 
 //Tool Widgets
     //Prompt
     prompt = new Prompt();
+    //Cursor
+    cursorWidgetRotate = new CursorWidgetRotate();
+    connect(cursorWidgetRotate->signButton, SIGNAL(clicked()), this, SLOT(rotateSignButtonClicked()));
+    connect(cursorWidgetRotate->reset0Button, SIGNAL(clicked()), this, SLOT(reset0ButtonClicked()));
+    connect(cursorWidgetRotate->r01Button, SIGNAL(clicked()), this, SLOT(r01ButtonClicked()));
+    connect(cursorWidgetRotate->r05Button, SIGNAL(clicked()), this, SLOT(r05ButtonClicked()));
+    connect(cursorWidgetRotate->r1Button, SIGNAL(clicked()), this, SLOT(r1ButtonClicked()));
+    connect(cursorWidgetRotate->r5Button, SIGNAL(clicked()), this, SLOT(r5ButtonClicked()));
+    connect(cursorWidgetRotate->r10Button, SIGNAL(clicked()), this, SLOT(r10ButtonClicked()));
+    connect(cursorWidgetRotate->r20Button, SIGNAL(clicked()), this, SLOT(r20ButtonClicked()));
+    connect(cursorWidgetRotate->r30Button, SIGNAL(clicked()), this, SLOT(r30ButtonClicked()));
+    connect(cursorWidgetRotate->r45Button, SIGNAL(clicked()), this, SLOT(r45ButtonClicked()));
+    connect(cursorWidgetRotate->r60Button, SIGNAL(clicked()), this, SLOT(r60ButtonClicked()));
+    connect(cursorWidgetRotate->r72Button, SIGNAL(clicked()), this, SLOT(r72ButtonClicked()));
+    connect(cursorWidgetRotate->r90Button, SIGNAL(clicked()), this, SLOT(r90ButtonClicked()));
+    connect(cursorWidgetRotate->r120Button, SIGNAL(clicked()), this, SLOT(r120ButtonClicked()));
+    connect(cursorWidgetRotate->r180Button, SIGNAL(clicked()), this, SLOT(r180ButtonClicked()));
+    connect(cursorWidgetRotate->r270Button, SIGNAL(clicked()), this, SLOT(r270ButtonClicked()));
+
     //Shapes
     shapesWidgetShapes = new ShapesWidgetShapes();
     connect(shapesWidgetShapes->previousShapeButton, SIGNAL(clicked()), this, SLOT(previousShapeButtonClicked()));
@@ -133,6 +138,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Application Layout
     vLayout = new QVBoxLayout;
     vLayout->addWidget(prompt);
+    vLayout->addWidget(cursorWidgetRotate);
     vLayout->addWidget(shapesWidgetShapes);
     vLayout->addWidget(shapesWidgetEndPath);
     vLayout->addWidget(canvas);
@@ -146,8 +152,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setToolButtonProperties(QToolButton *b)
+{
+    b->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->mainToolBar->addWidget(b);
+}
+
 void MainWindow::hideWidgets()
 {
+    cursorWidgetRotate->hide();
     shapesWidgetShapes->hide();
     shapesWidgetEndPath->hide();
 }
@@ -182,6 +195,7 @@ void MainWindow::cursorButtonClicked()
     canvas->drawState = canvas->CURSOR;
 
     prompt->promptLabel->setText("Click an item on the canvas to change its properties");
+    cursorWidgetRotate->show();
 }
 
 void MainWindow::colorsButtonClicked()
@@ -223,10 +237,93 @@ void MainWindow::insertPictureButtonClicked()
     QMessageBox::information(this, "title", "Insert Picture");
 }
 
+//Cursor
+void MainWindow::rotateSignButtonClicked()
+{
+    canvas->rotateSignPositive = !canvas->rotateSignPositive;
+    cursorWidgetRotate->toggleSign(canvas->rotateSignPositive);
+}
+
+void MainWindow::reset0ButtonClicked()
+{
+    canvas->rotateAngle = -1;
+}
+
+void MainWindow::r01ButtonClicked()
+{
+    canvas->rotateAngle = 0.1;
+}
+
+void MainWindow::r05ButtonClicked()
+{
+    canvas->rotateAngle = 0.5;
+}
+
+void MainWindow::r1ButtonClicked()
+{
+    canvas->rotateAngle = 1;
+}
+
+void MainWindow::r5ButtonClicked()
+{
+    canvas->rotateAngle = 5;
+}
+
+void MainWindow::r10ButtonClicked()
+{
+    canvas->rotateAngle = 10;
+}
+
+void MainWindow::r20ButtonClicked()
+{
+    canvas->rotateAngle = 20;
+}
+
+void MainWindow::r30ButtonClicked()
+{
+    canvas->rotateAngle = 30;
+}
+
+void MainWindow::r45ButtonClicked()
+{
+    canvas->rotateAngle = 45;
+}
+
+void MainWindow::r60ButtonClicked()
+{
+    canvas->rotateAngle = 60;
+}
+
+void MainWindow::r72ButtonClicked()
+{
+    canvas->rotateAngle = 72;
+}
+
+void MainWindow::r90ButtonClicked()
+{
+    canvas->rotateAngle = 90;
+}
+
+void MainWindow::r120ButtonClicked()
+{
+    canvas->rotateAngle = 120;
+}
+
+void MainWindow::r180ButtonClicked()
+{
+    canvas->rotateAngle = 180;
+}
+
+void MainWindow::r270ButtonClicked()
+{
+    canvas->rotateAngle = 270;
+}
+
 //Shapes
 void MainWindow::previousShapeButtonClicked()
 {
-    QMessageBox::information(this, "title", "Previous Shape");
+     canvas->shapeState = canvas->PREVSHAPE;
+     prompt->promptLabel->setText(tr("hmm"));
 }
 
 void MainWindow::lineButtonClicked()
@@ -305,13 +402,13 @@ void MainWindow::endPathButtonClicked()
         polygon << canvas->points[i];
     }
     if(canvas->shapeState == canvas->POLYGON) {
-        QGraphicsPolygonItem *polygonItem = canvas->scene->addPolygon(polygon,*(canvas->pen),*(canvas->brush));
-        polygonItem->setTransformOriginPoint(polygonItem->boundingRect().center());
+        QGraphicsPolygonItem *polygonItem = new QGraphicsPolygonItem(polygon);
+        polygonItem->setPen(*(canvas->pen));
+        polygonItem->setBrush(*(canvas->brush));
+        canvas->drawItem(polygonItem);
     } else if(canvas->shapeState == canvas->PATH) {
         PathItem *pathItem = new PathItem(polygon,canvas->points,*(canvas->pen),*(canvas->brush));
-        canvas->scene->addItem(pathItem);
-        pathItem->setTransformOriginPoint(pathItem->boundingRect().center());
-
+        canvas->drawItem(pathItem);
     } else {
     }
 
@@ -320,7 +417,6 @@ void MainWindow::endPathButtonClicked()
 
     canvas->mousePressCount = 0;
     canvas->points.clear();
-
 }
 
 

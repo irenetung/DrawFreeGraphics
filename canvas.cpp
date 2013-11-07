@@ -7,24 +7,67 @@ Canvas::Canvas()
 {
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,this->frameSize().width(),this->frameSize().height());
-
     this->setScene(scene);
     this->setRenderHint(QPainter::Antialiasing);
 
     brush = new QBrush(Qt::green);
     pen = new QPen(Qt::red);
     drawState = NONE;
+    cursorState = ROTATE;
     shapeState = LINE;
     mousePressCount = 0;
+
+    rotateAngle = 0;
+    rotateSignPositive = true;
+
+    prevShape = NULL;
+}
+
+void Canvas::drawItem(QGraphicsItem *item)
+{
+    item->setTransformOriginPoint(item->boundingRect().center());
+    scene->addItem(item);
+    update();
+    prevShape = item;
+    mousePressCount = 0;
+    points.clear();
+
+    if(drawState == SHAPE) {
+        shapeState = NOSHAPE;
+        prevShape = item;
+    } else {
+
+    }
 }
 
 void Canvas::mousePressEvent(QMouseEvent *e)
 {
     QPointF clickPoint = mapToScene(e->pos());
     QGraphicsItem *selectedItem = itemAt(e->pos());
+
     if(drawState == CURSOR) {
         if(selectedItem != NULL) {
-            selectedItem->setRotation(selectedItem->rotation()+45);
+            switch(cursorState) {
+                case SCALE:
+                    break;
+                case ROTATE:
+                    if(rotateAngle < 0) {
+                        selectedItem->setRotation(0.000);
+                    }
+                    selectedItem->setRotation(fmod(selectedItem->rotation(),360));
+                    if(rotateSignPositive == true) {
+                        selectedItem->setRotation(selectedItem->rotation()+rotateAngle);
+                    } else {
+                        selectedItem->setRotation(selectedItem->rotation()-rotateAngle);
+                    }
+                    break;
+                case SHEAR:
+                    break;
+                case TRANSLATE:
+                    break;
+                default:
+                    break;
+            }
         }
     }
     if(drawState == SHAPE) {
@@ -35,109 +78,67 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         mousePressCount++;
 
         switch(shapeState) {
+            case PREVSHAPE:
+            qDebug() << "err" << shapeState;
+                /*prevShape = new QGraphicsItem(prevShape);
+                prevShape->setTransform(prevShape->transform()*(QTransform().translate(10,10)));
+                drawItem(prevShape);*/
+                break;
             case LINE:
                 if(mousePressCount == 2) {
                     QLineF line(points[0],points[1]);
-                    QGraphicsLineItem *lineItem = scene->addLine(line,*pen);
-                    lineItem->setTransformOriginPoint(lineItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    points.clear();
-                    mousePressCount = 0;
+                    QGraphicsLineItem *lineItem = new QGraphicsLineItem(line);
+                    lineItem->setPen(*pen);
+                    drawItem(lineItem);
                 }
                 break;
             case POINT:
                 if(mousePressCount == 1) {
                     PointItem *pointItem = new PointItem(points,*pen,*brush);
-                    scene->addItem(pointItem);
-                    pointItem->setTransformOriginPoint(pointItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    mousePressCount = 0;
-                    points.clear();
+                    drawItem(pointItem);
                 }
                 break;
             case CIRCLE:
                 if(mousePressCount == 2) {
-                    QGraphicsEllipseItem *ellipseItem = scene->addEllipse(points[0].x(),points[0].y(),points[1].x()-points[0].x(),points[1].y()-points[0].y(),*pen,*brush);
-                    ellipseItem->setTransformOriginPoint(ellipseItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    points.clear();
-                    mousePressCount = 0;
+                    QRectF rect(points[0].x(),points[0].y(),points[1].x()-points[0].x(),points[1].y()-points[0].y());
+                    QGraphicsEllipseItem *ellipseItem = new QGraphicsEllipseItem(rect);
+                    ellipseItem->setPen(*pen);
+                    ellipseItem->setBrush(*brush);
+                    drawItem(ellipseItem);
                 }
                 break;
             case RECT:
                 if(mousePressCount == 2) {
                     QRectF rect(points[0].x(),points[0].y(),points[1].x()-points[0].x(),points[1].y()-points[0].y());
-                    QGraphicsRectItem *rectItem = scene->addRect(rect,*pen,*brush);
-                    rectItem->setTransformOriginPoint(rectItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    mousePressCount = 0;
-                    points.clear();
+                    QGraphicsRectItem *rectItem = new QGraphicsRectItem(rect);
+                    rectItem->setPen(*pen);
+                    rectItem->setBrush(*brush);
+                    drawItem(rectItem);
                 }
                 break;
             case ROUNDRECT:
                 if(mousePressCount == 2) {
                     RoundRectangleItem *roundRectItem = new RoundRectangleItem(points,*pen,*brush);
-                    scene->addItem(roundRectItem);
-                    roundRectItem->setTransformOriginPoint(roundRectItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    mousePressCount = 0;
-                    points.clear();
+                    drawItem(roundRectItem);
                 }
                 break;
             case ARC:
                 if(mousePressCount == 2) {
                     ArcItem *arcItem = new ArcItem(points,*pen,*brush);
-                    scene->addItem(arcItem);
-                    arcItem->setTransformOriginPoint(arcItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    mousePressCount = 0;
-                    points.clear();
+                    drawItem(arcItem);
                 }
                 break;
             case CHORD:
                 if(mousePressCount == 2) {
                     ChordItem *chordItem = new ChordItem(points,*pen,*brush);
-                    scene->addItem(chordItem);
-                    chordItem->setTransformOriginPoint(chordItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    mousePressCount = 0;
-                    points.clear();
+                    drawItem(chordItem);
                 }
                 break;
             case PIE:
                 if(mousePressCount == 2) {
                     PieItem *pieItem = new PieItem(points,*pen,*brush);
-                    scene->addItem(pieItem);
-                    pieItem->setTransformOriginPoint(pieItem->boundingRect().center());
-                    update();
-
-                    shapeState = NOSHAPE;
-
-                    mousePressCount = 0;
-                    points.clear();
+                    drawItem(pieItem);
                 }
-            break;
                 break;
             case POLYGON:
             case PATH:
@@ -145,8 +146,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             default:
                 mousePressCount = 0;
                 break;
-
         }
-        repaint();
     }
 }

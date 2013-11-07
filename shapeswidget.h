@@ -6,7 +6,6 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QPushButton>
-#include <QToolButton>
 #include <QHBoxLayout>
 
 class ShapesWidget : public QWidget
@@ -25,6 +24,8 @@ protected:
 
 protected:
     int dim;
+    QHBoxLayout *hLayout;
+    void setButtonProperties(QPushButton *b);
 
 private:
     QPixmap *parea;
@@ -47,9 +48,6 @@ public:
     QPushButton *pieButton;
     QPushButton *pathButton;
     QPushButton *textButton;
-
-private:
-    QHBoxLayout *hLayout;
 };
 
 //End path
@@ -58,8 +56,6 @@ class ShapesWidgetEndPath : public ShapesWidget
 public:
     explicit ShapesWidgetEndPath();
     QPushButton *endPathButton;
-
-private:
-    QHBoxLayout *hLayout;
 };
+
 #endif // SHAPESWIDGET_H

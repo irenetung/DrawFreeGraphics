@@ -11,6 +11,7 @@
 #include <QIcon>
 
 #include "prompt.h"
+#include "cursorwidget.h"
 #include "shapeswidget.h"
 #include "item.h"
 #include "canvas.h"
@@ -29,10 +30,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void setToolButtonProperties(QToolButton *b);
     void hideWidgets();
 
     int dim;
-
     //Toolbar
     QToolButton *newButton;
     QToolButton *openButton;
@@ -51,6 +52,7 @@ private:
  //Tool Widgets
     Prompt *prompt;
     //Shapes
+    CursorWidgetRotate *cursorWidgetRotate;
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
 
@@ -76,6 +78,24 @@ private slots:
     void insertPictureButtonClicked();
 
 //Tool Buttons
+    //Cursor
+    void rotateSignButtonClicked();
+    void reset0ButtonClicked();
+    void r01ButtonClicked();
+    void r05ButtonClicked();
+    void r1ButtonClicked();
+    void r5ButtonClicked();
+    void r10ButtonClicked();
+    void r20ButtonClicked();
+    void r30ButtonClicked();
+    void r45ButtonClicked();
+    void r60ButtonClicked();
+    void r72ButtonClicked();
+    void r90ButtonClicked();
+    void r120ButtonClicked();
+    void r180ButtonClicked();
+    void r270ButtonClicked();
+
     //Shapes
     void previousShapeButtonClicked();
     void lineButtonClicked();

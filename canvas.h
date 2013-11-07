@@ -11,25 +11,32 @@
 #include <QList>
 #include <QPoint>
 #include "item.h"
+#include <cmath>
 
 class Canvas : public QGraphicsView
 {
 public:
     enum DrawState {NONE,CURSOR,SHAPE,STAMP,DRAW,ERASER,PICTURE};
+    enum CursorState {NOCURSOR,PREVCURSOR,SCALE,ROTATE,SHEAR,TRANSLATE};
     enum ShapeState {NOSHAPE,PREVSHAPE,LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
 
     Canvas();
-    QPen *pen;
-    QBrush *brush;
-    DrawState drawState;
-    ShapeState shapeState;
-    QGraphicsItem *prevShape;
-    QGraphicsItem *curShape;
-    QList<QPointF> points;
-    QGraphicsRectItem *rectangle;
-
     QGraphicsScene *scene;
     int mousePressCount;
+    QPen *pen;
+    QBrush *brush;
+    QList<QPointF> points;
+
+    DrawState drawState;
+    CursorState cursorState;
+    ShapeState shapeState;
+    //Cursor
+    bool rotateSignPositive;
+    float rotateAngle;
+    //Shapes
+    QGraphicsItem *prevShape;
+
+    void drawItem(QGraphicsItem *item);
 
 protected:
     void mousePressEvent(QMouseEvent *e);

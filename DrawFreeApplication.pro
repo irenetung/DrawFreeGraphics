@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     prompt.cpp \
     shapeswidget.cpp \
     item.cpp \
-    canvas.cpp
+    canvas.cpp \
+    cursorwidget.cpp
 
 HEADERS  += mainwindow.h \
     prompt.h \
     shapeswidget.h \
     item.h \
-    canvas.h
+    canvas.h \
+    cursorwidget.h
 
 FORMS    += mainwindow.ui
 

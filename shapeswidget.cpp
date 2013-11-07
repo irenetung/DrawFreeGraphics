@@ -28,86 +28,59 @@ void ShapesWidget::paintEvent(QPaintEvent *e)
     }
 }
 
+void ShapesWidget::setButtonProperties(QPushButton *b)
+{
+    b->setFixedWidth(dim);
+    b->setFixedHeight(dim);
+    hLayout->addWidget(b);
+}
+
 ShapesWidgetShapes::ShapesWidgetShapes()
 {
-    previousShapeButton = new QPushButton("previous\nshape");
-    previousShapeButton->setFixedWidth(dim);
-    previousShapeButton->setFixedHeight(dim);
-
-    lineButton = new QPushButton("line");
-    lineButton->setFixedWidth(dim);
-    lineButton->setFixedHeight(dim);
-
-    pointButton = new QPushButton("point");
-    pointButton->setFixedWidth(dim);
-    pointButton->setFixedHeight(dim);
-
-    circleButton = new QPushButton("circle");
-    circleButton->setFixedWidth(dim);
-    circleButton->setFixedHeight(dim);
-
-    rectangleButton = new QPushButton("rectangle");
-    rectangleButton->setFixedWidth(dim);
-    rectangleButton->setFixedHeight(dim);
-
-    roundedRectangleButton = new QPushButton("rounded\nrectangle");
-    roundedRectangleButton->setFixedWidth(dim);
-    roundedRectangleButton->setFixedHeight(dim);
-
-    polygonButton = new QPushButton("polygon");
-    polygonButton->setFixedWidth(dim);
-    polygonButton->setFixedHeight(dim);
-
-    arcButton = new QPushButton("arc");
-    arcButton->setFixedWidth(dim);
-    arcButton->setFixedHeight(dim);
-
-    chordButton = new QPushButton("chord");
-    chordButton->setFixedWidth(dim);
-    chordButton->setFixedHeight(dim);
-
-    pieButton = new QPushButton("pie");
-    pieButton->setFixedWidth(dim);
-    pieButton->setFixedHeight(dim);
-
-    pathButton = new QPushButton("path");
-    pathButton->setFixedWidth(dim);
-    pathButton->setFixedHeight(dim);
-
-    textButton = new QPushButton("text");
-    textButton->setFixedWidth(dim);
-    textButton->setFixedHeight(dim);
-
     hLayout = new QHBoxLayout;
-    hLayout->addWidget(previousShapeButton);
-    hLayout->addWidget(lineButton);
-    hLayout->addWidget(pointButton);
-    hLayout->addWidget(circleButton);
-    hLayout->addWidget(rectangleButton);
-    hLayout->addWidget(roundedRectangleButton);
-    hLayout->addWidget(polygonButton);
-    hLayout->addWidget(arcButton);
-    hLayout->addWidget(chordButton);
-    hLayout->addWidget(pieButton);
-    hLayout->addWidget(pathButton);
-    hLayout->addWidget(textButton);
+
+    previousShapeButton = new QPushButton("previous\nshape");
+    setButtonProperties(previousShapeButton);
+    lineButton = new QPushButton("line");
+    setButtonProperties(lineButton);
+    pointButton = new QPushButton("point");
+    setButtonProperties(pointButton);
+    circleButton = new QPushButton("circle");
+    setButtonProperties(circleButton);
+    rectangleButton = new QPushButton("rectangle");
+    setButtonProperties(rectangleButton);
+    roundedRectangleButton = new QPushButton("rounded\nrectangle");
+    setButtonProperties(roundedRectangleButton);
+    polygonButton = new QPushButton("polygon");
+    setButtonProperties(polygonButton);
+    arcButton = new QPushButton("arc");
+    setButtonProperties(arcButton);
+    chordButton = new QPushButton("chord");
+    setButtonProperties(chordButton);
+    pieButton = new QPushButton("pie");
+    setButtonProperties(pieButton);
+    pathButton = new QPushButton("path");
+    setButtonProperties(pathButton);
+    textButton = new QPushButton("text");
+    setButtonProperties(textButton);
+
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addSpacerItem(horizSpacer);
-
     this->setLayout(hLayout);
 }
 
 ShapesWidgetEndPath::ShapesWidgetEndPath()
 {
-    endPathButton = new QPushButton("end path");
-    endPathButton->setFixedWidth(dim);
-    endPathButton->setFixedHeight(dim);
-
     hLayout = new QHBoxLayout;
+
+    endPathButton = new QPushButton("end path");
+    setButtonProperties(endPathButton);
+
     hLayout->addWidget(endPathButton);
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addSpacerItem(horizSpacer);
 
     this->setLayout(hLayout);
-
 }
+
+
