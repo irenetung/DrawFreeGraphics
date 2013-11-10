@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QMessageBox>
+#include <QAbstractButton>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -132,6 +133,9 @@ MainWindow::MainWindow(QWidget *parent) :
     shapesWidgetEndPath = new ShapesWidgetEndPath();
     connect(shapesWidgetEndPath->endPathButton, SIGNAL(clicked()), this, SLOT(endPathButtonClicked()));
 
+    //Stamps
+    stampsWidgetCategories = new StampsWidgetCategories();
+
     //Canvas
     canvas = new Canvas();
 
@@ -141,6 +145,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout->addWidget(cursorWidgetRotate);
     vLayout->addWidget(shapesWidgetShapes);
     vLayout->addWidget(shapesWidgetEndPath);
+    vLayout->addWidget(stampsWidgetCategories);
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
 
@@ -163,6 +168,8 @@ void MainWindow::hideWidgets()
     cursorWidgetRotate->hide();
     shapesWidgetShapes->hide();
     shapesWidgetEndPath->hide();
+    stampsWidgetCategories->hide();
+
 }
 
 //Toolbar
@@ -217,8 +224,9 @@ void MainWindow::stampsButtonClicked()
     hideWidgets();
     canvas->drawState = canvas->STAMP;
 
-    prompt->promptLabel->setText("select a stamp");
-    QMessageBox::information(this, "title", "Stamps");
+    prompt->promptLabel->setText("Select a stamp category:");
+    stampsWidgetCategories->show();
+
 }
 
 void MainWindow::brushEffectsButtonClicked()

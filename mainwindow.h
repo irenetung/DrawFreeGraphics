@@ -13,6 +13,7 @@
 #include "prompt.h"
 #include "cursorwidget.h"
 #include "shapeswidget.h"
+#include "stampswidget.h"
 #include "item.h"
 #include "canvas.h"
 
@@ -55,6 +56,9 @@ private:
     CursorWidgetRotate *cursorWidgetRotate;
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
+
+    //Stamps
+    StampsWidgetCategories *stampsWidgetCategories;
 
     //Canvas
     Canvas *canvas;
@@ -111,6 +115,8 @@ private slots:
     void textButtonClicked();
 
     void endPathButtonClicked();
+
+    //Stamps
 
 };
 
