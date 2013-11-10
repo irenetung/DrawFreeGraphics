@@ -56,6 +56,7 @@ class StampsWidgetSilhouette : public StampsWidget
 {
 public:
     explicit StampsWidgetSilhouette();
+    QPushButton *goBack;
     QPushButton *dogStamp;
     QPushButton *catStamp;
     QPushButton *birdStamp;

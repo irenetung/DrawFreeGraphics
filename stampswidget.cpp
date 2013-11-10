@@ -80,6 +80,8 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
     hLayout = new QHBoxLayout;
     button_length = 60;
 
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
     dogStamp = new QPushButton(QIcon(":/Stamps/Stamps/dog_stamp.png"), tr(""));
     setButtonProperties(dogStamp);
     catStamp = new QPushButton(QIcon(":/Stamps/Stamps/cat_stamp.png"), tr(""));
@@ -89,7 +91,7 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
     manStamp = new QPushButton(QIcon(":/Stamps/Stamps/man_stamp.png"), tr(""));
     setButtonProperties(manStamp);
     womanStamp = new QPushButton(QIcon(":/Stamps/Stamps/woman_stamp.png"), tr(""));
-    setButtonProperties(womanStamp);s
+    setButtonProperties(womanStamp);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addSpacerItem(horizSpacer);

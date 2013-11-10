@@ -118,6 +118,7 @@ private slots:
     void endPathButtonClicked();
 
     //Stamps
+    void goBackButtonClicked();
     void silhouetteButtonClicked();
 
 };

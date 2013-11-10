@@ -136,7 +136,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //Stamps
     stampsWidgetCategories = new StampsWidgetCategories();
     stampsWidgetSilhouette = new StampsWidgetSilhouette();
+
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
+        // Silhouette Stamps
+        connect(stampsWidgetSilhouette->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
 
     //Canvas
     canvas = new Canvas();
@@ -444,6 +447,16 @@ void MainWindow::silhouetteButtonClicked()
 
     prompt->promptLabel->setText("Select a stamp:");
     stampsWidgetSilhouette->show();
+}
+
+
+
+// SILHOUETTE STAMPS
+void MainWindow::goBackButtonClicked()
+{
+    hideWidgets();
+    prompt->promptLabel->setText("Select a stamp category:");
+    stampsWidgetCategories->show();
 }
 
 
