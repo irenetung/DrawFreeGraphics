@@ -44,6 +44,26 @@ StampsWidgetCategories::StampsWidgetCategories()
 
     silhouetteButton = new QPushButton("Solid Color Buttons");
     setButtonProperties(silhouetteButton);
+    animalsButton = new QPushButton("Animals");
+    setButtonProperties(animalsButton);
+    peopleButton = new QPushButton("People");
+    setButtonProperties(peopleButton);
+    buildingsButton = new QPushButton("Buildings");
+    setButtonProperties(buildingsButton);
+    sceneryButton = new QPushButton("Scenery");
+    setButtonProperties(sceneryButton);
+    facesButton = new QPushButton("Faces");
+    setButtonProperties(facesButton);
+    vehiclesButton = new QPushButton("Vehicles");
+    setButtonProperties(vehiclesButton);
+    actionsButton = new QPushButton("Actions");
+    setButtonProperties(actionsButton);
+    objectsOneButton = new QPushButton("Objects 1");
+    setButtonProperties(objectsOneButton);
+    objectsTwoButton = new QPushButton("Objects 2");
+    setButtonProperties(objectsTwoButton);
+    objectsThreeButton = new QPushButton("Objects 3");
+    setButtonProperties(objectsThreeButton);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addSpacerItem(horizSpacer);

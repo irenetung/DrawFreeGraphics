@@ -38,6 +38,17 @@ class StampsWidgetCategories : public StampsWidget
 public:
     explicit StampsWidgetCategories();
     QPushButton *silhouetteButton;
+    QPushButton *animalsButton;
+    QPushButton *peopleButton;
+    QPushButton *buildingsButton;
+    QPushButton *sceneryButton;
+    QPushButton *facesButton;
+    QPushButton *vehiclesButton;
+    QPushButton *actionsButton;
+    QPushButton *objectsOneButton;
+    QPushButton *objectsTwoButton;
+    QPushButton *objectsThreeButton;
+
 };
 
 #endif // STAMPSWIDGET_H
