@@ -59,6 +59,7 @@ private:
 
     //Stamps
     StampsWidgetCategories *stampsWidgetCategories;
+    StampsWidgetSilhouette *stampsWidgetSilhouette;
 
     //Canvas
     Canvas *canvas;
@@ -117,6 +118,7 @@ private slots:
     void endPathButtonClicked();
 
     //Stamps
+    void silhouetteButtonClicked();
 
 };
 

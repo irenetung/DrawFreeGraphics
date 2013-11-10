@@ -51,4 +51,18 @@ public:
 
 };
 
+//Stamp Category: Silhouette
+class StampsWidgetSilhouette : public StampsWidget
+{
+public:
+    explicit StampsWidgetSilhouette();
+    QPushButton *dogStamp;
+    QPushButton *catStamp;
+    QPushButton *birdStamp;
+    QPushButton *manStamp;
+    QPushButton *womanStamp;
+
+
+};
+
 #endif // STAMPSWIDGET_H

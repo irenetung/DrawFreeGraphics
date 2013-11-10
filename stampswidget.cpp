@@ -1,5 +1,6 @@
 #include "stampswidget.h"
 
+// STAMPS WIDGET
 StampsWidget::StampsWidget(QWidget *parent) :
     QWidget(parent)
 {
@@ -38,6 +39,8 @@ void StampsWidget::setButtonProperties(QPushButton *b)
     hLayout->addWidget(b);
 }
 
+
+// STAMPS WIDGET CATEGORIES
 StampsWidgetCategories::StampsWidgetCategories()
 {
     hLayout = new QHBoxLayout;
@@ -69,3 +72,30 @@ StampsWidgetCategories::StampsWidgetCategories()
     hLayout->addSpacerItem(horizSpacer);
     this->setLayout(hLayout);
 }
+
+
+// STAMPS WIDGET SILHOUETTE
+StampsWidgetSilhouette::StampsWidgetSilhouette()
+{
+    hLayout = new QHBoxLayout;
+    button_length = 60;
+
+    dogStamp = new QPushButton(QIcon(":/Stamps/Stamps/dog_stamp.png"), tr(""));
+    setButtonProperties(dogStamp);
+    catStamp = new QPushButton(QIcon(":/Stamps/Stamps/cat_stamp.png"), tr(""));
+    setButtonProperties(catStamp);
+    birdStamp = new QPushButton(QIcon(":/Stamps/Stamps/bird_stamp.png"), tr(""));
+    setButtonProperties(birdStamp);
+    manStamp = new QPushButton(QIcon(":/Stamps/Stamps/man_stamp.png"), tr(""));
+    setButtonProperties(manStamp);
+    womanStamp = new QPushButton(QIcon(":/Stamps/Stamps/woman_stamp.png"), tr(""));
+    setButtonProperties(womanStamp);s
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+    this->setLayout(hLayout);
+
+}
+
+
+

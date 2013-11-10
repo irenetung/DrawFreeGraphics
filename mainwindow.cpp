@@ -16,79 +16,79 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->setIconSize(QSize(dim,dim));
 
     newButton = new QToolButton;
-    newButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/new.png"));
+    newButton->setIcon(QIcon(":/Icons/Icons/new.png"));
     newButton->setText("New");
     setToolButtonProperties(newButton);
     connect(newButton, SIGNAL(clicked()), this, SLOT(newButtonClicked()));
 
     openButton = new QToolButton;
-    openButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/open.png"));
+    openButton->setIcon(QIcon(":/Icons/Icons/open.png"));
     openButton->setText("Open");
     setToolButtonProperties(openButton);
     connect(openButton, SIGNAL(clicked()), this, SLOT(openButtonClicked()));
 
     saveButton = new QToolButton;
-    saveButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/save.png"));
+    saveButton->setIcon(QIcon(":/Icons/Icons/save.png"));
     saveButton->setText("Save");
     setToolButtonProperties(saveButton);
     connect(saveButton, SIGNAL(clicked()), this, SLOT(saveButtonClicked()));
 
     undoButton = new QToolButton;
-    undoButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/undo.png"));
+    undoButton->setIcon(QIcon(":/Icons/Icons/undo.png"));
     undoButton->setText("Undo");
     setToolButtonProperties(undoButton);
     connect(undoButton, SIGNAL(clicked()), this, SLOT(undoButtonClicked()));
 
     cursorButton = new QToolButton;
-    cursorButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/cursor.png"));
+    cursorButton->setIcon(QIcon(":/Icons/Icons/cursor.png"));
     cursorButton->setText("Cursor");
     setToolButtonProperties(cursorButton);
     connect(cursorButton, SIGNAL(clicked()), this, SLOT(cursorButtonClicked()));
 
     colorsButton = new QToolButton;
-    colorsButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/colors.png"));
+    colorsButton->setIcon(QIcon(":/Icons/Icons/colors.png"));
     colorsButton->setText("Colors");
     setToolButtonProperties(colorsButton);
     connect(colorsButton, SIGNAL(clicked()), this, SLOT(colorsButtonClicked()));
 
     shapesButton = new QToolButton;
-    shapesButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/shapes.png"));
+    shapesButton->setIcon(QIcon(":/Icons/Icons/shapes.png"));
     shapesButton->setText("Shapes");
     setToolButtonProperties(shapesButton);
     connect(shapesButton, SIGNAL(clicked()), this, SLOT(shapesButtonClicked()));
 
     stampsButton = new QToolButton;
-    stampsButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/stamps.png"));
+    stampsButton->setIcon(QIcon(":/Icons/Icons/stamps.png"));
     stampsButton->setText("Stamps");
     setToolButtonProperties(stampsButton);
     connect(stampsButton, SIGNAL(clicked()), this, SLOT(stampsButtonClicked()));
 
     brushEffectsButton = new QToolButton;
-    brushEffectsButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/brushEffects.png"));
+    brushEffectsButton->setIcon(QIcon(":/Icons/Icons/brushEffects.png"));
     brushEffectsButton->setText("Brush Effects");
     setToolButtonProperties(brushEffectsButton);
     connect(brushEffectsButton, SIGNAL(clicked()), this, SLOT(brushEffectsButtonClicked()));
 
     drawButton = new QToolButton;
-    drawButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/draw.png"));
+    drawButton->setIcon(QIcon(":/Icons/Icons/draw.png"));
     drawButton->setText("Draw");
     setToolButtonProperties(drawButton);
     connect(drawButton, SIGNAL(clicked()), this, SLOT(drawButtonClicked()));
 
     eraserButton = new QToolButton;
-    eraserButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/eraser.png"));
+    eraserButton->setIcon(QIcon(":/Icons/Icons/eraser.png"));
     eraserButton->setText("Eraser");
     setToolButtonProperties(eraserButton);
     connect(eraserButton, SIGNAL(clicked()), this, SLOT(eraserButtonClicked()));
 
     insertPictureButton = new QToolButton;
-    insertPictureButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/insertPicture.png"));
+    insertPictureButton->setIcon(QIcon(":/Icons/Icons/insertPicture.png"));
     insertPictureButton->setText("Insert Picture");
     setToolButtonProperties(insertPictureButton);
     connect(insertPictureButton, SIGNAL(clicked()), this, SLOT(insertPictureButtonClicked()));
 
     closeButton = new QToolButton;
-    closeButton->setIcon(QIcon("C:/Qt/Tools/QtCreator/bin/DrawFreeApplication/Icons/close.png"));
+    closeButton->setIcon(QIcon(":/Icons/Icons/close.png"));
     closeButton->setText("Close");
     setToolButtonProperties(closeButton);
     connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -135,6 +135,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Stamps
     stampsWidgetCategories = new StampsWidgetCategories();
+    stampsWidgetSilhouette = new StampsWidgetSilhouette();
+    connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
 
     //Canvas
     canvas = new Canvas();
@@ -146,6 +148,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout->addWidget(shapesWidgetShapes);
     vLayout->addWidget(shapesWidgetEndPath);
     vLayout->addWidget(stampsWidgetCategories);
+    vLayout->addWidget(stampsWidgetSilhouette);
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
 
@@ -168,7 +171,9 @@ void MainWindow::hideWidgets()
     cursorWidgetRotate->hide();
     shapesWidgetShapes->hide();
     shapesWidgetEndPath->hide();
+
     stampsWidgetCategories->hide();
+    stampsWidgetSilhouette->hide();
 
 }
 
@@ -429,6 +434,16 @@ void MainWindow::endPathButtonClicked()
 
     canvas->mousePressCount = 0;
     canvas->points.clear();
+}
+
+
+// STAMPS
+void MainWindow::silhouetteButtonClicked()
+{
+    hideWidgets();
+
+    prompt->promptLabel->setText("Select a stamp:");
+    stampsWidgetSilhouette->show();
 }
 
 
