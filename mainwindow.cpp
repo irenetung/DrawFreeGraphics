@@ -214,6 +214,10 @@ void MainWindow::shapesButtonClicked()
 
 void MainWindow::stampsButtonClicked()
 {
+    hideWidgets();
+    canvas->drawState = canvas->STAMP;
+
+    prompt->promptLabel->setText("select a stamp");
     QMessageBox::information(this, "title", "Stamps");
 }
 
