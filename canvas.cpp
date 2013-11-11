@@ -12,6 +12,7 @@ Canvas::Canvas()
 
     brush = new QBrush(Qt::green);
     pen = new QPen(Qt::red);
+    color = Qt::black;
     drawState = NONE;
     cursorState = ROTATE;
     shapeState = LINE;
@@ -38,6 +39,15 @@ void Canvas::drawItem(QGraphicsItem *item)
     } else {
 
     }
+}
+
+void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
+{
+    item->setTransformOriginPoint(item->boundingRect().center());
+    scene->addItem(item);
+    update();
+    mousePressCount = 0;
+    points.clear();
 }
 
 void Canvas::mousePressEvent(QMouseEvent *e)

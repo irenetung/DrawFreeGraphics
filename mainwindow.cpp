@@ -209,7 +209,7 @@ MainWindow::MainWindow(QWidget *parent) :
         silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->cloudStamp, "cloud_stamp");
         silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->snowStamp, "snow_stamp");
         silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->rainStamp, "rain_stamp");
-        connect(silhouetteSignalMapper, SIGNAL(mapped(char const*)), this, SLOT(silhouetteStampClicked(char const*)));
+        connect(silhouetteSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(silhouetteStampClicked(const QString)));
 
 
 
@@ -530,9 +530,24 @@ void MainWindow::goBackButtonClicked()
     prompt->promptLabel->setText("Select a stamp category:");
     stampsWidgetCategories->show();
 }
-void MainWindow::silhouetteStampClicked(const char *stamp_name)
+void MainWindow::silhouetteStampClicked(const QString stamp_name)
 {
-    // DO STUFF
+
+    QString path = ":/Stamps/solidcolorstamps/Stamps/";
+    QImage im(path.append(stamp_name));
+    QImage alpha = im.alphaChannel();
+    for(int x=0; x<im.width();x++)
+    {
+        for(int y=0; y<im.height();y++)
+        {
+            if (qRed(alpha.pixel(x,y)) > 1)
+            {
+                im.setPixel( x, y, canvas->color.rgb());
+            }
+        }
+    }
+    QGraphicsPixmapItem item( QPixmap::fromImage(im));
+    canvas->drawPixmapItem(&item);
 }
 
 

@@ -120,7 +120,7 @@ private slots:
     //Stamps
     void goBackButtonClicked();
     void silhouetteButtonClicked();
-    void silhouetteStampClicked(const char *stamp_name);
+    void silhouetteStampClicked(const QString stamp_name);
 
 };
 

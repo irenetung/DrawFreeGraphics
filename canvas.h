@@ -25,6 +25,7 @@ public:
     int mousePressCount;
     QPen *pen;
     QBrush *brush;
+    QColor color;
     QList<QPointF> points;
 
     DrawState drawState;
@@ -37,6 +38,7 @@ public:
     QGraphicsItem *prevShape;
 
     void drawItem(QGraphicsItem *item);
+    void drawPixmapItem(QGraphicsPixmapItem *item);
 
 protected:
     void mousePressEvent(QMouseEvent *e);
