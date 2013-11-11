@@ -38,6 +38,10 @@ public:
     QGraphicsItem *prevShape;
 
     void drawItem(QGraphicsItem *item);
+
+    //Stamps
+    QString currentStampPath;
+    void setCurrentStamp(QString path);
     void drawPixmapItem(QGraphicsPixmapItem *item);
 
 protected:

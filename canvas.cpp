@@ -22,6 +22,8 @@ Canvas::Canvas()
     rotateSignPositive = true;
 
     prevShape = NULL;
+
+    currentStampPath = "";
 }
 
 void Canvas::drawItem(QGraphicsItem *item)
@@ -41,9 +43,15 @@ void Canvas::drawItem(QGraphicsItem *item)
     }
 }
 
+void Canvas::setCurrentStamp(QString item)
+{
+    currentStampPath = item;
+}
+
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
-    item->setTransformOriginPoint(item->boundingRect().center());
+    //item->setTransformOriginPoint(item->boundingRect().center());
+    qDebug() << item;
     scene->addItem(item);
     update();
     mousePressCount = 0;
@@ -157,5 +165,26 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 mousePressCount = 0;
                 break;
         }
+    }
+    if (drawState == STAMP)
+    {
+        points.append(clickPoint);
+        QImage im(currentStampPath);
+        QImage alpha = im.alphaChannel();
+        for(int x=0; x<im.width();x++)
+        {
+            for(int y=0; y<im.height();y++)
+            {
+                if (qRed(alpha.pixel(x,y)) > 1)
+                {
+                    im.setPixel( x, y, color.rgb());
+                }
+            }
+        }
+        QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
+        qDebug() << "click point: " << clickPoint;
+        qDebug() << "current path: " << currentStampPath;
+        qDebug() << item->pos();
+        drawPixmapItem(item);
     }
 }

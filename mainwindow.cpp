@@ -532,22 +532,9 @@ void MainWindow::goBackButtonClicked()
 }
 void MainWindow::silhouetteStampClicked(const QString stamp_name)
 {
-
     QString path = ":/Stamps/solidcolorstamps/Stamps/";
-    QImage im(path.append(stamp_name));
-    QImage alpha = im.alphaChannel();
-    for(int x=0; x<im.width();x++)
-    {
-        for(int y=0; y<im.height();y++)
-        {
-            if (qRed(alpha.pixel(x,y)) > 1)
-            {
-                im.setPixel( x, y, canvas->color.rgb());
-            }
-        }
-    }
-    QGraphicsPixmapItem item( QPixmap::fromImage(im));
-    canvas->drawPixmapItem(&item);
+    QString stamp_path = path.append(stamp_name).append(".png");
+    canvas->setCurrentStamp(stamp_path);
 }
 
 
