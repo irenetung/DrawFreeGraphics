@@ -156,4 +156,22 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
 }
 
 
+// STAMPS WIDGET ANIMALS
+StampsWidgetAnimals::StampsWidgetAnimals()
+{
+    hLayout = new QHBoxLayout;
+    button_length = 60;
+
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
+
+    // ADD BUTTONS HERE
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+    this->setLayout(hLayout);
+
+}
+
+
 

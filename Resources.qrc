@@ -49,4 +49,52 @@
         <file>Stamps/mail_stamp.png</file>
         <file>Stamps/camera_stamp.png</file>
     </qresource>
+    <qresource prefix="/Stamps/animals">
+        <file>Stamps/animal_alligator_stamp.png</file>
+        <file>Stamps/animal_ant_stamp.png</file>
+        <file>Stamps/animal_bat_stamp.png</file>
+        <file>Stamps/animal_bear_stamp.png</file>
+        <file>Stamps/animal_bee_stamp.png</file>
+        <file>Stamps/animal_bird_stamp.png</file>
+        <file>Stamps/animal_bull_stamp.png</file>
+        <file>Stamps/animal_bulldog_stamp.png</file>
+        <file>Stamps/animal_butterfly_stamp.png</file>
+        <file>Stamps/animal_cat_stamp.png</file>
+        <file>Stamps/animal_chicken_stamp.png</file>
+        <file>Stamps/animal_cow_stamp.png</file>
+        <file>Stamps/animal_crab_stamp.png</file>
+        <file>Stamps/animal_crocodile_stamp.png</file>
+        <file>Stamps/animal_deer_stamp.png</file>
+        <file>Stamps/animal_donkey_stamp.png</file>
+        <file>Stamps/animal_duck_stamp.png</file>
+        <file>Stamps/animal_eagle_stamp.png</file>
+        <file>Stamps/animal_elephant_stamp.png</file>
+        <file>Stamps/animal_fish_stamp.png</file>
+        <file>Stamps/animal_fox_stamp.png</file>
+        <file>Stamps/animal_frog_stamp.png</file>
+        <file>Stamps/animal_giraffe_stamp.png</file>
+        <file>Stamps/animal_gorilla_stamp.png</file>
+        <file>Stamps/animal_hippo_stamp.png</file>
+        <file>Stamps/animal_horse_stamp.png</file>
+        <file>Stamps/animal_insect_stamp.png</file>
+        <file>Stamps/animal_lion_stamp.png</file>
+        <file>Stamps/animal_monkey_stamp.png</file>
+        <file>Stamps/animal_moose_stamp.png</file>
+        <file>Stamps/animal_mouse_stamp.png</file>
+        <file>Stamps/animal_owl_stamp.png</file>
+        <file>Stamps/animal_panda_stamp.png</file>
+        <file>Stamps/animal_penguin_stamp.png</file>
+        <file>Stamps/animal_pig_stamp.png</file>
+        <file>Stamps/animal_rabbit_stamp.png</file>
+        <file>Stamps/animal_rhino_stamp.png</file>
+        <file>Stamps/animal_rooster_stamp.png</file>
+        <file>Stamps/animal_shark_stamp.png</file>
+        <file>Stamps/animal_sheep_stamp.png</file>
+        <file>Stamps/animal_snake_stamp.png</file>
+        <file>Stamps/animal_tiger_stamp.png</file>
+        <file>Stamps/animal_turkey_stamp.png</file>
+        <file>Stamps/animal_turtle_stamp.png</file>
+        <file>Stamps/animal_wolf_stamp.png</file>
+        <file>Stamps/animal_dog_stamp.png</file>
+    </qresource>
 </RCC>

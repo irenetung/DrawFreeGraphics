@@ -94,4 +94,14 @@ public:
 
 };
 
+//Stamp Category: Animals
+class StampsWidgetAnimals : public StampsWidget
+{
+public:
+    explicit StampsWidgetAnimals();
+    QPushButton *goBack;
+
+
+};
+
 #endif // STAMPSWIDGET_H

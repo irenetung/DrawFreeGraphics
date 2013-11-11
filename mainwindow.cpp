@@ -136,6 +136,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Stamps
     stampsWidgetCategories = new StampsWidgetCategories();
     stampsWidgetSilhouette = new StampsWidgetSilhouette();
+    stampsWidgetAnimals = new StampsWidgetAnimals();
 
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
         // Silhouette Stamps
@@ -211,6 +212,11 @@ MainWindow::MainWindow(QWidget *parent) :
         silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->rainStamp, "rain_stamp");
         connect(silhouetteSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(silhouetteStampClicked(const QString)));
 
+    connect(stampsWidgetCategories->animalsButton, SIGNAL(clicked()), this, SLOT(animalsButtonClicked()));
+        // Animals Stamps
+        connect(stampsWidgetAnimals->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
+
+
 
 
     //Canvas
@@ -224,6 +230,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout->addWidget(shapesWidgetEndPath);
     vLayout->addWidget(stampsWidgetCategories);
     vLayout->addWidget(stampsWidgetSilhouette);
+    vLayout->addWidget(stampsWidgetAnimals);
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
 
@@ -249,6 +256,7 @@ void MainWindow::hideWidgets()
 
     stampsWidgetCategories->hide();
     stampsWidgetSilhouette->hide();
+    stampsWidgetAnimals->hide();
 
 }
 
@@ -520,6 +528,13 @@ void MainWindow::silhouetteButtonClicked()
     prompt->promptLabel->setText("Select a stamp. The color tool can be used as well:");
     stampsWidgetSilhouette->show();
 }
+void MainWindow::animalsButtonClicked()
+{
+    hideWidgets();
+
+    prompt->promptLabel->setText("Select a stamp:");
+    stampsWidgetAnimals->show();
+}
 
 
 
@@ -536,5 +551,7 @@ void MainWindow::silhouetteStampClicked(const QString stamp_name)
     QString stamp_path = path.append(stamp_name).append(".png");
     canvas->setCurrentStamp(stamp_path);
 }
+
+
 
 
