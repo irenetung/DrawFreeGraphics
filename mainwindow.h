@@ -124,6 +124,7 @@ private slots:
     void animalsButtonClicked();
 
     void silhouetteStampClicked(const QString stamp_name);
+    void standardStampClicked(const QString stamp_name);
 
 };
 

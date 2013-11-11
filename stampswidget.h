@@ -100,6 +100,39 @@ class StampsWidgetAnimals : public StampsWidget
 public:
     explicit StampsWidgetAnimals();
     QPushButton *goBack;
+    QPushButton *bearStamp;
+    QPushButton *beeStamp;
+    QPushButton *birdStamp;
+    QPushButton *bullStamp;
+    QPushButton *catStamp;
+    QPushButton *cowStamp;
+    QPushButton *crabStamp;
+    QPushButton *crocodileStamp;
+    QPushButton *deerStamp;
+    QPushButton *dogStamp;
+    QPushButton *donkeyStamp;
+    QPushButton *eagleStamp;
+    QPushButton *elephantStamp;
+    QPushButton *foxStamp;
+    QPushButton *giraffeStamp;
+    QPushButton *gorillaStamp;
+    QPushButton *hippoStamp;
+    QPushButton *horseStamp;
+    QPushButton *lionStamp;
+    QPushButton *monkeyStamp;
+    QPushButton *mooseStamp;
+    QPushButton *mouseStamp;
+    QPushButton *owlStamp;
+    QPushButton *pandaStamp;
+    QPushButton *penguinStamp;
+    QPushButton *pigStamp;
+    QPushButton *rabbitStamp;
+    QPushButton *rhinoStamp;
+    QPushButton *roosterStamp;
+    QPushButton *sheepStamp;
+    QPushButton *snakeStamp;
+    QPushButton *turkeyStamp;
+    QPushButton *wolfStamp;
 
 
 };

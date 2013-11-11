@@ -24,6 +24,7 @@ Canvas::Canvas()
     prevShape = NULL;
 
     currentStampPath = "";
+    stampState = NOSTAMP;
 }
 
 void Canvas::drawItem(QGraphicsItem *item)
@@ -166,21 +167,36 @@ void Canvas::mousePressEvent(QMouseEvent *e)
     }
     if (drawState == STAMP)
     {
-        points.append(clickPoint);
-        QImage im(currentStampPath);
-        QImage alpha = im.alphaChannel();
-        for(int x=0; x<im.width();x++)
+        if (stampState == SILHOUETTE)
         {
-            for(int y=0; y<im.height();y++)
+            points.append(clickPoint);
+            QImage im(currentStampPath);
+            QImage alpha = im.alphaChannel();
+            for(int x=0; x<im.width();x++)
             {
-                if (qRed(alpha.pixel(x,y)) > 1)
+                for(int y=0; y<im.height();y++)
                 {
-                    im.setPixel( x, y, color.rgb());
+                    if (qRed(alpha.pixel(x,y)) > 1)
+                    {
+                        im.setPixel( x, y, color.rgb());
+                    }
                 }
             }
+            QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
+            item->setPos(clickPoint - item->boundingRect().center());
+            drawPixmapItem(item);
         }
-        QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
-        item->setPos(clickPoint - item->boundingRect().center());
-        drawPixmapItem(item);
+        else if (stampState == STANDARD)
+        {
+            points.append(clickPoint);
+            QImage im(currentStampPath);
+            QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
+            item->setPos(clickPoint - item->boundingRect().center());
+            drawPixmapItem(item);
+        }
+        else
+        {
+            qDebug() << "EXCEPTION: draw stamp occurred without stamp state being set";
+        }
     }
 }
