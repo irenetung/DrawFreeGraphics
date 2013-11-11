@@ -50,8 +50,6 @@ void Canvas::setCurrentStamp(QString item)
 
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
-    //item->setTransformOriginPoint(item->boundingRect().center());
-    qDebug() << item;
     scene->addItem(item);
     update();
     mousePressCount = 0;
@@ -182,9 +180,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             }
         }
         QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
-        qDebug() << "click point: " << clickPoint;
-        qDebug() << "current path: " << currentStampPath;
-        qDebug() << item->pos();
+        item->setPos(clickPoint - item->boundingRect().center());
         drawPixmapItem(item);
     }
 }
