@@ -14,4 +14,39 @@
         <file>Icons/stamps.png</file>
         <file>Icons/undo.png</file>
     </qresource>
+    <qresource prefix="/Stamps/solidcolorstamps">
+        <file>Stamps/bird_stamp.png</file>
+        <file>Stamps/dog_stamp.png</file>
+        <file>Stamps/man_stamp.png</file>
+        <file>Stamps/woman_stamp.png</file>
+        <file>Stamps/cat_stamp.png</file>
+        <file>Stamps/turtle_stamp.png</file>
+        <file>Stamps/camera_stamp.png</file>
+        <file>Stamps/alien_stamp.png</file>
+        <file>Stamps/rat_stamp.png</file>
+        <file>Stamps/heart_stamp.png</file>
+        <file>Stamps/car_stamp.png</file>
+        <file>Stamps/cup_stamp.png</file>
+        <file>Stamps/factory_stamp.png</file>
+        <file>Stamps/gas_pump_stamp.png</file>
+        <file>Stamps/gift_stamp.png</file>
+        <file>Stamps/mail_stamp.png</file>
+        <file>Stamps/security_cam_stamp.png</file>
+        <file>Stamps/truck_stamp.png</file>
+        <file>Stamps/wrench_stamp.png</file>
+        <file>Stamps/airplane_stamp.png</file>
+        <file>Stamps/bus_stamp.png</file>
+        <file>Stamps/helicopter_stamp.png</file>
+        <file>Stamps/home_stamp.png</file>
+        <file>Stamps/sun_stamp.png</file>
+        <file>Stamps/tree_stamp.png</file>
+        <file>Stamps/umbrella_stamp.png</file>
+        <file>Stamps/building_stamp.png</file>
+        <file>Stamps/capitol_stamp.png</file>
+        <file>Stamps/giraffe_stamp.png</file>
+        <file>Stamps/tree2_stamp.png</file>
+        <file>Stamps/snow_stamp.png</file>
+        <file>Stamps/cloud_stamp.png</file>
+        <file>Stamps/rain_stamp.png</file>
+    </qresource>
 </RCC>

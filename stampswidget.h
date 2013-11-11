@@ -60,13 +60,36 @@ public:
     QPushButton *dogStamp;
     QPushButton *catStamp;
     QPushButton *birdStamp;
-    QPushButton *manStamp;
-    QPushButton *womanStamp;
     QPushButton *turtleStamp;
     QPushButton *ratStamp;
+    QPushButton *giraffeStamp;
     QPushButton *alienStamp;
+    QPushButton *manStamp;
+    QPushButton *womanStamp;
     QPushButton *cameraStamp;
+    QPushButton *mailStamp;
+    QPushButton *cupStamp;
+    QPushButton *giftStamp;
+    QPushButton *umbrellaStamp;
+    QPushButton *securityCamStamp;
+    QPushButton *wrenchStamp;
     QPushButton *heartStamp;
+    QPushButton *airplaneStamp;
+    QPushButton *helicopterStamp;
+    QPushButton *carStamp;
+    QPushButton *truckStamp;
+    QPushButton *busStamp;
+    QPushButton *gasPumpStamp;
+    QPushButton *factoryStamp;
+    QPushButton *buildingStamp;
+    QPushButton *capitolStamp;
+    QPushButton *homeStamp;
+    QPushButton *sunStamp;
+    QPushButton *treeStamp;
+    QPushButton *tree2Stamp;
+    QPushButton *cloudStamp;
+    QPushButton *snowStamp;
+    QPushButton *rainStamp;
 
 
 };

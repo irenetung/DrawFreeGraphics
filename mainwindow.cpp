@@ -445,7 +445,7 @@ void MainWindow::silhouetteButtonClicked()
 {
     hideWidgets();
 
-    prompt->promptLabel->setText("Select a stamp:");
+    prompt->promptLabel->setText("Select a stamp. The color tool can be used as well:");
     stampsWidgetSilhouette->show();
 }
 
