@@ -88,10 +88,20 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
     setButtonProperties(catStamp);
     birdStamp = new QPushButton(QIcon(":/Stamps/Stamps/bird_stamp.png"), tr(""));
     setButtonProperties(birdStamp);
+    turtleStamp = new QPushButton(QIcon(":/Stamps/Stamps/turtle_stamp.png"), tr(""));
+    setButtonProperties(turtleStamp);
+    ratStamp = new QPushButton(QIcon(":/Stamps/Stamps/rat_stamp.png"), tr(""));
+    setButtonProperties(ratStamp);
+    alienStamp = new QPushButton(QIcon(":/Stamps/Stamps/alien_stamp.png"), tr(""));
+    setButtonProperties(alienStamp);
     manStamp = new QPushButton(QIcon(":/Stamps/Stamps/man_stamp.png"), tr(""));
     setButtonProperties(manStamp);
     womanStamp = new QPushButton(QIcon(":/Stamps/Stamps/woman_stamp.png"), tr(""));
     setButtonProperties(womanStamp);
+    cameraStamp = new QPushButton(QIcon(":/Stamps/Stamps/camera_stamp.png"), tr(""));
+    setButtonProperties(cameraStamp);
+    heartStamp = new QPushButton(QIcon(":/Stamps/Stamps/heart_stamp.png"), tr(""));
+    setButtonProperties(heartStamp);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addSpacerItem(horizSpacer);

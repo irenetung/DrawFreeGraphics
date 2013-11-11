@@ -62,6 +62,11 @@ public:
     QPushButton *birdStamp;
     QPushButton *manStamp;
     QPushButton *womanStamp;
+    QPushButton *turtleStamp;
+    QPushButton *ratStamp;
+    QPushButton *alienStamp;
+    QPushButton *cameraStamp;
+    QPushButton *heartStamp;
 
 
 };
