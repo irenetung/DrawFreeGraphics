@@ -114,4 +114,21 @@
         <file>Stamps/scenery_stormy_cloud_stamp.png</file>
         <file>Stamps/scenery_sun_stamp.png</file>
     </qresource>
+    <qresource prefix="/Stamps/buildings">
+        <file>Stamps/buildings_bank_stamp.png</file>
+        <file>Stamps/buildings_building_stamp.png</file>
+        <file>Stamps/buildings_castle_stamp.png</file>
+        <file>Stamps/buildings_home_four_stamp.png</file>
+        <file>Stamps/buildings_home_one_stamp.png</file>
+        <file>Stamps/buildings_home_three_stamp.png</file>
+        <file>Stamps/buildings_home_two_stamp.png</file>
+        <file>Stamps/buildings_hospital_stamp.png</file>
+        <file>Stamps/buildings_multiplex_stamp.png</file>
+        <file>Stamps/buildings_school_stamp.png</file>
+        <file>Stamps/buildings_shop_four_stamp.png</file>
+        <file>Stamps/buildings_shop_one_stamp.png</file>
+        <file>Stamps/buildings_shop_three_stamp.png</file>
+        <file>Stamps/buildings_shop_two_stamp.png</file>
+        <file>Stamps/buildings_skyscraper_stamp.png</file>
+    </qresource>
 </RCC>

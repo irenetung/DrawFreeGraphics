@@ -238,6 +238,51 @@ StampsWidgetAnimals::StampsWidgetAnimals()
 
 }
 
+// STAMPS WIDGET BUILDINGS
+StampsWidgetBuildings::StampsWidgetBuildings()
+{
+    hLayout = new QHBoxLayout;
+    button_length = 60;
+
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
+    homeOneStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_home_one_stamp.png"), tr(""));
+    setButtonProperties(homeOneStamp);
+    homeTwoStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_home_two_stamp.png"), tr(""));
+    setButtonProperties(homeTwoStamp);
+    homeThreeStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_home_three_stamp.png"), tr(""));
+    setButtonProperties(homeThreeStamp);
+    homeFourStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_home_four_stamp.png"), tr(""));
+    setButtonProperties(homeFourStamp);
+    bankStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_bank_stamp.png"), tr(""));
+    setButtonProperties(bankStamp);
+    schoolStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_school_stamp.png"), tr(""));
+    setButtonProperties(schoolStamp);
+    hospitalStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_hospital_stamp.png"), tr(""));
+    setButtonProperties(hospitalStamp);
+    skyscraperStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_skyscraper_stamp.png"), tr(""));
+    setButtonProperties(skyscraperStamp);
+    buildingStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_building_stamp.png"), tr(""));
+    setButtonProperties(buildingStamp);
+    multiplexStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_multiplex_stamp.png"), tr(""));
+    setButtonProperties(multiplexStamp);
+    shopOneStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_shop_one_stamp.png"), tr(""));
+    setButtonProperties(shopOneStamp);
+    shopTwoStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_shop_two_stamp.png"), tr(""));
+    setButtonProperties(shopTwoStamp);
+    shopThreeStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_shop_three_stamp.png"), tr(""));
+    setButtonProperties(shopThreeStamp);
+    shopFourStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_shop_four_stamp.png"), tr(""));
+    setButtonProperties(shopFourStamp);
+    castleStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_castle_stamp.png"), tr(""));
+    setButtonProperties(castleStamp);
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+    this->setLayout(hLayout);
+
+}
+
 // STAMPS WIDGET SCENERY
 StampsWidgetScenery::StampsWidgetScenery()
 {

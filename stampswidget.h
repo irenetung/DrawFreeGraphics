@@ -137,6 +137,30 @@ public:
 
 };
 
+//Stamp Category: Buildings
+class StampsWidgetBuildings : public StampsWidget
+{
+public:
+    explicit StampsWidgetBuildings();
+    QPushButton *goBack;
+    QPushButton *homeOneStamp;
+    QPushButton *homeTwoStamp;
+    QPushButton *homeThreeStamp;
+    QPushButton *homeFourStamp;
+    QPushButton *bankStamp;
+    QPushButton *schoolStamp;
+    QPushButton *hospitalStamp;
+    QPushButton *skyscraperStamp;
+    QPushButton *buildingStamp;
+    QPushButton *multiplexStamp;
+    QPushButton *shopOneStamp;
+    QPushButton *shopTwoStamp;
+    QPushButton *shopThreeStamp;
+    QPushButton *shopFourStamp;
+    QPushButton *castleStamp;
+
+};
+
 //Stamp Category: Scenery
 class StampsWidgetScenery : public StampsWidget
 {
