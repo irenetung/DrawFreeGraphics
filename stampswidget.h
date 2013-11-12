@@ -137,4 +137,28 @@ public:
 
 };
 
+//Stamp Category: Scenery
+class StampsWidgetScenery : public StampsWidget
+{
+public:
+    explicit StampsWidgetScenery();
+    QPushButton *goBack;
+    QPushButton *palmTreeStamp;
+    QPushButton *treeOneStamp;
+    QPushButton *treeTwoStamp;
+    QPushButton *christmasTreeStamp;
+    QPushButton *sunStamp;
+    QPushButton *moonStamp;
+    QPushButton *cloudStamp;
+    QPushButton *stormyCloudStamp;
+    QPushButton *starsStamp;
+    QPushButton *balloonStamp;
+    QPushButton *flowerOneStamp;
+    QPushButton *flowerTwoStamp;
+    QPushButton *flowerThreeStamp;
+    QPushButton *bouquetStamp;
+    QPushButton *statueStamp;
+
+};
+
 #endif // STAMPSWIDGET_H

@@ -238,5 +238,50 @@ StampsWidgetAnimals::StampsWidgetAnimals()
 
 }
 
+// STAMPS WIDGET SCENERY
+StampsWidgetScenery::StampsWidgetScenery()
+{
+    hLayout = new QHBoxLayout;
+    button_length = 60;
 
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
+    palmTreeStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_palm_tree_stamp.png"), tr(""));
+    setButtonProperties(palmTreeStamp);
+    treeOneStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_tree_one_stamp.png"), tr(""));
+    setButtonProperties(treeOneStamp);
+    treeTwoStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_tree_two_stamp.png"), tr(""));
+    setButtonProperties(treeTwoStamp);
+    christmasTreeStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_christmas_tree_stamp.png"), tr(""));
+    setButtonProperties(christmasTreeStamp);
+    sunStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_sun_stamp.png"), tr(""));
+    setButtonProperties(sunStamp);
+    moonStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_moon_stamp.png"), tr(""));
+    setButtonProperties(moonStamp);
+    cloudStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_cloud_stamp.png"), tr(""));
+    setButtonProperties(cloudStamp);
+    stormyCloudStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_stormy_cloud_stamp.png"), tr(""));
+    setButtonProperties(stormyCloudStamp);
+    starsStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_stars_stamp.png"), tr(""));
+    setButtonProperties(starsStamp);
+    balloonStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_balloon_stamp.png"), tr(""));
+    setButtonProperties(balloonStamp);
+    flowerOneStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_flower_one_stamp.png"), tr(""));
+    setButtonProperties(flowerOneStamp);
+    flowerTwoStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_flower_two_stamp.png"), tr(""));
+    setButtonProperties(flowerTwoStamp);
+    flowerThreeStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_flower_three_stamp.png"), tr(""));
+    setButtonProperties(flowerThreeStamp);
+    bouquetStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_bouquet_stamp.png"), tr(""));
+    setButtonProperties(bouquetStamp);
+    statueStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_statue_stamp.png"), tr(""));
+    setButtonProperties(statueStamp);
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+    this->setLayout(hLayout);
+
+
+
+}
 

@@ -137,6 +137,7 @@ MainWindow::MainWindow(QWidget *parent) :
     stampsWidgetCategories = new StampsWidgetCategories();
     stampsWidgetSilhouette = new StampsWidgetSilhouette();
     stampsWidgetAnimals = new StampsWidgetAnimals();
+    stampsWidgetScenery = new StampsWidgetScenery();
 
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
         // Silhouette Stamps
@@ -286,6 +287,9 @@ MainWindow::MainWindow(QWidget *parent) :
         animalSignalMapper->setMapping(stampsWidgetAnimals->wolfStamp, ":/Stamps/animals/Stamps/animal_wolf_stamp");
         connect(animalSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(standardStampClicked(const QString)));
 
+    connect(stampsWidgetCategories->sceneryButton, SIGNAL(clicked()), this, SLOT(sceneryButtonClicked()));
+        // Scenery Stamps
+        connect(stampsWidgetScenery->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
 
 
 
@@ -302,6 +306,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout->addWidget(stampsWidgetCategories);
     vLayout->addWidget(stampsWidgetSilhouette);
     vLayout->addWidget(stampsWidgetAnimals);
+    vLayout->addWidget(stampsWidgetScenery);
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
 
@@ -328,6 +333,7 @@ void MainWindow::hideWidgets()
     stampsWidgetCategories->hide();
     stampsWidgetSilhouette->hide();
     stampsWidgetAnimals->hide();
+    stampsWidgetScenery->hide();
 
 }
 
@@ -605,6 +611,13 @@ void MainWindow::animalsButtonClicked()
 
     prompt->promptLabel->setText("Select a stamp:");
     stampsWidgetAnimals->show();
+}
+void MainWindow::sceneryButtonClicked()
+{
+    hideWidgets();
+
+    prompt->promptLabel->setText("select a stamp:");
+    stampsWidgetScenery->show();
 }
 
 

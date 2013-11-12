@@ -97,4 +97,21 @@
         <file>Stamps/animal_wolf_stamp.png</file>
         <file>Stamps/animal_dog_stamp.png</file>
     </qresource>
+    <qresource prefix="/Stamps/scenery">
+        <file>Stamps/scenery_palm_tree_stamp.png</file>
+        <file>Stamps/scenery_tree_one_stamp.png</file>
+        <file>Stamps/scenery_christmas_tree_stamp.png</file>
+        <file>Stamps/scenery_moon_stamp.png</file>
+        <file>Stamps/scenery_tree_two_stamp.png</file>
+        <file>Stamps/scenery_bouquet_stamp.png</file>
+        <file>Stamps/scenery_stars_stamp.png</file>
+        <file>Stamps/scenery_statue_stamp.png</file>
+        <file>Stamps/scenery_balloon_stamp.png</file>
+        <file>Stamps/scenery_cloud_stamp.png</file>
+        <file>Stamps/scenery_flower_one_stamp.png</file>
+        <file>Stamps/scenery_flower_three_stamp.png</file>
+        <file>Stamps/scenery_flower_two_stamp.png</file>
+        <file>Stamps/scenery_stormy_cloud_stamp.png</file>
+        <file>Stamps/scenery_sun_stamp.png</file>
+    </qresource>
 </RCC>
