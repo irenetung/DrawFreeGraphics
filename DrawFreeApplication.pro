@@ -18,14 +18,18 @@ SOURCES += main.cpp\
     shapeswidget.cpp \
     item.cpp \
     canvas.cpp \
-    cursorwidget.cpp
+    cursorwidget.cpp \
+    brusheffectswidget.cpp \
+    drawwidget.cpp
 
 HEADERS  += mainwindow.h \
     prompt.h \
     shapeswidget.h \
     item.h \
     canvas.h \
-    cursorwidget.h
+    cursorwidget.h \
+    brusheffectswidget.h \
+    drawwidget.h
 
 FORMS    += mainwindow.ui
 

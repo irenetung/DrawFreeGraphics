@@ -113,7 +113,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(cursorWidgetRotate->r120Button, SIGNAL(clicked()), this, SLOT(r120ButtonClicked()));
     connect(cursorWidgetRotate->r180Button, SIGNAL(clicked()), this, SLOT(r180ButtonClicked()));
     connect(cursorWidgetRotate->r270Button, SIGNAL(clicked()), this, SLOT(r270ButtonClicked()));
-
     //Shapes
     shapesWidgetShapes = new ShapesWidgetShapes();
     connect(shapesWidgetShapes->previousShapeButton, SIGNAL(clicked()), this, SLOT(previousShapeButtonClicked()));
@@ -131,7 +130,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     shapesWidgetEndPath = new ShapesWidgetEndPath();
     connect(shapesWidgetEndPath->endPathButton, SIGNAL(clicked()), this, SLOT(endPathButtonClicked()));
-
+    //Brush Effects
+    brushEffectsWidgetBrushEffects = new BrushEffectsWidgetBrushEffects();
+    connect(brushEffectsWidgetBrushEffects->paintButton, SIGNAL(clicked()), this, SLOT(paintButtonClicked()));
+    connect(brushEffectsWidgetBrushEffects->waterColorButton, SIGNAL(clicked()), this, SLOT(waterColorButtonClicked()));
+    connect(brushEffectsWidgetBrushEffects->calligraphyButton, SIGNAL(clicked()), this, SLOT(calligraphyButtonClicked()));
+    connect(brushEffectsWidgetBrushEffects->pencilButton, SIGNAL(clicked()), this, SLOT(pencilButtonClicked()));
+    connect(brushEffectsWidgetBrushEffects->sprayPaintButton, SIGNAL(clicked()), this, SLOT(sprayPaintButtonClicked()));
     //Canvas
     canvas = new Canvas();
 
@@ -141,6 +146,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout->addWidget(cursorWidgetRotate);
     vLayout->addWidget(shapesWidgetShapes);
     vLayout->addWidget(shapesWidgetEndPath);
+    vLayout->addWidget(brushEffectsWidgetBrushEffects);
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
 
@@ -163,6 +169,7 @@ void MainWindow::hideWidgets()
     cursorWidgetRotate->hide();
     shapesWidgetShapes->hide();
     shapesWidgetEndPath->hide();
+    brushEffectsWidgetBrushEffects->hide();
 }
 
 //Toolbar
@@ -219,12 +226,18 @@ void MainWindow::stampsButtonClicked()
 
 void MainWindow::brushEffectsButtonClicked()
 {
-    QMessageBox::information(this, "title", "Brush Effects");
+    hideWidgets();
+
+    prompt->promptLabel->setText("Select a brush effect");
+    brushEffectsWidgetBrushEffects->show();
 }
 
 void MainWindow::drawButtonClicked()
 {
-    QMessageBox::information(this, "title", "Draw");
+    hideWidgets();
+    canvas->drawState = canvas->DRAW;
+
+    prompt->promptLabel->setText("Click on the canvas to start drawing. Click a second time on the canvas to end drawing.");
 }
 
 void MainWindow::eraserButtonClicked()
@@ -417,6 +430,31 @@ void MainWindow::endPathButtonClicked()
 
     canvas->mousePressCount = 0;
     canvas->points.clear();
+}
+
+void MainWindow::paintButtonClicked()
+{
+    QMessageBox::information(this, "title", "paint");
+}
+
+void MainWindow::waterColorButtonClicked()
+{
+    QMessageBox::information(this, "title", "water color");
+}
+
+void MainWindow::calligraphyButtonClicked()
+{
+    QMessageBox::information(this, "title", "calligraphy");
+}
+
+void MainWindow::pencilButtonClicked()
+{
+    QMessageBox::information(this, "title", "pencil");
+}
+
+void MainWindow::sprayPaintButtonClicked()
+{
+    QMessageBox::information(this, "title", "spray paint");
 }
 
 

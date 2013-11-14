@@ -21,8 +21,6 @@ public slots:
 protected:
     void resizeEvent(QResizeEvent *e);
     void paintEvent(QPaintEvent *e);
-
-protected:
     int dim;
     QHBoxLayout *hLayout;
     void setButtonProperties(QPushButton *b);

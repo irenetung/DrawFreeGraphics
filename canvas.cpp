@@ -44,7 +44,9 @@ void Canvas::mousePressEvent(QMouseEvent *e)
 {
     QPointF clickPoint = mapToScene(e->pos());
     QGraphicsItem *selectedItem = itemAt(e->pos());
+    if(drawState == DRAW) {
 
+    }
     if(drawState == CURSOR) {
         if(selectedItem != NULL) {
             switch(cursorState) {
@@ -72,11 +74,8 @@ void Canvas::mousePressEvent(QMouseEvent *e)
     }
     if(drawState == SHAPE) {
         points.append(clickPoint);
-        qDebug() << "shapestate" << shapeState;
-        qDebug() << "mousePressCount" << mousePressCount;
-        qDebug() << "clicks " << clickPoint.x() << " " << clickPoint.y() <<"\n";
         mousePressCount++;
-
+ qDebug() << "err" ;
         switch(shapeState) {
             case PREVSHAPE:
             qDebug() << "err" << shapeState;

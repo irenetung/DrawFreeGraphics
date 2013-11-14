@@ -13,6 +13,7 @@
 #include "prompt.h"
 #include "cursorwidget.h"
 #include "shapeswidget.h"
+#include "brusheffectswidget.h"
 #include "item.h"
 #include "canvas.h"
 
@@ -51,11 +52,13 @@ private:
 
  //Tool Widgets
     Prompt *prompt;
-    //Shapes
+    //Cursor
     CursorWidgetRotate *cursorWidgetRotate;
+    //Shapes
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
-
+    //Brush Effects
+    BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;
     //Canvas
     Canvas *canvas;
 
@@ -111,7 +114,12 @@ private slots:
     void textButtonClicked();
 
     void endPathButtonClicked();
-
+    //Brush Effects
+    void paintButtonClicked();
+    void waterColorButtonClicked();
+    void calligraphyButtonClicked();
+    void pencilButtonClicked();
+    void sprayPaintButtonClicked();
 };
 
 #endif // MAINWINDOW_H
