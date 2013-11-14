@@ -12,6 +12,7 @@ Canvas::Canvas()
 
     brush = new QBrush(Qt::green);
     pen = new QPen(Qt::red);
+    color = Qt::black;
     drawState = NONE;
     cursorState = ROTATE;
     shapeState = LINE;
@@ -21,6 +22,9 @@ Canvas::Canvas()
     rotateSignPositive = true;
 
     prevShape = NULL;
+
+    currentStampPath = "";
+    stampState = NOSTAMP;
 }
 
 void Canvas::drawItem(QGraphicsItem *item)
@@ -38,6 +42,19 @@ void Canvas::drawItem(QGraphicsItem *item)
     } else {
 
     }
+}
+
+void Canvas::setCurrentStamp(QString item)
+{
+    currentStampPath = item;
+}
+
+void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
+{
+    scene->addItem(item);
+    update();
+    mousePressCount = 0;
+    points.clear();
 }
 
 void Canvas::mousePressEvent(QMouseEvent *e)
@@ -145,6 +162,40 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             default:
                 mousePressCount = 0;
                 break;
+        }
+    }
+    if (drawState == STAMP)
+    {
+        if (stampState == SILHOUETTE)
+        {
+            points.append(clickPoint);
+            QImage im(currentStampPath);
+            QImage alpha = im.alphaChannel();
+            for(int x=0; x<im.width();x++)
+            {
+                for(int y=0; y<im.height();y++)
+                {
+                    if (qRed(alpha.pixel(x,y)) > 1)
+                    {
+                        im.setPixel( x, y, color.rgb());
+                    }
+                }
+            }
+            QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
+            item->setPos(clickPoint - item->boundingRect().center());
+            drawPixmapItem(item);
+        }
+        else if (stampState == STANDARD)
+        {
+            points.append(clickPoint);
+            QImage im(currentStampPath);
+            QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
+            item->setPos(clickPoint - item->boundingRect().center());
+            drawPixmapItem(item);
+        }
+        else
+        {
+            qDebug() << "EXCEPTION: draw stamp occurred without stamp state being set";
         }
     }
 }

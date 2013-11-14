@@ -14,6 +14,7 @@
 #include "cursorwidget.h"
 #include "shapeswidget.h"
 #include "brusheffectswidget.h"
+#include "stampswidget.h"
 #include "item.h"
 #include "canvas.h"
 
@@ -57,8 +58,17 @@ private:
     //Shapes
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
+
     //Brush Effects
     BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;
+
+    //Stamps
+    StampsWidgetCategories *stampsWidgetCategories;
+    StampsWidgetSilhouette *stampsWidgetSilhouette;
+    StampsWidgetAnimals *stampsWidgetAnimals;
+    StampsWidgetBuildings *stampsWidgetBuildings;
+    StampsWidgetScenery *stampsWidgetScenery;
+
     //Canvas
     Canvas *canvas;
 
@@ -114,12 +124,25 @@ private slots:
     void textButtonClicked();
 
     void endPathButtonClicked();
+
     //Brush Effects
     void paintButtonClicked();
     void waterColorButtonClicked();
     void calligraphyButtonClicked();
     void pencilButtonClicked();
     void sprayPaintButtonClicked();
+
+    //Stamps
+    void goBackButtonClicked();
+    void silhouetteButtonClicked();
+    void animalsButtonClicked();
+    void buildingsButtonClicked();
+    void sceneryButtonClicked();
+
+    void silhouetteStampClicked(const QString stamp_name);
+    void standardStampClicked(const QString stamp_name);
+
+
 };
 
 #endif // MAINWINDOW_H

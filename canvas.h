@@ -38,12 +38,14 @@ public:
     enum DrawState {NONE,CURSOR,SHAPE,STAMP,DRAW,ERASER,PICTURE};
     enum CursorState {NOCURSOR,PREVCURSOR,SCALE,ROTATE,SHEAR,TRANSLATE};
     enum ShapeState {NOSHAPE,PREVSHAPE,LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
+    enum StampState {NOSTAMP, SILHOUETTE, STANDARD};
 
     Canvas();
     QGraphicsScene *scene;
     int mousePressCount;
     QPen *pen;
     QBrush *brush;
+    QColor color;
     QList<QPointF> points;
 
     DrawState drawState;
@@ -58,8 +60,15 @@ public:
     void drawItem(QGraphicsItem *item);
 
 protected:  
-   /* void paintEvent(QPaintEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);*/
+ 
+    //Stamps
+    StampState stampState;
+    QString currentStampPath;
+    void setCurrentStamp(QString path);
+    void drawPixmapItem(QGraphicsPixmapItem *item);
+
+
+protected:
     void mousePressEvent(QMouseEvent *e);
 private:
     /*int gx[N_POINTS],gy[N_POINTS];
