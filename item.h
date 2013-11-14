@@ -96,4 +96,21 @@ protected:
     float bottom;
 };
 
+class DrawItem : public QGraphicsItem
+{
+public:
+    DrawItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+
+protected:
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float left;
+    float right;
+    float top;
+    float bottom;
+};
+
 #endif // ITEM_H

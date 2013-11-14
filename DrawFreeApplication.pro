@@ -19,12 +19,10 @@ SOURCES += main.cpp\
     item.cpp \
     canvas.cpp \
     cursorwidget.cpp \
-<<<<<<< HEAD
+    stampswidget.cpp \
     brusheffectswidget.cpp \
-    drawwidget.cpp
-=======
+    drawwidget.cpp \
     stampswidget.cpp
->>>>>>> 4b8faeb1c9a7e7c2e86f0ac0c9badfc60af8b276
 
 HEADERS  += mainwindow.h \
     prompt.h \
@@ -32,12 +30,10 @@ HEADERS  += mainwindow.h \
     item.h \
     canvas.h \
     cursorwidget.h \
-<<<<<<< HEAD
+    stampswidget.h \
     brusheffectswidget.h \
-    drawwidget.h
-=======
+    drawwidget.h \
     stampswidget.h
->>>>>>> 4b8faeb1c9a7e7c2e86f0ac0c9badfc60af8b276
 
 FORMS    += mainwindow.ui
 

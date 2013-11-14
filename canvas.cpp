@@ -5,6 +5,7 @@
 
 Canvas::Canvas()
 {
+    setMouseTracking(true);
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,this->frameSize().width(),this->frameSize().height());
     this->setScene(scene);
@@ -18,8 +19,19 @@ Canvas::Canvas()
     shapeState = LINE;
     mousePressCount = 0;
 
+    translateValue = 0;
+    translateSignPositive = true;
+    translateDirectionHorizontal = true;
+    scaleFactor = 1.0;
+    scaleSignPositive = true;
+    stretchSignPositive = true;
+    stretchDirectionHorizontal = true;
+    stretchValue = 0;
     rotateAngle = 0;
     rotateSignPositive = true;
+    shearSignPositive = true;
+    shearDirectionHorizontal = true;
+    shearAngle = 0;
 
     prevShape = NULL;
 
@@ -57,17 +69,74 @@ void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
     points.clear();
 }
 
+void Canvas::mouseMoveEvent(QMouseEvent *e)
+{
+    if(drawState == DRAW) {
+        if(mousePressCount == 1) {
+            QPointF movePoint = mapToScene(e->pos());
+            points.append(movePoint);
+        }
+    }
+}
+
 void Canvas::mousePressEvent(QMouseEvent *e)
 {
     QPointF clickPoint = mapToScene(e->pos());
     QGraphicsItem *selectedItem = itemAt(e->pos());
     if(drawState == DRAW) {
-
+        mousePressCount++;
+        if(mousePressCount == 2) {
+            DrawItem *draw = new DrawItem(points,*pen,*brush);
+            drawItem(draw);
+            mousePressCount = 0;
+        }
     }
     if(drawState == CURSOR) {
         if(selectedItem != NULL) {
             switch(cursorState) {
+                case TRANSLATE:
+                    if(translateSignPositive == true) {
+                        if(translateDirectionHorizontal) {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(translateValue,0)));
+                        } else {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(0,translateValue)));
+                        }
+                    } else {
+                        if(translateDirectionHorizontal) {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(-translateValue,0)));
+                        } else {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(0,-translateValue)));
+                        }
+                    }
+                    break;
                 case SCALE:
+                    if(scaleFactor < 0) {
+                        selectedItem->setScale(1.0);
+                        break;
+                    }
+                    if(scaleSignPositive == true) {
+
+                        selectedItem->setScale(selectedItem->scale()+scaleFactor);
+                    } else {
+                        if(selectedItem->scale()-scaleFactor > 0) {
+                            selectedItem->setScale(selectedItem->scale()-scaleFactor);
+                        }
+                    }
+                    break;
+                case STRETCH:
+                    if(stretchSignPositive == true) {
+                        if(stretchDirectionHorizontal) {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().scale(1+stretchValue,1)));
+                        } else {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().scale(1,stretchValue)));
+                        }
+                    } else {
+                        if(stretchDirectionHorizontal) {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().scale(-stretchValue,1)));
+                        } else {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().scale(1,-stretchValue)));
+                        }
+                    }
                     break;
                 case ROTATE:
                     if(rotateAngle < 0) {
@@ -81,8 +150,20 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     }
                     break;
                 case SHEAR:
-                    break;
-                case TRANSLATE:
+                    if(shearSignPositive == true) {
+                        if(shearDirectionHorizontal) {
+                            qDebug() << "shearing";
+                            selectedItem->setTransform(QTransform().shear(.01,0), true);
+                        } else {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().shear(0,shearAngle)));
+                        }
+                    } else {
+                        if(shearDirectionHorizontal) {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().shear(-shearAngle,0)));
+                        } else {
+                            selectedItem->setTransform(selectedItem->transform()*(QTransform().shear(0,-shearAngle)));
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -92,13 +173,10 @@ void Canvas::mousePressEvent(QMouseEvent *e)
     if(drawState == SHAPE) {
         points.append(clickPoint);
         mousePressCount++;
- qDebug() << "err" ;
+
         switch(shapeState) {
             case PREVSHAPE:
-            qDebug() << "err" << shapeState;
-                /*prevShape = new QGraphicsItem(prevShape);
-                prevShape->setTransform(prevShape->transform()*(QTransform().translate(10,10)));
-                drawItem(prevShape);*/
+
                 break;
             case LINE:
                 if(mousePressCount == 2) {
@@ -199,3 +277,5 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         }
     }
 }
+
+

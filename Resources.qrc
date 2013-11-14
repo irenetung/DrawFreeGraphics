@@ -13,6 +13,7 @@
         <file>Icons/shapes.png</file>
         <file>Icons/stamps.png</file>
         <file>Icons/undo.png</file>
+        <file>Icons/cursor.png</file>
     </qresource>
     <qresource prefix="/Stamps/solidcolorstamps">
         <file>Stamps/bird_stamp.png</file>

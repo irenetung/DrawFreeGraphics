@@ -54,7 +54,11 @@ private:
  //Tool Widgets
     Prompt *prompt;
     //Cursor
+    CursorWidgetTranslate *cursorWidgetTranslate;
+    CursorWidgetScale *cursorWidgetScale;
+    CursorWidgetStretch *cursorWidgetStretch;
     CursorWidgetRotate *cursorWidgetRotate;
+    CursorWidgetShear *cursorWidgetShear;
     //Shapes
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
@@ -92,6 +96,37 @@ private slots:
 
 //Tool Buttons
     //Cursor
+    void translateButtonClicked();
+    void scaleButtonClicked();
+    void rotateButtonClicked();
+    void shearButtonClicked();
+    void stretchButtonClicked();
+
+    void translateSignButtonClicked();
+    void translateDirectionButtonClicked();
+    void t05ButtonButtonClicked();
+    void t1ButtonButtonClicked();
+    void t5ButtonButtonClicked();
+    void t10ButtonButtonClicked();
+    void t20ButtonButtonClicked();
+    void t50ButtonButtonClicked();
+    void t100ButtonButtonClicked();
+
+    void scaleSignButtonClicked();
+    void scaleResetButtonClicked();
+    void s05ButtonClicked();
+    void s1ButtonClicked();
+    void s5ButtonClicked();
+    void s10ButtonClicked();
+    void s20ButtonClicked();
+    void s50ButtonClicked();
+    void s100ButtonClicked();
+
+    void stretchSignButtonClicked();
+    void stretchDirectionButtonClicked();
+    void st05ButtonButtonClicked();
+    void st1ButtonButtonClicked();
+
     void rotateSignButtonClicked();
     void reset0ButtonClicked();
     void r01ButtonClicked();
@@ -108,6 +143,10 @@ private slots:
     void r120ButtonClicked();
     void r180ButtonClicked();
     void r270ButtonClicked();
+
+    void shearSignButtonClicked();
+    void shearDirectionButtonClicked();
+    void sh1ButtonButtonClicked();
 
     //Shapes
     void previousShapeButtonClicked();

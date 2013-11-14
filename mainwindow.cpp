@@ -96,9 +96,60 @@ MainWindow::MainWindow(QWidget *parent) :
 //Tool Widgets
     //Prompt
     prompt = new Prompt();
-    //Cursor
+//Cursor
+    cursorWidgetTranslate = new CursorWidgetTranslate();
+    cursorWidgetScale = new CursorWidgetScale();
     cursorWidgetRotate = new CursorWidgetRotate();
+    cursorWidgetShear = new CursorWidgetShear();
+    cursorWidgetStretch = new CursorWidgetStretch();
+    //Translate
+    connect(cursorWidgetTranslate->scaleButton, SIGNAL(clicked()), this, SLOT(scaleButtonClicked()));
+    connect(cursorWidgetTranslate->stretchButton, SIGNAL(clicked()), this, SLOT(stretchButtonClicked()));
+    connect(cursorWidgetTranslate->rotateButton, SIGNAL(clicked()), this, SLOT(rotateButtonClicked()));
+    connect(cursorWidgetTranslate->shearButton, SIGNAL(clicked()), this, SLOT(shearButtonClicked()));
+
+    connect(cursorWidgetTranslate->signButton, SIGNAL(clicked()), this, SLOT(translateSignButtonClicked()));
+    connect(cursorWidgetTranslate->directionButton, SIGNAL(clicked()), this, SLOT(translateDirectionButtonClicked()));
+    connect(cursorWidgetTranslate->t05Button, SIGNAL(clicked()), this, SLOT(t05ButtonButtonClicked()));
+    connect(cursorWidgetTranslate->t1Button, SIGNAL(clicked()), this, SLOT(t1ButtonButtonClicked()));
+    connect(cursorWidgetTranslate->t5Button, SIGNAL(clicked()), this, SLOT(t5ButtonButtonClicked()));
+    connect(cursorWidgetTranslate->t10Button, SIGNAL(clicked()), this, SLOT(t10ButtonButtonClicked()));
+    connect(cursorWidgetTranslate->t20Button, SIGNAL(clicked()), this, SLOT(t20ButtonButtonClicked()));
+    connect(cursorWidgetTranslate->t50Button, SIGNAL(clicked()), this, SLOT(t50ButtonButtonClicked()));
+    connect(cursorWidgetTranslate->t100Button, SIGNAL(clicked()), this, SLOT(t100ButtonButtonClicked()));
+
+    //Scale
+    connect(cursorWidgetScale->translateButton, SIGNAL(clicked()), this, SLOT(translateButtonClicked()));
+    connect(cursorWidgetScale->stretchButton, SIGNAL(clicked()), this, SLOT(stretchButtonClicked()));
+    connect(cursorWidgetScale->rotateButton, SIGNAL(clicked()), this, SLOT(rotateButtonClicked()));
+    connect(cursorWidgetScale->shearButton, SIGNAL(clicked()), this, SLOT(shearButtonClicked()));
+
+    connect(cursorWidgetScale->signButton, SIGNAL(clicked()), this, SLOT(scaleSignButtonClicked()));
+    connect(cursorWidgetScale->sResetButton, SIGNAL(clicked()), this, SLOT(scaleResetButtonClicked()));
+    connect(cursorWidgetScale->s05Button, SIGNAL(clicked()), this, SLOT(s05ButtonClicked()));
+    connect(cursorWidgetScale->s1Button, SIGNAL(clicked()), this, SLOT(s1ButtonClicked()));
+    connect(cursorWidgetScale->s5Button, SIGNAL(clicked()), this, SLOT(s5ButtonClicked()));
+    connect(cursorWidgetScale->s10Button, SIGNAL(clicked()), this, SLOT(s10ButtonClicked()));
+    connect(cursorWidgetScale->s20Button, SIGNAL(clicked()), this, SLOT(s20ButtonClicked()));
+    connect(cursorWidgetScale->s50Button, SIGNAL(clicked()), this, SLOT(s50ButtonClicked()));
+    connect(cursorWidgetScale->s100Button, SIGNAL(clicked()), this, SLOT(s100ButtonClicked()));
+    //Stretch
+    connect(cursorWidgetStretch->scaleButton, SIGNAL(clicked()), this, SLOT(scaleButtonClicked()));
+    connect(cursorWidgetStretch->translateButton, SIGNAL(clicked()), this, SLOT(translateButtonClicked()));
+    connect(cursorWidgetStretch->rotateButton, SIGNAL(clicked()), this, SLOT(rotateButtonClicked()));
+    connect(cursorWidgetStretch->shearButton, SIGNAL(clicked()), this, SLOT(shearButtonClicked()));
+
+    connect(cursorWidgetStretch->signButton, SIGNAL(clicked()), this, SLOT(stretchSignButtonClicked()));
+    connect(cursorWidgetStretch->directionButton, SIGNAL(clicked()), this, SLOT(stretchDirectionButtonClicked()));
+    connect(cursorWidgetStretch->st05Button, SIGNAL(clicked()), this, SLOT(st05ButtonButtonClicked()));
+    connect(cursorWidgetStretch->st1Button, SIGNAL(clicked()), this, SLOT(st1ButtonButtonClicked()));
+    //Rotate
+    connect(cursorWidgetRotate->translateButton, SIGNAL(clicked()), this, SLOT(translateButtonClicked()));
+    connect(cursorWidgetRotate->scaleButton, SIGNAL(clicked()), this, SLOT(scaleButtonClicked()));
+    connect(cursorWidgetRotate->stretchButton, SIGNAL(clicked()), this, SLOT(stretchButtonClicked()));
+    connect(cursorWidgetRotate->shearButton, SIGNAL(clicked()), this, SLOT(shearButtonClicked()));
     connect(cursorWidgetRotate->signButton, SIGNAL(clicked()), this, SLOT(rotateSignButtonClicked()));
+
     connect(cursorWidgetRotate->reset0Button, SIGNAL(clicked()), this, SLOT(reset0ButtonClicked()));
     connect(cursorWidgetRotate->r01Button, SIGNAL(clicked()), this, SLOT(r01ButtonClicked()));
     connect(cursorWidgetRotate->r05Button, SIGNAL(clicked()), this, SLOT(r05ButtonClicked()));
@@ -114,6 +165,15 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(cursorWidgetRotate->r120Button, SIGNAL(clicked()), this, SLOT(r120ButtonClicked()));
     connect(cursorWidgetRotate->r180Button, SIGNAL(clicked()), this, SLOT(r180ButtonClicked()));
     connect(cursorWidgetRotate->r270Button, SIGNAL(clicked()), this, SLOT(r270ButtonClicked()));
+    //Shear
+    connect(cursorWidgetShear->scaleButton, SIGNAL(clicked()), this, SLOT(scaleButtonClicked()));
+    connect(cursorWidgetShear->stretchButton, SIGNAL(clicked()), this, SLOT(stretchButtonClicked()));
+    connect(cursorWidgetShear->rotateButton, SIGNAL(clicked()), this, SLOT(rotateButtonClicked()));
+    connect(cursorWidgetShear->translateButton, SIGNAL(clicked()), this, SLOT(translateButtonClicked()));
+
+    connect(cursorWidgetShear->signButton, SIGNAL(clicked()), this, SLOT(shearSignButtonClicked()));
+    connect(cursorWidgetShear->directionButton, SIGNAL(clicked()), this, SLOT(shearDirectionButtonClicked()));
+    connect(cursorWidgetShear->sh1Button, SIGNAL(clicked()), this, SLOT(sh1ButtonButtonClicked()));
     //Shapes
     shapesWidgetShapes = new ShapesWidgetShapes();
     connect(shapesWidgetShapes->previousShapeButton, SIGNAL(clicked()), this, SLOT(previousShapeButtonClicked()));
@@ -380,7 +440,11 @@ MainWindow::MainWindow(QWidget *parent) :
     //Application Layout
     vLayout = new QVBoxLayout;
     vLayout->addWidget(prompt);
+    vLayout->addWidget(cursorWidgetTranslate);
     vLayout->addWidget(cursorWidgetRotate);
+    vLayout->addWidget(cursorWidgetShear);
+    vLayout->addWidget(cursorWidgetScale);
+    vLayout->addWidget(cursorWidgetStretch);
     vLayout->addWidget(shapesWidgetShapes);
     vLayout->addWidget(shapesWidgetEndPath);
     vLayout->addWidget(brushEffectsWidgetBrushEffects);
@@ -408,7 +472,11 @@ void MainWindow::setToolButtonProperties(QToolButton *b)
 
 void MainWindow::hideWidgets()
 {
+    cursorWidgetTranslate->hide();
+    cursorWidgetScale->hide();
+    cursorWidgetStretch->hide();
     cursorWidgetRotate->hide();
+    cursorWidgetShear->hide();
     shapesWidgetShapes->hide();
     shapesWidgetEndPath->hide();
     brushEffectsWidgetBrushEffects->hide();
@@ -504,16 +572,171 @@ void MainWindow::insertPictureButtonClicked()
     QMessageBox::information(this, "title", "Insert Picture");
 }
 
-//Cursor
+//Cursor--------------------------------------------------------
+void MainWindow::translateButtonClicked()
+{
+    hideWidgets();
+    canvas->cursorState = canvas->TRANSLATE;
+    prompt->promptLabel->setText("Select a translation value.  Then click an item on the canvas to change its properties");
+    cursorWidgetTranslate->show();
+}
+
+void MainWindow::scaleButtonClicked()
+{
+    hideWidgets();
+    canvas->cursorState = canvas->SCALE;
+    prompt->promptLabel->setText("Select a scale factor.  Then click an item on the canvas to change its properties");
+    cursorWidgetScale->show();
+}
+
+void MainWindow::rotateButtonClicked()
+{
+    hideWidgets();
+    canvas->cursorState = canvas->ROTATE;
+    prompt->promptLabel->setText("Select a rotation angle.  Then click an item on the canvas to change its properties");
+    cursorWidgetRotate->show();
+}
+
+void MainWindow::shearButtonClicked()
+{
+    hideWidgets();
+    canvas->cursorState = canvas->SHEAR;
+    prompt->promptLabel->setText("Select a shear angle.  Then click an item on the canvas to change its properties");
+    cursorWidgetShear->show();
+}
+
+void MainWindow::stretchButtonClicked()
+{
+    hideWidgets();
+    canvas->cursorState = canvas->STRETCH;
+    prompt->promptLabel->setText("Select a stretch value.  Then click an item on the canvas to change its properties");
+    cursorWidgetStretch->show();
+}
+//Translate
+void MainWindow::translateSignButtonClicked()
+{
+    canvas->translateSignPositive = !(canvas->translateSignPositive);
+    cursorWidgetTranslate->toggleSign(canvas->translateSignPositive);
+}
+
+void MainWindow::translateDirectionButtonClicked()
+{
+    canvas->translateDirectionHorizontal = !(canvas->translateDirectionHorizontal);
+    cursorWidgetTranslate->toggleDirection(canvas->translateDirectionHorizontal);
+}
+
+void MainWindow::t05ButtonButtonClicked()
+{
+    canvas->translateValue = 0.5;
+}
+
+void MainWindow::t1ButtonButtonClicked()
+{
+    canvas->translateValue = 1;
+}
+
+void MainWindow::t5ButtonButtonClicked()
+{
+    canvas->translateValue = 5;
+}
+
+void MainWindow::t10ButtonButtonClicked()
+{
+    canvas->translateValue = 10;
+}
+
+void MainWindow::t20ButtonButtonClicked()
+{
+    canvas->translateValue = 20;
+}
+
+void MainWindow::t50ButtonButtonClicked()
+{
+    canvas->translateValue = 50;
+}
+
+void MainWindow::t100ButtonButtonClicked()
+{
+    canvas->translateValue = 100;
+}
+//Scale
+void MainWindow::scaleSignButtonClicked()
+{
+    canvas->scaleSignPositive = !(canvas->scaleSignPositive);
+    cursorWidgetScale->toggleSign(canvas->scaleSignPositive);
+}
+
+void MainWindow::scaleResetButtonClicked()
+{
+    canvas->scaleFactor = -1.0;
+}
+
+void MainWindow::s05ButtonClicked()
+{
+    canvas->scaleFactor = 0.005;
+}
+
+void MainWindow::s1ButtonClicked()
+{
+    canvas->scaleFactor = 0.01;
+}
+
+void MainWindow::s5ButtonClicked()
+{
+    canvas->scaleFactor = 0.05;
+}
+
+void MainWindow::s10ButtonClicked()
+{
+    canvas->scaleFactor = 0.1;
+}
+
+void MainWindow::s20ButtonClicked()
+{
+    canvas->scaleFactor = 0.2;
+}
+
+void MainWindow::s50ButtonClicked()
+{
+    canvas->scaleFactor = 0.5;
+}
+
+void MainWindow::s100ButtonClicked()
+{
+    canvas->scaleFactor = 1.0;
+}
+
+void MainWindow::stretchSignButtonClicked()
+{
+    canvas->stretchSignPositive = !(canvas->stretchSignPositive);
+    cursorWidgetStretch->toggleSign(canvas->stretchSignPositive);
+}
+
+void MainWindow::stretchDirectionButtonClicked()
+{
+    canvas->stretchDirectionHorizontal = !(canvas->stretchDirectionHorizontal);
+    cursorWidgetStretch->toggleDirection(canvas->stretchDirectionHorizontal);
+}
+
+void MainWindow::st05ButtonButtonClicked()
+{
+    canvas->stretchValue = 0.5;
+}
+
+void MainWindow::st1ButtonButtonClicked()
+{
+    canvas->stretchValue = 1;
+}
+
 void MainWindow::rotateSignButtonClicked()
 {
-    canvas->rotateSignPositive = !canvas->rotateSignPositive;
+    canvas->rotateSignPositive = !(canvas->rotateSignPositive);
     cursorWidgetRotate->toggleSign(canvas->rotateSignPositive);
 }
 
 void MainWindow::reset0ButtonClicked()
 {
-    canvas->rotateAngle = -1;
+    canvas->rotateAngle = -1.0;
 }
 
 void MainWindow::r01ButtonClicked()
@@ -584,6 +807,23 @@ void MainWindow::r180ButtonClicked()
 void MainWindow::r270ButtonClicked()
 {
     canvas->rotateAngle = 270;
+}
+
+void MainWindow::shearSignButtonClicked()
+{
+    canvas->shearSignPositive = !(canvas->shearSignPositive);
+    cursorWidgetShear->toggleSign(canvas->shearSignPositive);
+}
+
+void MainWindow::shearDirectionButtonClicked()
+{
+    canvas->shearDirectionHorizontal = !(canvas->shearDirectionHorizontal);
+    cursorWidgetShear->toggleDirection(canvas->shearDirectionHorizontal);
+}
+
+void MainWindow::sh1ButtonButtonClicked()
+{
+    canvas->shearAngle = 1;
 }
 
 //Shapes
