@@ -44,10 +44,6 @@ public:
     QPushButton *sceneryButton;
     QPushButton *facesButton;
     QPushButton *vehiclesButton;
-    QPushButton *actionsButton;
-    QPushButton *objectsOneButton;
-    QPushButton *objectsTwoButton;
-    QPushButton *objectsThreeButton;
 
 };
 
