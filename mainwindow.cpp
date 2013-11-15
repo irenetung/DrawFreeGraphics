@@ -207,6 +207,7 @@ MainWindow::MainWindow(QWidget *parent) :
     stampsWidgetAnimals = new StampsWidgetAnimals();
     stampsWidgetBuildings = new StampsWidgetBuildings();
     stampsWidgetScenery = new StampsWidgetScenery();
+    stampsWidgetFaces = new StampsWidgetFaces();
     stampsWidgetVehicles = new StampsWidgetVehicles();
 
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
@@ -248,39 +249,39 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(stampsWidgetSilhouette->rainStamp, SIGNAL(clicked()), silhouetteSignalMapper, SLOT(map()));
 
 
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->dogStamp, "dog_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->catStamp, "cat_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->birdStamp, "bird_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->turtleStamp, "turtle_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->ratStamp, "rat_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->giraffeStamp, "giraffe_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->alienStamp, "alien_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->manStamp, "man_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->womanStamp, "woman_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->cameraStamp, "camera_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->mailStamp, "mail_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->cupStamp, "cup_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->giftStamp, "gift_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->umbrellaStamp, "umbrella_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->securityCamStamp, "security_cam_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->wrenchStamp, "wrench_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->heartStamp, "heart_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->airplaneStamp, "airplane_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->helicopterStamp, "helicopter_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->carStamp, "car_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->truckStamp, "truck_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->busStamp, "bus_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->gasPumpStamp, "gas_pump_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->factoryStamp, "factory_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->buildingStamp, "building_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->capitolStamp, "capitol_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->homeStamp, "home_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->sunStamp, "sun_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->treeStamp, "tree_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->tree2Stamp, "tree2_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->cloudStamp, "cloud_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->snowStamp, "snow_stamp");
-        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->rainStamp, "rain_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->dogStamp, ":/Stamps/solidcolorstamps/Stamps/dog_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->catStamp, ":/Stamps/solidcolorstamps/Stamps/cat_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->birdStamp, ":/Stamps/solidcolorstamps/Stamps/bird_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->turtleStamp, ":/Stamps/solidcolorstamps/Stamps/turtle_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->ratStamp, ":/Stamps/solidcolorstamps/Stamps/rat_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->giraffeStamp, ":/Stamps/solidcolorstamps/Stamps/giraffe_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->alienStamp, ":/Stamps/solidcolorstamps/Stamps/alien_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->manStamp, ":/Stamps/solidcolorstamps/Stamps/man_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->womanStamp, ":/Stamps/solidcolorstamps/Stamps/woman_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->cameraStamp, ":/Stamps/solidcolorstamps/Stamps/camera_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->mailStamp, ":/Stamps/solidcolorstamps/Stamps/mail_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->cupStamp, ":/Stamps/solidcolorstamps/Stamps/cup_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->giftStamp, ":/Stamps/solidcolorstamps/Stamps/gift_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->umbrellaStamp, ":/Stamps/solidcolorstamps/Stamps/umbrella_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->securityCamStamp, ":/Stamps/solidcolorstamps/Stamps/security_cam_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->wrenchStamp, ":/Stamps/solidcolorstamps/Stamps/wrench_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->heartStamp, ":/Stamps/solidcolorstamps/Stamps/heart_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->airplaneStamp, ":/Stamps/solidcolorstamps/Stamps/airplane_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->helicopterStamp, ":/Stamps/solidcolorstamps/Stamps/helicopter_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->carStamp, ":/Stamps/solidcolorstamps/Stamps/car_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->truckStamp, ":/Stamps/solidcolorstamps/Stamps/truck_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->busStamp, ":/Stamps/solidcolorstamps/Stamps/bus_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->gasPumpStamp, ":/Stamps/solidcolorstamps/Stamps/gas_pump_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->factoryStamp, ":/Stamps/solidcolorstamps/Stamps/factory_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->buildingStamp, ":/Stamps/solidcolorstamps/Stamps/building_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->capitolStamp, ":/Stamps/solidcolorstamps/Stamps/capitol_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->homeStamp, ":/Stamps/solidcolorstamps/Stamps/home_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->sunStamp, ":/Stamps/solidcolorstamps/Stamps/sun_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->treeStamp, ":/Stamps/solidcolorstamps/Stamps/tree_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->tree2Stamp, ":/Stamps/solidcolorstamps/Stamps/tree2_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->cloudStamp, ":/Stamps/solidcolorstamps/Stamps/cloud_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->snowStamp, ":/Stamps/solidcolorstamps/Stamps/snow_stamp");
+        silhouetteSignalMapper->setMapping(stampsWidgetSilhouette->rainStamp, ":/Stamps/solidcolorstamps/Stamps/rain_stamp");
         connect(silhouetteSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(silhouetteStampClicked(const QString)));
 
     connect(stampsWidgetCategories->peopleButton, SIGNAL(clicked()), this, SLOT(peopleButtonClicked()));
@@ -320,6 +321,7 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(stampsWidgetPeople->stampThirtyOne, SIGNAL(clicked()), peopleSignalMapper, SLOT(map()));
         connect(stampsWidgetPeople->stampThirtyTwo, SIGNAL(clicked()), peopleSignalMapper, SLOT(map()));
         connect(stampsWidgetPeople->stampThirtyThree, SIGNAL(clicked()), peopleSignalMapper, SLOT(map()));
+
 
         peopleSignalMapper->setMapping(stampsWidgetPeople->stampOne, ":/Stamps/people/Stamps/people_angel_stamp");
         peopleSignalMapper->setMapping(stampsWidgetPeople->stampTwo, ":/Stamps/people/Stamps/people_baby_stamp");
@@ -506,6 +508,80 @@ MainWindow::MainWindow(QWidget *parent) :
         scenerySignalMapper->setMapping(stampsWidgetScenery->statueStamp, ":/Stamps/scenery/Stamps/scenery_statue_stamp");
         connect(scenerySignalMapper, SIGNAL(mapped(const QString)), this, SLOT(standardStampClicked(const QString)));
 
+    connect(stampsWidgetCategories->facesButton, SIGNAL(clicked()), this, SLOT(facesButtonClicked()));
+        // Faces Stamps
+        connect(stampsWidgetFaces->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
+        QSignalMapper *facesSignalMapper = new QSignalMapper(this);
+        connect(stampsWidgetFaces->stampOne, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwo, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampThree, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampFour, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampFive, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampSix, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampSeven, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampEight, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampNine, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampEleven, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwelve, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampThirteen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampFourteen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampFifteen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampSixteen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampSeventeen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampEighteen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampNineteen, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwenty, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentyOne, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentyTwo, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentyThree, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentyFour, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentyFive, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentySix, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentySeven, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentyEight, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampTwentyNine, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampThirty, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampThirtyOne, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+        connect(stampsWidgetFaces->stampThirtyTwo, SIGNAL(clicked()), facesSignalMapper, SLOT(map()));
+
+
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampOne, ":/Stamps/faces/Stamps/faces_one_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwo, ":/Stamps/faces/Stamps/faces_two_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampThree, ":/Stamps/faces/Stamps/faces_three_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampFour, ":/Stamps/faces/Stamps/faces_four_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampFive, ":/Stamps/faces/Stamps/faces_five_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampSix, ":/Stamps/faces/Stamps/faces_six_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampSeven, ":/Stamps/faces/Stamps/faces_seven_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampEight, ":/Stamps/faces/Stamps/faces_eight_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampNine, ":/Stamps/faces/Stamps/faces_nine_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTen, ":/Stamps/faces/Stamps/faces_ten_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampEleven, ":/Stamps/faces/Stamps/faces_eleven_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwelve, ":/Stamps/faces/Stamps/faces_twelve_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampThirteen, ":/Stamps/faces/Stamps/faces_thirteen_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampFourteen, ":/Stamps/faces/Stamps/faces_fourteen_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampFifteen, ":/Stamps/faces/Stamps/faces_fifteen_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampSixteen, ":/Stamps/faces/Stamps/faces_sixteen_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampSeventeen, ":/Stamps/faces/Stamps/faces_seventeen_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampEighteen, ":/Stamps/faces/Stamps/faces_eighteen_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampNineteen, ":/Stamps/faces/Stamps/faces_nineteen_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwenty, ":/Stamps/faces/Stamps/faces_twenty_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentyOne, ":/Stamps/faces/Stamps/faces_twentyone_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentyTwo, ":/Stamps/faces/Stamps/faces_twentytwo_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentyThree, ":/Stamps/faces/Stamps/faces_twentythree_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentyFour, ":/Stamps/faces/Stamps/faces_twentyfour_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentyFive, ":/Stamps/faces/Stamps/faces_twentyfive_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentySix, ":/Stamps/faces/Stamps/faces_twentysix_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentySeven, ":/Stamps/faces/Stamps/faces_twentyseven_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentyEight, ":/Stamps/faces/Stamps/faces_twentyeight_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampTwentyNine, ":/Stamps/faces/Stamps/faces_twentynine_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampThirty, ":/Stamps/faces/Stamps/faces_thirty_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampThirtyOne, ":/Stamps/faces/Stamps/faces_thirtyone_stamp");
+        facesSignalMapper->setMapping(stampsWidgetFaces->stampThirtyTwo, ":/Stamps/faces/Stamps/faces_thirtytwo_stamp");
+        connect(facesSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(silhouetteStampClicked(const QString)));
+
+
+
     connect(stampsWidgetCategories->vehiclesButton, SIGNAL(clicked()), this, SLOT(vehiclesButtonClicked()));
         // Vehicle Stamps
         connect(stampsWidgetVehicles->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
@@ -565,6 +641,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout->addWidget(stampsWidgetAnimals);
     vLayout->addWidget(stampsWidgetBuildings);
     vLayout->addWidget(stampsWidgetScenery);
+    vLayout->addWidget(stampsWidgetFaces);
     vLayout->addWidget(stampsWidgetVehicles);
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
@@ -600,6 +677,7 @@ void MainWindow::hideWidgets()
     stampsWidgetAnimals->hide();
     stampsWidgetBuildings->hide();
     stampsWidgetScenery->hide();
+    stampsWidgetFaces->hide();
     stampsWidgetVehicles->hide();
 
 }
@@ -1104,6 +1182,14 @@ void MainWindow::sceneryButtonClicked()
     prompt->promptLabel->setText("Select a stamp:");
     stampsWidgetScenery->show();
 }
+void MainWindow::facesButtonClicked()
+{
+    hideWidgets();
+
+    prompt->promptLabel->setText("Select a stamp. The color tool can be used as well:");
+    stampsWidgetFaces->show();
+}
+
 void MainWindow::vehiclesButtonClicked()
 {
     hideWidgets();
@@ -1123,8 +1209,8 @@ void MainWindow::goBackButtonClicked()
 }
 void MainWindow::silhouetteStampClicked(const QString stamp_name)
 {
-    QString path = ":/Stamps/solidcolorstamps/Stamps/";
-    QString stamp_path = path.append(stamp_name).append(".png");
+    QString stamp_path = stamp_name;
+    stamp_path.append(".png");
     canvas->stampState = canvas->SILHOUETTE;
     canvas->setCurrentStamp(stamp_path);
 }

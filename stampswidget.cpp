@@ -414,6 +414,86 @@ StampsWidgetScenery::StampsWidgetScenery()
 }
 
 
+// STAMPS WIDGET FACES
+StampsWidgetFaces::StampsWidgetFaces()
+{
+    hLayout = new QHBoxLayout;
+    button_length = 60;
+
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
+    stampOne = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_one_stamp.png"), tr(""));
+    setButtonProperties(stampOne);
+    stampTwo = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_two_stamp.png"), tr(""));
+    setButtonProperties(stampTwo);
+    stampThree = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_three_stamp.png"), tr(""));
+    setButtonProperties(stampThree);
+    stampFour = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_four_stamp.png"), tr(""));
+    setButtonProperties(stampFour);
+    stampFive = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_five_stamp.png"), tr(""));
+    setButtonProperties(stampFive);
+    stampSix = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_six_stamp.png"), tr(""));
+    setButtonProperties(stampSix);
+    stampSeven = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_seven_stamp.png"), tr(""));
+    setButtonProperties(stampSeven);
+    stampEight = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_eight_stamp.png"), tr(""));
+    setButtonProperties(stampEight);
+    stampNine = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_nine_stamp.png"), tr(""));
+    setButtonProperties(stampNine);
+    stampTen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_ten_stamp.png"), tr(""));
+    setButtonProperties(stampTen);
+    stampEleven = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_eleven_stamp.png"), tr(""));
+    setButtonProperties(stampEleven);
+    stampTwelve = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twelve_stamp.png"), tr(""));
+    setButtonProperties(stampTwelve);
+    stampThirteen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_thirteen_stamp.png"), tr(""));
+    setButtonProperties(stampThirteen);
+    stampFourteen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_fourteen_stamp.png"), tr(""));
+    setButtonProperties(stampFourteen);
+    stampFifteen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_fifteen_stamp.png"), tr(""));
+    setButtonProperties(stampFifteen);
+    stampSixteen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_sixteen_stamp.png"), tr(""));
+    setButtonProperties(stampSixteen);
+    stampSeventeen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_seventeen_stamp.png"), tr(""));
+    setButtonProperties(stampSeventeen);
+    stampEighteen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_eighteen_stamp.png"), tr(""));
+    setButtonProperties(stampEighteen);
+    stampNineteen = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_nineteen_stamp.png"), tr(""));
+    setButtonProperties(stampNineteen);
+    stampTwenty = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twenty_stamp.png"), tr(""));
+    setButtonProperties(stampTwenty);
+    stampTwentyOne = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentyone_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyOne);
+    stampTwentyTwo = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentytwo_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyTwo);
+    stampTwentyThree = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentythree_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyThree);
+    stampTwentyFour = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentyfour_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyFour);
+    stampTwentyFive = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentyfive_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyFive);
+    stampTwentySix = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentysix_stamp.png"), tr(""));
+    setButtonProperties(stampTwentySix);
+    stampTwentySeven = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentyseven_stamp.png"), tr(""));
+    setButtonProperties(stampTwentySeven);
+    stampTwentyEight = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentyeight_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyEight);
+    stampTwentyNine = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_twentynine_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyNine);
+    stampThirty = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_thirty_stamp.png"), tr(""));
+    setButtonProperties(stampThirty);
+    stampThirtyOne = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_thirtyone_stamp.png"), tr(""));
+    setButtonProperties(stampThirtyOne);
+    stampThirtyTwo = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_thirtytwo_stamp.png"), tr(""));
+    setButtonProperties(stampThirtyTwo);
+
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+    this->setLayout(hLayout);
+}
+
+
 // STAMPS WIDGET VEHICLES
 StampsWidgetVehicles::StampsWidgetVehicles()
 {

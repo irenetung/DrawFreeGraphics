@@ -184,4 +184,38 @@
         <file>Stamps/people_witch_stamp.png</file>
         <file>Stamps/people_zombie_stamp.png</file>
     </qresource>
+    <qresource prefix="/Stamps/faces">
+        <file>Stamps/faces_one_stamp.png</file>
+        <file>Stamps/faces_two_stamp.png</file>
+        <file>Stamps/faces_three_stamp.png</file>
+        <file>Stamps/faces_four_stamp.png</file>
+        <file>Stamps/faces_five_stamp.png</file>
+        <file>Stamps/faces_six_stamp.png</file>
+        <file>Stamps/faces_seven_stamp.png</file>
+        <file>Stamps/faces_eight_stamp.png</file>
+        <file>Stamps/faces_nine_stamp.png</file>
+        <file>Stamps/faces_ten_stamp.png</file>
+        <file>Stamps/faces_eleven_stamp.png</file>
+        <file>Stamps/faces_twelve_stamp.png</file>
+        <file>Stamps/faces_thirteen_stamp.png</file>
+        <file>Stamps/faces_fourteen_stamp.png</file>
+        <file>Stamps/faces_fifteen_stamp.png</file>
+        <file>Stamps/faces_sixteen_stamp.png</file>
+        <file>Stamps/faces_seventeen_stamp.png</file>
+        <file>Stamps/faces_eighteen_stamp.png</file>
+        <file>Stamps/faces_nineteen_stamp.png</file>
+        <file>Stamps/faces_twenty_stamp.png</file>
+        <file>Stamps/faces_twentyone_stamp.png</file>
+        <file>Stamps/faces_twentytwo_stamp.png</file>
+        <file>Stamps/faces_twentythree_stamp.png</file>
+        <file>Stamps/faces_twentyfour_stamp.png</file>
+        <file>Stamps/faces_twentyfive_stamp.png</file>
+        <file>Stamps/faces_twentysix_stamp.png</file>
+        <file>Stamps/faces_twentyseven_stamp.png</file>
+        <file>Stamps/faces_twentyeight_stamp.png</file>
+        <file>Stamps/faces_twentynine_stamp.png</file>
+        <file>Stamps/faces_thirty_stamp.png</file>
+        <file>Stamps/faces_thirtyone_stamp.png</file>
+        <file>Stamps/faces_thirtytwo_stamp.png</file>
+    </qresource>
 </RCC>

@@ -22,3 +22,8 @@ https://www.iconfinder.com/iconsets/Matchbox-Car-Icons-Mac#readme
 	These icons are for personal use. You can distribute them on the condition that you include this license agreement with it.
 	Bart Kowalski<br />2010
 	http://bartkowalski.com/
+
+Faces:
+https://www.iconfinder.com/search/?q=iconset%3Aimoticons
+	License: Creative Commons Attribution 3.0 Unported
+	By: phdieuli
