@@ -132,4 +132,21 @@
         <file>Stamps/buildings_shop_two_stamp.png</file>
         <file>Stamps/buildings_skyscraper_stamp.png</file>
     </qresource>
+    <qresource prefix="/Stamps/vehicles">
+        <file>Stamps/vehicles_crane_stamp.png</file>
+        <file>Stamps/vehicles_ambulance_stamp.png</file>
+        <file>Stamps/vehicles_tractor_stamp.png</file>
+        <file>Stamps/vehicles_firetruck_stamp.png</file>
+        <file>Stamps/vehicles_avion_stamp.png</file>
+        <file>Stamps/vehicles_car_stamp.png</file>
+        <file>Stamps/vehicles_car_two_stamp.png</file>
+        <file>Stamps/vehicles_car_three_stamp.png</file>
+        <file>Stamps/vehicles_formula_stamp.png</file>
+        <file>Stamps/vehicles_greyhound_stamp.png</file>
+        <file>Stamps/vehicles_helicopter_stamp.png</file>
+        <file>Stamps/vehicles_jeep_stamp.png</file>
+        <file>Stamps/vehicles_lorry_stamp.png</file>
+        <file>Stamps/vehicles_schoolbus_stamp.png</file>
+        <file>Stamps/vehicles_van_stamp.png</file>
+    </qresource>
 </RCC>

@@ -72,6 +72,7 @@ private:
     StampsWidgetAnimals *stampsWidgetAnimals;
     StampsWidgetBuildings *stampsWidgetBuildings;
     StampsWidgetScenery *stampsWidgetScenery;
+    StampsWidgetVehicles *stampsWidgetVehicles;
 
     //Canvas
     Canvas *canvas;
@@ -177,6 +178,7 @@ private slots:
     void animalsButtonClicked();
     void buildingsButtonClicked();
     void sceneryButtonClicked();
+    void vehiclesButtonClicked();
 
     void silhouetteStampClicked(const QString stamp_name);
     void standardStampClicked(const QString stamp_name);

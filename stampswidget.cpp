@@ -330,3 +330,50 @@ StampsWidgetScenery::StampsWidgetScenery()
 
 }
 
+
+// STAMPS WIDGET VEHICLES
+StampsWidgetVehicles::StampsWidgetVehicles()
+{
+    hLayout = new QHBoxLayout;
+    button_length = 60;
+
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
+    stampOne = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_ambulance_stamp.png"), tr(""));
+    setButtonProperties(stampOne);
+    stampTwo = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_avion_stamp.png"), tr(""));
+    setButtonProperties(stampTwo);
+    stampThree = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_car_stamp.png"), tr(""));
+    setButtonProperties(stampThree);
+    stampFour = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_car_two_stamp.png"), tr(""));
+    setButtonProperties(stampFour);
+    stampFive = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_car_three_stamp.png"), tr(""));
+    setButtonProperties(stampFive);
+    stampSix = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_crane_stamp.png"), tr(""));
+    setButtonProperties(stampSix);
+    stampSeven = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_firetruck_stamp.png"), tr(""));
+    setButtonProperties(stampSeven);
+    stampEight = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_formula_stamp.png"), tr(""));
+    setButtonProperties(stampEight);
+    stampNine = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_greyhound_stamp.png"), tr(""));
+    setButtonProperties(stampNine);
+    stampTen = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_helicopter_stamp.png"), tr(""));
+    setButtonProperties(stampTen);
+    stampEleven = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_jeep_stamp.png"), tr(""));
+    setButtonProperties(stampEleven);
+    stampTwelve = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_lorry_stamp.png"), tr(""));
+    setButtonProperties(stampTwelve);
+    stampThirteen = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_schoolbus_stamp.png"), tr(""));
+    setButtonProperties(stampThirteen);
+    stampFourteen = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_tractor_stamp.png"), tr(""));
+    setButtonProperties(stampFourteen);
+    stampFifteen = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_van_stamp.png"), tr(""));
+    setButtonProperties(stampFifteen);
+
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+    this->setLayout(hLayout);
+
+}
+

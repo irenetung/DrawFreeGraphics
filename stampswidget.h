@@ -185,4 +185,28 @@ public:
 
 };
 
+//Stamp Category: Vehicles
+class StampsWidgetVehicles : public StampsWidget
+{
+public:
+    explicit StampsWidgetVehicles();
+    QPushButton *goBack;
+    QPushButton *stampOne;
+    QPushButton *stampTwo;
+    QPushButton *stampThree;
+    QPushButton *stampFour;
+    QPushButton *stampFive;
+    QPushButton *stampSix;
+    QPushButton *stampSeven;
+    QPushButton *stampEight;
+    QPushButton *stampNine;
+    QPushButton *stampTen;
+    QPushButton *stampEleven;
+    QPushButton *stampTwelve;
+    QPushButton *stampThirteen;
+    QPushButton *stampFourteen;
+    QPushButton *stampFifteen;
+
+};
+
 #endif // STAMPSWIDGET_H
