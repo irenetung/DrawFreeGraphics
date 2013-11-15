@@ -238,6 +238,89 @@ StampsWidgetAnimals::StampsWidgetAnimals()
 
 }
 
+// STAMPS WIDGET PEOPLE
+StampsWidgetPeople::StampsWidgetPeople(){
+    hLayout = new QHBoxLayout;
+    button_length = 60;
+
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
+    stampOne = new QPushButton(QIcon(":/Stamps/people/Stamps/people_angel_stamp.png"), tr(""));
+    setButtonProperties(stampOne);
+    stampTwo = new QPushButton(QIcon(":/Stamps/people/Stamps/people_baby_stamp.png"), tr(""));
+    setButtonProperties(stampTwo);
+    stampThree = new QPushButton(QIcon(":/Stamps/people/Stamps/people_chef_stamp.png"), tr(""));
+    setButtonProperties(stampThree);
+    stampFour = new QPushButton(QIcon(":/Stamps/people/Stamps/people_clown_stamp.png"), tr(""));
+    setButtonProperties(stampFour);
+    stampFive = new QPushButton(QIcon(":/Stamps/people/Stamps/people_dad_stamp.png"), tr(""));
+    setButtonProperties(stampFive);
+    stampSix = new QPushButton(QIcon(":/Stamps/people/Stamps/people_devil_stamp.png"), tr(""));
+    setButtonProperties(stampSix);
+    stampSeven = new QPushButton(QIcon(":/Stamps/people/Stamps/people_doctor_stamp.png"), tr(""));
+    setButtonProperties(stampSeven);
+    stampEight = new QPushButton(QIcon(":/Stamps/people/Stamps/people_fireman_stamp.png"), tr(""));
+    setButtonProperties(stampEight);
+    stampNine = new QPushButton(QIcon(":/Stamps/people/Stamps/people_ghost_stamp.png"), tr(""));
+    setButtonProperties(stampNine);
+    stampTen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_girl_stamp.png"), tr(""));
+    setButtonProperties(stampTen);
+    stampEleven = new QPushButton(QIcon(":/Stamps/people/Stamps/people_kid_stamp.png"), tr(""));
+    setButtonProperties(stampEleven);
+    stampTwelve = new QPushButton(QIcon(":/Stamps/people/Stamps/people_king_stamp.png"), tr(""));
+    setButtonProperties(stampTwelve);
+    stampThirteen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_knight_stamp.png"), tr(""));
+    setButtonProperties(stampThirteen);
+    stampFourteen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_lawyer_stamp.png"), tr(""));
+    setButtonProperties(stampFourteen);
+    stampFifteen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_leprechaun_stamp.png"), tr(""));
+    setButtonProperties(stampFifteen);
+    stampSixteen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_man_stamp.png"), tr(""));
+    setButtonProperties(stampSixteen);
+    stampSeventeen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_mermaid_stamp.png"), tr(""));
+    setButtonProperties(stampSeventeen);
+    stampEighteen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_ninja_stamp.png"), tr(""));
+    setButtonProperties(stampEighteen);
+    stampNineteen = new QPushButton(QIcon(":/Stamps/people/Stamps/people_nurse_stamp.png"), tr(""));
+    setButtonProperties(stampNineteen);
+    stampTwenty = new QPushButton(QIcon(":/Stamps/people/Stamps/people_pirate_stamp.png"), tr(""));
+    setButtonProperties(stampTwenty);
+    stampTwentyOne = new QPushButton(QIcon(":/Stamps/people/Stamps/people_policeman_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyOne);
+    stampTwentyTwo = new QPushButton(QIcon(":/Stamps/people/Stamps/people_prince_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyTwo);
+    stampTwentyThree = new QPushButton(QIcon(":/Stamps/people/Stamps/people_princess_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyThree);
+    stampTwentyFour = new QPushButton(QIcon(":/Stamps/people/Stamps/people_queen_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyFour);
+    stampTwentyFive = new QPushButton(QIcon(":/Stamps/people/Stamps/people_robot_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyFive);
+    stampTwentySix = new QPushButton(QIcon(":/Stamps/people/Stamps/people_santa_stamp.png"), tr(""));
+    setButtonProperties(stampTwentySix);
+    stampTwentySeven = new QPushButton(QIcon(":/Stamps/people/Stamps/people_snowman_stamp.png"), tr(""));
+    setButtonProperties(stampTwentySeven);
+    stampTwentyEight = new QPushButton(QIcon(":/Stamps/people/Stamps/people_superhero_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyEight);
+    stampTwentyNine = new QPushButton(QIcon(":/Stamps/people/Stamps/people_teacher_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyNine);
+    stampThirty = new QPushButton(QIcon(":/Stamps/people/Stamps/people_troll_stamp.png"), tr(""));
+    setButtonProperties(stampThirty);
+    stampThirtyOne = new QPushButton(QIcon(":/Stamps/people/Stamps/people_vampire_stamp.png"), tr(""));
+    setButtonProperties(stampThirtyOne);
+    stampThirtyTwo = new QPushButton(QIcon(":/Stamps/people/Stamps/people_witch_stamp.png"), tr(""));
+    setButtonProperties(stampThirtyTwo);
+    stampThirtyThree = new QPushButton(QIcon(":/Stamps/people/Stamps/people_zombie_stamp.png"), tr(""));
+    setButtonProperties(stampThirtyThree);
+
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addSpacerItem(horizSpacer);
+    this->setLayout(hLayout);
+
+
+
+}
+
 // STAMPS WIDGET BUILDINGS
 StampsWidgetBuildings::StampsWidgetBuildings()
 {

@@ -69,6 +69,7 @@ private:
     //Stamps
     StampsWidgetCategories *stampsWidgetCategories;
     StampsWidgetSilhouette *stampsWidgetSilhouette;
+    StampsWidgetPeople *stampsWidgetPeople;
     StampsWidgetAnimals *stampsWidgetAnimals;
     StampsWidgetBuildings *stampsWidgetBuildings;
     StampsWidgetScenery *stampsWidgetScenery;
@@ -175,6 +176,7 @@ private slots:
     //Stamps
     void goBackButtonClicked();
     void silhouetteButtonClicked();
+    void peopleButtonClicked();
     void animalsButtonClicked();
     void buildingsButtonClicked();
     void sceneryButtonClicked();

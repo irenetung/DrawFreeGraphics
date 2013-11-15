@@ -149,4 +149,39 @@
         <file>Stamps/vehicles_schoolbus_stamp.png</file>
         <file>Stamps/vehicles_van_stamp.png</file>
     </qresource>
+    <qresource prefix="/Stamps/people">
+        <file>Stamps/people_angel_stamp.png</file>
+        <file>Stamps/people_baby_stamp.png</file>
+        <file>Stamps/people_chef_stamp.png</file>
+        <file>Stamps/people_clown_stamp.png</file>
+        <file>Stamps/people_dad_stamp.png</file>
+        <file>Stamps/people_devil_stamp.png</file>
+        <file>Stamps/people_doctor_stamp.png</file>
+        <file>Stamps/people_fireman_stamp.png</file>
+        <file>Stamps/people_ghost_stamp.png</file>
+        <file>Stamps/people_girl_stamp.png</file>
+        <file>Stamps/people_kid_stamp.png</file>
+        <file>Stamps/people_king_stamp.png</file>
+        <file>Stamps/people_knight_stamp.png</file>
+        <file>Stamps/people_lawyer_stamp.png</file>
+        <file>Stamps/people_leprechaun_stamp.png</file>
+        <file>Stamps/people_man_stamp.png</file>
+        <file>Stamps/people_mermaid_stamp.png</file>
+        <file>Stamps/people_ninja_stamp.png</file>
+        <file>Stamps/people_nurse_stamp.png</file>
+        <file>Stamps/people_pirate_stamp.png</file>
+        <file>Stamps/people_policeman_stamp.png</file>
+        <file>Stamps/people_prince_stamp.png</file>
+        <file>Stamps/people_princess_stamp.png</file>
+        <file>Stamps/people_queen_stamp.png</file>
+        <file>Stamps/people_robot_stamp.png</file>
+        <file>Stamps/people_santa_stamp.png</file>
+        <file>Stamps/people_snowman_stamp.png</file>
+        <file>Stamps/people_superhero_stamp.png</file>
+        <file>Stamps/people_teacher_stamp.png</file>
+        <file>Stamps/people_troll_stamp.png</file>
+        <file>Stamps/people_vampire_stamp.png</file>
+        <file>Stamps/people_witch_stamp.png</file>
+        <file>Stamps/people_zombie_stamp.png</file>
+    </qresource>
 </RCC>

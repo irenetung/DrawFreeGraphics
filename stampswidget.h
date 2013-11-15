@@ -137,6 +137,49 @@ public:
 
 };
 
+//Stamp Category: People
+class StampsWidgetPeople : public StampsWidget
+{
+public:
+    explicit StampsWidgetPeople();
+    QPushButton *goBack;
+    QPushButton *stampOne;
+    QPushButton *stampTwo;
+    QPushButton *stampThree;
+    QPushButton *stampFour;
+    QPushButton *stampFive;
+    QPushButton *stampSix;
+    QPushButton *stampSeven;
+    QPushButton *stampEight;
+    QPushButton *stampNine;
+    QPushButton *stampTen;
+    QPushButton *stampEleven;
+    QPushButton *stampTwelve;
+    QPushButton *stampThirteen;
+    QPushButton *stampFourteen;
+    QPushButton *stampFifteen;
+    QPushButton *stampSixteen;
+    QPushButton *stampSeventeen;
+    QPushButton *stampEighteen;
+    QPushButton *stampNineteen;
+    QPushButton *stampTwenty;
+    QPushButton *stampTwentyOne;
+    QPushButton *stampTwentyTwo;
+    QPushButton *stampTwentyThree;
+    QPushButton *stampTwentyFour;
+    QPushButton *stampTwentyFive;
+    QPushButton *stampTwentySix;
+    QPushButton *stampTwentySeven;
+    QPushButton *stampTwentyEight;
+    QPushButton *stampTwentyNine;
+    QPushButton *stampThirty;
+    QPushButton *stampThirtyOne;
+    QPushButton *stampThirtyTwo;
+    QPushButton *stampThirtyThree;
+
+
+};
+
 //Stamp Category: Buildings
 class StampsWidgetBuildings : public StampsWidget
 {
@@ -208,5 +251,6 @@ public:
     QPushButton *stampFifteen;
 
 };
+
 
 #endif // STAMPSWIDGET_H
