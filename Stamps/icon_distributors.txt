@@ -1,8 +1,44 @@
 ICON DISTRIBUTORS
 Retina Icons:
-https://www.iconfinder.com/krasnoyarsk
-	License: Creative Commons Attribution-Share Alike license
-	http://www.aha-soft.com/
+	Dog, Cat, Bird, Turtle, Rat, Gas Pump:
+		https://www.iconfinder.com/search/?q=iconset%3Apop-tab-bar-svg-icons-2
+		License: Basic License ($19)
+		http://www.aha-soft.com/
+
+	Alien, Factory, Car:
+		https://www.iconfinder.com/search/?q=iconset%3Awindows-8-metro-style
+		License: Free for Commercial Use
+		Designer: Visual Pharm - http://icons8.com/
+
+	Airplane, Wrench:
+		https://www.iconfinder.com/search/?q=iconset%3Agcons-2
+		License: Free for Commercial Use
+		Designer: Greepit - http://www.greepit.com/ 
+
+	Helicopter, Man, Woman:
+		https://www.iconfinder.com/search/?q=iconset%3Aaiga-symbol-signs
+		License: Public Domain
+		Designer: AIGA - http://www.aiga.org/  
+
+	Camera, Umbrella, Forest, Bus, Mail, Heart, Sun, House: 
+		https://www.iconfinder.com/search/?q=iconset%3Apittogrammi
+		License: Free for Commercial Use
+		Designer: Danilo Demarco - http://www.danilodemarco.com/ 
+	
+	Giraffe, Building, Capitol, Tree:
+		https://www.iconfinder.com/search/?q=iconset%3Amaki
+		License: BSD License (see Maki Copyright File)
+		Designer: Mapbox - http://mapbox.com/ 
+	
+	Gift, Cup, Security Camera, Truck:
+		https://www.iconfinder.com/icons/111050/gift_icon#size=512
+		License: Creative Commons (Attribution-Share Alike 3.0 Unported)
+		Designer: WPZOOM - http://www.wpzoom.com 
+
+	Rain Cloud, Snow Cloud, Cloud:
+		https://www.iconfinder.com/search/?q=iconset%3Ameteocons
+		License: Free for Commercial Use
+		Designer: Alessio Atzeni
 
 People:
 http://www.iconarchive.com/show/character-icons-by-martin-berube.html
