@@ -59,6 +59,11 @@ https://www.iconfinder.com/iconsets/Matchbox-Car-Icons-Mac#readme
 	Bart Kowalski<br />2010
 	http://bartkowalski.com/
 
+	Plane:
+	https://www.iconfinder.com/icons/22429/falcon_flight_plane_transportation_travel_icon#size=512
+	License: Free for Commercial Use
+	Designer: Sebastien Durel - http://www.crystalxp.net/galerie/en.id.3751-bagg-a-png.htm 
+
 Faces:
 https://www.iconfinder.com/search/?q=iconset%3Aimoticons
 	License: Creative Commons Attribution 3.0 Unported

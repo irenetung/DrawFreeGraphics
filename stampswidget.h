@@ -286,6 +286,15 @@ public:
     QPushButton *stampThirteen;
     QPushButton *stampFourteen;
     QPushButton *stampFifteen;
+    QPushButton *stampSixteen;
+    QPushButton *stampSeventeen;
+    QPushButton *stampEighteen;
+    QPushButton *stampNineteen;
+    QPushButton *stampTwenty;
+    QPushButton *stampTwentyOne;
+    QPushButton *stampTwentyTwo;
+    QPushButton *stampTwentyThree;
+    QPushButton *stampTwentyFour;
 
 };
 

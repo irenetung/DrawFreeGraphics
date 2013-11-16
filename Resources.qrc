@@ -133,21 +133,30 @@
         <file>Stamps/buildings_skyscraper_stamp.png</file>
     </qresource>
     <qresource prefix="/Stamps/vehicles">
-        <file>Stamps/vehicles_crane_stamp.png</file>
-        <file>Stamps/vehicles_ambulance_stamp.png</file>
-        <file>Stamps/vehicles_tractor_stamp.png</file>
-        <file>Stamps/vehicles_firetruck_stamp.png</file>
-        <file>Stamps/vehicles_avion_stamp.png</file>
-        <file>Stamps/vehicles_car_stamp.png</file>
-        <file>Stamps/vehicles_car_two_stamp.png</file>
-        <file>Stamps/vehicles_car_three_stamp.png</file>
-        <file>Stamps/vehicles_formula_stamp.png</file>
-        <file>Stamps/vehicles_greyhound_stamp.png</file>
-        <file>Stamps/vehicles_helicopter_stamp.png</file>
-        <file>Stamps/vehicles_jeep_stamp.png</file>
-        <file>Stamps/vehicles_lorry_stamp.png</file>
-        <file>Stamps/vehicles_schoolbus_stamp.png</file>
-        <file>Stamps/vehicles_van_stamp.png</file>
+        <file>Stamps/vehicles_one_stamp.png</file>
+        <file>Stamps/vehicles_two_stamp.png</file>
+        <file>Stamps/vehicles_three_stamp.png</file>
+        <file>Stamps/vehicles_four_stamp.png</file>
+        <file>Stamps/vehicles_five_stamp.png</file>
+        <file>Stamps/vehicles_six_stamp.png</file>
+        <file>Stamps/vehicles_seven_stamp.png</file>
+        <file>Stamps/vehicles_eight_stamp.png</file>
+        <file>Stamps/vehicles_nine_stamp.png</file>
+        <file>Stamps/vehicles_ten_stamp.png</file>
+        <file>Stamps/vehicles_eleven_stamp.png</file>
+        <file>Stamps/vehicles_twelve_stamp.png</file>
+        <file>Stamps/vehicles_thirteen_stamp.png</file>
+        <file>Stamps/vehicles_fourteen_stamp.png</file>
+        <file>Stamps/vehicles_fifteen_stamp.png</file>
+        <file>Stamps/vehicles_sixteen_stamp.png</file>
+        <file>Stamps/vehicles_seventeen_stamp.png</file>
+        <file>Stamps/vehicles_eighteen_stamp.png</file>
+        <file>Stamps/vehicles_nineteen_stamp.png</file>
+        <file>Stamps/vehicles_twenty_stamp.png</file>
+        <file>Stamps/vehicles_twentyone_stamp.png</file>
+        <file>Stamps/vehicles_twentytwo_stamp.png</file>
+        <file>Stamps/vehicles_twentythree_stamp.png</file>
+        <file>Stamps/vehicles_twentyfour_stamp.png</file>
     </qresource>
     <qresource prefix="/Stamps/people">
         <file>Stamps/people_angel_stamp.png</file>
