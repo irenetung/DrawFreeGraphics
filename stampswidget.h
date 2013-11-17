@@ -295,6 +295,7 @@ public:
     QPushButton *stampTwentyTwo;
     QPushButton *stampTwentyThree;
     QPushButton *stampTwentyFour;
+    QPushButton *stampTwentyFive;
 
 };
 

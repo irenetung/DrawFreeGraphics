@@ -157,6 +157,7 @@
         <file>Stamps/vehicles_twentytwo_stamp.png</file>
         <file>Stamps/vehicles_twentythree_stamp.png</file>
         <file>Stamps/vehicles_twentyfour_stamp.png</file>
+        <file>Stamps/vehicles_twentyfive_stamp.png</file>
     </qresource>
     <qresource prefix="/Stamps/people">
         <file>Stamps/people_angel_stamp.png</file>

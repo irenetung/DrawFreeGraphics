@@ -542,6 +542,8 @@ StampsWidgetVehicles::StampsWidgetVehicles()
     setButtonProperties(stampTwentyThree);
     stampTwentyFour = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_twentyfour_stamp.png"), tr(""));
     setButtonProperties(stampTwentyFour);
+    stampTwentyFive = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_twentyfive_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyFive);
 
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);

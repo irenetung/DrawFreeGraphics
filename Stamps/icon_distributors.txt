@@ -64,6 +64,10 @@ https://www.iconfinder.com/iconsets/Matchbox-Car-Icons-Mac#readme
 	License: Free for Commercial Use
 	Designer: Sebastien Durel - http://www.crystalxp.net/galerie/en.id.3751-bagg-a-png.htm 
 
+	Boat:
+	http://cemagraphics.deviantart.com/art/Sailingship-Icon-96460904
+	License: Free for Commercial Use
+
 Faces:
 https://www.iconfinder.com/search/?q=iconset%3Aimoticons
 	License: Creative Commons Attribution 3.0 Unported
