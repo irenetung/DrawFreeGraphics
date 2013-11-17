@@ -205,3 +205,90 @@ void DrawItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
         painter->drawPoint(vertices[i]);
     }
 }
+
+// WATER COLOR METHOD
+void DrawItem::addWaterColorEffect(int size, float perc)
+{
+    // init
+    QList<QPointF> pointList;
+    int numRowsCols = floor(perc * size);
+    int divide = floor(size / 2);
+    int numCenters = vertices.size();
+
+    for (int i = 0; i < numCenters; i++)
+    {
+        // generate random rows/columns to be included
+        int rows[numRowsCols];
+        int cols[numRowsCols];
+        for (int r = 0; r < numRowsCols; r++)
+        {
+            rows[r] = rand() % size;
+            cols[r] = rand() % size;
+        }
+
+        // deque center point
+        QPointF center = vertices.at(i);
+        // add surrounding points
+        for (int r = 0; r < numRowsCols; r++)
+        {
+            // add row
+            int curRow = rows[r];
+            int pixelRow = 0;
+            if (curRow > divide)
+            {
+                pixelRow = center.y() + (curRow - divide);
+            }
+            else
+            {
+                pixelRow = center.y() - (divide - curRow);
+            }
+            for (int c = 0; c < size; c++)
+            {
+                QPointF newPoint;
+                if (c < divide)
+                {
+                    newPoint.setX(center.x() - (divide - c));
+                    newPoint.setY(pixelRow);
+                    vertices.append(newPoint);
+                }
+                else
+                {
+                    newPoint.setX(center.x() + (c - divide));
+                    newPoint.setY(pixelRow);
+                    vertices.append(newPoint);
+                }
+            }
+
+            // add col
+            int curCol = cols[r];
+            int pixelCol = 0;
+            if (pixelCol > divide)
+            {
+                pixelCol = center.x() + (curCol - divide);
+            }
+            else
+            {
+                pixelCol = center.x() - (divide - curCol);
+            }
+            for (int c = 0; c < size; c++)
+            {
+                QPointF newPoint;
+                if (c < divide)
+                {
+                    newPoint.setX(pixelCol);
+                    newPoint.setY(center.y() - (divide - c));
+                    vertices.append(newPoint);
+                }
+                else
+                {
+                    newPoint.setX(pixelCol);
+                    newPoint.setY(center.y() + (c - divide));
+                    vertices.append(newPoint);
+                }
+            }
+        }
+
+
+    }
+
+}

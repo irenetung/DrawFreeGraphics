@@ -87,6 +87,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         mousePressCount++;
         if(mousePressCount == 2) {
             DrawItem *draw = new DrawItem(points,*pen,*brush);
+            draw->addWaterColorEffect(100, 0.1);
             drawItem(draw);
             mousePressCount = 0;
         }
