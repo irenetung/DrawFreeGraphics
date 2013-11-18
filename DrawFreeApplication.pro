@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     cursorwidget.cpp \
     stampswidget.cpp \
     brusheffectswidget.cpp \
-    drawwidget.cpp
+    drawwidget.cpp \
+    commanditem.cpp
 
 HEADERS  += mainwindow.h \
     prompt.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     cursorwidget.h \
     stampswidget.h \
     brusheffectswidget.h \
-    drawwidget.h
+    drawwidget.h \
+    commanditem.h
 
 FORMS    += mainwindow.ui
 

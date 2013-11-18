@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QList>
 #include <QPoint>
+#include <QUndoStack>
 #include "item.h"
 #include <cmath>
 /*#define N_POINTS 1000
@@ -40,13 +41,14 @@ public:
     enum ShapeState {NOSHAPE,PREVSHAPE,LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
     enum StampState {NOSTAMP, SILHOUETTE, STANDARD};
 
-    Canvas();
+    Canvas(QUndoStack* undoStack_);
     QGraphicsScene *scene;
     int mousePressCount;
     QPen *pen;
     QBrush *brush;
     QColor color;
     QList<QPointF> points;
+    QUndoStack *undoStack;
 
     DrawState drawState;
     CursorState cursorState;

@@ -1,9 +1,10 @@
 #include "canvas.h"
+#include "commanditem.h"
 
 #include <QMessageBox>
 #include <QDebug>
 
-Canvas::Canvas()
+Canvas::Canvas(QUndoStack* undoStack_)
 {
     setMouseTracking(true);
     scene = new QGraphicsScene();
@@ -37,12 +38,14 @@ Canvas::Canvas()
 
     currentStampPath = "";
     stampState = NOSTAMP;
+
+    undoStack = undoStack_;
 }
 
 void Canvas::drawItem(QGraphicsItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
-    scene->addItem(item);
+    undoStack->push(new CommandItem(item, scene));
     update();
     prevShape = item;
     mousePressCount = 0;
@@ -63,7 +66,7 @@ void Canvas::setCurrentStamp(QString item)
 
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
-    scene->addItem(item);
+    undoStack->push(new CommandItem(item, scene));
     update();
     mousePressCount = 0;
     points.clear();

@@ -713,7 +713,12 @@ void MainWindow::newButtonClicked()
 
 void MainWindow::openButtonClicked()
 {
-    QMessageBox::information(this, "title", "Open");
+    //QMessageBox::information(this, "title", "Open");
+    QString s = QFileDialog::getOpenFileName(
+                    0,
+                    "open file dialog",
+                    "/home",
+                    "Images (*.png *.xpm *.jpg)");
 }
 
 void MainWindow::saveButtonClicked()
