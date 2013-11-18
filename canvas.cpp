@@ -72,6 +72,25 @@ void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
     points.clear();
 }
 
+void Canvas::saveScene(QString filename)
+{
+    scene->clearSelection();                                                  // Selections would also render to the file
+    scene->setSceneRect(scene->itemsBoundingRect());                          // Re-shrink the scene to it's bounding contents
+    QImage image(scene->sceneRect().size().toSize(), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
+    image.fill(Qt::transparent);                                              // Start all pixels transparent
+
+    QPainter painter(&image);
+    scene->render(&painter);
+    image.save(filename);
+}
+
+void Canvas::loadScene(QString filename)
+{
+    qDebug() << "Loading file: " <<  filename;
+    QPixmap bg(filename);
+    scene->addPixmap(bg);
+}
+
 void Canvas::mouseMoveEvent(QMouseEvent *e)
 {
     if(drawState == DRAW) {

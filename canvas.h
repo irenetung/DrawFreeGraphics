@@ -77,6 +77,8 @@ public:
     void setCurrentStamp(QString path);
     void drawPixmapItem(QGraphicsPixmapItem *item);
 
+    void saveScene(QString filename);
+    void loadScene(QString filename);
 
 protected:
     //void paintEvent(QPaintEvent *e);
