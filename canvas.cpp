@@ -261,6 +261,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 }
             }
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
+            item->setScale(0.5);
             item->setPos(clickPoint - item->boundingRect().center());
             drawPixmapItem(item);
         }
@@ -269,7 +270,8 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             points.append(clickPoint);
             QImage im(currentStampPath);
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
-            item->setPos(clickPoint - item->boundingRect().center());
+            item->setScale(0.5);
+            item->setPos(clickPoint - 0.5 * item->boundingRect().center());
             drawPixmapItem(item);
         }
         else
