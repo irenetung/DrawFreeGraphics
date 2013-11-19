@@ -11,14 +11,17 @@
 class PointItem : public QGraphicsItem
 {
 public:
-    PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+   //PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    PointItem(QPointF &point,QPen &curPen);
+
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
 
 protected:
-    QList<QPointF> vertices;
+    //QList<QPointF> vertices;
+    QPointF vertex;
     QPen *pen;
-    QBrush *brush;
+    //QBrush *brush;
 };
 
 class RoundRectangleItem : public QGraphicsItem

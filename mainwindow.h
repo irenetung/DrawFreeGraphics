@@ -54,11 +54,14 @@ private:
  //Tool Widgets
     Prompt *prompt;
     //Cursor
+    CursorWidgetCursors *cursorWidgetCursors;
     CursorWidgetTranslate *cursorWidgetTranslate;
     CursorWidgetScale *cursorWidgetScale;
     CursorWidgetStretch *cursorWidgetStretch;
     CursorWidgetRotate *cursorWidgetRotate;
     CursorWidgetShear *cursorWidgetShear;
+    CursorWidgetDepth *cursorWidgetDepth;
+    CursorWidgetBack *cursorWidgetBack;
     //Shapes
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
@@ -96,11 +99,16 @@ private slots:
 
 //Tool Buttons
     //Cursor
+    void cursorBackButtonClicked();
+
     void translateButtonClicked();
     void scaleButtonClicked();
     void rotateButtonClicked();
     void shearButtonClicked();
     void stretchButtonClicked();
+    void depthButtonClicked();
+    void copyButtonClicked();
+    void deleteButtonClicked();
 
     void translateSignButtonClicked();
     void translateDirectionButtonClicked();
@@ -124,8 +132,14 @@ private slots:
 
     void stretchSignButtonClicked();
     void stretchDirectionButtonClicked();
-    void st05ButtonButtonClicked();
-    void st1ButtonButtonClicked();
+    void st0001ButtonClicked();
+    void st0005ButtonClicked();
+    void st001ButtonClicked();
+    void st005ButtonClicked();
+    void st01ButtonClicked();
+    void st02ButtonClicked();
+    void st05ButtonClicked();
+    void st1ButtonClicked();
 
     void rotateSignButtonClicked();
     void reset0ButtonClicked();
@@ -146,10 +160,17 @@ private slots:
 
     void shearSignButtonClicked();
     void shearDirectionButtonClicked();
-    void sh1ButtonButtonClicked();
+    void sh001ButtonClicked();
+    void sh005ButtonClicked();
+    void sh01ButtonClicked();
+    void sh02ButtonClicked();
+    void sh05ButtonClicked();
+    void sh1ButtonClicked();
+
+    void dp1ButtonClicked();
+    void dn1ButtonClicked();
 
     //Shapes
-    void previousShapeButtonClicked();
     void lineButtonClicked();
     void pointButtonClicked();
     void circleButtonClicked();
@@ -162,6 +183,7 @@ private slots:
     void pathButtonClicked();
     void textButtonClicked();
 
+    void shapesBackButtonClicked();
     void endPathButtonClicked();
 
     //Brush Effects
@@ -181,7 +203,10 @@ private slots:
     void silhouetteStampClicked(const QString stamp_name);
     void standardStampClicked(const QString stamp_name);
 
-
+private:
+    void changeTranslateValue(double v);
+    void changeStretchValue(double v);
+    void changeShearValue(double v);
 };
 
 #endif // MAINWINDOW_H

@@ -2,27 +2,35 @@
 #include <QDebug>
 
 //POINT
-PointItem::PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
+/*PointItem::PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
 {
     for(int i = 0; i < points.size(); i++) {
         vertices.append(points[i]);
     }
     pen = new QPen(curPen);
     brush = new QBrush(curBrush);
+}*/
+
+PointItem::PointItem(QPointF &point, QPen &curPen)
+{
+    vertex = point;
+    pen = new QPen(curPen);
 }
 
 QRectF PointItem::boundingRect() const
 {
-    return QRectF(vertices[0].x()-2.5,vertices[0].y()-2.5,5,5);
+    //return QRectF(vertices[0].x()-2.5,vertices[0].y()-2.5,5,5);
+    return QRectF(vertex.x()-2.5,vertex.y()-2.5,5,5);
 }
 
 void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRectF rect = boundingRect();
+   // QRectF rect = boundingRect();
 
-    painter->setBrush(*brush);
+   // painter->setBrush(*brush);
     painter->setPen(*pen);
-    painter->drawEllipse(rect);
+    //painter->drawPoint(vertices[0]);
+    painter->drawPoint(vertex);
 }
 
 //ROUNDRECT
@@ -201,7 +209,10 @@ void DrawItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setBrush(*brush);
     painter->setPen(*pen);
     int size = vertices.size();
-    for(int i = 0; i < size; i++) {
-        painter->drawPoint(vertices[i]);
+    if(size >1) {
+        for(int i = 1; i < size; i++) {
+            painter->drawLine(vertices[i-1],vertices[i]);
+        }
     }
 }
+

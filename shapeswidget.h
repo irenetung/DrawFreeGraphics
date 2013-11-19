@@ -34,7 +34,6 @@ class ShapesWidgetShapes : public ShapesWidget
 {
 public:
     explicit ShapesWidgetShapes();
-    QPushButton *previousShapeButton;
     QPushButton *lineButton;
     QPushButton *pointButton;
     QPushButton *circleButton;
@@ -53,6 +52,7 @@ class ShapesWidgetEndPath : public ShapesWidget
 {
 public:
     explicit ShapesWidgetEndPath();
+    QPushButton *backButton;
     QPushButton *endPathButton;
 };
 

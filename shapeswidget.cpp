@@ -39,8 +39,6 @@ ShapesWidgetShapes::ShapesWidgetShapes()
 {
     hLayout = new QHBoxLayout;
 
-    previousShapeButton = new QPushButton("previous\nshape");
-    setButtonProperties(previousShapeButton);
     lineButton = new QPushButton("line");
     setButtonProperties(lineButton);
     pointButton = new QPushButton("point");
@@ -73,6 +71,8 @@ ShapesWidgetEndPath::ShapesWidgetEndPath()
 {
     hLayout = new QHBoxLayout;
 
+    backButton = new QPushButton("back to\nshapes");
+    setButtonProperties(backButton);
     endPathButton = new QPushButton("end path");
     setButtonProperties(endPathButton);
 
