@@ -3,6 +3,7 @@
 
 #include <QMessageBox>
 #include <QAbstractButton>
+#include <qfiledialog.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -92,6 +93,8 @@ MainWindow::MainWindow(QWidget *parent) :
     closeButton->setText("Close");
     setToolButtonProperties(closeButton);
     connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
+
+    undoStack = new QUndoStack();
 
 //Tool Widgets
     //Prompt
@@ -642,7 +645,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //Canvas
-    canvas = new Canvas();
+    canvas = new Canvas(undoStack);
 
     //Application Layout
     vLayout = new QVBoxLayout;
@@ -713,17 +716,27 @@ void MainWindow::newButtonClicked()
 
 void MainWindow::openButtonClicked()
 {
-    QMessageBox::information(this, "title", "Open");
+    QString s = QFileDialog::getOpenFileName(
+                    0,
+                    "Open File",
+                    "/home",
+                    "Images (*.png *.xpm *.jpg)");
+    canvas->loadScene(s);
 }
 
 void MainWindow::saveButtonClicked()
 {
-    QMessageBox::information(this, "title", "Save");
+    QString s = QFileDialog::getSaveFileName(
+                    0,
+                    "Save File",
+                    "/home",
+                    "Images (*.png *.xpm *.jpg)");
+    canvas->saveScene(s);
 }
 
 void MainWindow::undoButtonClicked()
 {
-    QMessageBox::information(this, "title", "Undo");
+    undoStack->undo();
 }
 
 void MainWindow::cursorButtonClicked()
@@ -1241,7 +1254,3 @@ void MainWindow::standardStampClicked(const QString stamp_name)
     canvas->stampState = canvas->STANDARD;
     canvas->setCurrentStamp(stamp_path);
 }
-
-
-
-

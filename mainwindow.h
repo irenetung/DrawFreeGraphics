@@ -9,6 +9,7 @@
 #include <QGraphicsView>
 #include <QToolButton>
 #include <QIcon>
+#include <QUndoStack>
 
 #include "prompt.h"
 #include "cursorwidget.h"
@@ -50,6 +51,8 @@ private:
     QToolButton *eraserButton;
     QToolButton *insertPictureButton;
     QToolButton *closeButton;
+
+    QUndoStack *undoStack;
 
  //Tool Widgets
     Prompt *prompt;

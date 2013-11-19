@@ -1,9 +1,10 @@
 #include "canvas.h"
+#include "commanditem.h"
 
 #include <QMessageBox>
 #include <QDebug>
 
-Canvas::Canvas()
+Canvas::Canvas(QUndoStack* undoStack_)
 {
     setMouseTracking(true);
     scene = new QGraphicsScene();
@@ -37,12 +38,14 @@ Canvas::Canvas()
 
     currentStampPath = "";
     stampState = NOSTAMP;
+
+    undoStack = undoStack_;
 }
 
 void Canvas::drawItem(QGraphicsItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
-    scene->addItem(item);
+    undoStack->push(new CommandItem(item, scene));
     update();
     prevShape = item;
     mousePressCount = 0;
@@ -63,10 +66,29 @@ void Canvas::setCurrentStamp(QString item)
 
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
-    scene->addItem(item);
+    undoStack->push(new CommandItem(item, scene));
     update();
     mousePressCount = 0;
     points.clear();
+}
+
+void Canvas::saveScene(QString filename)
+{
+    scene->clearSelection();                                                  // Selections would also render to the file
+    scene->setSceneRect(scene->itemsBoundingRect());                          // Re-shrink the scene to it's bounding contents
+    QImage image(scene->sceneRect().size().toSize(), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
+    image.fill(Qt::transparent);                                              // Start all pixels transparent
+
+    QPainter painter(&image);
+    scene->render(&painter);
+    image.save(filename);
+}
+
+void Canvas::loadScene(QString filename)
+{
+    qDebug() << "Loading file: " <<  filename;
+    QPixmap bg(filename);
+    scene->addPixmap(bg);
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *e)
