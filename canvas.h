@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QList>
 #include <QPoint>
+#include <QUndoStack>
 #include "item.h"
 #include <cmath>
 
@@ -21,13 +22,14 @@ public:
     enum ShapeState {NOSHAPE,LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
     enum StampState {NOSTAMP, SILHOUETTE, STANDARD};
 
-    Canvas();
+    Canvas(QUndoStack* undoStack_);
     QGraphicsScene *scene;
     int mousePressCount;
     QPen *pen;
     QBrush *brush;
     QColor color;
     QList<QPointF> points;
+    QUndoStack *undoStack;
 
     DrawState drawState;
     void resetDrawState();
@@ -70,6 +72,8 @@ public:
     void setCurrentStamp(QString path);
     void drawPixmapItem(QGraphicsPixmapItem *item);
 
+    void saveScene(QString filename);
+    void loadScene(QString filename);
 
 protected:
     //void paintEvent(QPaintEvent *e);

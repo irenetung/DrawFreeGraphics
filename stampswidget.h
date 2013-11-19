@@ -44,10 +44,6 @@ public:
     QPushButton *sceneryButton;
     QPushButton *facesButton;
     QPushButton *vehiclesButton;
-    QPushButton *actionsButton;
-    QPushButton *objectsOneButton;
-    QPushButton *objectsTwoButton;
-    QPushButton *objectsThreeButton;
 
 };
 
@@ -57,39 +53,39 @@ class StampsWidgetSilhouette : public StampsWidget
 public:
     explicit StampsWidgetSilhouette();
     QPushButton *goBack;
-    QPushButton *dogStamp;
-    QPushButton *catStamp;
-    QPushButton *birdStamp;
-    QPushButton *turtleStamp;
-    QPushButton *ratStamp;
-    QPushButton *giraffeStamp;
-    QPushButton *alienStamp;
-    QPushButton *manStamp;
-    QPushButton *womanStamp;
-    QPushButton *cameraStamp;
-    QPushButton *mailStamp;
-    QPushButton *cupStamp;
-    QPushButton *giftStamp;
-    QPushButton *umbrellaStamp;
-    QPushButton *securityCamStamp;
-    QPushButton *wrenchStamp;
-    QPushButton *heartStamp;
-    QPushButton *airplaneStamp;
-    QPushButton *helicopterStamp;
-    QPushButton *carStamp;
-    QPushButton *truckStamp;
-    QPushButton *busStamp;
-    QPushButton *gasPumpStamp;
-    QPushButton *factoryStamp;
-    QPushButton *buildingStamp;
-    QPushButton *capitolStamp;
-    QPushButton *homeStamp;
-    QPushButton *sunStamp;
-    QPushButton *treeStamp;
-    QPushButton *tree2Stamp;
-    QPushButton *cloudStamp;
-    QPushButton *snowStamp;
-    QPushButton *rainStamp;
+    QPushButton *stampOne;
+    QPushButton *stampTwo;
+    QPushButton *stampThree;
+    QPushButton *stampFour;
+    QPushButton *stampFive;
+    QPushButton *stampSix;
+    QPushButton *stampSeven;
+    QPushButton *stampEight;
+    QPushButton *stampNine;
+    QPushButton *stampTen;
+    QPushButton *stampEleven;
+    QPushButton *stampTwelve;
+    QPushButton *stampThirteen;
+    QPushButton *stampFourteen;
+    QPushButton *stampFifteen;
+    QPushButton *stampSixteen;
+    QPushButton *stampSeventeen;
+    QPushButton *stampEighteen;
+    QPushButton *stampNineteen;
+    QPushButton *stampTwenty;
+    QPushButton *stampTwentyOne;
+    QPushButton *stampTwentyTwo;
+    QPushButton *stampTwentyThree;
+    QPushButton *stampTwentyFour;
+    QPushButton *stampTwentyFive;
+    QPushButton *stampTwentySix;
+    QPushButton *stampTwentySeven;
+    QPushButton *stampTwentyEight;
+    QPushButton *stampTwentyNine;
+    QPushButton *stampThirty;
+    QPushButton *stampThirtyOne;
+    QPushButton *stampThirtyTwo;
+    QPushButton *stampThirtyThree;
 
 
 };
@@ -133,6 +129,49 @@ public:
     QPushButton *snakeStamp;
     QPushButton *turkeyStamp;
     QPushButton *wolfStamp;
+
+
+};
+
+//Stamp Category: People
+class StampsWidgetPeople : public StampsWidget
+{
+public:
+    explicit StampsWidgetPeople();
+    QPushButton *goBack;
+    QPushButton *stampOne;
+    QPushButton *stampTwo;
+    QPushButton *stampThree;
+    QPushButton *stampFour;
+    QPushButton *stampFive;
+    QPushButton *stampSix;
+    QPushButton *stampSeven;
+    QPushButton *stampEight;
+    QPushButton *stampNine;
+    QPushButton *stampTen;
+    QPushButton *stampEleven;
+    QPushButton *stampTwelve;
+    QPushButton *stampThirteen;
+    QPushButton *stampFourteen;
+    QPushButton *stampFifteen;
+    QPushButton *stampSixteen;
+    QPushButton *stampSeventeen;
+    QPushButton *stampEighteen;
+    QPushButton *stampNineteen;
+    QPushButton *stampTwenty;
+    QPushButton *stampTwentyOne;
+    QPushButton *stampTwentyTwo;
+    QPushButton *stampTwentyThree;
+    QPushButton *stampTwentyFour;
+    QPushButton *stampTwentyFive;
+    QPushButton *stampTwentySix;
+    QPushButton *stampTwentySeven;
+    QPushButton *stampTwentyEight;
+    QPushButton *stampTwentyNine;
+    QPushButton *stampThirty;
+    QPushButton *stampThirtyOne;
+    QPushButton *stampThirtyTwo;
+    QPushButton *stampThirtyThree;
 
 
 };
@@ -184,5 +223,81 @@ public:
     QPushButton *statueStamp;
 
 };
+
+//Stamp Category: Faces
+class StampsWidgetFaces : public StampsWidget
+{
+public:
+    explicit StampsWidgetFaces();
+    QPushButton *goBack;
+    QPushButton *stampOne;
+    QPushButton *stampTwo;
+    QPushButton *stampThree;
+    QPushButton *stampFour;
+    QPushButton *stampFive;
+    QPushButton *stampSix;
+    QPushButton *stampSeven;
+    QPushButton *stampEight;
+    QPushButton *stampNine;
+    QPushButton *stampTen;
+    QPushButton *stampEleven;
+    QPushButton *stampTwelve;
+    QPushButton *stampThirteen;
+    QPushButton *stampFourteen;
+    QPushButton *stampFifteen;
+    QPushButton *stampSixteen;
+    QPushButton *stampSeventeen;
+    QPushButton *stampEighteen;
+    QPushButton *stampNineteen;
+    QPushButton *stampTwenty;
+    QPushButton *stampTwentyOne;
+    QPushButton *stampTwentyTwo;
+    QPushButton *stampTwentyThree;
+    QPushButton *stampTwentyFour;
+    QPushButton *stampTwentyFive;
+    QPushButton *stampTwentySix;
+    QPushButton *stampTwentySeven;
+    QPushButton *stampTwentyEight;
+    QPushButton *stampTwentyNine;
+    QPushButton *stampThirty;
+    QPushButton *stampThirtyOne;
+    QPushButton *stampThirtyTwo;
+
+};
+
+//Stamp Category: Vehicles
+class StampsWidgetVehicles : public StampsWidget
+{
+public:
+    explicit StampsWidgetVehicles();
+    QPushButton *goBack;
+    QPushButton *stampOne;
+    QPushButton *stampTwo;
+    QPushButton *stampThree;
+    QPushButton *stampFour;
+    QPushButton *stampFive;
+    QPushButton *stampSix;
+    QPushButton *stampSeven;
+    QPushButton *stampEight;
+    QPushButton *stampNine;
+    QPushButton *stampTen;
+    QPushButton *stampEleven;
+    QPushButton *stampTwelve;
+    QPushButton *stampThirteen;
+    QPushButton *stampFourteen;
+    QPushButton *stampFifteen;
+    QPushButton *stampSixteen;
+    QPushButton *stampSeventeen;
+    QPushButton *stampEighteen;
+    QPushButton *stampNineteen;
+    QPushButton *stampTwenty;
+    QPushButton *stampTwentyOne;
+    QPushButton *stampTwentyTwo;
+    QPushButton *stampTwentyThree;
+    QPushButton *stampTwentyFour;
+    QPushButton *stampTwentyFive;
+
+};
+
 
 #endif // STAMPSWIDGET_H

@@ -1,9 +1,10 @@
 #include "canvas.h"
+#include "commanditem.h"
 
 #include <QMessageBox>
 #include <QDebug>
 
-Canvas::Canvas()
+Canvas::Canvas(QUndoStack* undoStack_)
 {
     setMouseTracking(true);
 
@@ -51,6 +52,8 @@ Canvas::Canvas()
 
     currentStampPath = "";
     stampState = NOSTAMP;
+
+    undoStack = undoStack_;
 }
 
 void Canvas::resetDrawState()
@@ -73,7 +76,7 @@ void Canvas::resetTranslateStretchShear()
 void Canvas::drawItem(QGraphicsItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
-    scene->addItem(item);
+    undoStack->push(new CommandItem(item, scene));
     update();
     prevShape = item;
     mousePressCount = 0;
@@ -93,21 +96,30 @@ void Canvas::setCurrentStamp(QString item)
 
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
-    scene->addItem(item);
+    undoStack->push(new CommandItem(item, scene));
     update();
     mousePressCount = 0;
     points.clear();
 }
 
-/*void Canvas::paintEvent(QPaintEvent *e)
+void Canvas::saveScene(QString filename)
 {
-    QPainter p(viewport());
-   // qDebug() << "paint";
-    if(points.size()>1) {
-    p.drawLine(points[points.size()-2],points[points.size()-1]);
-    }
+    scene->clearSelection();                                                  // Selections would also render to the file
+    scene->setSceneRect(scene->itemsBoundingRect());                          // Re-shrink the scene to it's bounding contents
+    QImage image(scene->sceneRect().size().toSize(), QImage::Format_ARGB32);  // Create the image with the exact size of the shrunk scene
+    image.fill(Qt::transparent);                                              // Start all pixels transparent
 
-}*/
+    QPainter painter(&image);
+    scene->render(&painter);
+    image.save(filename);
+}
+
+void Canvas::loadScene(QString filename)
+{
+    qDebug() << "Loading file: " <<  filename;
+    QPixmap bg(filename);
+    scene->addPixmap(bg);
+}
 
 void Canvas::mouseMoveEvent(QMouseEvent *e)
 {
@@ -136,6 +148,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         //drawItem(pointItem);
         if(mousePressCount == 2) {
             DrawItem *draw = new DrawItem(points,*pen,*brush);
+            draw->addWaterColorEffect(100, 0.1);
             drawItem(draw);
             mousePressCount = 0;
         }
@@ -284,6 +297,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 }
             }
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
+            item->setScale(0.5);
             item->setPos(clickPoint - item->boundingRect().center());
             drawPixmapItem(item);
         }
@@ -292,7 +306,8 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             points.append(clickPoint);
             QImage im(currentStampPath);
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
-            item->setPos(clickPoint - item->boundingRect().center());
+            item->setScale(0.5);
+            item->setPos(clickPoint - 0.5 * item->boundingRect().center());
             drawPixmapItem(item);
         }
         else

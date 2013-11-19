@@ -8,6 +8,8 @@
 #include <QPoint>
 #include <QList>
 
+#include "math.h"
+
 class PointItem : public QGraphicsItem
 {
 public:
@@ -99,12 +101,15 @@ protected:
     float bottom;
 };
 
+// DRAW ITEM
 class DrawItem : public QGraphicsItem
 {
 public:
-    DrawItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    explicit DrawItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+
+    void addWaterColorEffect(int size, float perc);
 
 protected:
     QList<QPointF> vertices;
@@ -115,5 +120,6 @@ protected:
     float top;
     float bottom;
 };
+
 
 #endif // ITEM_H

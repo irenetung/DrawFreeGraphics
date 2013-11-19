@@ -9,6 +9,7 @@
 #include <QGraphicsView>
 #include <QToolButton>
 #include <QIcon>
+#include <QUndoStack>
 
 #include "prompt.h"
 #include "cursorwidget.h"
@@ -51,6 +52,8 @@ private:
     QToolButton *insertPictureButton;
     QToolButton *closeButton;
 
+    QUndoStack *undoStack;
+
  //Tool Widgets
     Prompt *prompt;
     //Cursor
@@ -72,9 +75,12 @@ private:
     //Stamps
     StampsWidgetCategories *stampsWidgetCategories;
     StampsWidgetSilhouette *stampsWidgetSilhouette;
+    StampsWidgetPeople *stampsWidgetPeople;
     StampsWidgetAnimals *stampsWidgetAnimals;
     StampsWidgetBuildings *stampsWidgetBuildings;
     StampsWidgetScenery *stampsWidgetScenery;
+    StampsWidgetFaces *stampsWidgetFaces;
+    StampsWidgetVehicles *stampsWidgetVehicles;
 
     //Canvas
     Canvas *canvas;
@@ -196,9 +202,12 @@ private slots:
     //Stamps
     void goBackButtonClicked();
     void silhouetteButtonClicked();
+    void peopleButtonClicked();
     void animalsButtonClicked();
     void buildingsButtonClicked();
     void sceneryButtonClicked();
+    void facesButtonClicked();
+    void vehiclesButtonClicked();
 
     void silhouetteStampClicked(const QString stamp_name);
     void standardStampClicked(const QString stamp_name);
