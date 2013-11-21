@@ -7,6 +7,7 @@
 #include <QPainter>
 #include <QPoint>
 #include <QList>
+#include <cmath>
 
 #include "math.h"
 

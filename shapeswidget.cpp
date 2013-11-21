@@ -1,43 +1,16 @@
 #include "shapeswidget.h"
 
-ShapesWidget::ShapesWidget(QWidget *parent) :
-    QWidget(parent)
+ShapesWidget::ShapesWidget()
 {
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(255,229,204));
-
-    dim = 60;
-}
-
-void ShapesWidget::resizeEvent(QResizeEvent *e)
-{
-    int h = e->size().height();
-    int w = e->size().width();
-    QPixmap temp = this->parea->copy();
-    parea = new QPixmap(w,h);
-    *parea = temp.scaled(w,h);
-}
-
-void ShapesWidget::paintEvent(QPaintEvent *e)
-{
-    if(parea != NULL) {
-        QPainter painter(this);
-        painter.drawPixmap(0,0,*parea);
-    }
-}
-
-void ShapesWidget::setButtonProperties(QPushButton *b)
-{
-    b->setFixedWidth(dim);
-    b->setFixedHeight(dim);
-    hLayout->addWidget(b);
+    parea->fill(QColor(255,255,204));
 }
 
 ShapesWidgetShapes::ShapesWidgetShapes()
 {
-    hLayout = new QHBoxLayout;
+    hLayout = new FlowLayout;
 
     lineButton = new QPushButton("line");
     setButtonProperties(lineButton);
@@ -63,13 +36,13 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     setButtonProperties(textButton);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 }
 
 ShapesWidgetEndPath::ShapesWidgetEndPath()
 {
-    hLayout = new QHBoxLayout;
+    hLayout = new FlowLayout;
 
     backButton = new QPushButton("back to\nshapes");
     setButtonProperties(backButton);
@@ -78,7 +51,7 @@ ShapesWidgetEndPath::ShapesWidgetEndPath()
 
     hLayout->addWidget(endPathButton);
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
 
     this->setLayout(hLayout);
 }

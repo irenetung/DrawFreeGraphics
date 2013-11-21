@@ -1,34 +1,12 @@
 #ifndef CURSORWIDGET_H
 #define CURSORWIDGET_H
 
-#include <QWidget>
-#include <QPixmap>
-#include <QPainter>
-#include <QResizeEvent>
-#include <QPushButton>
-#include <QHBoxLayout>
-#include <QSlider>
-#include <QSignalMapper>
+#include "basewidget.h"
 
-class CursorWidget : public QWidget
+class CursorWidget : public BaseWidget
 {
-    Q_OBJECT
 public:
-    explicit CursorWidget(QWidget *parent = 0);
-signals:
-
-public slots:
-
-protected:
-    void resizeEvent(QResizeEvent *e);
-    void paintEvent(QPaintEvent *e);
-
-    int dim;
-    QHBoxLayout *hLayout;
-    void setButtonProperties(QPushButton *b);
-
-private:
-    QPixmap *parea;
+    explicit CursorWidget();
 };
 
 class CursorWidgetCursors : public CursorWidget
@@ -52,7 +30,6 @@ public:
     QPushButton *backButton;
     QPushButton *signButton;
     QPushButton *directionButton;
-    QPushButton *t05Button;
     QPushButton *t1Button;
     QPushButton *t5Button;
     QPushButton *t10Button;
@@ -87,7 +64,6 @@ public:
     QPushButton *backButton;
     QPushButton *signButton;
     QPushButton *directionButton;
-    QPushButton *st0001Button;
     QPushButton *st0005Button;
     QPushButton *st001Button;
     QPushButton *st005Button;

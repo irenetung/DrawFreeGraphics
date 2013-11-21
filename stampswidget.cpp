@@ -1,49 +1,18 @@
 #include "stampswidget.h"
 
 // STAMPS WIDGET
-StampsWidget::StampsWidget(QWidget *parent) :
-    QWidget(parent)
+StampsWidget::StampsWidget()
 {
-
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
     parea->fill(QColor(229,255,204));
-
-    dim = 60;
-    button_length = 200;
-
 }
-
-void StampsWidget::resizeEvent(QResizeEvent *e)
-{
-    int h = e->size().height();
-    int w = e->size().width();
-    QPixmap temp = this->parea->copy();
-    parea = new QPixmap(w,h);
-    *parea = temp.scaled(w,h);
-}
-
-void StampsWidget::paintEvent(QPaintEvent *e)
-{
-    if(parea != NULL) {
-        QPainter painter(this);
-        painter.drawPixmap(0,0,*parea);
-    }
-}
-
-void StampsWidget::setButtonProperties(QPushButton *b)
-{
-    b->setFixedWidth(button_length);
-    b->setFixedHeight(dim);
-    hLayout->addWidget(b);
-}
-
 
 // STAMPS WIDGET CATEGORIES
 StampsWidgetCategories::StampsWidgetCategories()
 {
-    hLayout = new QHBoxLayout;
+    hLayout = new FlowLayout;
 
     silhouetteButton = new QPushButton("Solid Color Buttons");
     setButtonProperties(silhouetteButton);
@@ -61,7 +30,7 @@ StampsWidgetCategories::StampsWidgetCategories()
     setButtonProperties(vehiclesButton);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 }
 
@@ -69,8 +38,7 @@ StampsWidgetCategories::StampsWidgetCategories()
 // STAMPS WIDGET SILHOUETTE
 StampsWidgetSilhouette::StampsWidgetSilhouette()
 {
-    hLayout = new QHBoxLayout;
-    button_length = 60;
+    hLayout = new FlowLayout;
 
     goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
     setButtonProperties(goBack);
@@ -142,18 +110,14 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
     setButtonProperties(stampThirtyThree);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
-
 }
-
 
 // STAMPS WIDGET ANIMALS
 StampsWidgetAnimals::StampsWidgetAnimals()
 {
-    hLayout = new QHBoxLayout;
-    button_length = 60;
-
+    hLayout = new FlowLayout;
     goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
     setButtonProperties(goBack);
     bearStamp = new QPushButton(QIcon(":/Stamps/animals/Stamps/animal_bear_stamp.png"), tr(""));
@@ -223,17 +187,14 @@ StampsWidgetAnimals::StampsWidgetAnimals()
     wolfStamp = new QPushButton(QIcon(":/Stamps/animals/Stamps/animal_wolf_stamp.png"), tr(""));
     setButtonProperties(wolfStamp);
 
-
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
-
 }
 
 // STAMPS WIDGET PEOPLE
 StampsWidgetPeople::StampsWidgetPeople(){
-    hLayout = new QHBoxLayout;
-    button_length = 60;
+    hLayout = new FlowLayout;
 
     goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
     setButtonProperties(goBack);
@@ -304,20 +265,15 @@ StampsWidgetPeople::StampsWidgetPeople(){
     stampThirtyThree = new QPushButton(QIcon(":/Stamps/people/Stamps/people_zombie_stamp.png"), tr(""));
     setButtonProperties(stampThirtyThree);
 
-
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
-
-
-
 }
 
 // STAMPS WIDGET BUILDINGS
 StampsWidgetBuildings::StampsWidgetBuildings()
 {
-    hLayout = new QHBoxLayout;
-    button_length = 60;
+    hLayout = new FlowLayout;
 
     goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
     setButtonProperties(goBack);
@@ -353,16 +309,14 @@ StampsWidgetBuildings::StampsWidgetBuildings()
     setButtonProperties(castleStamp);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
-
 }
 
 // STAMPS WIDGET SCENERY
 StampsWidgetScenery::StampsWidgetScenery()
 {
-    hLayout = new QHBoxLayout;
-    button_length = 60;
+    hLayout = new FlowLayout;
 
     goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
     setButtonProperties(goBack);
@@ -398,19 +352,15 @@ StampsWidgetScenery::StampsWidgetScenery()
     setButtonProperties(statueStamp);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
-
-
-
 }
 
 
 // STAMPS WIDGET FACES
 StampsWidgetFaces::StampsWidgetFaces()
 {
-    hLayout = new QHBoxLayout;
-    button_length = 60;
+    hLayout = new FlowLayout;
 
     goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
     setButtonProperties(goBack);
@@ -479,18 +429,15 @@ StampsWidgetFaces::StampsWidgetFaces()
     stampThirtyTwo = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_thirtytwo_stamp.png"), tr(""));
     setButtonProperties(stampThirtyTwo);
 
-
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 }
-
 
 // STAMPS WIDGET VEHICLES
 StampsWidgetVehicles::StampsWidgetVehicles()
 {
-    hLayout = new QHBoxLayout;
-    button_length = 60;
+    hLayout = new FlowLayout;
 
     goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
     setButtonProperties(goBack);
@@ -545,10 +492,8 @@ StampsWidgetVehicles::StampsWidgetVehicles()
     stampTwentyFive = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_twentyfive_stamp.png"), tr(""));
     setButtonProperties(stampTwentyFive);
 
-
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
-
 }
 

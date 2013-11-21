@@ -1,32 +1,12 @@
 #ifndef BRUSHEFFECTSWIDGET_H
 #define BRUSHEFFECTSWIDGET_H
 
-#include <QWidget>
-#include <QPixmap>
-#include <QPainter>
-#include <QResizeEvent>
-#include <QPushButton>
-#include <QHBoxLayout>
+#include "basewidget.h"
 
-class BrushEffectsWidget : public QWidget
+class BrushEffectsWidget : public BaseWidget
 {
-    Q_OBJECT
 public:
-    explicit BrushEffectsWidget(QWidget *parent = 0);
-
-signals:
-
-public slots:
-
-protected:
-    void resizeEvent(QResizeEvent *e);
-    void paintEvent(QPaintEvent *e);
-    int dim;
-    QHBoxLayout *hLayout;
-    void setButtonProperties(QPushButton *b);
-
-private:
-    QPixmap *parea;
+    explicit BrushEffectsWidget();
 };
 
 class BrushEffectsWidgetBrushEffects : public BrushEffectsWidget

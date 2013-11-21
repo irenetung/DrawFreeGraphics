@@ -22,7 +22,11 @@ SOURCES += main.cpp\
     stampswidget.cpp \
     brusheffectswidget.cpp \
     drawwidget.cpp \
-    commanditem.cpp
+    commanditem.cpp \
+    colorswidget.cpp \
+    flowlayout.cpp \
+    settingswidget.cpp \
+    basewidget.cpp
 
 HEADERS  += mainwindow.h \
     prompt.h \
@@ -33,7 +37,11 @@ HEADERS  += mainwindow.h \
     stampswidget.h \
     brusheffectswidget.h \
     drawwidget.h \
-    commanditem.h
+    commanditem.h \
+    colorswidget.h \
+    flowlayout.h \
+    settingswidget.h \
+    basewidget.h
 
 FORMS    += mainwindow.ui
 

@@ -1,43 +1,16 @@
 #include "brusheffectswidget.h"
 
-BrushEffectsWidget::BrushEffectsWidget(QWidget *parent) :
-    QWidget(parent)
+BrushEffectsWidget::BrushEffectsWidget()
 {
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
     parea->fill(QColor(204,255,204));
-
-    dim = 60;
-}
-
-void BrushEffectsWidget::resizeEvent(QResizeEvent *e)
-{
-    int h = e->size().height();
-    int w = e->size().width();
-    QPixmap temp = this->parea->copy();
-    parea = new QPixmap(w,h);
-    *parea = temp.scaled(w,h);
-}
-
-void BrushEffectsWidget::paintEvent(QPaintEvent *e)
-{
-    if(parea != NULL) {
-        QPainter painter(this);
-        painter.drawPixmap(0,0,*parea);
-    }
-}
-
-void BrushEffectsWidget::setButtonProperties(QPushButton *b)
-{
-    b->setFixedWidth(dim);
-    b->setFixedHeight(dim);
-    hLayout->addWidget(b);
 }
 
 BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)
 {
-    hLayout = new QHBoxLayout;
+    hLayout = new FlowLayout;
 
     paintButton = new QPushButton("paint");
     setButtonProperties(paintButton);
@@ -50,8 +23,7 @@ BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)
     sprayPaintButton = new QPushButton("spray\npaint");
     setButtonProperties(sprayPaintButton);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(dim,dim,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addSpacerItem(horizSpacer);
-
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 }

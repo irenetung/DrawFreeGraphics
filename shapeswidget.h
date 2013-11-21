@@ -1,32 +1,12 @@
 #ifndef SHAPESWIDGET_H
 #define SHAPESWIDGET_H
 
-#include <QWidget>
-#include <QPixmap>
-#include <QPainter>
-#include <QResizeEvent>
-#include <QPushButton>
-#include <QHBoxLayout>
+#include "basewidget.h"
 
-class ShapesWidget : public QWidget
+class ShapesWidget : public BaseWidget
 {
-    Q_OBJECT
 public:
-    explicit ShapesWidget(QWidget *parent = 0);
-
-signals:
-
-public slots:
-
-protected:
-    void resizeEvent(QResizeEvent *e);
-    void paintEvent(QPaintEvent *e);
-    int dim;
-    QHBoxLayout *hLayout;
-    void setButtonProperties(QPushButton *b);
-
-private:
-    QPixmap *parea;
+    explicit ShapesWidget();
 };
 
 //Select a shape

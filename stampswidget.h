@@ -1,35 +1,12 @@
 #ifndef STAMPSWIDGET_H
 #define STAMPSWIDGET_H
 
-#include <QWidget>
-#include <QPixmap>
-#include <QPainter>
-#include <QResizeEvent>
-#include <QPushButton>
-#include <QHBoxLayout>
+#include "basewidget.h"
 
-class StampsWidget : public QWidget
+class StampsWidget : public BaseWidget
 {
-    Q_OBJECT
 public:
-    explicit StampsWidget(QWidget *parent = 0);
-
-signals:
-
-public slots:
-
-protected:
-    void resizeEvent(QResizeEvent *e);
-    void paintEvent(QPaintEvent *e);
-
-protected:
-    int dim, button_length;
-    QHBoxLayout *hLayout;
-    void setButtonProperties(QPushButton *b);
-
-private:
-    QPixmap *parea;
-
+    explicit StampsWidget();
 };
 
 //Select a stamp category

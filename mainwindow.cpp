@@ -11,88 +11,81 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    dim = 60;
+    buttonWidth = 60;
+    buttonHeight = 60;
 
-    //Toolbar
-    ui->mainToolBar->setIconSize(QSize(dim,dim));
+//Toolbar
+    ui->mainToolBar->setIconSize(QSize(buttonWidth,buttonHeight));
 
-    newButton = new QToolButton;
-    newButton->setIcon(QIcon(":/Icons/Icons/new.png"));
-    newButton->setText("New");
+    settingsButton.setIcon(QIcon(":/Icons/Icons/settings.png"));
+    settingsButton.setText("Settings");
+    setToolButtonProperties(settingsButton);
+    connect(&settingsButton, SIGNAL(clicked()), this, SLOT(settingsButtonClicked()));
+
+    newButton.setIcon(QIcon(":/Icons/Icons/new.png"));
+    newButton.setText("New");
     setToolButtonProperties(newButton);
-    connect(newButton, SIGNAL(clicked()), this, SLOT(newButtonClicked()));
+    connect(&newButton, SIGNAL(clicked()), this, SLOT(newButtonClicked()));
 
-    openButton = new QToolButton;
-    openButton->setIcon(QIcon(":/Icons/Icons/open.png"));
-    openButton->setText("Open");
+    openButton.setIcon(QIcon(":/Icons/Icons/open.png"));
+    openButton.setText("Open");
     setToolButtonProperties(openButton);
-    connect(openButton, SIGNAL(clicked()), this, SLOT(openButtonClicked()));
+    connect(&openButton, SIGNAL(clicked()), this, SLOT(openButtonClicked()));
 
-    saveButton = new QToolButton;
-    saveButton->setIcon(QIcon(":/Icons/Icons/save.png"));
-    saveButton->setText("Save");
+    saveButton.setIcon(QIcon(":/Icons/Icons/save.png"));
+    saveButton.setText("Save");
     setToolButtonProperties(saveButton);
-    connect(saveButton, SIGNAL(clicked()), this, SLOT(saveButtonClicked()));
+    connect(&saveButton, SIGNAL(clicked()), this, SLOT(saveButtonClicked()));
 
-    undoButton = new QToolButton;
-    undoButton->setIcon(QIcon(":/Icons/Icons/undo.png"));
-    undoButton->setText("Undo");
+    undoButton.setIcon(QIcon(":/Icons/Icons/undo.png"));
+    undoButton.setText("Undo");
     setToolButtonProperties(undoButton);
-    connect(undoButton, SIGNAL(clicked()), this, SLOT(undoButtonClicked()));
+    connect(&undoButton, SIGNAL(clicked()), this, SLOT(undoButtonClicked()));
 
-    cursorButton = new QToolButton;
-    cursorButton->setIcon(QIcon(":/Icons/Icons/cursor.png"));
-    cursorButton->setText("Cursor");
+    cursorButton.setIcon(QIcon(":/Icons/Icons/cursor.png"));
+    cursorButton.setText("Cursor");
     setToolButtonProperties(cursorButton);
-    connect(cursorButton, SIGNAL(clicked()), this, SLOT(cursorButtonClicked()));
+    connect(&cursorButton, SIGNAL(clicked()), this, SLOT(cursorButtonClicked()));
 
-    colorsButton = new QToolButton;
-    colorsButton->setIcon(QIcon(":/Icons/Icons/colors.png"));
-    colorsButton->setText("Colors");
+    colorsButton.setIcon(QIcon(":/Icons/Icons/colors.png"));
+    colorsButton.setText("Colors");
     setToolButtonProperties(colorsButton);
-    connect(colorsButton, SIGNAL(clicked()), this, SLOT(colorsButtonClicked()));
+    connect(&colorsButton, SIGNAL(clicked()), this, SLOT(colorsButtonClicked()));
 
-    shapesButton = new QToolButton;
-    shapesButton->setIcon(QIcon(":/Icons/Icons/shapes.png"));
-    shapesButton->setText("Shapes");
+    shapesButton.setIcon(QIcon(":/Icons/Icons/shapes.png"));
+    shapesButton.setText("Shapes");
     setToolButtonProperties(shapesButton);
-    connect(shapesButton, SIGNAL(clicked()), this, SLOT(shapesButtonClicked()));
+    connect(&shapesButton, SIGNAL(clicked()), this, SLOT(shapesButtonClicked()));
 
-    stampsButton = new QToolButton;
-    stampsButton->setIcon(QIcon(":/Icons/Icons/stamps.png"));
-    stampsButton->setText("Stamps");
+    stampsButton.setIcon(QIcon(":/Icons/Icons/stamps.png"));
+    stampsButton.setText("Stamps");
     setToolButtonProperties(stampsButton);
-    connect(stampsButton, SIGNAL(clicked()), this, SLOT(stampsButtonClicked()));
+    connect(&stampsButton, SIGNAL(clicked()), this, SLOT(stampsButtonClicked()));
 
-    brushEffectsButton = new QToolButton;
-    brushEffectsButton->setIcon(QIcon(":/Icons/Icons/brushEffects.png"));
-    brushEffectsButton->setText("Brush Effects");
+    brushEffectsButton.setIcon(QIcon(":/Icons/Icons/brushEffects.png"));
+    brushEffectsButton.setText("Brush Effects");
     setToolButtonProperties(brushEffectsButton);
-    connect(brushEffectsButton, SIGNAL(clicked()), this, SLOT(brushEffectsButtonClicked()));
+    connect(&brushEffectsButton, SIGNAL(clicked()), this, SLOT(brushEffectsButtonClicked()));
 
-    drawButton = new QToolButton;
-    drawButton->setIcon(QIcon(":/Icons/Icons/draw.png"));
-    drawButton->setText("Draw");
+    drawButton.setIcon(QIcon(":/Icons/Icons/draw.png"));
+    drawButton.setText("Draw");
     setToolButtonProperties(drawButton);
-    connect(drawButton, SIGNAL(clicked()), this, SLOT(drawButtonClicked()));
+    connect(&drawButton, SIGNAL(clicked()), this, SLOT(drawButtonClicked()));
 
-    eraserButton = new QToolButton;
-    eraserButton->setIcon(QIcon(":/Icons/Icons/eraser.png"));
-    eraserButton->setText("Eraser");
+    eraserButton.setIcon(QIcon(":/Icons/Icons/eraser.png"));
+    eraserButton.setText("Eraser");
     setToolButtonProperties(eraserButton);
-    connect(eraserButton, SIGNAL(clicked()), this, SLOT(eraserButtonClicked()));
+    connect(&eraserButton, SIGNAL(clicked()), this, SLOT(eraserButtonClicked()));
 
-    insertPictureButton = new QToolButton;
-    insertPictureButton->setIcon(QIcon(":/Icons/Icons/insertPicture.png"));
-    insertPictureButton->setText("Insert Picture");
+    insertPictureButton.setIcon(QIcon(":/Icons/Icons/insertPicture.png"));
+    insertPictureButton.setText("Insert Picture");
     setToolButtonProperties(insertPictureButton);
-    connect(insertPictureButton, SIGNAL(clicked()), this, SLOT(insertPictureButtonClicked()));
+    connect(&insertPictureButton, SIGNAL(clicked()), this, SLOT(insertPictureButtonClicked()));
 
-    closeButton = new QToolButton;
-    closeButton->setIcon(QIcon(":/Icons/Icons/close.png"));
-    closeButton->setText("Close");
+    closeButton.setIcon(QIcon(":/Icons/Icons/close.png"));
+    closeButton.setText("Close");
     setToolButtonProperties(closeButton);
-    connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(&closeButton, SIGNAL(clicked()), this, SLOT(close()));
 
     undoStack = new QUndoStack();
 
@@ -100,15 +93,31 @@ MainWindow::MainWindow(QWidget *parent) :
     //Prompt
     prompt = new Prompt();
 //Cursor
-    cursorWidgetCursors = new CursorWidgetCursors();
-    cursorWidgetTranslate = new CursorWidgetTranslate();
-    cursorWidgetScale = new CursorWidgetScale();
-    cursorWidgetRotate = new CursorWidgetRotate();
-    cursorWidgetShear = new CursorWidgetShear();
-    cursorWidgetStretch = new CursorWidgetStretch();
-    cursorWidgetDepth = new CursorWidgetDepth();
-    cursorWidgetBack = new CursorWidgetBack();
+    //Settings
+    settingsWidgetButtonSize = new SettingsWidgetButtonSize();
+    popUps.push_back(settingsWidgetButtonSize);
+    connect(settingsWidgetButtonSize->bwn5Button, SIGNAL(clicked()), this, SLOT(bwn5ButtonClicked()));
+    connect(settingsWidgetButtonSize->bwp5Button, SIGNAL(clicked()), this, SLOT(bwp5ButtonClicked()));
+    connect(settingsWidgetButtonSize->bhn5Button, SIGNAL(clicked()), this, SLOT(bhn5ButtonClicked()));
+    connect(settingsWidgetButtonSize->bhp5Button, SIGNAL(clicked()), this, SLOT(bhp5ButtonClicked()));
     //Cursors
+    cursorWidgetCursors = new CursorWidgetCursors();
+    popUps.push_back(cursorWidgetCursors);
+    cursorWidgetTranslate = new CursorWidgetTranslate();
+    popUps.push_back(cursorWidgetTranslate);
+    cursorWidgetScale = new CursorWidgetScale();
+    popUps.push_back(cursorWidgetScale);
+    cursorWidgetRotate = new CursorWidgetRotate();
+    popUps.push_back(cursorWidgetRotate);
+    cursorWidgetShear = new CursorWidgetShear();
+    popUps.push_back(cursorWidgetShear);
+    cursorWidgetStretch = new CursorWidgetStretch();
+    popUps.push_back(cursorWidgetStretch);
+    cursorWidgetDepth = new CursorWidgetDepth();
+    popUps.push_back(cursorWidgetDepth);
+    cursorWidgetBack = new CursorWidgetBack();
+    popUps.push_back(cursorWidgetBack);
+
     connect(cursorWidgetCursors->translateButton, SIGNAL(clicked()), this, SLOT(translateButtonClicked()));
     connect(cursorWidgetCursors->scaleButton, SIGNAL(clicked()), this, SLOT(scaleButtonClicked()));
     connect(cursorWidgetCursors->stretchButton, SIGNAL(clicked()), this, SLOT(stretchButtonClicked()));
@@ -121,64 +130,126 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(cursorWidgetTranslate->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
     connect(cursorWidgetTranslate->signButton, SIGNAL(clicked()), this, SLOT(translateSignButtonClicked()));
     connect(cursorWidgetTranslate->directionButton, SIGNAL(clicked()), this, SLOT(translateDirectionButtonClicked()));
-    connect(cursorWidgetTranslate->t05Button, SIGNAL(clicked()), this, SLOT(t05ButtonButtonClicked()));
-    connect(cursorWidgetTranslate->t1Button, SIGNAL(clicked()), this, SLOT(t1ButtonButtonClicked()));
-    connect(cursorWidgetTranslate->t5Button, SIGNAL(clicked()), this, SLOT(t5ButtonButtonClicked()));
-    connect(cursorWidgetTranslate->t10Button, SIGNAL(clicked()), this, SLOT(t10ButtonButtonClicked()));
-    connect(cursorWidgetTranslate->t20Button, SIGNAL(clicked()), this, SLOT(t20ButtonButtonClicked()));
-    connect(cursorWidgetTranslate->t50Button, SIGNAL(clicked()), this, SLOT(t50ButtonButtonClicked()));
-    connect(cursorWidgetTranslate->t100Button, SIGNAL(clicked()), this, SLOT(t100ButtonButtonClicked()));
+
+    QSignalMapper* translateSignalMapper = new QSignalMapper (this) ;
+    connect(cursorWidgetTranslate->t1Button, SIGNAL(clicked()), translateSignalMapper, SLOT(map()));
+    connect(cursorWidgetTranslate->t5Button, SIGNAL(clicked()), translateSignalMapper, SLOT(map()));
+    connect(cursorWidgetTranslate->t10Button, SIGNAL(clicked()), translateSignalMapper, SLOT(map()));
+    connect(cursorWidgetTranslate->t20Button, SIGNAL(clicked()), translateSignalMapper, SLOT(map()));
+    connect(cursorWidgetTranslate->t50Button, SIGNAL(clicked()), translateSignalMapper, SLOT(map()));
+    connect(cursorWidgetTranslate->t100Button, SIGNAL(clicked()), translateSignalMapper, SLOT(map()));
+
+    translateSignalMapper->setMapping(cursorWidgetTranslate->t1Button, 1);
+    translateSignalMapper->setMapping(cursorWidgetTranslate->t5Button, 5);
+    translateSignalMapper->setMapping(cursorWidgetTranslate->t10Button, 10);
+    translateSignalMapper->setMapping(cursorWidgetTranslate->t20Button, 20);
+    translateSignalMapper->setMapping(cursorWidgetTranslate->t50Button, 50);
+    translateSignalMapper->setMapping(cursorWidgetTranslate->t100Button, 100);
+
+    connect(translateSignalMapper, SIGNAL(mapped(int)), this, SLOT(translateValueButtonClicked(int)));
     //Scale
     connect(cursorWidgetScale->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
     connect(cursorWidgetScale->signButton, SIGNAL(clicked()), this, SLOT(scaleSignButtonClicked()));
     connect(cursorWidgetScale->resetButton, SIGNAL(clicked()), this, SLOT(scaleResetButtonClicked()));
-    connect(cursorWidgetScale->s05Button, SIGNAL(clicked()), this, SLOT(s05ButtonClicked()));
-    connect(cursorWidgetScale->s1Button, SIGNAL(clicked()), this, SLOT(s1ButtonClicked()));
-    connect(cursorWidgetScale->s5Button, SIGNAL(clicked()), this, SLOT(s5ButtonClicked()));
-    connect(cursorWidgetScale->s10Button, SIGNAL(clicked()), this, SLOT(s10ButtonClicked()));
-    connect(cursorWidgetScale->s20Button, SIGNAL(clicked()), this, SLOT(s20ButtonClicked()));
-    connect(cursorWidgetScale->s50Button, SIGNAL(clicked()), this, SLOT(s50ButtonClicked()));
-    connect(cursorWidgetScale->s100Button, SIGNAL(clicked()), this, SLOT(s100ButtonClicked()));
+
+    QSignalMapper* scaleSignalMapper = new QSignalMapper (this) ;
+    connect(cursorWidgetScale->s05Button, SIGNAL(clicked()), scaleSignalMapper, SLOT(map()));
+    connect(cursorWidgetScale->s1Button, SIGNAL(clicked()), scaleSignalMapper, SLOT(map()));
+    connect(cursorWidgetScale->s5Button, SIGNAL(clicked()), scaleSignalMapper, SLOT(map()));
+    connect(cursorWidgetScale->s10Button, SIGNAL(clicked()), scaleSignalMapper, SLOT(map()));
+    connect(cursorWidgetScale->s20Button, SIGNAL(clicked()), scaleSignalMapper, SLOT(map()));
+    connect(cursorWidgetScale->s50Button, SIGNAL(clicked()), scaleSignalMapper, SLOT(map()));
+    connect(cursorWidgetScale->s100Button, SIGNAL(clicked()), scaleSignalMapper, SLOT(map()));
+
+    scaleSignalMapper->setMapping(cursorWidgetScale->s05Button, 5);
+    scaleSignalMapper->setMapping(cursorWidgetScale->s1Button, 10);
+    scaleSignalMapper->setMapping(cursorWidgetScale->s5Button, 50);
+    scaleSignalMapper->setMapping(cursorWidgetScale->s10Button, 100);
+    scaleSignalMapper->setMapping(cursorWidgetScale->s20Button, 200);
+    scaleSignalMapper->setMapping(cursorWidgetScale->s50Button, 500);
+    scaleSignalMapper->setMapping(cursorWidgetScale->s100Button, 1000);
+
+    connect(scaleSignalMapper, SIGNAL(mapped(int)), this, SLOT(scaleValueButtonClicked(int)));
     //Stretch
     connect(cursorWidgetStretch->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
     connect(cursorWidgetStretch->signButton, SIGNAL(clicked()), this, SLOT(stretchSignButtonClicked()));
     connect(cursorWidgetStretch->directionButton, SIGNAL(clicked()), this, SLOT(stretchDirectionButtonClicked()));
-    connect(cursorWidgetStretch->st0001Button, SIGNAL(clicked()), this, SLOT(st0001ButtonClicked()));
-    connect(cursorWidgetStretch->st0005Button, SIGNAL(clicked()), this, SLOT(st0005ButtonClicked()));
-    connect(cursorWidgetStretch->st001Button, SIGNAL(clicked()), this, SLOT(st001ButtonClicked()));
-    connect(cursorWidgetStretch->st005Button, SIGNAL(clicked()), this, SLOT(st005ButtonClicked()));
-    connect(cursorWidgetStretch->st01Button, SIGNAL(clicked()), this, SLOT(st01ButtonClicked()));
-    connect(cursorWidgetStretch->st02Button, SIGNAL(clicked()), this, SLOT(st02ButtonClicked()));
-    connect(cursorWidgetStretch->st05Button, SIGNAL(clicked()), this, SLOT(st05ButtonClicked()));
-    connect(cursorWidgetStretch->st1Button, SIGNAL(clicked()), this, SLOT(st1ButtonClicked()));
+
+    QSignalMapper* stretchSignalMapper = new QSignalMapper (this) ;
+    connect(cursorWidgetStretch->st0005Button, SIGNAL(clicked()), stretchSignalMapper, SLOT(map()));
+    connect(cursorWidgetStretch->st001Button, SIGNAL(clicked()), stretchSignalMapper, SLOT(map()));
+    connect(cursorWidgetStretch->st005Button, SIGNAL(clicked()), stretchSignalMapper, SLOT(map()));
+    connect(cursorWidgetStretch->st01Button, SIGNAL(clicked()), stretchSignalMapper, SLOT(map()));
+    connect(cursorWidgetStretch->st02Button, SIGNAL(clicked()), stretchSignalMapper, SLOT(map()));
+    connect(cursorWidgetStretch->st05Button, SIGNAL(clicked()), stretchSignalMapper, SLOT(map()));
+    connect(cursorWidgetStretch->st1Button, SIGNAL(clicked()), stretchSignalMapper, SLOT(map()));
+
+    stretchSignalMapper->setMapping(cursorWidgetStretch->st0005Button, 5);
+    stretchSignalMapper->setMapping(cursorWidgetStretch->st001Button, 10);
+    stretchSignalMapper->setMapping(cursorWidgetStretch->st005Button, 50);
+    stretchSignalMapper->setMapping(cursorWidgetStretch->st01Button, 100);
+    stretchSignalMapper->setMapping(cursorWidgetStretch->st02Button, 200);
+    stretchSignalMapper->setMapping(cursorWidgetStretch->st05Button, 500);
+    stretchSignalMapper->setMapping(cursorWidgetStretch->st1Button, 1000);
+
+    connect(stretchSignalMapper, SIGNAL(mapped(int)), this, SLOT(stretchValueButtonClicked(int)));
+
     //Rotate
     connect(cursorWidgetRotate->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
     connect(cursorWidgetRotate->signButton, SIGNAL(clicked()), this, SLOT(rotateSignButtonClicked()));
     connect(cursorWidgetRotate->resetButton, SIGNAL(clicked()), this, SLOT(reset0ButtonClicked()));
-    connect(cursorWidgetRotate->r01Button, SIGNAL(clicked()), this, SLOT(r01ButtonClicked()));
-    connect(cursorWidgetRotate->r05Button, SIGNAL(clicked()), this, SLOT(r05ButtonClicked()));
-    connect(cursorWidgetRotate->r1Button, SIGNAL(clicked()), this, SLOT(r1ButtonClicked()));
-    connect(cursorWidgetRotate->r5Button, SIGNAL(clicked()), this, SLOT(r5ButtonClicked()));
-    connect(cursorWidgetRotate->r10Button, SIGNAL(clicked()), this, SLOT(r10ButtonClicked()));
-    connect(cursorWidgetRotate->r20Button, SIGNAL(clicked()), this, SLOT(r20ButtonClicked()));
-    connect(cursorWidgetRotate->r30Button, SIGNAL(clicked()), this, SLOT(r30ButtonClicked()));
-    connect(cursorWidgetRotate->r45Button, SIGNAL(clicked()), this, SLOT(r45ButtonClicked()));
-    connect(cursorWidgetRotate->r60Button, SIGNAL(clicked()), this, SLOT(r60ButtonClicked()));
-    connect(cursorWidgetRotate->r72Button, SIGNAL(clicked()), this, SLOT(r72ButtonClicked()));
-    connect(cursorWidgetRotate->r90Button, SIGNAL(clicked()), this, SLOT(r90ButtonClicked()));
-    connect(cursorWidgetRotate->r120Button, SIGNAL(clicked()), this, SLOT(r120ButtonClicked()));
-    connect(cursorWidgetRotate->r180Button, SIGNAL(clicked()), this, SLOT(r180ButtonClicked()));
-    connect(cursorWidgetRotate->r270Button, SIGNAL(clicked()), this, SLOT(r270ButtonClicked()));
+
+    QSignalMapper* rotateSignalMapper = new QSignalMapper (this) ;
+    connect(cursorWidgetRotate->r01Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r05Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r1Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r5Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r10Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r20Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r30Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r45Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r60Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r72Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r90Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r120Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+    connect(cursorWidgetRotate->r180Button, SIGNAL(clicked()), rotateSignalMapper, SLOT(map()));
+
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r01Button, 1);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r05Button, 5);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r1Button, 10);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r5Button, 50);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r10Button, 100);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r20Button, 200);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r30Button, 300);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r45Button, 450);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r60Button, 600);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r72Button, 720);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r90Button, 900);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r120Button, 1200);
+    rotateSignalMapper->setMapping(cursorWidgetRotate->r180Button, 1800);
+
+    connect(rotateSignalMapper, SIGNAL(mapped(int)), this, SLOT(rotateValueButtonClicked(int)));
     //Shear
     connect(cursorWidgetShear->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
     connect(cursorWidgetShear->signButton, SIGNAL(clicked()), this, SLOT(shearSignButtonClicked()));
     connect(cursorWidgetShear->directionButton, SIGNAL(clicked()), this, SLOT(shearDirectionButtonClicked()));
-    connect(cursorWidgetShear->sh001Button, SIGNAL(clicked()), this, SLOT(sh001ButtonClicked()));
-    connect(cursorWidgetShear->sh005Button, SIGNAL(clicked()), this, SLOT(sh005ButtonClicked()));
-    connect(cursorWidgetShear->sh01Button, SIGNAL(clicked()), this, SLOT(sh01ButtonClicked()));
-    connect(cursorWidgetShear->sh02Button, SIGNAL(clicked()), this, SLOT(sh02ButtonClicked()));
-    connect(cursorWidgetShear->sh05Button, SIGNAL(clicked()), this, SLOT(sh05ButtonClicked()));
-    connect(cursorWidgetShear->sh1Button, SIGNAL(clicked()), this, SLOT(sh1ButtonClicked()));
+
+    QSignalMapper* shearSignalMapper = new QSignalMapper (this) ;
+    connect(cursorWidgetShear->sh001Button, SIGNAL(clicked()), shearSignalMapper, SLOT(map()));
+    connect(cursorWidgetShear->sh005Button, SIGNAL(clicked()), shearSignalMapper, SLOT(map()));
+    connect(cursorWidgetShear->sh01Button, SIGNAL(clicked()), shearSignalMapper, SLOT(map()));
+    connect(cursorWidgetShear->sh02Button, SIGNAL(clicked()), shearSignalMapper, SLOT(map()));
+    connect(cursorWidgetShear->sh05Button, SIGNAL(clicked()), shearSignalMapper, SLOT(map()));
+    connect(cursorWidgetShear->sh1Button, SIGNAL(clicked()), shearSignalMapper, SLOT(map()));
+
+    shearSignalMapper->setMapping(cursorWidgetShear->sh001Button, 10);
+    shearSignalMapper->setMapping(cursorWidgetShear->sh005Button, 50);
+    shearSignalMapper->setMapping(cursorWidgetShear->sh01Button, 100);
+    shearSignalMapper->setMapping(cursorWidgetShear->sh02Button, 200);
+    shearSignalMapper->setMapping(cursorWidgetShear->sh05Button, 500);
+    shearSignalMapper->setMapping(cursorWidgetShear->sh1Button, 1000);
+
+    connect(shearSignalMapper, SIGNAL(mapped(int)), this, SLOT(shearValueButtonClicked(int)));
     //Depth
     connect(cursorWidgetDepth->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
     connect(cursorWidgetDepth->dp1Button, SIGNAL(clicked()), this, SLOT(dp1ButtonClicked()));
@@ -187,6 +258,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(cursorWidgetBack->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
 //Shapes
     shapesWidgetShapes = new ShapesWidgetShapes();
+    popUps.push_back(shapesWidgetShapes);
+    shapesWidgetEndPath = new ShapesWidgetEndPath();
+    popUps.push_back(shapesWidgetEndPath);
+
     connect(shapesWidgetShapes->lineButton, SIGNAL(clicked()), this, SLOT(lineButtonClicked()));
     connect(shapesWidgetShapes->pointButton, SIGNAL(clicked()), this, SLOT(pointButtonClicked()));
     connect(shapesWidgetShapes->circleButton, SIGNAL(clicked()), this, SLOT(circleButtonClicked()));
@@ -199,27 +274,65 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(shapesWidgetShapes->pathButton, SIGNAL(clicked()), this, SLOT(pathButtonClicked()));
     connect(shapesWidgetShapes->textButton, SIGNAL(clicked()), this, SLOT(textButtonClicked()));
 
-    shapesWidgetEndPath = new ShapesWidgetEndPath();
     connect(shapesWidgetEndPath->backButton, SIGNAL(clicked()), this, SLOT(shapesBackButtonClicked()));
     connect(shapesWidgetEndPath->endPathButton, SIGNAL(clicked()), this, SLOT(endPathButtonClicked()));
+//Colors
+    colorsWidgetColors = new ColorsWidgetColors();
+    popUps.push_back(colorsWidgetColors);
+    colorsWidgetPaintTools = new ColorsWidgetPaintTools();
+    popUps.push_back(colorsWidgetPaintTools);
+    colorsWidgetOutlineSizes = new ColorsWidgetOutlineSizes();
+    popUps.push_back(colorsWidgetOutlineSizes);
 
-    //Brush Effects
+    connect(colorsWidgetPaintTools->outlineButton, SIGNAL(clicked()), this, SLOT(outlineButtonClicked()));
+    connect(colorsWidgetPaintTools->fillButton, SIGNAL(clicked()), this, SLOT(fillButtonClicked()));
+    connect(colorsWidgetPaintTools->brushButton, SIGNAL(clicked()), this, SLOT(brushButtonClicked()));
+    connect(colorsWidgetPaintTools->backgroundButton, SIGNAL(clicked()), this, SLOT(backgroundButtonClicked()));
+
+    connect(colorsWidgetColors->backButton, SIGNAL(clicked()), this, SLOT(colorsBackButtonClicked()));
+    connect(colorsWidgetColors->peachButton, SIGNAL(clicked()), this, SLOT(peachButtonClicked()));
+    connect(colorsWidgetColors->pinkButton, SIGNAL(clicked()), this, SLOT(pinkButtonClicked()));
+    connect(colorsWidgetColors->redButton, SIGNAL(clicked()), this, SLOT(redButtonClicked()));
+    connect(colorsWidgetColors->orangeButton, SIGNAL(clicked()), this, SLOT(orangeButtonClicked()));
+    connect(colorsWidgetColors->yellowButton, SIGNAL(clicked()), this, SLOT(yellowButtonClicked()));
+    connect(colorsWidgetColors->greenButton, SIGNAL(clicked()), this, SLOT(greenButtonClicked()));
+    connect(colorsWidgetColors->blueButton, SIGNAL(clicked()), this, SLOT(blueButtonClicked()));
+    connect(colorsWidgetColors->purpleButton, SIGNAL(clicked()), this, SLOT(purpleButtonClicked()));
+    connect(colorsWidgetColors->brownButton, SIGNAL(clicked()), this, SLOT(brownButtonClicked()));
+    connect(colorsWidgetColors->blackButton, SIGNAL(clicked()), this, SLOT(blackButtonClicked()));
+    connect(colorsWidgetColors->grayButton, SIGNAL(clicked()), this, SLOT(grayButtonClicked()));
+    connect(colorsWidgetColors->whiteButton, SIGNAL(clicked()), this, SLOT(whiteButtonClicked()));
+    connect(colorsWidgetColors->customColorButton, SIGNAL(clicked()), this, SLOT(customColorButtonClicked()));
+
+    connect(colorsWidgetOutlineSizes->backButton, SIGNAL(clicked()), this, SLOT(outlinSizesBackButtonClicked()));
+    connect(colorsWidgetOutlineSizes->on1Button, SIGNAL(clicked()), this, SLOT(on1ButtonClicked()));
+    connect(colorsWidgetOutlineSizes->op1Button, SIGNAL(clicked()), this, SLOT(op1ButtonClicked()));
+//Brush Effects
     brushEffectsWidgetBrushEffects = new BrushEffectsWidgetBrushEffects();
+    popUps.push_back(brushEffectsWidgetBrushEffects);
     connect(brushEffectsWidgetBrushEffects->paintButton, SIGNAL(clicked()), this, SLOT(paintButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->waterColorButton, SIGNAL(clicked()), this, SLOT(waterColorButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->calligraphyButton, SIGNAL(clicked()), this, SLOT(calligraphyButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->pencilButton, SIGNAL(clicked()), this, SLOT(pencilButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->sprayPaintButton, SIGNAL(clicked()), this, SLOT(sprayPaintButtonClicked()));
 
-    //Stamps
+//Stamps
     stampsWidgetCategories = new StampsWidgetCategories();
+    popUps.push_back(stampsWidgetCategories);
     stampsWidgetSilhouette = new StampsWidgetSilhouette();
+    popUps.push_back(stampsWidgetSilhouette);
     stampsWidgetPeople = new StampsWidgetPeople();
+    popUps.push_back(stampsWidgetPeople);
     stampsWidgetAnimals = new StampsWidgetAnimals();
+    popUps.push_back(stampsWidgetAnimals);
     stampsWidgetBuildings = new StampsWidgetBuildings();
+    popUps.push_back(stampsWidgetBuildings);
     stampsWidgetScenery = new StampsWidgetScenery();
+    popUps.push_back(stampsWidgetScenery);
     stampsWidgetFaces = new StampsWidgetFaces();
+    popUps.push_back(stampsWidgetFaces);
     stampsWidgetVehicles = new StampsWidgetVehicles();
+    popUps.push_back(stampsWidgetVehicles);
 
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
         // Silhouette Stamps
@@ -501,7 +614,6 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(stampsWidgetScenery->bouquetStamp, SIGNAL(clicked()), scenerySignalMapper, SLOT(map()));
         connect(stampsWidgetScenery->statueStamp, SIGNAL(clicked()), scenerySignalMapper, SLOT(map()));
 
-
         scenerySignalMapper->setMapping(stampsWidgetScenery->palmTreeStamp, ":/Stamps/scenery/Stamps/scenery_palm_tree_stamp");
         scenerySignalMapper->setMapping(stampsWidgetScenery->treeOneStamp, ":/Stamps/scenery/Stamps/scenery_tree_one_stamp");
         scenerySignalMapper->setMapping(stampsWidgetScenery->treeTwoStamp, ":/Stamps/scenery/Stamps/scenery_tree_two_stamp");
@@ -591,8 +703,6 @@ MainWindow::MainWindow(QWidget *parent) :
         facesSignalMapper->setMapping(stampsWidgetFaces->stampThirtyTwo, ":/Stamps/faces/Stamps/faces_thirtytwo_stamp");
         connect(facesSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(silhouetteStampClicked(const QString)));
 
-
-
     connect(stampsWidgetCategories->vehiclesButton, SIGNAL(clicked()), this, SLOT(vehiclesButtonClicked()));
         // Vehicle Stamps
         connect(stampsWidgetVehicles->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
@@ -658,25 +768,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //Application Layout
     vLayout = new QVBoxLayout;
     vLayout->addWidget(prompt);
-    vLayout->addWidget(cursorWidgetCursors);
-    vLayout->addWidget(cursorWidgetTranslate);
-    vLayout->addWidget(cursorWidgetRotate);
-    vLayout->addWidget(cursorWidgetShear);
-    vLayout->addWidget(cursorWidgetScale);
-    vLayout->addWidget(cursorWidgetStretch);
-    vLayout->addWidget(cursorWidgetDepth);
-    vLayout->addWidget(cursorWidgetBack);
-    vLayout->addWidget(shapesWidgetShapes);
-    vLayout->addWidget(shapesWidgetEndPath);
-    vLayout->addWidget(brushEffectsWidgetBrushEffects);
-    vLayout->addWidget(stampsWidgetCategories);
-    vLayout->addWidget(stampsWidgetSilhouette);
-    vLayout->addWidget(stampsWidgetPeople);
-    vLayout->addWidget(stampsWidgetAnimals);
-    vLayout->addWidget(stampsWidgetBuildings);
-    vLayout->addWidget(stampsWidgetScenery);
-    vLayout->addWidget(stampsWidgetFaces);
-    vLayout->addWidget(stampsWidgetVehicles);
+
+    int size = popUps.size();
+    for(int i = 0; i < size; ++i) {
+        vLayout->addWidget(popUps[i]);
+    }
+
     vLayout->addWidget(canvas);
     this->centralWidget()->setLayout(vLayout);
 
@@ -688,34 +785,26 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setToolButtonProperties(QToolButton *b)
+void MainWindow::setToolButtonProperties(QToolButton &b)
 {
-    b->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    ui->mainToolBar->addWidget(b);
+    b.setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->mainToolBar->addWidget(&b);
 }
 
 void MainWindow::hideWidgets()
 {
-    cursorWidgetCursors->hide();
-    cursorWidgetTranslate->hide();
-    cursorWidgetScale->hide();
-    cursorWidgetStretch->hide();
-    cursorWidgetRotate->hide();
-    cursorWidgetShear->hide();
-    cursorWidgetDepth->hide();
-    cursorWidgetBack->hide();
-    shapesWidgetShapes->hide();
-    shapesWidgetEndPath->hide();
-    brushEffectsWidgetBrushEffects->hide();
+    int size = popUps.size();
+    for(int i = 0; i < size; ++i) {
+        popUps[i]->hide();
+    }
+}
 
-    stampsWidgetCategories->hide();
-    stampsWidgetSilhouette->hide();
-    stampsWidgetPeople->hide();
-    stampsWidgetAnimals->hide();
-    stampsWidgetBuildings->hide();
-    stampsWidgetScenery->hide();
-    stampsWidgetFaces->hide();
-    stampsWidgetVehicles->hide();
+void MainWindow::settingsButtonClicked()
+{
+    hideWidgets();
+    canvas->resetDrawState();
+    prompt->promptLabel->setText("Adjust the button size");
+    settingsWidgetButtonSize->show();
 }
 
 //Toolbar
@@ -770,8 +859,10 @@ void MainWindow::cursorButtonClicked()
 
 void MainWindow::colorsButtonClicked()
 {
-    QMessageBox::information(this, "title", "Colors");
+    hideWidgets();
     canvas->resetDrawState();
+    prompt->promptLabel->setText("Select a paint tool to modify");
+    colorsWidgetPaintTools->show();
 }
 
 void MainWindow::shapesButtonClicked()
@@ -800,6 +891,7 @@ void MainWindow::brushEffectsButtonClicked()
 {
     hideWidgets();
     canvas->resetDrawState();
+    canvas->drawState = canvas->BRUSHEFFECTS;
 
     prompt->promptLabel->setText("Select a brush effect");
     brushEffectsWidgetBrushEffects->show();
@@ -809,7 +901,7 @@ void MainWindow::drawButtonClicked()
 {
     hideWidgets();
     canvas->resetDrawState();
-    canvas->drawState = canvas->DRAW;
+    //canvas->drawState = canvas->DRAW;
 
     prompt->promptLabel->setText("Click on the canvas to start drawing. Click a second time on the canvas to end drawing.");
 }
@@ -824,6 +916,37 @@ void MainWindow::insertPictureButtonClicked()
 {
     QMessageBox::information(this, "title", "Insert Picture");
     canvas->resetDrawState();
+}
+
+
+
+//Settings--------------------------------------------------------
+void MainWindow::bwn5ButtonClicked()
+{
+    if(buttonWidth - 5 >= 60) {
+        buttonWidth -= 5;
+    }
+    changeButtonProperties(buttonWidth,buttonHeight);
+}
+
+void MainWindow::bwp5ButtonClicked()
+{
+    buttonWidth += 5;
+    changeButtonProperties(buttonWidth,buttonHeight);
+}
+
+void MainWindow::bhn5ButtonClicked()
+{
+    if(buttonHeight - 5 >= 60) {
+        buttonHeight -= 5;
+    }
+    changeButtonProperties(buttonWidth,buttonHeight);
+}
+
+void MainWindow::bhp5ButtonClicked()
+{
+    buttonHeight += 5;
+    changeButtonProperties(buttonWidth,buttonHeight);
 }
 
 //Cursor--------------------------------------------------------
@@ -911,47 +1034,12 @@ void MainWindow::translateDirectionButtonClicked()
     cursorWidgetTranslate->toggleDirection(canvas->translateDirectionHorizontal);
 }
 
-void MainWindow::t05ButtonButtonClicked()
+void MainWindow::translateValueButtonClicked(int v)
 {
     canvas->resetTranslateStretchShear();
-    changeTranslateValue(0.5);
+    changeTranslateValue(v);
 }
 
-void MainWindow::t1ButtonButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeTranslateValue(1.0);
-}
-
-void MainWindow::t5ButtonButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeTranslateValue(5.0);
-}
-
-void MainWindow::t10ButtonButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeTranslateValue(10.0);
-}
-
-void MainWindow::t20ButtonButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeTranslateValue(20.0);
-}
-
-void MainWindow::t50ButtonButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeTranslateValue(50.0);
-}
-
-void MainWindow::t100ButtonButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeTranslateValue(100.0);
-}
 //Scale
 void MainWindow::scaleSignButtonClicked()
 {
@@ -964,39 +1052,9 @@ void MainWindow::scaleResetButtonClicked()
     canvas->scaleFactor = -1.0;
 }
 
-void MainWindow::s05ButtonClicked()
+void MainWindow::scaleValueButtonClicked(int v)
 {
-    canvas->scaleFactor = 0.005;
-}
-
-void MainWindow::s1ButtonClicked()
-{
-    canvas->scaleFactor = 0.01;
-}
-
-void MainWindow::s5ButtonClicked()
-{
-    canvas->scaleFactor = 0.05;
-}
-
-void MainWindow::s10ButtonClicked()
-{
-    canvas->scaleFactor = 0.1;
-}
-
-void MainWindow::s20ButtonClicked()
-{
-    canvas->scaleFactor = 0.2;
-}
-
-void MainWindow::s50ButtonClicked()
-{
-    canvas->scaleFactor = 0.5;
-}
-
-void MainWindow::s100ButtonClicked()
-{
-    canvas->scaleFactor = 1.0;
+    canvas->scaleFactor = ((double)v)/1000.0;
 }
 
 void MainWindow::stretchSignButtonClicked()
@@ -1011,52 +1069,10 @@ void MainWindow::stretchDirectionButtonClicked()
     cursorWidgetStretch->toggleDirection(canvas->stretchDirectionHorizontal);
 }
 
-void MainWindow::st0001ButtonClicked()
+void MainWindow::stretchValueButtonClicked(int v)
 {
     canvas->resetTranslateStretchShear();
-    changeStretchValue(0.001);
-}
-
-void MainWindow::st0005ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeStretchValue(0.005);
-}
-
-void MainWindow::st001ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeStretchValue(0.01);
-}
-
-void MainWindow::st005ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeStretchValue(0.05);
-}
-
-void MainWindow::st01ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeStretchValue(0.1);
-}
-
-void MainWindow::st02ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeStretchValue(0.2);
-}
-
-void MainWindow::st05ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeStretchValue(0.5);
-}
-
-void MainWindow::st1ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeStretchValue(1.0);
+    changeStretchValue(((double)v)/1000.0);
 }
 
 void MainWindow::rotateSignButtonClicked()
@@ -1070,74 +1086,9 @@ void MainWindow::reset0ButtonClicked()
     canvas->rotateAngle = -1.0;
 }
 
-void MainWindow::r01ButtonClicked()
+void MainWindow::rotateValueButtonClicked(int v)
 {
-    canvas->rotateAngle = 0.1;
-}
-
-void MainWindow::r05ButtonClicked()
-{
-    canvas->rotateAngle = 0.5;
-}
-
-void MainWindow::r1ButtonClicked()
-{
-    canvas->rotateAngle = 1;
-}
-
-void MainWindow::r5ButtonClicked()
-{
-    canvas->rotateAngle = 5;
-}
-
-void MainWindow::r10ButtonClicked()
-{
-    canvas->rotateAngle = 10;
-}
-
-void MainWindow::r20ButtonClicked()
-{
-    canvas->rotateAngle = 20;
-}
-
-void MainWindow::r30ButtonClicked()
-{
-    canvas->rotateAngle = 30;
-}
-
-void MainWindow::r45ButtonClicked()
-{
-    canvas->rotateAngle = 45;
-}
-
-void MainWindow::r60ButtonClicked()
-{
-    canvas->rotateAngle = 60;
-}
-
-void MainWindow::r72ButtonClicked()
-{
-    canvas->rotateAngle = 72;
-}
-
-void MainWindow::r90ButtonClicked()
-{
-    canvas->rotateAngle = 90;
-}
-
-void MainWindow::r120ButtonClicked()
-{
-    canvas->rotateAngle = 120;
-}
-
-void MainWindow::r180ButtonClicked()
-{
-    canvas->rotateAngle = 180;
-}
-
-void MainWindow::r270ButtonClicked()
-{
-    canvas->rotateAngle = 270;
+    canvas->rotateAngle = ((double)v)/10.0;
 }
 
 void MainWindow::shearSignButtonClicked()
@@ -1152,40 +1103,10 @@ void MainWindow::shearDirectionButtonClicked()
     cursorWidgetShear->toggleDirection(canvas->shearDirectionHorizontal);
 }
 
-void MainWindow::sh001ButtonClicked()
+void MainWindow::shearValueButtonClicked(int v)
 {
     canvas->resetTranslateStretchShear();
-    changeShearValue(0.01);
-}
-
-void MainWindow::sh005ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeShearValue(0.05);
-}
-
-void MainWindow::sh01ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeShearValue(0.1);
-}
-
-void MainWindow::sh02ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeShearValue(0.2);
-}
-
-void MainWindow::sh05ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeShearValue(0.5);
-}
-
-void MainWindow::sh1ButtonClicked()
-{
-    canvas->resetTranslateStretchShear();
-    changeShearValue(1);
+    changeShearValue(((double)v)/1000.0);
 }
 
 void MainWindow::dp1ButtonClicked()
@@ -1309,29 +1230,153 @@ void MainWindow::endPathButtonClicked()
     update();
 }
 
+void MainWindow::outlineButtonClicked()
+{
+    hideWidgets();
+    prompt->promptLabel->setText("Select a color");
+    canvas->colorState = canvas->OUTLINE;
+    colorsWidgetColors->show();
+}
+
+void MainWindow::fillButtonClicked()
+{
+    hideWidgets();
+    prompt->promptLabel->setText("Select a color");
+    canvas->colorState = canvas->FILL;
+    colorsWidgetColors->show();
+}
+
+void MainWindow::brushButtonClicked()
+{
+    hideWidgets();
+    prompt->promptLabel->setText("Select a color");
+    canvas->colorState = canvas->BRUSH;
+    colorsWidgetColors->show();
+}
+
+void MainWindow::backgroundButtonClicked()
+{
+    hideWidgets();
+    prompt->promptLabel->setText("Select a color");
+    canvas->colorState = canvas->BACKGROUND;
+    colorsWidgetColors->show();
+}
+
+void MainWindow::colorsBackButtonClicked()
+{
+    hideWidgets();
+    prompt->promptLabel->setText("Select a paint tool to modify");
+    colorsWidgetPaintTools->show();
+}
+
+void MainWindow::peachButtonClicked()
+{
+    changePaintToolColor(QColor(255,239,213));
+}
+
+void MainWindow::pinkButtonClicked()
+{
+    changePaintToolColor(QColor(255,102,178));
+}
+
+void MainWindow::redButtonClicked()
+{
+    changePaintToolColor(QColor(255,51,51));
+}
+
+void MainWindow::orangeButtonClicked()
+{
+    changePaintToolColor(QColor(255,128,0));
+}
+
+void MainWindow::yellowButtonClicked()
+{
+    changePaintToolColor(QColor(255,255,51));
+}
+
+void MainWindow::greenButtonClicked()
+{
+    changePaintToolColor(QColor(102,204,0));
+}
+
+void MainWindow::blueButtonClicked()
+{
+    changePaintToolColor(QColor(0,128,255));
+}
+
+void MainWindow::purpleButtonClicked()
+{
+    changePaintToolColor(QColor(153,51,255));
+}
+
+void MainWindow::brownButtonClicked()
+{
+    changePaintToolColor(QColor(102,51,0));
+}
+
+void MainWindow::blackButtonClicked()
+{
+    changePaintToolColor(QColor(0,0,0));
+}
+
+void MainWindow::grayButtonClicked()
+{
+    changePaintToolColor(QColor(192,192,192));
+}
+
+void MainWindow::whiteButtonClicked()
+{
+    changePaintToolColor(QColor(255,255,255));
+}
+
+void MainWindow::customColorButtonClicked()
+{
+    QMessageBox::information(this, "title", "custom");
+}
+
+void MainWindow::outlinSizesBackButtonClicked()
+{
+    QMessageBox::information(this, "title", "back colors");
+}
+
+void MainWindow::on1ButtonClicked()
+{
+    canvas->setPenWidth(-1);
+}
+
+void MainWindow::op1ButtonClicked()
+{
+    canvas->setPenWidth(1);
+}
+
 void MainWindow::paintButtonClicked()
 {
     QMessageBox::information(this, "title", "paint");
+    canvas->brushEffectsState = canvas->PAINT;
 }
 
 void MainWindow::waterColorButtonClicked()
 {
     QMessageBox::information(this, "title", "water color");
+    canvas->brushEffectsState = canvas->WATERCOLOR;
 }
 
 void MainWindow::calligraphyButtonClicked()
 {
     QMessageBox::information(this, "title", "calligraphy");
+    canvas->brushEffectsState = canvas->CALLIGRAPHY;
 }
 
 void MainWindow::pencilButtonClicked()
 {
     QMessageBox::information(this, "title", "pencil");
+    canvas->brushEffectsState = canvas->PENCIL;
 }
 
 void MainWindow::sprayPaintButtonClicked()
 {
-    QMessageBox::information(this, "title", "spray paint");
+    enum BrushEffectsState {NOBRUSH,PAINT,WATERCOLOR,CALLIGRAPHY,PENCIL,SPRAYPAINT};
+    canvas->brushEffectsState = canvas->SPRAYPAINT;
 }
 
 
@@ -1388,8 +1433,6 @@ void MainWindow::vehiclesButtonClicked()
     stampsWidgetVehicles->show();
 }
 
-
-
 // STAMPS ACTIONS
 void MainWindow::goBackButtonClicked()
 {
@@ -1412,7 +1455,15 @@ void MainWindow::standardStampClicked(const QString stamp_name)
     canvas->setCurrentStamp(stamp_path);
 }
 
-void MainWindow::changeTranslateValue(double v)
+void MainWindow::changeButtonProperties(const int &newButtonWidth,const int &newButtonHeight)
+{
+    int size = popUps.size();
+    for(int i = 0; i < size; ++i) {
+        popUps[i]->changeButtonProperties(newButtonWidth, newButtonHeight);
+    }
+}
+
+void MainWindow::changeTranslateValue(int v)
 {
     if(canvas->translateSignPositive) {
         if(canvas->translateDirectionHorizontal) {
@@ -1464,5 +1515,27 @@ void MainWindow::changeShearValue(double v)
         } else {
             canvas->shearVerticalValue -= v;
         }
+    }
+}
+
+void MainWindow::changePaintToolColor(QColor color)
+{
+
+    switch (canvas->colorState) {
+        case canvas->OUTLINE:
+            hideWidgets();
+            canvas->setPenColor(color);
+            colorsWidgetOutlineSizes->show();
+            break;
+        case canvas->FILL:
+            canvas->setBrushColor(color);
+            break;
+        case canvas->BRUSH:
+            break;
+        case canvas->BACKGROUND:
+            canvas->setBackgroundBrush(color);
+            break;
+        default:
+            break;
     }
 }

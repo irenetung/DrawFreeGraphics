@@ -34,3 +34,4 @@ DrawWidget::DrawWidget(QWidget *parent) :
       b->setFixedHeight(dim);
       hLayout->addWidget(b);
   }
+

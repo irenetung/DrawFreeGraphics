@@ -14,6 +14,7 @@
         <file>Icons/stamps.png</file>
         <file>Icons/undo.png</file>
         <file>Icons/cursor.png</file>
+        <file>Icons/settings.png</file>
     </qresource>
     <qresource prefix="/Stamps/solidcolorstamps">
         <file>Stamps/solid_airplane_stamp.png</file>
@@ -227,5 +228,8 @@
         <file>Stamps/faces_thirty_stamp.png</file>
         <file>Stamps/faces_thirtyone_stamp.png</file>
         <file>Stamps/faces_thirtytwo_stamp.png</file>
+    </qresource>
+    <qresource prefix="/ButtonIcons">
+        <file>ButtonIcons/back.png</file>
     </qresource>
 </RCC>

@@ -17,10 +17,12 @@
 class Canvas : public QGraphicsView
 {
 public:
-    enum DrawState {NOSTATE,CURSOR,SHAPE,STAMP,DRAW,ERASER,PICTURE};
+    enum DrawState {NOSTATE,CURSOR,SHAPE,STAMP,BRUSHEFFECTS,DRAW,ERASER,PICTURE};
     enum CursorState {NOCURSOR,SCALE,STRETCH,ROTATE,SHEAR,TRANSLATE,DEPTH,COPY,DELETEITEM};
+    enum ColorState {NOCOLOR,OUTLINE,FILL,BRUSH,BACKGROUND};
     enum ShapeState {NOSHAPE,LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
     enum StampState {NOSTAMP, SILHOUETTE, STANDARD};
+    enum BrushEffectsState {NOBRUSH,PAINT,WATERCOLOR,CALLIGRAPHY,PENCIL,SPRAYPAINT};
 
     Canvas(QUndoStack* undoStack_);
     QGraphicsScene *scene;
@@ -34,14 +36,16 @@ public:
     DrawState drawState;
     void resetDrawState();
     CursorState cursorState;
+    ColorState colorState;
     ShapeState shapeState;
     StampState stampState;
+    BrushEffectsState brushEffectsState;
 
     //Cursor
     bool translateSignPositive;
     bool translateDirectionHorizontal;
-    double translateHorizontalValue;
-    double translateVerticalValue;
+    int translateHorizontalValue;
+    int translateVerticalValue;
 
     bool scaleSignPositive;
     double scaleFactor;
@@ -62,7 +66,10 @@ public:
     bool depthPositive;
 
     void resetTranslateStretchShear();
-
+    //Colors
+    void setPenColor(QColor color);
+    void setBrushColor(QColor color);
+    void setPenWidth(int width);
     //Shapes
     QGraphicsItem *prevShape;
     void drawItem(QGraphicsItem *item);
