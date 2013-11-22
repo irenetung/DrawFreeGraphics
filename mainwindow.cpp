@@ -315,6 +315,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(brushEffectsWidgetBrushEffects->calligraphyButton, SIGNAL(clicked()), this, SLOT(calligraphyButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->pencilButton, SIGNAL(clicked()), this, SLOT(pencilButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->sprayPaintButton, SIGNAL(clicked()), this, SLOT(sprayPaintButtonClicked()));
+    connect(brushEffectsWidgetBrushEffects->dustButton, SIGNAL(clicked()), this, SLOT(dustButtonClicked()));
 
 //Stamps
     stampsWidgetCategories = new StampsWidgetCategories();
@@ -1375,8 +1376,13 @@ void MainWindow::pencilButtonClicked()
 
 void MainWindow::sprayPaintButtonClicked()
 {
-    enum BrushEffectsState {NOBRUSH,PAINT,WATERCOLOR,CALLIGRAPHY,PENCIL,SPRAYPAINT};
+
     canvas->brushEffectsState = canvas->SPRAYPAINT;
+}
+
+void MainWindow::dustButtonClicked()
+{
+    canvas->brushEffectsState = canvas->DUST;
 }
 
 

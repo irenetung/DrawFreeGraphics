@@ -209,6 +209,49 @@ void DrawItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setBrush(*brush);
     painter->setPen(*pen);
     int size = vertices.size();
+
+    for(int i = 1; i < size; i++) {
+        painter->drawPoint(vertices[i]);
+    }
+
+}
+
+PaintItem::PaintItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
+{
+    left = points[0].x();
+    right = points[0].x();
+    top = points[0].y();
+    bottom = points[0].y();
+
+    for(int i = 0; i < points.size(); i++) {
+        vertices.append(points[i]);
+        if(points[i].x() < left) {
+            left = points[i].x();
+        }
+        if(points[i].x() > right) {
+            right = points[i].x();
+        }
+        if(points[i].y() < top) {
+            top = points[i].y();
+        }
+        if(points[i].y() > bottom) {
+            bottom = points[i].y();
+        }
+    }
+    pen = new QPen(curPen);
+    brush = new QBrush(curBrush);
+}
+
+QRectF PaintItem::boundingRect() const
+{
+    return QRectF(left,top,right-left,bottom-top);
+}
+
+void PaintItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->setBrush(*brush);
+    painter->setPen(*pen);
+    int size = vertices.size();
     if(size >1) {
         for(int i = 1; i < size; i++) {
             painter->drawLine(vertices[i-1],vertices[i]);
@@ -302,3 +345,5 @@ void DrawItem::addWaterColorEffect(int size, float perc)
     }*/
 
 }
+
+

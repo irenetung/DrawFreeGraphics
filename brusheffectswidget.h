@@ -18,6 +18,7 @@ public:
     QPushButton *calligraphyButton;
     QPushButton *pencilButton;
     QPushButton *sprayPaintButton;
+    QPushButton *dustButton;
 };
 
 #endif // BRUSHEFFECTSWIDGET_H

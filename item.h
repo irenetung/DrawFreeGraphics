@@ -122,5 +122,24 @@ protected:
     float bottom;
 };
 
+class PaintItem : public QGraphicsItem
+{
+public:
+    explicit PaintItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+
+    void addWaterColorEffect(int size, float perc);
+
+protected:
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float left;
+    float right;
+    float top;
+    float bottom;
+};
+
 
 #endif // ITEM_H

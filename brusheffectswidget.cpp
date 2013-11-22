@@ -22,6 +22,8 @@ BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)
     setButtonProperties(pencilButton);
     sprayPaintButton = new QPushButton("spray\npaint");
     setButtonProperties(sprayPaintButton);
+    dustButton = new QPushButton("dust");
+    setButtonProperties(dustButton);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);

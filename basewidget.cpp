@@ -1,4 +1,5 @@
 #include "basewidget.h"
+#include <QDebug>
 
 BaseWidget::BaseWidget(QWidget *parent) :
     QWidget(parent)
@@ -28,6 +29,7 @@ void BaseWidget::setButtonProperties(QPushButton *b)
 {
     b->setFixedWidth(buttonWidth);
     b->setFixedHeight(buttonHeight);
+    b->setIconSize(QSize(buttonWidth-6,buttonHeight-6));
     buttons.push_back(b);
     hLayout->addWidget(b);
 }
@@ -37,6 +39,10 @@ void BaseWidget::changeButtonProperties(int newButtonWidth, int newButtonHeight)
     for(int i = 0; i < buttons.size();++i) {
         buttons[i]->setFixedWidth(newButtonWidth);
         buttons[i]->setFixedHeight(newButtonHeight);
+        //parea = new QPixmap(newButtonWidth,newButtonHeight);
+        //*parea = temp.scaled(w,h);
+        buttons[i]->setIconSize(buttons[i]->size());
     }
+    repaint();
     update();
 }

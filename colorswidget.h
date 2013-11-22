@@ -24,7 +24,18 @@ class ColorsWidgetColors : public ColorsWidget
 {
 public:
     explicit ColorsWidgetColors();
-    QPixmap *pink;
+    QPixmap *peachButtonIcon;
+    QPixmap *pinkButtonIcon;
+    QPixmap *redButtonIcon;
+    QPixmap *orangeButtonIcon;
+    QPixmap *yellowButtonIcon;
+    QPixmap *greenButtonIcon;
+    QPixmap *blueButtonIcon;
+    QPixmap *purpleButtonIcon;
+    QPixmap *brownButtonIcon;
+    QPixmap *blackButtonIcon;
+    QPixmap *grayButtonIcon;
+    QPixmap *whiteButtonIcon;
 
     QPushButton *backButton;
     QPushButton *peachButton;

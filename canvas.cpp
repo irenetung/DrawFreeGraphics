@@ -169,8 +169,8 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         if(mousePressCount == 2) {
             switch(brushEffectsState) {
                 case PAINT: {
-                    DrawItem *draw = new DrawItem(points,*pen,*brush);
-                    drawItem(draw);
+                    PaintItem *paintItem = new PaintItem(points,*pen,*brush);
+                    drawItem(paintItem);
                     break;
                     }
                 case WATERCOLOR:
@@ -181,6 +181,11 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     break;
                 case SPRAYPAINT:
                     break;
+            case DUST: {
+                    DrawItem *draw = new DrawItem(points,*pen,*brush);
+                    drawItem(draw);
+                    break;
+                    }
                 default:
                     break;
 

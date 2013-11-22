@@ -205,6 +205,7 @@ private slots:
     void calligraphyButtonClicked();
     void pencilButtonClicked();
     void sprayPaintButtonClicked();
+    void dustButtonClicked();
 
     //Stamps
     void goBackButtonClicked();
