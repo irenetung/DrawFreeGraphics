@@ -1358,7 +1358,6 @@ void MainWindow::paintButtonClicked()
 
 void MainWindow::waterColorButtonClicked()
 {
-    QMessageBox::information(this, "title", "water color");
     canvas->brushEffectsState = canvas->WATERCOLOR;
 }
 

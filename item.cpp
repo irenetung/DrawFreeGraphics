@@ -262,7 +262,7 @@ void PaintItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 // WATER COLOR METHOD
 void DrawItem::addWaterColorEffect(int size, float perc)
 {
-    /*// init
+    // init
     QList<QPointF> pointList;
     int numRowsCols = floor((float)(perc * size));
     int divide = floor((float)(size / 2));
@@ -342,7 +342,7 @@ void DrawItem::addWaterColorEffect(int size, float perc)
         }
 
 
-    }*/
+    }
 
 }
 

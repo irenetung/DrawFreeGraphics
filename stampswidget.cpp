@@ -13,6 +13,7 @@ StampsWidget::StampsWidget()
 StampsWidgetCategories::StampsWidgetCategories()
 {
     hLayout = new FlowLayout;
+    buttonWidth = 200;
 
     silhouetteButton = new QPushButton("Solid Color Buttons");
     setButtonProperties(silhouetteButton);

@@ -173,8 +173,12 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     drawItem(paintItem);
                     break;
                     }
-                case WATERCOLOR:
+                case WATERCOLOR: {
+                    DrawItem *watercolor = new DrawItem(points, *pen, *brush);
+                    watercolor->addWaterColorEffect(25,0.3);
+                    drawItem(watercolor);
                     break;
+                    }
                 case CALLIGRAPHY:
                     break;
                 case PENCIL:
