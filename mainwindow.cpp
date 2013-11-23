@@ -1528,17 +1528,17 @@ void MainWindow::changePaintToolColor(QColor color)
 {
 
     switch (canvas->colorState) {
-        case canvas->OUTLINE:
+        case 0: //OUTLINE
             hideWidgets();
             canvas->setPenColor(color);
             colorsWidgetOutlineSizes->show();
             break;
-        case canvas->FILL:
+        case 1: //FILL
             canvas->setBrushColor(color);
             break;
-        case canvas->BRUSH:
+        case 2: //BRUSH
             break;
-        case canvas->BACKGROUND:
+        case 3: //BACKGROUND
             canvas->setBackgroundBrush(color);
             break;
         default:
