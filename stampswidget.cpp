@@ -29,6 +29,8 @@ StampsWidgetCategories::StampsWidgetCategories()
     setButtonProperties(facesButton);
     vehiclesButton = new QPushButton("Vehicles");
     setButtonProperties(vehiclesButton);
+    foodButton = new QPushButton("Food");
+    setButtonProperties(foodButton);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
@@ -498,3 +500,72 @@ StampsWidgetVehicles::StampsWidgetVehicles()
     this->setLayout(hLayout);
 }
 
+//STAMPS WIDGET FOOD
+StampsWidgetFood::StampsWidgetFood()
+{
+    hLayout = new FlowLayout;
+
+    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    setButtonProperties(goBack);
+
+    stampOne = new QPushButton(QIcon(":/Stamps/food/Stamps/food_one_stamp.png"), tr(""));
+    setButtonProperties(stampOne);
+    stampTwo = new QPushButton(QIcon(":/Stamps/food/Stamps/food_two_stamp.png"), tr(""));
+    setButtonProperties(stampTwo);
+    stampThree = new QPushButton(QIcon(":/Stamps/food/Stamps/food_three_stamp.png"), tr(""));
+    setButtonProperties(stampThree);
+    stampFour = new QPushButton(QIcon(":/Stamps/food/Stamps/food_four_stamp.png"), tr(""));
+    setButtonProperties(stampFour);
+    stampFive = new QPushButton(QIcon(":/Stamps/food/Stamps/food_five_stamp.png"), tr(""));
+    setButtonProperties(stampFive);
+    stampSix = new QPushButton(QIcon(":/Stamps/food/Stamps/food_six_stamp.png"), tr(""));
+    setButtonProperties(stampSix);
+    stampSeven = new QPushButton(QIcon(":/Stamps/food/Stamps/food_seven_stamp.png"), tr(""));
+    setButtonProperties(stampSeven);
+    stampEight = new QPushButton(QIcon(":/Stamps/food/Stamps/food_eight_stamp.png"), tr(""));
+    setButtonProperties(stampEight);
+    stampNine = new QPushButton(QIcon(":/Stamps/food/Stamps/food_nine_stamp.png"), tr(""));
+    setButtonProperties(stampNine);
+    stampTen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_ten_stamp.png"), tr(""));
+    setButtonProperties(stampTen);
+    stampEleven = new QPushButton(QIcon(":/Stamps/food/Stamps/food_eleven_stamp.png"), tr(""));
+    setButtonProperties(stampEleven);
+    stampTwelve = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twelve_stamp.png"), tr(""));
+    setButtonProperties(stampTwelve);
+    stampThirteen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_thirteen_stamp.png"), tr(""));
+    setButtonProperties(stampThirteen);
+    stampFourteen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_fourteen_stamp.png"), tr(""));
+    setButtonProperties(stampFourteen);
+    stampFifteen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_fifteen_stamp.png"), tr(""));
+    setButtonProperties(stampFifteen);
+    stampSixteen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_sixteen_stamp.png"), tr(""));
+    setButtonProperties(stampSixteen);
+    stampSeventeen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_seventeen_stamp.png"), tr(""));
+    setButtonProperties(stampSeventeen);
+    stampEighteen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_eighteen_stamp.png"), tr(""));
+    setButtonProperties(stampEighteen);
+    stampNineteen = new QPushButton(QIcon(":/Stamps/food/Stamps/food_nineteen_stamp.png"), tr(""));
+    setButtonProperties(stampNineteen);
+    stampTwenty = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twenty_stamp.png"), tr(""));
+    setButtonProperties(stampTwenty);
+    stampTwentyOne = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentyone_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyOne);
+    stampTwentyTwo = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentytwo_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyTwo);
+    stampTwentyThree = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentythree_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyThree);
+    stampTwentyFour = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentyfour_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyFour);
+    stampTwentyFive = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentyfive_stamp.png"), tr(""));
+    setButtonProperties(stampTwentyFive);
+    stampTwentySix = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentysix_stamp.png"), tr(""));
+    setButtonProperties(stampTwentySix);
+    stampTwentySeven = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentyseven_stamp.png"), tr(""));
+    setButtonProperties(stampTwentySeven);
+
+
+    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
+    hLayout->addItem(horizSpacer);
+    this->setLayout(hLayout);
+
+}

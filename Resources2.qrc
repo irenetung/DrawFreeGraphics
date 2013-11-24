@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/Stamps/food">
+        <file>Stamps/food_eight_stamp.png</file>
+        <file>Stamps/food_eleven_stamp.png</file>
+        <file>Stamps/food_fifteen_stamp.png</file>
+        <file>Stamps/food_five_stamp.png</file>
+        <file>Stamps/food_four_stamp.png</file>
+        <file>Stamps/food_fourteen_stamp.png</file>
+        <file>Stamps/food_nine_stamp.png</file>
+        <file>Stamps/food_nineteen_stamp.png</file>
+        <file>Stamps/food_one_stamp.png</file>
+        <file>Stamps/food_seven_stamp.png</file>
+        <file>Stamps/food_seventeen_stamp.png</file>
+        <file>Stamps/food_six_stamp.png</file>
+        <file>Stamps/food_sixteen_stamp.png</file>
+        <file>Stamps/food_ten_stamp.png</file>
+        <file>Stamps/food_thirteen_stamp.png</file>
+        <file>Stamps/food_three_stamp.png</file>
+        <file>Stamps/food_twelve_stamp.png</file>
+        <file>Stamps/food_twenty_stamp.png</file>
+        <file>Stamps/food_eighteen_stamp.png</file>
+        <file>Stamps/food_twentyfive_stamp.png</file>
+        <file>Stamps/food_twentyfour_stamp.png</file>
+        <file>Stamps/food_twentyone_stamp.png</file>
+        <file>Stamps/food_twentyseven_stamp.png</file>
+        <file>Stamps/food_twentysix_stamp.png</file>
+        <file>Stamps/food_twentythree_stamp.png</file>
+        <file>Stamps/food_twentytwo_stamp.png</file>
+        <file>Stamps/food_two_stamp.png</file>
+    </qresource>
+</RCC>

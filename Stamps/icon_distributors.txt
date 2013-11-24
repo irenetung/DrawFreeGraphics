@@ -72,3 +72,43 @@ Faces:
 https://www.iconfinder.com/search/?q=iconset%3Aimoticons
 	License: Creative Commons Attribution 3.0 Unported
 	By: phdieuli
+
+Food:
+	Coffee, Donut, Hamburger:
+	https://www.iconfinder.com/search/?q=iconset%3Atasty-bites-icon-set
+	License: Creative Commons Attribution 3.0 Unported
+	By: PixelKit
+
+	Fruits:
+	https://www.iconfinder.com/iconsets/fruits
+	License: Free for Personal Use Only (Contact for Purchasing Information)
+	By: Artbees (info@artbees.net)
+
+	Spaghetti:
+	http://gfx9.com/spaghetti-icon/79590
+	License: Free Usage
+
+	Cheese:
+	http://www.robinweatherall.eu/
+	http://www.iconarchive.com/show/cheese-icons-by-robinweatherall/fullboard-icon.html	
+	License: Linkware (Commercial Usage Allowed)
+
+	Chicken, Rice, Hot Dog, Soup, Ice Cream, Lobster
+	http://www.gettyicons.com/free-icon/220/foods-icon-set/free-roasted-chicken-icon-png/
+
+	French Fries:
+	http://www.gettyicons.com/free-icon/101/foods-icon-set/free-french-fries-icon-png/
+
+	Pizza:
+	http://www.gettyicons.com/free-icon/101/foods-icon-set/free-pizza-slice-icon-png/
+
+	Soft Drink:
+	http://www.gettyicons.com/free-icon/101/foods-icon-set/free-soft-drink-icon-png/
+
+	Popsicle:
+	http://www.gettyicons.com/free-icon/135/sweets-icon-set/free-popsickle-icon-png/
+
+	Beer:
+	http://www.gettyicons.com/free-icon/103/glass-icon-set/free-beer-glass-full-icon-png/
+
+

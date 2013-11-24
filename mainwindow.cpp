@@ -334,6 +334,9 @@ MainWindow::MainWindow(QWidget *parent) :
     popUps.push_back(stampsWidgetFaces);
     stampsWidgetVehicles = new StampsWidgetVehicles();
     popUps.push_back(stampsWidgetVehicles);
+    stampsWidgetFood = new StampsWidgetFood();
+    popUps.push_back(stampsWidgetFood);
+
 
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
         // Silhouette Stamps
@@ -761,6 +764,67 @@ MainWindow::MainWindow(QWidget *parent) :
         vehiclesSignalMapper->setMapping(stampsWidgetVehicles->stampTwentyFour, ":/Stamps/vehicles/Stamps/vehicles_twentyfour_stamp");
         vehiclesSignalMapper->setMapping(stampsWidgetVehicles->stampTwentyFive, ":/Stamps/vehicles/Stamps/vehicles_twentyfive_stamp");
         connect(vehiclesSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(standardStampClicked(const QString)));
+
+    connect(stampsWidgetCategories->foodButton, SIGNAL(clicked()), this, SLOT(foodButtonClicked()));
+        // Food Stamps
+        connect(stampsWidgetFood->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
+        QSignalMapper *foodSignalMapper = new QSignalMapper(this);
+        connect(stampsWidgetFood->stampOne, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwo, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampThree, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampFour, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampFive, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampSix, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampSeven, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampEight, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampNine, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampEleven, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwelve, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampThirteen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampFourteen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampFifteen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampSixteen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampSeventeen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampEighteen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampNineteen, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwenty, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwentyOne, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwentyTwo, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwentyThree, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwentyFour, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwentyFive, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwentySix, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+        connect(stampsWidgetFood->stampTwentySeven, SIGNAL(clicked()), foodSignalMapper, SLOT(map()));
+
+        foodSignalMapper->setMapping(stampsWidgetFood->stampOne, ":/Stamps/food/Stamps/food_one_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwo, ":/Stamps/food/Stamps/food_two_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampThree, ":/Stamps/food/Stamps/food_three_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampFour, ":/Stamps/food/Stamps/food_four_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampFive, ":/Stamps/food/Stamps/food_five_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampSix, ":/Stamps/food/Stamps/food_six_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampSeven, ":/Stamps/food/Stamps/food_seven_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampEight, ":/Stamps/food/Stamps/food_eight_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampNine, ":/Stamps/food/Stamps/food_nine_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTen, ":/Stamps/food/Stamps/food_ten_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampEleven, ":/Stamps/food/Stamps/food_eleven_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwelve, ":/Stamps/food/Stamps/food_twelve_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampThirteen, ":/Stamps/food/Stamps/food_thirteen_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampFourteen, ":/Stamps/food/Stamps/food_fourteen_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampFifteen, ":/Stamps/food/Stamps/food_fifteen_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampSixteen, ":/Stamps/food/Stamps/food_sixteen_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampSeventeen, ":/Stamps/food/Stamps/food_seventeen_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampEighteen, ":/Stamps/food/Stamps/food_eighteen_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampNineteen, ":/Stamps/food/Stamps/food_nineteen_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwenty, ":/Stamps/food/Stamps/food_twenty_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwentyOne, ":/Stamps/food/Stamps/food_twentyone_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwentyTwo, ":/Stamps/food/Stamps/food_twentytwo_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwentyThree, ":/Stamps/food/Stamps/food_twentythree_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwentyFour, ":/Stamps/food/Stamps/food_twentyfour_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwentyFive, ":/Stamps/food/Stamps/food_twentyfive_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwentySix, ":/Stamps/food/Stamps/food_twentysix_stamp");
+        foodSignalMapper->setMapping(stampsWidgetFood->stampTwentySeven, ":/Stamps/food/Stamps/food_twentyseven_stamp");
+        connect(foodSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(standardStampClicked(const QString)));
 
 
     //Canvas
@@ -1436,6 +1500,14 @@ void MainWindow::vehiclesButtonClicked()
 
     prompt->promptLabel->setText("Select a stamp:");
     stampsWidgetVehicles->show();
+}
+
+void MainWindow::foodButtonClicked()
+{
+    hideWidgets();
+
+    prompt->promptLabel->setText("Select a stamp:");
+    stampsWidgetFood->show();
 }
 
 // STAMPS ACTIONS

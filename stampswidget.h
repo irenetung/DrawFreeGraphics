@@ -21,6 +21,7 @@ public:
     QPushButton *sceneryButton;
     QPushButton *facesButton;
     QPushButton *vehiclesButton;
+    QPushButton *foodButton;
 
 };
 
@@ -273,6 +274,43 @@ public:
     QPushButton *stampTwentyThree;
     QPushButton *stampTwentyFour;
     QPushButton *stampTwentyFive;
+
+};
+
+
+//Stamp Category: Food
+class StampsWidgetFood : public StampsWidget
+{
+public:
+    explicit StampsWidgetFood();
+    QPushButton *goBack;
+    QPushButton *stampOne;
+    QPushButton *stampTwo;
+    QPushButton *stampThree;
+    QPushButton *stampFour;
+    QPushButton *stampFive;
+    QPushButton *stampSix;
+    QPushButton *stampSeven;
+    QPushButton *stampEight;
+    QPushButton *stampNine;
+    QPushButton *stampTen;
+    QPushButton *stampEleven;
+    QPushButton *stampTwelve;
+    QPushButton *stampThirteen;
+    QPushButton *stampFourteen;
+    QPushButton *stampFifteen;
+    QPushButton *stampSixteen;
+    QPushButton *stampSeventeen;
+    QPushButton *stampEighteen;
+    QPushButton *stampNineteen;
+    QPushButton *stampTwenty;
+    QPushButton *stampTwentyOne;
+    QPushButton *stampTwentyTwo;
+    QPushButton *stampTwentyThree;
+    QPushButton *stampTwentyFour;
+    QPushButton *stampTwentyFive;
+    QPushButton *stampTwentySix;
+    QPushButton *stampTwentySeven;
 
 };
 
