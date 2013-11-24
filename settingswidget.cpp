@@ -5,7 +5,8 @@ SettingsWidget::SettingsWidget()
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(255,204,229));
+    parea->fill(QColor(255,153,204));
+    this->setStyleSheet("QPushButton{background-color:#FFCCE5; border-color:#FF3399; border-style:solid; border-width:3px; border-radius:3px;} QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}");
 }
 
 SettingsWidgetButtonSize::SettingsWidgetButtonSize()

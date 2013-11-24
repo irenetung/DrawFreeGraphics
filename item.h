@@ -11,20 +11,23 @@
 
 #include "math.h"
 
+enum ItemType{PointItemType = QGraphicsItem::UserType+1,
+             RoundRectangleItemType = QGraphicsItem::UserType+2,
+             ArcItemType = QGraphicsItem::UserType+3,
+             ChordItemType = QGraphicsItem::UserType+4,
+             PieItemType = QGraphicsItem::UserType+5,
+             PathItemType = QGraphicsItem::UserType+6};
+
 class PointItem : public QGraphicsItem
 {
 public:
-   //PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     PointItem(QPointF &point,QPen &curPen);
-
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return PointItemType;}
 
-protected:
-    //QList<QPointF> vertices;
     QPointF vertex;
     QPen *pen;
-    //QBrush *brush;
 };
 
 class RoundRectangleItem : public QGraphicsItem
@@ -33,8 +36,8 @@ public:
     RoundRectangleItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return RoundRectangleItemType;}
 
-protected:
     QList<QPointF> vertices;
     QPen *pen;
     QBrush *brush;
@@ -46,8 +49,8 @@ public:
     ArcItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return ArcItemType;}
 
-protected:
     QList<QPointF> vertices;
     QPen *pen;
     QBrush *brush;
@@ -61,8 +64,8 @@ public:
     ChordItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return ChordItemType;}
 
-protected:
     QList<QPointF> vertices;
     QPen *pen;
     QBrush *brush;
@@ -76,8 +79,8 @@ public:
     PieItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return PieItemType;}
 
-protected:
     QList<QPointF> vertices;
     QPen *pen;
     QBrush *brush;
@@ -88,18 +91,19 @@ protected:
 class PathItem : public QGraphicsItem
 {
 public:
-    PathItem(QPolygonF &curPolygon,QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    //PathItem(QPolygonF &curPolygon,QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    PathItem(QPolygonF &curPolygon,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return PathItemType;}
 
-protected:
     QPolygonF *polygon;
     QPen *pen;
     QBrush *brush;
-    float left;
+    /*float left;
     float right;
     float top;
-    float bottom;
+    float bottom;*/
 };
 
 // DRAW ITEM
@@ -112,7 +116,6 @@ public:
 
     void addWaterColorEffect(int size, float perc);
 
-protected:
     QList<QPointF> vertices;
     QPen *pen;
     QBrush *brush;
@@ -131,7 +134,6 @@ public:
 
     void addWaterColorEffect(int size, float perc);
 
-protected:
     QList<QPointF> vertices;
     QPen *pen;
     QBrush *brush;

@@ -5,13 +5,14 @@ ShapesWidget::ShapesWidget()
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(255,255,204));
+    parea->fill(QColor(153,255,153));
+    this->setStyleSheet("QPushButton{background-color:#CCFFCC; border-color:#00CC66; border-style:solid; border-width:3px; border-radius:3px;} QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}");
 }
 
 ShapesWidgetShapes::ShapesWidgetShapes()
 {
-    hLayout = new FlowLayout;
-
+    outlineSizeButton = new QPushButton("set\noutline\nsize");
+    setButtonProperties(outlineSizeButton);
     lineButton = new QPushButton("line");
     setButtonProperties(lineButton);
     pointButton = new QPushButton("point");
@@ -35,25 +36,45 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     textButton = new QPushButton("text");
     setButtonProperties(textButton);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(lineButton);
+    addToButtonGroup(pointButton);
+    addToButtonGroup(circleButton);
+    addToButtonGroup(rectangleButton);
+    addToButtonGroup(roundedRectangleButton);
+    addToButtonGroup(polygonButton);
+    addToButtonGroup(arcButton);
+    addToButtonGroup(chordButton);
+    addToButtonGroup(pieButton);
+    addToButtonGroup(pathButton);
+    addToButtonGroup(textButton);
+
+    buttonGroup->setExclusive(true);
 }
 
 ShapesWidgetEndPath::ShapesWidgetEndPath()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton("back to\nshapes");
     setButtonProperties(backButton);
     endPathButton = new QPushButton("end path");
     setButtonProperties(endPathButton);
 
-    hLayout->addWidget(endPathButton);
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
-
     this->setLayout(hLayout);
 }
 
+ShapesWidgetOutlineSizes::ShapesWidgetOutlineSizes()
+{
+    backButton = new QPushButton("back to\ncolors");
+    setButtonProperties(backButton);
+    on1Button = new QPushButton("-1");
+    setButtonProperties(on1Button);
+    op1Button = new QPushButton("+1");
+    setButtonProperties(op1Button);
 
+    hLayout->addItem(horizSpacer);
+    this->setLayout(hLayout);
+}

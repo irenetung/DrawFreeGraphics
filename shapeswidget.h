@@ -14,6 +14,7 @@ class ShapesWidgetShapes : public ShapesWidget
 {
 public:
     explicit ShapesWidgetShapes();
+    QPushButton *outlineSizeButton;
     QPushButton *lineButton;
     QPushButton *pointButton;
     QPushButton *circleButton;
@@ -34,6 +35,16 @@ public:
     explicit ShapesWidgetEndPath();
     QPushButton *backButton;
     QPushButton *endPathButton;
+};
+
+class ShapesWidgetOutlineSizes : public ShapesWidget
+{
+public:
+    explicit ShapesWidgetOutlineSizes();
+    QPushButton *backButton;
+    QPushButton *on1Button;
+    QPushButton *op1Button;
+
 };
 
 #endif // SHAPESWIDGET_H

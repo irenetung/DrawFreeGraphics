@@ -6,13 +6,12 @@ CursorWidget::CursorWidget()
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(255,204,229));
+    parea->fill(QColor(255,255,153));
+    this->setStyleSheet("QPushButton{background-color:#FFFFCC; border-color:#FF9933; border-style:solid; border-width:3px; border-radius:3px;} QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}");
 }
 
 CursorWidgetCursors::CursorWidgetCursors()
 {
-    hLayout = new FlowLayout;
-
     translateButton = new QPushButton("translate");
     setButtonProperties(translateButton);
     scaleButton = new QPushButton("scale");
@@ -25,12 +24,21 @@ CursorWidgetCursors::CursorWidgetCursors()
     setButtonProperties(depthButton);
     shearButton = new QPushButton("shear");
     setButtonProperties(shearButton);
+    changeOutlineColorButton = new QPushButton("change\noutline\ncolor");
+    setButtonProperties(changeOutlineColorButton);
+    changeFillColorButton = new QPushButton("change\nfill\ncolor");
+    setButtonProperties(changeFillColorButton);
+    changeBrushColorButton = new QPushButton("change\nbrush\ncolor");
+    setButtonProperties(changeBrushColorButton);
+    changeOutlineSizeButton = new QPushButton("change\noutline\nsize");
+    setButtonProperties(changeOutlineSizeButton);
+    changeBrushSizeButton = new QPushButton("change\nbrush\nsize");
+    setButtonProperties(changeBrushSizeButton);
     copyButton = new QPushButton("copy");
     setButtonProperties(copyButton);
     deleteButton = new QPushButton("delete");
     setButtonProperties(deleteButton);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 }
@@ -38,8 +46,6 @@ CursorWidgetCursors::CursorWidgetCursors()
 //-------------------------------------------------------
 CursorWidgetTranslate::CursorWidgetTranslate()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
     signButton = new QPushButton("+");
@@ -60,9 +66,18 @@ CursorWidgetTranslate::CursorWidgetTranslate()
     t100Button = new QPushButton("100");
     setButtonProperties(t100Button);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(t1Button);
+    addToButtonGroup(t5Button);
+    addToButtonGroup(t10Button);
+    addToButtonGroup(t20Button);
+    addToButtonGroup(t50Button);
+    addToButtonGroup(t100Button);
+
+    buttonGroup->setExclusive(true);
 }
 
 void CursorWidgetTranslate::toggleSign(bool signPositive)
@@ -85,16 +100,13 @@ void CursorWidgetTranslate::toggleDirection(bool directionHorizontal)
 //-------------------------------------------------------
 CursorWidgetScale::CursorWidgetScale()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
     signButton = new QPushButton("+");
     setButtonProperties(signButton);
     resetButton = new QPushButton("reset to\noriginal");
     setButtonProperties(resetButton);
-    s05Button = new QPushButton(".005");
-    setButtonProperties(s05Button);
+
     s1Button = new QPushButton(".01");
     setButtonProperties(s1Button);
     s5Button = new QPushButton(".05");
@@ -108,9 +120,19 @@ CursorWidgetScale::CursorWidgetScale()
     s100Button = new QPushButton("1");
     setButtonProperties(s100Button);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(resetButton);
+    addToButtonGroup(s1Button);
+    addToButtonGroup(s5Button);
+    addToButtonGroup(s10Button);
+    addToButtonGroup(s20Button);
+    addToButtonGroup(s50Button);
+    addToButtonGroup(s100Button);
+
+    buttonGroup->setExclusive(true);
 }
 
 void CursorWidgetScale::toggleSign(bool signPositive)
@@ -125,8 +147,6 @@ void CursorWidgetScale::toggleSign(bool signPositive)
 //-------------------------------------------------------
 CursorWidgetStretch::CursorWidgetStretch()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
     signButton = new QPushButton("+");
@@ -148,9 +168,19 @@ CursorWidgetStretch::CursorWidgetStretch()
     st1Button = new QPushButton("1");
     setButtonProperties(st1Button);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(st0005Button);
+    addToButtonGroup(st001Button);
+    addToButtonGroup(st005Button);
+    addToButtonGroup(st01Button);
+    addToButtonGroup(st02Button);
+    addToButtonGroup(st05Button);
+    addToButtonGroup(st1Button);
+
+    buttonGroup->setExclusive(true);
 }
 
 void CursorWidgetStretch::toggleSign(bool signPositive)
@@ -173,8 +203,6 @@ void CursorWidgetStretch::toggleDirection(bool directionHorizontal)
 //--------------------------------------------------------------
 CursorWidgetRotate::CursorWidgetRotate()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
     signButton = new QPushButton("+");
@@ -207,12 +235,27 @@ CursorWidgetRotate::CursorWidgetRotate()
     setButtonProperties(r120Button);
     r180Button = new QPushButton("180");
     setButtonProperties(r180Button);
-    r270Button = new QPushButton("270");
-    setButtonProperties(r270Button);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(resetButton);
+    addToButtonGroup(r01Button);
+    addToButtonGroup(r05Button);
+    addToButtonGroup(r1Button);
+    addToButtonGroup(r5Button);
+    addToButtonGroup(r10Button);
+    addToButtonGroup(r20Button);
+    addToButtonGroup(r30Button);
+    addToButtonGroup(r45Button);
+    addToButtonGroup(r60Button);
+    addToButtonGroup(r72Button);
+    addToButtonGroup(r90Button);
+    addToButtonGroup(r120Button);
+    addToButtonGroup(r180Button);
+
+    buttonGroup->setExclusive(true);
 }
 
 void CursorWidgetRotate::toggleSign(bool signPositive)
@@ -227,8 +270,6 @@ void CursorWidgetRotate::toggleSign(bool signPositive)
 //-----------------------------------------------------
 CursorWidgetShear::CursorWidgetShear()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
     signButton = new QPushButton("+");
@@ -248,9 +289,18 @@ CursorWidgetShear::CursorWidgetShear()
     sh1Button = new QPushButton("1");
     setButtonProperties(sh1Button);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(sh001Button);
+    addToButtonGroup(sh005Button);
+    addToButtonGroup(sh01Button);
+    addToButtonGroup(sh02Button);
+    addToButtonGroup(sh05Button);
+    addToButtonGroup(sh1Button);
+
+    buttonGroup->setExclusive(true);
 }
 
 void CursorWidgetShear::toggleSign(bool signPositive)
@@ -273,8 +323,6 @@ void CursorWidgetShear::toggleDirection(bool directionHorizontal)
 
 CursorWidgetDepth::CursorWidgetDepth()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
     dn1Button = new QPushButton("-1");
@@ -282,19 +330,21 @@ CursorWidgetDepth::CursorWidgetDepth()
     dp1Button = new QPushButton("+1");
     setButtonProperties(dp1Button);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(dn1Button);
+    addToButtonGroup(dp1Button);
+
+    buttonGroup->setExclusive(true);
 }
 
 CursorWidgetBack::CursorWidgetBack()
 {
-    hLayout = new FlowLayout;
-
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 }

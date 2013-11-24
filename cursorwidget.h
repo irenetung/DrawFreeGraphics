@@ -19,6 +19,11 @@ public:
     QPushButton *rotateButton;
     QPushButton *depthButton;
     QPushButton *shearButton;
+    QPushButton *changeOutlineColorButton;
+    QPushButton *changeFillColorButton;
+    QPushButton *changeBrushColorButton;
+    QPushButton *changeOutlineSizeButton;
+    QPushButton *changeBrushSizeButton;
     QPushButton *copyButton;
     QPushButton *deleteButton;
 };
@@ -47,7 +52,6 @@ public:
     QPushButton *backButton;
     QPushButton *signButton;
     QPushButton *resetButton;
-    QPushButton *s05Button;
     QPushButton *s1Button;
     QPushButton *s5Button;
     QPushButton *s10Button;
@@ -96,7 +100,6 @@ public:
     QPushButton *r120Button;
     QPushButton *r150Button;
     QPushButton *r180Button;
-    QPushButton *r270Button;
     void toggleSign(bool signPositive);
 };
 

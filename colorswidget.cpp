@@ -5,60 +5,61 @@ ColorsWidget::ColorsWidget()
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(255,229,204));
+    parea->fill(QColor(204,255,153));
+    this->setStyleSheet("QPushButton{background-color:#E5FFCC; border-color:#66CC00; border-style:solid; border-width:3px; border-radius:3px;}"
+                        "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
+                        );
 }
 
 ColorsWidgetPaintTools::ColorsWidgetPaintTools()
 {
-    hLayout = new FlowLayout;
-
     outlineButton = new QPushButton("outline");
     setButtonProperties(outlineButton);
     fillButton = new QPushButton("fill");
     setButtonProperties(fillButton);
     brushButton = new QPushButton("brush");
     setButtonProperties(brushButton);
+    silhouetteButton = new QPushButton("silhouette");
+    setButtonProperties(silhouetteButton);
     backgroundButton = new QPushButton("back\nground");
     setButtonProperties(backgroundButton);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 }
 
 ColorsWidgetColors::ColorsWidgetColors()
 {
-    hLayout = new FlowLayout;
-
-    peachButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    peachButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     peachButtonIcon->fill(QColor(255,239,213));
-    pinkButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    pinkButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     pinkButtonIcon->fill(QColor(255,102,178));
-    redButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    redButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     redButtonIcon->fill(QColor(255,51,51));
-    orangeButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    orangeButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     orangeButtonIcon->fill(QColor(255,128,0));
-    yellowButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    yellowButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     yellowButtonIcon->fill(QColor(255,255,51));
-    greenButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    greenButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     greenButtonIcon->fill(QColor(102,204,0));
-    blueButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    blueButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     blueButtonIcon->fill(QColor(0,128,255));
-    purpleButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    purpleButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     purpleButtonIcon->fill(QColor(153,51,255));
-    brownButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    brownButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     brownButtonIcon->fill(QColor(102,51,0));
-    blackButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    blackButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     blackButtonIcon->fill(QColor(0,0,0));
-    grayButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    grayButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     grayButtonIcon->fill(QColor(192,192,192));
-    whiteButtonIcon = new QPixmap(buttonWidth,buttonHeight);
+    whiteButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     whiteButtonIcon->fill(QColor(255,255,255));
 
     backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
     setButtonProperties(backButton);
+    whiteButton = new QPushButton(QIcon(*whiteButtonIcon), tr(""));
+    setButtonProperties(whiteButton);
     peachButton = new QPushButton(QIcon(*peachButtonIcon), tr(""));
-   // peachButton = new QPushButton(tr(""));
     setButtonProperties(peachButton);
     pinkButton = new QPushButton(QIcon(*pinkButtonIcon), tr(""));
     setButtonProperties(pinkButton);
@@ -80,28 +81,28 @@ ColorsWidgetColors::ColorsWidgetColors()
     setButtonProperties(blackButton);
     grayButton = new QPushButton(QIcon(*grayButtonIcon), tr(""));
     setButtonProperties(grayButton);
-    whiteButton = new QPushButton(QIcon(*whiteButtonIcon), tr(""));
-    setButtonProperties(whiteButton);
+    prevCustomButton = new QPushButton("previous\ncustom\ncolor");
+    setButtonProperties(prevCustomButton);
     customColorButton = new QPushButton("custom\ncolor");
     setButtonProperties(customColorButton);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
-}
 
-ColorsWidgetOutlineSizes::ColorsWidgetOutlineSizes()
-{
-    hLayout = new FlowLayout;
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(whiteButton);
+    addToButtonGroup(peachButton);
+    addToButtonGroup(pinkButton);
+    addToButtonGroup(redButton);
+    addToButtonGroup(orangeButton);
+    addToButtonGroup(yellowButton);
+    addToButtonGroup(greenButton);
+    addToButtonGroup(blueButton);
+    addToButtonGroup(purpleButton);
+    addToButtonGroup(brownButton);
+    addToButtonGroup(blackButton);
+    addToButtonGroup(grayButton);
+    addToButtonGroup(prevCustomButton);
 
-    backButton = new QPushButton("back to\ncolors");
-    setButtonProperties(backButton);
-    on1Button = new QPushButton("-1");
-    setButtonProperties(on1Button);
-    op1Button = new QPushButton("+1");
-    setButtonProperties(op1Button);
-
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
-    hLayout->addItem(horizSpacer);
-    this->setLayout(hLayout);
+    buttonGroup->setExclusive(true);
 }

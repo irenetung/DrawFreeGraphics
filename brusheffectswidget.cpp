@@ -5,13 +5,12 @@ BrushEffectsWidget::BrushEffectsWidget()
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(204,255,204));
+    parea->fill(QColor(184,184,233));
+    this->setStyleSheet("QPushButton{background-color:#CCCCFF; border-color:#6666FF; border-style:solid; border-width:3px; border-radius:3px;} QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}");
 }
 
 BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)
 {
-    hLayout = new FlowLayout;
-
     paintButton = new QPushButton("paint");
     setButtonProperties(paintButton);
     waterColorButton = new QPushButton("water\ncolor");
@@ -25,7 +24,16 @@ BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)
     dustButton = new QPushButton("dust");
     setButtonProperties(dustButton);
 
-    QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(paintButton);
+    addToButtonGroup(waterColorButton);
+    addToButtonGroup(calligraphyButton);
+    addToButtonGroup(pencilButton);
+    addToButtonGroup(sprayPaintButton);
+    addToButtonGroup(dustButton);
+
+    buttonGroup->setExclusive(true);
 }
