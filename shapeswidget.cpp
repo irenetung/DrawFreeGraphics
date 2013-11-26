@@ -274,6 +274,55 @@ ShapesWidgetKeyboardLetters::ShapesWidgetKeyboardLetters()
 
 ShapesWidgetKeyboardNumbers::ShapesWidgetKeyboardNumbers()
 {
+    /*n1Button = new QPushButton(tr("1"));
+    setButtonProperties(n1Button);
+    n2Button = new QPushButton(tr("2"));
+    setButtonProperties(n1Button);
+    n3Button = new QPushButton(tr("3"));
+    setButtonProperties(n1Button);
+    n4Button = new QPushButton(tr("4"));
+    setButtonProperties(n1Button);
+    n5Button = new QPushButton(tr("5"));
+    setButtonProperties(n1Button);
+    n6Button = new QPushButton(tr("6"));
+    setButtonProperties(n6Button);
+    n7Button = new QPushButton(tr("7"));
+    setButtonProperties(n7Button);
+    n8Button = new QPushButton(tr("8"));
+    setButtonProperties(n8Button);
+    n9Button = new QPushButton (tr("9"));
+    setButtonProperties(n9Button);
+    n0Button = new QPushButton(tr"0");
+    setButtonProperties(n0Button);
+
+    minusButton = new QPushButton(tr("minus"));
+    setButtonProperties(minusButton);
+    forwardSlashButton = new QPushButton(tr("/"));
+    setButtonProeprties(forwardSLashButton);
+    colonButton = new QPushButton(tr(":"));
+    setButtonProperties(colonButton);
+    semicolonButton = new QPushButton(tr(";"));
+    setButtonProperties(semicolongButton);
+    leftParenthasesButton = new QPushButton(tr"(");
+    setButtonProperties(leftParenthasesButton);
+    rightParenthasesButton = new QPushButton(tr cwzvd\sccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+    QPushButton *dollarButton;
+    QPushButton *ampersandButton;
+    QPushButton *atButton;
+    QPushButton *quoteButton;
+
+    QPushButton *symbolsButton;
+    QPushButton *periodButton;
+    QPushButton *commaButton;
+    QPushButton *questionButton;
+    QPushButton *exclamationButton;
+    QPushButton *apostropheButton;
+    QPushButton *backSpaceButton;
+
+    QPushButton *lettersButton;
+    QPushButton *spaceButton;
+    QPushButton *enterButton;*/
 
 }
 
