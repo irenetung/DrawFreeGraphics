@@ -176,15 +176,22 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 case WATERCOLOR: {
                     //DrawItem *watercolor = new DrawItem(points, *brushPen, *brushBrush);
                     //watercolor->addWaterColorEffect(25,0.3);
-                    //drawItem(watercolor);
+                    WatercolorItem *watercolor = new WatercolorItem(points, *brushPen, *brushBrush);
+                    drawItem(watercolor);
                     break;
                     }
-                case CALLIGRAPHY:
+                case CALLIGRAPHY: {
+                    CalligraphyItem *calligraphyItem = new CalligraphyItem(points, *brushPen, *brushBrush);
+                    drawItem(calligraphyItem);
                     break;
+                }
                 case PENCIL:
                     break;
-                case SPRAYPAINT:
+            case SPRAYPAINT: {
+                    SprayPaintItem *sprayPaintItem = new SprayPaintItem(points, *brushPen, *brushBrush);
+                    drawItem(sprayPaintItem);
                     break;
+            }
             case DUST: {
                     DrawItem *draw = new DrawItem(points,*brushPen,*brushBrush);
                     drawItem(draw);
@@ -716,6 +723,78 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                  selectedPaintItem->update();
                  break;
             }
+            case WaterColorItemType: {
+                WatercolorItem *selectedWatercolorItem = qgraphicsitem_cast<WatercolorItem *>(selectedItem);
+                QPen pen = *(selectedWatercolorItem->pen);
+                QBrush brush = *(selectedWatercolorItem->brush);
+                switch(colorState) {
+                case BRUSH: {
+                    pen.setColor(brushPen->color());
+                    brush.setColor(brushBrush->color());
+                    *(selectedWatercolorItem->pen) = pen;
+                    *(selectedWatercolorItem->brush) = brush;
+                    break;
+                   }
+                case BRUSHSIZE: {
+                    pen.setWidth(brushPen->width());
+                    *(selectedWatercolorItem->pen) = pen;
+                    *(selectedWatercolorItem->brush) = brush;
+                    break;
+                    }
+                default:
+                    break;
+                }
+                selectedWatercolorItem->update();
+                break;
+                }
+            case SprayPaintItemType: {
+                SprayPaintItem *selectedSprayPaintItem = qgraphicsitem_cast<SprayPaintItem *>(selectedItem);
+                QPen pen = *(selectedSprayPaintItem->pen);
+                QBrush brush = *(selectedSprayPaintItem->brush);
+                switch(colorState) {
+                case BRUSH: {
+                    pen.setColor(brushPen->color());
+                    brush.setColor(brushBrush->color());
+                    *(selectedSprayPaintItem->pen) = pen;
+                    *(selectedSprayPaintItem->brush) = brush;
+                    break;
+                   }
+                case BRUSHSIZE: {
+                    pen.setWidth(brushPen->width());
+                    *(selectedSprayPaintItem->pen) = pen;
+                    *(selectedSprayPaintItem->brush) = brush;
+                    break;
+                    }
+                default:
+                    break;
+                }
+                selectedSprayPaintItem->update();
+                break;
+                }
+            case CalligraphyItemType: {
+                CalligraphyItem *selectedCalligraphyItem = qgraphicsitem_cast<CalligraphyItem *>(selectedItem);
+                QPen pen = *(selectedCalligraphyItem->pen);
+                QBrush brush = *(selectedCalligraphyItem->brush);
+                switch(colorState) {
+                case BRUSH: {
+                    pen.setColor(brushPen->color());
+                    brush.setColor(brushBrush->color());
+                    *(selectedCalligraphyItem->pen) = pen;
+                    *(selectedCalligraphyItem->brush) = brush;
+                    break;
+                   }
+                case BRUSHSIZE: {
+                    pen.setWidth(brushPen->width());
+                    *(selectedCalligraphyItem->pen) = pen;
+                    *(selectedCalligraphyItem->brush) = brush;
+                    break;
+                    }
+                default:
+                    break;
+                }
+                selectedCalligraphyItem->update();
+                break;
+                }
             case DustItemType: {
                  DrawItem *selectedDrawItem = qgraphicsitem_cast<DrawItem *>(selectedItem);
                  QPen pen = *(selectedDrawItem->pen);
@@ -732,6 +811,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                      pen.setWidth(brushPen->width());
                      //WHAT TO DO WITH BRUSH
                      *(selectedDrawItem->pen) = pen;
+                     //watercolor->addWaterColorEffect(25,0.3);
                      *(selectedDrawItem->brush) = brush;
                      break;
                      }

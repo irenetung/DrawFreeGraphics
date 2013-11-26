@@ -1407,6 +1407,7 @@ void MainWindow::shapesButtonGroupClicked(int id)
             break;
         case 10:
             QMessageBox::information(this, "title", "Text");
+            canvas->shapeState = canvas->TEXTTYPE;
             break;
         default:
             break;
@@ -1672,6 +1673,7 @@ void MainWindow::brushColorButtonClicked()
 
 void MainWindow::brushEffectsButtonGroupClicked(int id)
 {
+    canvas->resetShapeState();
     switch(id) {
         case 0:
             canvas->brushEffectsState = canvas->PAINT;
@@ -1683,6 +1685,7 @@ void MainWindow::brushEffectsButtonGroupClicked(int id)
             canvas->brushEffectsState = canvas->CALLIGRAPHY;
             break;
         case 3:
+            QMessageBox::information(this, tr("title"),tr("Not implemented yet"));
             canvas->brushEffectsState = canvas->PENCIL;
             break;
         case 4:

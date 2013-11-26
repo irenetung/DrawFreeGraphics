@@ -122,7 +122,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
     int type() const {return DustItemType;}
 
-    //void addWaterColorEffect(int size, float perc);
+    void addWaterColorEffect(int size, float perc);
+    //void calligraphy(int skew);
+    //void spray();
 
     QList<QPointF> vertices;
     QPen *pen;
@@ -141,7 +143,22 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
     int type() const {return PaintItemType;}
 
-    //void addWaterColorEffect(int size, float perc);
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float left;
+    float right;
+    float top;
+    float bottom;
+};
+
+class CalligraphyItem : public QGraphicsItem
+{
+public:
+    explicit CalligraphyItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return CalligraphyItemType;}
 
     QList<QPointF> vertices;
     QPen *pen;
@@ -150,6 +167,43 @@ public:
     float right;
     float top;
     float bottom;
+};
+
+class SprayPaintItem : public QGraphicsItem
+{
+public:
+    explicit SprayPaintItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return SprayPaintItemType;}
+
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float left;
+    float right;
+    float top;
+    float bottom;
+};
+
+class WatercolorItem : public QGraphicsItem
+{
+public:
+    explicit WatercolorItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
+    QRectF boundingRect() const; //must
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return WaterColorItemType;}
+
+
+
+    QList<QPointF> vertices;
+    QPen *pen;
+    QBrush *brush;
+    float left;
+    float right;
+    float top;
+    float bottom;
+
 };
 
 

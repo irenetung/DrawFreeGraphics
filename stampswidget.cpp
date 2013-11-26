@@ -499,7 +499,8 @@ StampsWidgetFood::StampsWidgetFood()
 {
     hLayout = new FlowLayout;
 
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
 
     stampOne = new QPushButton(QIcon(":/Stamps/food/Stamps/food_one_stamp.png"), tr(""));
