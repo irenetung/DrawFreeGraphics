@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     cursorwidget.cpp \
     stampswidget.cpp \
     brusheffectswidget.cpp \
-    drawwidget.cpp \
     commanditem.cpp \
     colorswidget.cpp \
     flowlayout.cpp \
@@ -36,7 +35,6 @@ HEADERS  += mainwindow.h \
     cursorwidget.h \
     stampswidget.h \
     brusheffectswidget.h \
-    drawwidget.h \
     commanditem.h \
     colorswidget.h \
     flowlayout.h \

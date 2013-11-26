@@ -7,6 +7,8 @@
 #include <QResizeEvent>
 #include <QPushButton>
 #include <QVector>
+#include <QButtonGroup>
+#include <QFont>
 #include "flowlayout.h"
 
 class BaseWidget : public QWidget
@@ -15,6 +17,7 @@ class BaseWidget : public QWidget
 public:
     explicit BaseWidget(QWidget *parent = 0);
     void changeButtonProperties(int newButtonWidth, int newButtonHeight);
+    QButtonGroup *buttonGroup;
 signals:
 
 public slots:
@@ -24,9 +27,13 @@ protected:
 
     int buttonWidth;
     int buttonHeight;
+    int id;
     QVector<QPushButton*> buttons;
     FlowLayout *hLayout;
+    QSpacerItem *horizSpacer;
     void setButtonProperties(QPushButton *b);
+    void addToButtonGroup(QPushButton *b);
+    void addToGroup(QPushButton *b);
     QPixmap *parea;
 };
 

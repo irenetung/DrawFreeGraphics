@@ -11,6 +11,7 @@
 #include <QIcon>
 #include <QUndoStack>
 #include <QVector>
+#include <QCursor>
 
 #include "prompt.h"
 #include "settingswidget.h"
@@ -36,36 +37,35 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void setToolButtonProperties(QToolButton &b);
-    void hideWidgets();
-
     int buttonWidth;
     int buttonHeight;
+    int id;
+    bool hidePopup;
+    BaseWidget *curPopup;
+    QVector<QToolButton *> tools;
     QVector<BaseWidget *> popUps;
-    //Toolbar
-    QToolButton settingsButton;
-    QToolButton newButton;
-    QToolButton openButton;
-    QToolButton saveButton;
-    QToolButton undoButton;
-    QToolButton cursorButton;
-    QToolButton colorsButton;
-    QToolButton shapesButton;
-    QToolButton stampsButton;
-    QToolButton brushEffectsButton;
-    QToolButton drawButton;
-    QToolButton eraserButton;
-    QToolButton insertPictureButton;
-    QToolButton closeButton;
-
-    QUndoStack *undoStack;
-
- //Tool Widgets
-
+    QButtonGroup *toolGroup;
+//Toolbar
+    QToolButton *settingsButton;
+    QToolButton *newButton;
+    QToolButton *openButton;
+    QToolButton *saveButton;
+    QToolButton *undoButton;
+    QToolButton *cursorButton;
+    QToolButton *colorsButton;
+    QToolButton *shapesButton;
+    QToolButton *stampsButton;
+    QToolButton *brushEffectsButton;
+    QToolButton *insertPictureButton;
+    QToolButton *closeButton;
+    QToolButton *showHidePopupButton;
+//Prompt
     Prompt *prompt;
-    //Settings
+//Settings
     SettingsWidgetButtonSize *settingsWidgetButtonSize;
-    //Cursor
+//Undo
+    QUndoStack *undoStack;
+//Cursor
     CursorWidgetCursors *cursorWidgetCursors;
     CursorWidgetTranslate *cursorWidgetTranslate;
     CursorWidgetScale *cursorWidgetScale;
@@ -74,18 +74,19 @@ private:
     CursorWidgetShear *cursorWidgetShear;
     CursorWidgetDepth *cursorWidgetDepth;
     CursorWidgetBack *cursorWidgetBack;
-    //Colors
+    CursorWidgetFlip * cursorWidgetFlip;
+//Colors
     ColorsWidgetPaintTools *colorsWidgetPaintTools;
-    ColorsWidgetColors *colorsWidgetColors;
-    ColorsWidgetOutlineSizes *colorsWidgetOutlineSizes;
-    //Shapes
+    ColorsWidgetColors *colorsWidgetColorsOutline;
+    ColorsWidgetColors *colorsWidgetColorsFill;
+    ColorsWidgetColors *colorsWidgetColorsSilhouette;
+    ColorsWidgetColors *colorsWidgetColorsBrush;
+    ColorsWidgetColors *colorsWidgetColorsBackground;
+//Shapes
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
-
-    //Brush Effects
-    BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;
-
-    //Stamps
+    ShapesWidgetOutlineSizes *shapesWidgetOutlineSizes;
+//Stamps
     StampsWidgetCategories *stampsWidgetCategories;
     StampsWidgetSilhouette *stampsWidgetSilhouette;
     StampsWidgetPeople *stampsWidgetPeople;
@@ -96,119 +97,68 @@ private:
     StampsWidgetVehicles *stampsWidgetVehicles;
     StampsWidgetFood *stampsWidgetFood;
 
-    //Canvas
+//Brush Effects
+    BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;
+    BrushEffectsWidgetBrushSizes *brushEffectsWidgetBrushSizes;
+//Canvas
     Canvas *canvas;
-
-    //Application Layout
+//Application Layout
     QVBoxLayout *vLayout;
+
+    void setToolButtonProperties(QToolButton *b);
+    void addToToolGroup(QToolButton *b);
+    void hideWidgets();
 
 private slots:
 //Toolbar
-    void settingsButtonClicked();
     void newButtonClicked();
     void openButtonClicked();
     void saveButtonClicked();
     void undoButtonClicked();
-    void cursorButtonClicked();
-    void colorsButtonClicked();
-    void shapesButtonClicked();
-    void stampsButtonClicked();
-    void brushEffectsButtonClicked();
-    void drawButtonClicked();
-    void eraserButtonClicked();
+    void toolButtonGroupClicked(int id);
+
     void insertPictureButtonClicked();
-
-//Tool Buttons
-    //Settings
-    void bwn5ButtonClicked();
-    void bwp5ButtonClicked();
-    void bhn5ButtonClicked();
-    void bhp5ButtonClicked();
-    //Cursor
+    void showHidePopupButtonClicked();
+//Settings
+    void settingsButtonSizeButtonGroupClicked(int id);
+//Cursor
     void cursorBackButtonClicked();
-
-    void translateButtonClicked();
-    void scaleButtonClicked();
-    void rotateButtonClicked();
-    void shearButtonClicked();
-    void stretchButtonClicked();
-    void depthButtonClicked();
-    void copyButtonClicked();
-    void deleteButtonClicked();
-
-    void translateSignButtonClicked();
-    void translateDirectionButtonClicked();
-    void translateValueButtonClicked(int v);
-
-    void scaleSignButtonClicked();
-    void scaleResetButtonClicked();
-    void scaleValueButtonClicked(int v);
-
-    void stretchSignButtonClicked();
-    void stretchDirectionButtonClicked();
-    void stretchValueButtonClicked(int v);
-
-    void rotateSignButtonClicked();
-    void reset0ButtonClicked();
-    void rotateValueButtonClicked(int v);
-
-    void shearSignButtonClicked();
-    void shearDirectionButtonClicked();
-    void shearValueButtonClicked(int v);
-
-    void dp1ButtonClicked();
-    void dn1ButtonClicked();
-
+    void cursorCursorsButtonGroupClicked(int id);
+    void cursorDirectionButtonClicked();
+    void cursorTranslateButtonGroupClicked(int id);
+    void cursorScaleButtonGroupClicked(int id);
+    void cursorStretchButtonGroupClicked(int id);
+    void cursorRotateButtonGroupClicked(int id);
+    void cursorShearButtonGroupClicked(int id);
+    void cursorDepthButtonGroupClicked(int id);
+    void cursorFlipButtonGroupClicked(int id);
+//Shapes
     //Shapes
-    void lineButtonClicked();
-    void pointButtonClicked();
-    void circleButtonClicked();
-    void rectangleButtonClicked();
-    void roundedRectangleButtonClicked();
-    void polygonButtonClicked();
-    void arcButtonClicked();
-    void chordButtonClicked();
-    void pieButtonClicked();
-    void pathButtonClicked();
-    void textButtonClicked();
+    void outlineSizeButtonClicked();
+    void outlineColorButtonClicked();
+    void fillColorButtonClicked();
+    void shapesButtonGroupClicked(int id);
 
     void shapesBackButtonClicked();
+    //EndPath
     void endPathButtonClicked();
-
+    //OutlineSizes
+    void sizeBackButtonClicked();
+    void sizeSignButtonClicked();
+    void sizeButtonGroupClicked(int id);
+//Colors
+    //PaintTools
+    void colorsPaintToolsButtonGroupClicked(int id);
     //Colors
-    void outlineButtonClicked();
-    void fillButtonClicked();
-    void brushButtonClicked();
-    void backgroundButtonClicked();
-
+    void colorsButtonGroupClicked(int id);
     void colorsBackButtonClicked();
-    void peachButtonClicked();
-    void pinkButtonClicked();
-    void redButtonClicked();
-    void orangeButtonClicked();
-    void yellowButtonClicked();
-    void greenButtonClicked();
-    void blueButtonClicked();
-    void purpleButtonClicked();
-    void brownButtonClicked();
-    void blackButtonClicked();
-    void grayButtonClicked();
-    void whiteButtonClicked();
+    void otherBackButtonClicked(int widgetType);
     void customColorButtonClicked();
-
-    void outlinSizesBackButtonClicked();
-    void on1ButtonClicked();
-    void op1ButtonClicked();
-
-    //Brush Effects
-    void paintButtonClicked();
-    void waterColorButtonClicked();
-    void calligraphyButtonClicked();
-    void pencilButtonClicked();
-    void sprayPaintButtonClicked();
-    void dustButtonClicked();
-
-    //Stamps
+//Brush Effects
+    void brushSizeButtonClicked();
+    void brushColorButtonClicked();
+    void brushEffectsButtonGroupClicked(int id);
+ //Stamps
     void goBackButtonClicked();
     void silhouetteButtonClicked();
     void peopleButtonClicked();
@@ -219,15 +169,19 @@ private slots:
     void vehiclesButtonClicked();
     void foodButtonClicked();
 
+    void silhouetteColorButtonClicked();
     void silhouetteStampClicked(const QString stamp_name);
     void standardStampClicked(const QString stamp_name);
 
 private:
+    void resetDrawState();
+    void showPopup(BaseWidget *p);
     void changeButtonProperties(const int &newButtonWidth,const int &newButtonHeight);
-    void changeTranslateValue(int v);
-    void changeStretchValue(double v);
-    void changeShearValue(double v);
+    void changeCursorDirectionValue(double v);
     void changePaintToolColor(QColor color);
+    void changePaintToolSize(int size);
+    void setShapesPrompt(Canvas::ShapeState shapeState);
+    void setColorsPrompt(Canvas::ColorState colorState);
 };
 
 #endif // MAINWINDOW_H

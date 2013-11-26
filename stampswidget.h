@@ -31,6 +31,7 @@ class StampsWidgetSilhouette : public StampsWidget
 public:
     explicit StampsWidgetSilhouette();
     QPushButton *goBack;
+    QPushButton *silhouetteColorButton;
     QPushButton *stampOne;
     QPushButton *stampTwo;
     QPushButton *stampThree;

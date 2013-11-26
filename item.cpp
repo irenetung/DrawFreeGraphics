@@ -2,15 +2,6 @@
 #include <QDebug>
 
 //POINT
-/*PointItem::PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
-{
-    for(int i = 0; i < points.size(); i++) {
-        vertices.append(points[i]);
-    }
-    pen = new QPen(curPen);
-    brush = new QBrush(curBrush);
-}*/
-
 PointItem::PointItem(QPointF &point, QPen &curPen)
 {
     vertex = point;
@@ -19,8 +10,7 @@ PointItem::PointItem(QPointF &point, QPen &curPen)
 
 QRectF PointItem::boundingRect() const
 {
-    //return QRectF(vertices[0].x()-2.5,vertices[0].y()-2.5,5,5);
-    return QRectF(vertex.x()-2.5,vertex.y()-2.5,5,5);
+    return QRectF(vertex.x()-5,vertex.y()-5,10,10);
 }
 
 void PointItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -134,11 +124,11 @@ void PieItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     painter->drawPie(rect,startAngle*16,spanAngle*16);
 }
 
-PathItem::PathItem(QPolygonF &curPolygon,QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
+PathItem::PathItem(QPolygonF &curPolygon,QPen &curPen,QBrush &curBrush)
 {
     polygon = new QPolygonF(curPolygon);
 
-    left = points[0].x();
+    /*left = points[0].x();
     right = points[0].x();
     top = points[0].y();
     bottom = points[0].y();
@@ -156,14 +146,14 @@ PathItem::PathItem(QPolygonF &curPolygon,QList<QPointF> &points,QPen &curPen,QBr
         if(points[i].y() > bottom) {
             bottom = points[i].y();
         }
-    }
+    }*/
     pen = new QPen(curPen);
     brush = new QBrush(curBrush);
 }
 
 QRectF PathItem::boundingRect() const
 {
-    return QRectF(left,top,right-left,bottom-top);
+    return polygon->boundingRect();
 }
 
 void PathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -239,6 +229,9 @@ PaintItem::PaintItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
         }
     }
     pen = new QPen(curPen);
+    pen->setStyle(Qt::SolidLine);
+    pen->setCapStyle(Qt::RoundCap);
+    pen->setJoinStyle(Qt::RoundJoin);
     brush = new QBrush(curBrush);
 }
 
@@ -260,7 +253,7 @@ void PaintItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 }
 
 // WATER COLOR METHOD
-void DrawItem::addWaterColorEffect(int size, float perc)
+/*void DrawItem::addWaterColorEffect(int size, float perc)
 {
     // init
     QList<QPointF> pointList;
@@ -344,6 +337,6 @@ void DrawItem::addWaterColorEffect(int size, float perc)
 
     }
 
-}
+}*/
 
 

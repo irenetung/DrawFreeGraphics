@@ -13,9 +13,13 @@ public:
 class ColorsWidgetPaintTools : public ColorsWidget
 {
 public:
+    //QButtonGroup paintToolsGroup;
     explicit ColorsWidgetPaintTools();
+    QString borderColor;
+
     QPushButton *outlineButton;
     QPushButton *fillButton;
+    QPushButton *silhouetteButton;
     QPushButton *brushButton;
     QPushButton *backgroundButton;
 };
@@ -23,7 +27,8 @@ public:
 class ColorsWidgetColors : public ColorsWidget
 {
 public:
-    explicit ColorsWidgetColors();
+    enum WidgetType{SHAPES,STAMPS,BRUSHEFFECTS,BACKGROUND};
+    explicit ColorsWidgetColors(WidgetType widgetType);
     QPixmap *peachButtonIcon;
     QPixmap *pinkButtonIcon;
     QPixmap *redButtonIcon;
@@ -36,8 +41,11 @@ public:
     QPixmap *blackButtonIcon;
     QPixmap *grayButtonIcon;
     QPixmap *whiteButtonIcon;
+    QPixmap *prevCustomButtonIcon;
 
-    QPushButton *backButton;
+    QPushButton *colorsBackButton;
+    QPushButton *otherBackButton;
+    QPushButton *whiteButton;
     QPushButton *peachButton;
     QPushButton *pinkButton;
     QPushButton *redButton;
@@ -49,17 +57,9 @@ public:
     QPushButton *brownButton;
     QPushButton *blackButton;
     QPushButton *grayButton;
-    QPushButton *whiteButton;
+    QPushButton *prevCustomButton;
     QPushButton *customColorButton;
-};
-
-class ColorsWidgetOutlineSizes : public ColorsWidget
-{
-public:
-    explicit ColorsWidgetOutlineSizes();
-    QPushButton *backButton;
-    QPushButton *on1Button;
-    QPushButton *op1Button;
 
 };
+
 #endif // COLORSWIDGET_H

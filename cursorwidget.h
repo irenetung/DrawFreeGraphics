@@ -19,6 +19,7 @@ public:
     QPushButton *rotateButton;
     QPushButton *depthButton;
     QPushButton *shearButton;
+    QPushButton *flipButton;
     QPushButton *copyButton;
     QPushButton *deleteButton;
 };
@@ -28,7 +29,6 @@ class CursorWidgetTranslate : public CursorWidget
 public:
     explicit CursorWidgetTranslate();
     QPushButton *backButton;
-    QPushButton *signButton;
     QPushButton *directionButton;
     QPushButton *t1Button;
     QPushButton *t5Button;
@@ -36,8 +36,6 @@ public:
     QPushButton *t20Button;
     QPushButton *t50Button;
     QPushButton *t100Button;
-    void toggleSign(bool signPositive);
-    void toggleDirection(bool directionHorizontal);
 };
 
 class CursorWidgetScale : public CursorWidget
@@ -45,16 +43,14 @@ class CursorWidgetScale : public CursorWidget
 public:
     explicit CursorWidgetScale();
     QPushButton *backButton;
-    QPushButton *signButton;
+    QPushButton *directionButton;
     QPushButton *resetButton;
-    QPushButton *s05Button;
     QPushButton *s1Button;
     QPushButton *s5Button;
     QPushButton *s10Button;
     QPushButton *s20Button;
     QPushButton *s50Button;
     QPushButton *s100Button;
-    void toggleSign(bool signPositive);
 };
 
 class CursorWidgetStretch : public CursorWidget
@@ -62,7 +58,6 @@ class CursorWidgetStretch : public CursorWidget
 public:
     explicit CursorWidgetStretch();
     QPushButton *backButton;
-    QPushButton *signButton;
     QPushButton *directionButton;
     QPushButton *st0005Button;
     QPushButton *st001Button;
@@ -71,8 +66,6 @@ public:
     QPushButton *st02Button;
     QPushButton *st05Button;
     QPushButton *st1Button;
-    void toggleSign(bool signPositive);
-    void toggleDirection(bool directionHorizontal);
 };
 
 class CursorWidgetRotate : public CursorWidget
@@ -80,7 +73,7 @@ class CursorWidgetRotate : public CursorWidget
 public:
     explicit CursorWidgetRotate();
     QPushButton *backButton;
-    QPushButton *signButton;
+    QPushButton *directionButton;
     QPushButton *resetButton;
     QPushButton *r01Button;
     QPushButton *r05Button;
@@ -96,8 +89,6 @@ public:
     QPushButton *r120Button;
     QPushButton *r150Button;
     QPushButton *r180Button;
-    QPushButton *r270Button;
-    void toggleSign(bool signPositive);
 };
 
 class CursorWidgetShear : public CursorWidget
@@ -105,7 +96,6 @@ class CursorWidgetShear : public CursorWidget
 public:
     explicit CursorWidgetShear();
     QPushButton *backButton;
-    QPushButton *signButton;
     QPushButton *directionButton;
     QPushButton *sh001Button;
     QPushButton *sh005Button;
@@ -113,8 +103,6 @@ public:
     QPushButton *sh02Button;
     QPushButton *sh05Button;
     QPushButton *sh1Button;
-    void toggleSign(bool signPositive);
-    void toggleDirection(bool directionHorizontal);
 };
 
 class CursorWidgetDepth : public CursorWidget
@@ -124,6 +112,15 @@ public:
     QPushButton *backButton;
     QPushButton *dn1Button;
     QPushButton *dp1Button;
+};
+
+class CursorWidgetFlip : public CursorWidget
+{
+public:
+    explicit CursorWidgetFlip();
+    QPushButton *backButton;
+    QPushButton *fyButton;
+    QPushButton *fxButton;
 };
 
 class CursorWidgetBack : public CursorWidget
