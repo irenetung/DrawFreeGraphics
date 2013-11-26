@@ -1031,21 +1031,21 @@ void MainWindow::cursorCursorsButtonGroupClicked(int id)
 void MainWindow::cursorDirectionButtonClicked()
 {
     switch(canvas->cursorState) {
-        case canvas->TRANSLATE:
+        case Canvas::TRANSLATE:
             switch(canvas->translateDirection) {
-            case canvas->RIGHT:
+            case Canvas::RIGHT:
                 canvas->translateDirection = canvas->LEFT;
                 cursorWidgetTranslate->directionButton->setText("Left");
                 break;
-            case canvas->LEFT:
+            case Canvas::LEFT:
                 canvas->translateDirection = canvas->UP;
                 cursorWidgetTranslate->directionButton->setText("Up");
                 break;
-            case canvas->UP:
+            case Canvas::UP:
                 canvas->translateDirection = canvas->DOWN;
                 cursorWidgetTranslate->directionButton->setText("Down");
                 break;
-            case canvas->DOWN:
+            case Canvas::DOWN:
                 canvas->translateDirection = canvas->RIGHT;
                 cursorWidgetTranslate->directionButton->setText("Right");
                 break;
@@ -1053,13 +1053,13 @@ void MainWindow::cursorDirectionButtonClicked()
                 break;
             }
             break;
-        case canvas->SCALE:
+        case Canvas::SCALE:
             switch(canvas->scaleDirection) {
-                case canvas->RIGHT:
+                case Canvas::RIGHT:
                     canvas->scaleDirection = canvas->LEFT;
                     cursorWidgetScale->directionButton->setText("Decrease");
                     break;
-                case canvas->LEFT:
+                case Canvas::LEFT:
                     canvas->scaleDirection = canvas->RIGHT;
                     cursorWidgetScale->directionButton->setText("Increase");
                     break;
@@ -1067,21 +1067,21 @@ void MainWindow::cursorDirectionButtonClicked()
                     break;
             }
             break;
-        case canvas->STRETCH:
+        case Canvas::STRETCH:
             switch(canvas->stretchDirection) {
-            case canvas->RIGHT:
+            case Canvas::RIGHT:
                 canvas->stretchDirection = canvas->LEFT;
                 cursorWidgetStretch->directionButton->setText("Decrease\nHorizontally");
                 break;
-            case canvas->LEFT:
+            case Canvas::LEFT:
                 canvas->stretchDirection = canvas->UP;
                 cursorWidgetStretch->directionButton->setText("Increase\nVertically");
                 break;
-            case canvas->UP:
+            case Canvas::UP:
                 canvas->stretchDirection = canvas->DOWN;
                 cursorWidgetStretch->directionButton->setText("Decrease\nVertically");
                 break;
-            case canvas->DOWN:
+            case Canvas::DOWN:
                 canvas->stretchDirection = canvas->RIGHT;
                 cursorWidgetStretch->directionButton->setText("Increase\nHorizontally");
                 break;
@@ -1089,13 +1089,13 @@ void MainWindow::cursorDirectionButtonClicked()
                 break;
             }
             break;
-        case canvas->ROTATE:
+        case Canvas::ROTATE:
             switch(canvas->rotateDirection) {
-            case canvas->RIGHT:
+            case Canvas::RIGHT:
                 canvas->rotateDirection = canvas->LEFT;
                 cursorWidgetRotate->directionButton->setText("Counter-\nClockwise");
                 break;
-            case canvas->LEFT:
+            case Canvas::LEFT:
                 canvas->rotateDirection = canvas->RIGHT;
                 cursorWidgetRotate->directionButton->setText("Clockwise");
                 break;
@@ -1103,21 +1103,21 @@ void MainWindow::cursorDirectionButtonClicked()
                 break;
             }
             break;
-        case canvas->SHEAR:
+        case Canvas::SHEAR:
             switch(canvas->shearDirection) {
-            case canvas->RIGHT:
+            case Canvas::RIGHT:
                 canvas->shearDirection = canvas->LEFT;
                 cursorWidgetShear->directionButton->setText("Left");
                 break;
-            case canvas->LEFT:
+            case Canvas::LEFT:
                 canvas->shearDirection = canvas->UP;
                 cursorWidgetShear->directionButton->setText("Up");
                 break;
-            case canvas->UP:
+            case Canvas::UP:
                 canvas->shearDirection = canvas->DOWN;
                 cursorWidgetShear->directionButton->setText("Down");
                 break;
-            case canvas->DOWN:
+            case Canvas::DOWN:
                 canvas->shearDirection = canvas->RIGHT;
                 cursorWidgetShear->directionButton->setText("Right");
                 break;
@@ -1448,12 +1448,12 @@ void MainWindow::sizeBackButtonClicked()
 {
     hideWidgets();
     switch(canvas->colorState) {
-        case canvas->OUTLINESIZE:
+        case Canvas::OUTLINESIZE:
             canvas->drawState = canvas->SHAPE;
             setShapesPrompt(canvas->shapeState);
             showPopup(shapesWidgetShapes);
             break;
-        case canvas->BRUSHSIZE:
+        case Canvas::BRUSHSIZE:
             canvas->drawState = canvas->BRUSHEFFECTS;
             prompt->promptLabel->setText(tr("Click a point on the canvas to start drawing and click a second point on the canvas to stop drawing and render the brush stroke. Or select a brush effect."));
             showPopup(brushEffectsWidgetBrushEffects);
@@ -1467,7 +1467,7 @@ void MainWindow::sizeBackButtonClicked()
 void MainWindow::sizeSignButtonClicked()
 {
     switch(canvas->colorState) {
-        case canvas->OUTLINESIZE:
+        case Canvas::OUTLINESIZE:
             if(canvas->outlineSignPositive) {
                 canvas->outlineSignPositive = false;
                 shapesWidgetOutlineSizes->signButton->setText("-");
@@ -1476,7 +1476,7 @@ void MainWindow::sizeSignButtonClicked()
                 shapesWidgetOutlineSizes->signButton->setText("+");
             }
             break;
-        case canvas->BRUSHSIZE:
+        case Canvas::BRUSHSIZE:
             if(canvas->brushSignPositive) {
                 canvas->brushSignPositive = false;
                 brushEffectsWidgetBrushSizes->signButton->setText("-");
@@ -1628,19 +1628,19 @@ void MainWindow::customColorButtonClicked()
     colorsWidgetColorsBackground->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsBackground->prevCustomButtonIcon));
 
     switch (canvas->colorState) {
-        case canvas->OUTLINE:
+        case Canvas::OUTLINE:
             colorsWidgetColorsOutline->buttonGroup->button(12)->setChecked(true);
             break;
-        case canvas->FILL:
+        case Canvas::FILL:
             colorsWidgetColorsFill->buttonGroup->button(12)->setChecked(true);
             break;
-        case canvas->SILHOUETTESTAMP:
+        case Canvas::SILHOUETTESTAMP:
             colorsWidgetColorsSilhouette->buttonGroup->button(12)->setChecked(true);
             break;
-        case canvas->BRUSH:
+        case Canvas::BRUSH:
             colorsWidgetColorsBrush->buttonGroup->button(12)->setChecked(true);
             break;
-        case canvas->BACKGROUND:
+        case Canvas::BACKGROUND:
             colorsWidgetColorsBackground->buttonGroup->button(12)->setChecked(true);
             break;
         default:
@@ -1873,26 +1873,26 @@ void MainWindow::changeButtonProperties(const int &newButtonWidth,const int &new
 void MainWindow::changePaintToolColor(QColor color)
 {
     switch (canvas->colorState) {
-        case canvas->OUTLINE:
+        case Canvas::OUTLINE:
             canvas->shapesPen->setColor(color);
             //canvas->setPenColor(color);
             colorsWidgetPaintTools->outlineButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
-        case canvas->FILL:
+        case Canvas::FILL:
             canvas->shapesBrush->setColor(color);
             //canvas->setBrushColor(color);
             colorsWidgetPaintTools->fillButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
-        case canvas->SILHOUETTESTAMP:
+        case Canvas::SILHOUETTESTAMP:
             canvas->silhouetteColor = color;
             colorsWidgetPaintTools->silhouetteButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
-        case canvas->BRUSH:
+        case Canvas::BRUSH:
             canvas->brushPen->setColor(color);
             canvas->brushBrush->setColor(color);
             colorsWidgetPaintTools->brushButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
-        case canvas->BACKGROUND:
+        case Canvas::BACKGROUND:
             colorsWidgetPaintTools->backgroundButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             canvas->setBackgroundBrush(color);
             break;
@@ -1904,7 +1904,7 @@ void MainWindow::changePaintToolColor(QColor color)
 void MainWindow::changePaintToolSize(int size)
 {
     switch (canvas->colorState) {
-        case canvas->OUTLINESIZE:
+        case Canvas::OUTLINESIZE:
             if(canvas->outlineSignPositive) {
                 canvas->shapesPen->setWidth(canvas->shapesPen->width()+size);
             } else {
@@ -1914,7 +1914,7 @@ void MainWindow::changePaintToolSize(int size)
             }
             prompt->promptLabel->setText(shapesWidgetOutlineSizes->currentSize.arg(canvas->shapesPen->width()));
             break;
-        case canvas->BRUSHSIZE:
+        case Canvas::BRUSHSIZE:
             if(canvas->brushSignPositive) {
                 canvas->brushPen->setWidth(canvas->brushPen->width()+size);
                 //WHAT TO DO WITH BRUSH
@@ -1934,37 +1934,37 @@ void MainWindow::changePaintToolSize(int size)
 void MainWindow::setShapesPrompt(Canvas::ShapeState shapeState)
 {
     switch(shapeState) {
-        case canvas->LINE:
+        case Canvas::LINE:
             prompt->promptLabel->setText(tr("Click two points on the canvas to render a line: 1)First endpoint 2)Second endpoint. Or select a shape."));
             break;
-        case canvas->POINT:
+        case Canvas::POINT:
             prompt->promptLabel->setText(tr("Click one point on the canvas to render a point. Or select a shape."));
             break;
-        case canvas->CIRCLE:
+        case Canvas::CIRCLE:
             prompt->promptLabel->setText(tr("Click two points on the canvas to render a circle: 1)Top left corner 2)Bottom right corner. Or select a shape."));
             break;
-        case canvas->RECT:
+        case Canvas::RECT:
             prompt->promptLabel->setText(tr("Click two points on the canvas to render a rectangle: 1)Top left corner 2)Bottom right corner. Or select a shape."));
             break;
-        case canvas->ROUNDRECT:
+        case Canvas::ROUNDRECT:
             prompt->promptLabel->setText(tr("Click two points on the canvas to render a rounded rectangle: 1)Top left corner 2)Bottom right corner. Or select a shape."));
             break;
-        case canvas->POLYGON:
+        case Canvas::POLYGON:
             prompt->promptLabel->setText(tr("Click points on the canvas to be included in your polygon path and click the 'end path' button to render the polygon. Or go back to shapes."));
             break;
-        case canvas->ARC:
+        case Canvas::ARC:
             prompt->promptLabel->setText(tr("Click two points on the canvas to render an arc: 1)Top left corner 2)Bottom right corner. Or select a shape."));
             break;
-        case canvas->CHORD:
+        case Canvas::CHORD:
             prompt->promptLabel->setText(tr("Click two points on the canvas to render a chord: 1)Top left corner 2)Bottom right corner. Or select a shape."));
             break;
-        case canvas->PIE:
+        case Canvas::PIE:
              prompt->promptLabel->setText(tr("Click two points on the canvas to render a pie segment: 1)Top left corner 2)Bottom right corner. Or select a shape."));
             break;
-        case canvas->PATH:
+        case Canvas::PATH:
              prompt->promptLabel->setText(tr("Click points on the canvas to be included in your polyline path and click the 'end path' button to render the polyline. Or go back to shapes."));
             break;
-        case canvas->TEXTTYPE:
+        case Canvas::TEXTTYPE:
             break;
         default:
             break;
@@ -1974,19 +1974,19 @@ void MainWindow::setShapesPrompt(Canvas::ShapeState shapeState)
 void MainWindow::setColorsPrompt(Canvas::ColorState colorState)
 {
     switch (canvas->colorState) {
-        case canvas->OUTLINE:
+        case Canvas::OUTLINE:
             prompt->promptLabel->setText("Set the outline color. Or click a shape on the canvas to change its outline color.");
             break;
-        case canvas->FILL:
+        case Canvas::FILL:
             prompt->promptLabel->setText("Set the fill color. Or click a shape on the canvas to change its fill color.");
             break;
-        case canvas->SILHOUETTESTAMP:
+        case Canvas::SILHOUETTESTAMP:
             prompt->promptLabel->setText("Set the silhouette stamp color. Or click a silhouette stamp on the canvas to change its color.");
             break;
-        case canvas->BRUSH:
+        case Canvas::BRUSH:
             prompt->promptLabel->setText("Set the brush effect color. Or click a brush stroke on the canvas to change its color.");
             break;
-        case canvas->BACKGROUND:
+        case Canvas::BACKGROUND:
             prompt->promptLabel->setText("Set the background color.");
             break;
         default:
