@@ -7,21 +7,29 @@ ColorsWidget::ColorsWidget()
     parea = new QPixmap(w,h);
     parea->fill(QColor(204,255,153));
     this->setStyleSheet("QPushButton{background-color:#E5FFCC; border-color:#66CC00; border-style:solid; border-width:3px; border-radius:3px;}"
+                        "QLabel{background-color:#E5FFCC; border-color:#66CC00;}"
                         "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
                         "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
 }
 
 ColorsWidgetPaintTools::ColorsWidgetPaintTools()
 {
-    outlineButton = new QPushButton("outline");
+    borderColor = "QPushButton {border-color: %1;}";
+
+    outlineButton = new QPushButton(tr("Outline"));
+    outlineButton->setStyleSheet(borderColor.arg(QColor(0,0,0).name()));
     setButtonProperties(outlineButton);
-    fillButton = new QPushButton("fill");
+    fillButton = new QPushButton(tr("Fill"));
+    fillButton->setStyleSheet(borderColor.arg(QColor(255,255,255).name()));
     setButtonProperties(fillButton);
-    silhouetteButton = new QPushButton("silhouette");
+    silhouetteButton = new QPushButton(tr("Silhouette"));
+    silhouetteButton->setStyleSheet(borderColor.arg(QColor(0,0,0).name()));
     setButtonProperties(silhouetteButton);
-    brushButton = new QPushButton("brush");
+    brushButton = new QPushButton(tr("Brush"));
+    brushButton->setStyleSheet(borderColor.arg(QColor(0,0,0).name()));
     setButtonProperties(brushButton);
-    backgroundButton = new QPushButton("back\nground");
+    backgroundButton = new QPushButton(tr("Background"));
+    backgroundButton->setStyleSheet(borderColor.arg(QColor(255,255,255).name()));
     setButtonProperties(backgroundButton);
 
     hLayout->addItem(horizSpacer);
@@ -61,25 +69,27 @@ ColorsWidgetColors::ColorsWidgetColors(ColorsWidgetColors::WidgetType widgetType
     grayButtonIcon->fill(QColor(192,192,192));
     whiteButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     whiteButtonIcon->fill(QColor(255,255,255));
+    prevCustomButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
+    prevCustomButtonIcon->fill(QColor(255,255,255));
 
     colorsBackButton = new QPushButton(tr("< paint\ntools"));
-    colorsBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+    colorsBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
     setButtonProperties(colorsBackButton);
 
     switch(widgetType) {
         case SHAPES:
             otherBackButton = new QPushButton(tr("< shapes"));
-            otherBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+            otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
             setButtonProperties(otherBackButton);
             break;
         case STAMPS:
             otherBackButton = new QPushButton(tr("< silhouette\nstamps"));
-            otherBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+            otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
             setButtonProperties(otherBackButton);
             break;
         case BRUSHEFFECTS:
             otherBackButton = new QPushButton(tr("< brush\neffects"));
-            otherBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+            otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
             setButtonProperties(otherBackButton);
             break;
         default:
@@ -110,9 +120,9 @@ ColorsWidgetColors::ColorsWidgetColors(ColorsWidgetColors::WidgetType widgetType
     setButtonProperties(blackButton);
     grayButton = new QPushButton(QIcon(*grayButtonIcon), tr(""));
     setButtonProperties(grayButton);
-    prevCustomButton = new QPushButton("previous\ncustom\ncolor");
+    prevCustomButton = new QPushButton(QIcon(*prevCustomButtonIcon), tr(""));
     setButtonProperties(prevCustomButton);
-    customColorButton = new QPushButton("custom\ncolor");
+    customColorButton = new QPushButton("Custom\nColor");
     setButtonProperties(customColorButton);
 
     hLayout->addItem(horizSpacer);

@@ -15,6 +15,8 @@ class ColorsWidgetPaintTools : public ColorsWidget
 public:
     //QButtonGroup paintToolsGroup;
     explicit ColorsWidgetPaintTools();
+    QString borderColor;
+
     QPushButton *outlineButton;
     QPushButton *fillButton;
     QPushButton *silhouetteButton;
@@ -39,6 +41,7 @@ public:
     QPixmap *blackButtonIcon;
     QPixmap *grayButtonIcon;
     QPixmap *whiteButtonIcon;
+    QPixmap *prevCustomButtonIcon;
 
     QPushButton *colorsBackButton;
     QPushButton *otherBackButton;

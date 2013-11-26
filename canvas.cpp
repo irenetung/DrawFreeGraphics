@@ -49,6 +49,8 @@ Canvas::Canvas(QUndoStack* undoStack_)
     shearVerticalValue = 0;
 
     depthPositive = true;
+//Colors
+    prevCustomColor = QColor(255,255,255);
 //Stamps
     currentStampPath = "";
 }
@@ -103,7 +105,6 @@ void Canvas::setCurrentStamp(QString item)
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
-    item->setScale(0.5);
     undoStack->push(new CommandItem(item, scene));
     update();
     mousePressCount = 0;
@@ -272,13 +273,25 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                         selectedItem->setRotation(selectedItem->rotation()-rotateAngle);
                     }
                     break;
-                case DEPTH:
+                case DEPTH: {
+                    QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
+                    qreal maxZValue = 0;
+                    qreal minZValue = 0;
+                    foreach(QGraphicsItem *item, overlapItems) {
+                        if(item->zValue() >= maxZValue) {
+                            maxZValue = item->zValue()+0.1;
+                        } else {
+                            minZValue = item->zValue()-0.1;
+                        }
+                    }
+
                     if(depthPositive == true) {
-                        selectedItem->setZValue(selectedItem->zValue()+1);
+                        selectedItem->setZValue(maxZValue);
                     } else {
-                        selectedItem->setZValue(selectedItem->zValue()-1);
+                        selectedItem->setZValue(minZValue);
                     }
                     break;
+                    }
                 case OUTLINESIZE:
                     break;
                 case BRUSHSIZE:
@@ -291,8 +304,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             QGraphicsPixmapItem *selectedPixmapItem = qgraphicsitem_cast<QGraphicsPixmapItem *>(selectedItem);
                             QGraphicsPixmapItem *pixmapItem = new QGraphicsPixmapItem(selectedPixmapItem->pixmap());
                             drawPixmapItem(pixmapItem);
-                            pixmapItem->setPos(selectedPixmapItem->pos().x()+10,selectedPixmapItem->pos().y()+10);
-
+                            copyTransforms(pixmapItem,selectedPixmapItem);
                             break;
                             }
                         case 6: {
@@ -301,7 +313,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             QGraphicsLineItem *lineItem = new QGraphicsLineItem(selectedLineItem->line());
                             lineItem->setPen(selectedLineItem->pen());
                             drawItem(lineItem);
-                            lineItem->setPos(selectedLineItem->pos().x()+10,selectedLineItem->pos().y()+10);
+                            copyTransforms(lineItem,selectedLineItem);
                             break;
                             }
                         case PointItemType: {
@@ -309,7 +321,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             PointItem *selectedPointItem = qgraphicsitem_cast<PointItem *>(selectedItem);
                             PointItem *pointItem = new PointItem(selectedPointItem->vertex,*(selectedPointItem->pen));
                             drawItem(pointItem);
-                            pointItem->setPos(selectedPointItem->pos().x()+10,selectedPointItem->pos().y()+10);
+                            copyTransforms(pointItem,selectedPointItem);
                             break;
                             }
                         case 4:{
@@ -319,9 +331,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             ellipseItem->setPen(selectedEllipseItem->pen());
                             ellipseItem->setBrush(selectedEllipseItem->brush());
                             drawItem(ellipseItem);
-                            ellipseItem->setPos(selectedEllipseItem->pos().x()+10,selectedEllipseItem->pos().y()+10);
-                            ellipseItem->setRotation(selectedEllipseItem->rotation());
-                            ellipseItem->setScale(selectedEllipseItem->scale());
+                            copyTransforms(ellipseItem,selectedEllipseItem);
                             break;
                             }
                         case 3: {
@@ -331,7 +341,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             rectItem->setPen(selectedRectItem->pen());
                             rectItem->setBrush(selectedRectItem->brush());
                             drawItem(rectItem);
-                            rectItem->setPos(selectedRectItem->pos().x()+10,selectedRectItem->pos().y()+10);
+                            copyTransforms(rectItem,selectedRectItem);
                             break;
                             }
                         case 5:{
@@ -341,7 +351,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             polygonItem->setPen(selectedPolygonItem->pen());
                             polygonItem->setBrush(selectedPolygonItem->brush());
                             drawItem(polygonItem);
-                            polygonItem->setPos(selectedPolygonItem->pos().x()+10,selectedPolygonItem->pos().y()+10);
+                            copyTransforms(polygonItem,selectedPolygonItem);
                             break;
                             }
                         case RoundRectangleItemType: {
@@ -349,7 +359,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             RoundRectangleItem *selectedRoundRectItem = qgraphicsitem_cast<RoundRectangleItem *>(selectedItem);
                             RoundRectangleItem *roundRectItem = new RoundRectangleItem(selectedRoundRectItem->vertices,*(selectedRoundRectItem->pen),*(selectedRoundRectItem->brush));
                             drawItem(roundRectItem);
-                            roundRectItem->setPos(selectedRoundRectItem->pos().x()+10,selectedRoundRectItem->pos().y()+10);
+                            copyTransforms(roundRectItem,selectedRoundRectItem);
                             break;
                             }
                         case ArcItemType:{
@@ -357,7 +367,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             ArcItem *selectedArcItem = qgraphicsitem_cast<ArcItem *>(selectedItem);
                             ArcItem *arcItem = new ArcItem(selectedArcItem->vertices,*(selectedArcItem->pen),*(selectedArcItem->brush));
                             drawItem(arcItem);
-                            arcItem->setPos(selectedArcItem->pos().x()+10,selectedArcItem->pos().y()+10);
+                            copyTransforms(arcItem,selectedArcItem);
                             break;
                             }
                         case ChordItemType:{
@@ -365,7 +375,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             ChordItem *selectedChordItem = qgraphicsitem_cast<ChordItem *>(selectedItem);
                             ChordItem *chordItem = new ChordItem(selectedChordItem->vertices,*(selectedChordItem->pen),*(selectedChordItem->brush));
                             drawItem(chordItem);
-                            chordItem->setPos(selectedChordItem->pos().x()+10,selectedChordItem->pos().y()+10);
+                            copyTransforms(chordItem,selectedChordItem);
                             break;
                             }
                         case PieItemType:{
@@ -373,7 +383,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             PieItem *selectedPieItem = qgraphicsitem_cast<PieItem *>(selectedItem);
                             PieItem *pieItem = new PieItem(selectedPieItem->vertices,*(selectedPieItem->pen),*(selectedPieItem->brush));
                             drawItem(pieItem);
-                            pieItem->setPos(selectedPieItem->pos().x()+10,selectedPieItem->pos().y()+10);
+                            copyTransforms(pieItem,selectedPieItem);
                             break;
                             }
                         case PathItemType:{
@@ -381,7 +391,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             PathItem *selectedPathItem = qgraphicsitem_cast<PathItem *>(selectedItem);
                             PathItem *pathItem = new PathItem(*(selectedPathItem->polygon),*(selectedPathItem->pen),*(selectedPathItem->brush));
                             drawItem(pathItem);
-                            pathItem->setPos(selectedPathItem->pos().x()+10,selectedPathItem->pos().y()+10);
+                            copyTransforms(pathItem,selectedPathItem);
                             break;
                             }
                         default:
@@ -480,7 +490,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             }
             case 4: {
                 //CIRCLE
-                qDebug() << "circle";
                 QGraphicsEllipseItem *selectedEllipseItem = qgraphicsitem_cast<QGraphicsEllipseItem *>(selectedItem);
                 switch(colorState) {
                 case OUTLINE:
@@ -680,6 +689,14 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             qDebug() << "EXCEPTION: draw stamp occurred without stamp state being set";
         }
     }
+}
+
+void Canvas::copyTransforms(QGraphicsItem *copyItem, QGraphicsItem *selectedItem)
+{
+    copyItem->setPos(selectedItem->pos().x()+10,selectedItem->pos().y()+10);
+    copyItem->setRotation(selectedItem->rotation());
+    copyItem->setScale(selectedItem->scale());
+    copyItem->setTransform(selectedItem->transform());
 }
 
 /*void Canvas::drawForeground(QPainter *painter, const QRectF &rect)

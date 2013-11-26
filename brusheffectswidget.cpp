@@ -6,7 +6,9 @@ BrushEffectsWidget::BrushEffectsWidget()
     int w = this->size().width();
     parea = new QPixmap(w,h);
     parea->fill(QColor(184,184,233));
-    this->setStyleSheet("QPushButton{background-color:#CCCCFF; border-color:#6666FF; border-style:solid; border-width:3px; border-radius:3px;} QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}");
+    this->setStyleSheet("QPushButton{background-color:#CCCCFF; border-color:#6666FF; border-style:solid; border-width:3px; border-radius:3px;}"
+                        "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
+                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
 }
 
 BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)

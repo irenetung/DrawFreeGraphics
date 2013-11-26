@@ -6,7 +6,9 @@ ShapesWidget::ShapesWidget()
     int w = this->size().width();
     parea = new QPixmap(w,h);
     parea->fill(QColor(153,255,153));
-    this->setStyleSheet("QPushButton{background-color:#CCFFCC; border-color:#00CC66; border-style:solid; border-width:3px; border-radius:3px;} QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}");
+    this->setStyleSheet("QPushButton{background-color:#CCFFCC; border-color:#00CC66; border-style:solid; border-width:3px; border-radius:3px;}"
+                        "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
+                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
 }
 
 ShapesWidgetShapes::ShapesWidgetShapes()

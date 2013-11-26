@@ -70,6 +70,7 @@ public:
 
     void resetTranslateStretchShear();
     //Colors
+    QColor prevCustomColor;
     void setPenColor(QColor color);
     void setBrushColor(QColor color);
     QColor silhouetteColor;
@@ -92,6 +93,7 @@ protected:
     void mousePressEvent(QMouseEvent *e);
     //void drawForeground(QPainter *painter, const QRectF &rect);
 private:
+    void copyTransforms(QGraphicsItem *copyItem,QGraphicsItem *selectedItem);
 
 };
 

@@ -7,7 +7,9 @@ StampsWidget::StampsWidget()
     int w = this->size().width();
     parea = new QPixmap(w,h);
     parea->fill(QColor(153,204,255));
-    this->setStyleSheet("QPushButton{background-color:#CCE5FF; border-color:#0080FF; border-style:solid; border-width:3px; border-radius:3px;} QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}");
+    this->setStyleSheet("QPushButton{background-color:#CCE5FF; border-color:#0080FF; border-style:solid; border-width:3px; border-radius:3px;}"
+                        "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
+                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
 }
 
 // STAMPS WIDGET CATEGORIES

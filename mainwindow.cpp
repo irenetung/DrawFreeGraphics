@@ -779,9 +779,10 @@ void MainWindow::toolButtonGroupClicked(int id)
 void MainWindow::newButtonClicked()
 {
     resetDrawState();
-    MainWindow *newApplication;
+    /*MainWindow *newApplication;
     newApplication = new MainWindow();
-    newApplication -> show();
+    newApplication -> show();*/
+    canvas->scene->clear();
 }
 
 void MainWindow::openButtonClicked()
@@ -889,49 +890,49 @@ void MainWindow::cursorCursorsButtonGroupClicked(int id)
         case 0:
             //Translate
             canvas->cursorState = canvas->TRANSLATE;
-            prompt->promptLabel->setText("Select a translation value. Then click an item on the canvas to apply the translation.");
+            prompt->promptLabel->setText("Select a translation value. Then click an item on the canvas to apply the translation. Toggle the direction button to change the translation direction.");
             showPopup(cursorWidgetTranslate);
             break;
         case 1:
             //Scale
             canvas->cursorState = canvas->SCALE;
-            prompt->promptLabel->setText("Select a scale factor. Then click an item on the canvas to apply the scaling.");
+            prompt->promptLabel->setText("Select a scale factor. Then click an item on the canvas to apply the scaling. Toggle the direction button to change the scaling direction.");
             showPopup(cursorWidgetScale);
             break;
         case 2:
             //Stretch
             canvas->cursorState = canvas->STRETCH;
-            prompt->promptLabel->setText("Select a stretch value. Then click an item on the canvas to apply the stretch.");
+            prompt->promptLabel->setText("Select a stretch value. Then click an item on the canvas to apply the stretch. Toggle the direction button to change the stretch direction.");
             showPopup(cursorWidgetStretch);
             break;
         case 3:
             //Rotate
             canvas->cursorState = canvas->ROTATE;
-            prompt->promptLabel->setText("Select a rotation angle. Then click an item on the canvas to apply the rotation.");
+            prompt->promptLabel->setText("Select a rotation angle. Then click an item on the canvas to apply the rotation. Toggle the direction button to change the rotation direction.");
             showPopup(cursorWidgetRotate);
             break;
         case 4:
             //Shear
             canvas->cursorState = canvas->SHEAR;
-            prompt->promptLabel->setText("Select a shear angle. Then click an item on the canvas to apply the shear.");
+            prompt->promptLabel->setText("Select a shear angle. Then click an item on the canvas to apply the shear. Toggle the direction button to change the shear direction.");
             showPopup(cursorWidgetShear);
             break;
         case 5:
             //Depth
             canvas->cursorState = canvas->DEPTH;
-            prompt->promptLabel->setText("Select a depth value. Then click an item on the canvas to apply the depth change.");
+            prompt->promptLabel->setText("Select a depth change. Then click an item on the canvas to apply the depth change.");
             showPopup(cursorWidgetDepth);
             break;
         case 6:
             //Copy
             canvas->cursorState = canvas->COPY;
-            prompt->promptLabel->setText("Click an item on the canvas to copy");
+            prompt->promptLabel->setText("Click an item on the canvas to copy.");
             showPopup(cursorWidgetBack);
             break;
         case 7:
             //Delete
             canvas->cursorState = canvas->DELETEITEM;
-            prompt->promptLabel->setText("Click an item on the canvas to delete");
+            prompt->promptLabel->setText("Click an item on the canvas to delete.");
             showPopup(cursorWidgetBack);
             break;
         default:
@@ -1398,6 +1399,8 @@ void MainWindow::colorsButtonGroupClicked(int id)
             break;
         case 12:
             //PREV CUSTOM
+            changePaintToolColor(canvas->prevCustomColor);
+
             break;
         default:
             break;
@@ -1443,6 +1446,17 @@ void MainWindow::customColorButtonClicked()
     QColorDialog colorDialog;
     QColor color = colorDialog.getColor(Qt::white,this);
     changePaintToolColor(color);
+    canvas->prevCustomColor = color;
+    colorsWidgetColorsOutline->prevCustomButtonIcon->fill(canvas->prevCustomColor);
+    colorsWidgetColorsOutline->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsOutline->prevCustomButtonIcon));
+    colorsWidgetColorsFill->prevCustomButtonIcon->fill(canvas->prevCustomColor);
+    colorsWidgetColorsFill->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsFill->prevCustomButtonIcon));
+    colorsWidgetColorsSilhouette->prevCustomButtonIcon->fill(canvas->prevCustomColor);
+    colorsWidgetColorsSilhouette->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsSilhouette->prevCustomButtonIcon));
+    colorsWidgetColorsBrush->prevCustomButtonIcon->fill(canvas->prevCustomColor);
+    colorsWidgetColorsBrush->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsBrush->prevCustomButtonIcon));
+    colorsWidgetColorsBackground->prevCustomButtonIcon->fill(canvas->prevCustomColor);
+    colorsWidgetColorsBackground->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsBackground->prevCustomButtonIcon));
 }
 
 void MainWindow::brushSizeButtonClicked()
@@ -1652,7 +1666,6 @@ void MainWindow::changeButtonProperties(const int &newButtonWidth,const int &new
     closeButton->setIcon(QIcon(":/Icons/Icons/close.png"));
     showHidePopupButton->setIcon(QIcon(":/Icons/Icons/hidePopup.png"));
 
-    qDebug() << newButtonWidth;
     int size = popUps.size();
     for(int i = 0; i < size; ++i) {
         popUps[i]->changeButtonProperties(newButtonWidth, newButtonHeight);
@@ -1665,16 +1678,21 @@ void MainWindow::changePaintToolColor(QColor color)
     switch (canvas->colorState) {
         case canvas->OUTLINE:
             canvas->setPenColor(color);
+            colorsWidgetPaintTools->outlineButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->FILL:
             canvas->setBrushColor(color);
+            colorsWidgetPaintTools->fillButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->SILHOUETTESTAMP:
             canvas->silhouetteColor = color;
+            colorsWidgetPaintTools->silhouetteButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->BRUSH:
+            colorsWidgetPaintTools->brushButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->BACKGROUND:
+            colorsWidgetPaintTools->backgroundButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             canvas->setBackgroundBrush(color);
             break;
         default:
