@@ -204,6 +204,7 @@ QRectF DrawItem::boundingRect() const
     return QRectF(left,top,right-left,bottom-top);
 }
 
+
 void DrawItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setBrush(*brush);
@@ -228,8 +229,8 @@ void DrawItem::addWaterColorEffect(int size, float perc)
     for (int i = 0; i < numCenters; i++)
     {
         // generate random rows/columns to be included
-        int rows[numRowsCols];
-        int cols[numRowsCols];
+        int *rows=new int[numRowsCols];
+        int *cols=new int[numRowsCols];
         for (int r = 0; r < numRowsCols; r++)
         {
             rows[r] = rand() % size;
@@ -297,8 +298,155 @@ void DrawItem::addWaterColorEffect(int size, float perc)
                 }
             }
         }
-
+       delete rows;
+       delete cols;
 
     }
 
+}
+
+// Caligraphy Metdo
+void DrawItem::caligraphy(int skew)
+{
+    QPainter *p;
+    p->setBrush(*brush);
+    p->setPen(Qt::red);
+    int size = vertices.size();
+     for(int i = 1; i < size; i++) {
+            QPointF xy1=vertices.at(i-1);
+            QPointF xy2=vertices.at(i);
+            //p->drawLine(xy1.x()-skew,xy1.y()-skew,xy1.x()+skew,xy1.y()+skew);
+            p->drawLine(xy1.x()-skew,xy1.y()-skew,xy1.x()+skew,xy1.y()+skew);// by narrowing the skew it becomes less caligraphy more pen
+            int counter;
+            counter=10;
+            int begin1;
+            begin1=xy1.x()-5;
+            int end1;
+            end1=xy2.x()-5;
+            int begin2;
+            begin2=xy1.y()-5;
+            int end2;
+            end2=xy2.y()-5;
+            while(counter>=0)
+            {
+                p->drawLine(begin1,begin2,end1,end2);
+                begin1++;
+                end1++;
+                begin2++;
+                end2++;
+                counter--;
+            }
+        }
+}
+
+//spray method
+void DrawItem::spray()
+{
+    QPainter *p;
+    p->setBrush(*brush);
+    p->setPen(Qt::red);
+    int size = vertices.size();
+     for(int i = 1; i < size; i++)
+     {
+            QPointF xy1=vertices.at(i-1);
+            int gx=xy1.x();
+            int gy=xy1.y();
+                    int randVal;
+                    int counter;
+                     randVal=rand()+1;
+                     counter=0;
+                     while(counter!=100)
+                     {
+                        // int random=rand();
+                       if(randVal%2==0)
+                         {
+                           p->drawPoint(gx,gy);
+                           p->drawPoint(gx-2,gy-9);
+                           p->drawPoint(gx-5,gy-7);
+                           p->drawPoint(gx-9,gy-2);
+                           p->drawPoint(gx-7,gy-2);
+                           p->drawPoint(gx-2,gy-5);
+                           p->drawPoint(gx+2,gy+9);
+                           p->drawPoint(gx+5,gy+7);
+                           p->drawPoint(gx+9,gy+2);
+                           p->drawPoint(gx+7,gy+2);
+                           p->drawPoint(gx+2,gy+5);
+                           p->drawPoint(gx-2,gy+9);
+                           p->drawPoint(gx-5,gy+7);
+                           p->drawPoint(gx-9,gy+2);
+                           p->drawPoint(gx-7,gy+2);
+                           p->drawPoint(gx-2,gy+5);
+                           p->drawPoint(gx+2,gy-9);
+                           p->drawPoint(gx+5,gy-7);
+                           p->drawPoint(gx+9,gy-2);
+                           p->drawPoint(gx+7,gy-2);
+                           p->drawPoint(gx+2,gy-5);
+                           p->drawPoint(gx+7,gy+7);
+                           p->drawPoint(gx-7,gy-7);
+                           p.drawPoint(gx+7,gy-7);
+                           p.drawPoint(gx-7,gy+7);
+                           p.drawPoint(gx+4,gy+4);
+                           p.drawPoint(gx-4,gy-4);
+                           p.drawPoint(gx+4,gy-4);
+                           p.drawPoint(gx-4,gy+4);
+                           p.drawPoint(gx+2,gy);
+                           p.drawPoint(gx+5,gy);
+                           p.drawPoint(gx+9,gy);
+                           p.drawPoint(gx,gy+2);
+                           p.drawPoint(gx,gy+5);
+                           p.drawPoint(gx,gy+9);
+                           p.drawPoint(gx-2,gy);
+                           p.drawPoint(gx-5,gy);
+                           p.drawPoint(gx-9,gy);
+                           p.drawPoint(gx,gy-2);
+                           p.drawPoint(gx,gy-5);
+                           p.drawPoint(gx,gy-9);
+                          }
+                         else if(randVal%2==1)
+                           {
+                           p.drawPoint(gx,gy);
+                           p.drawPoint(gx-1,gy-2);
+                           p.drawPoint(gx-3,gy-8);
+                           p.drawPoint(gx-6,gy-6);
+                           p.drawPoint(gx-8,gy-3);
+                           p.drawPoint(gx-2,gy-1);
+                           p.drawPoint(gx+1,gy+2);
+                           p.drawPoint(gx+3,gy+8);
+                           p.drawPoint(gx+6,gy+6);
+                           p.drawPoint(gx+8,gy+3);
+                           p.drawPoint(gx+2,gy+1);
+                           p.drawPoint(gx-1,gy+2);
+                           p.drawPoint(gx-3,gy+8);
+                           p.drawPoint(gx-6,gy+6);
+                           p.drawPoint(gx-8,gy+3);
+                           p.drawPoint(gx-2,gy+1);
+                           p.drawPoint(gx+1,gy-2);
+                           p.drawPoint(gx+3,gy-8);
+                           p.drawPoint(gx+6,gy-6);
+                           p.drawPoint(gx+8,gy-3);
+                           p.drawPoint(gx+2,gy-1);
+                           p.drawPoint(gx+7,gy+7);
+                           p.drawPoint(gx-7,gy-7);
+                           p.drawPoint(gx+7,gy-7);
+                           p.drawPoint(gx-7,gy+7);
+                           p.drawPoint(gx+4,gy+4);
+                           p.drawPoint(gx-4,gy-4);
+                           p.drawPoint(gx+4,gy-4);
+                           p.drawPoint(gx-4,gy+4);
+                           p.drawPoint(gx+2,gy);
+                           p.drawPoint(gx+5,gy);
+                           p.drawPoint(gx+9,gy);
+                           p.drawPoint(gx,gy+2);
+                           p.drawPoint(gx,gy+5);
+                           p.drawPoint(gx,gy+9);
+                           p.drawPoint(gx-2,gy);
+                           p.drawPoint(gx-5,gy);
+                           p.drawPoint(gx-9,gy);
+                           p.drawPoint(gx,gy-2);
+                           p.drawPoint(gx,gy-5);
+                           p.drawPoint(gx,gy-9);
+                           }
+                         counter++;
+                     }
+     }
 }

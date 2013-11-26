@@ -152,6 +152,11 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             drawItem(draw);
             mousePressCount = 0;
         }
+        if(mousePressCount == 3){
+            DrawItem *draw=new DrawItem(points,*pen,*brush);
+            draw->caligraphy(5);
+            mousePressCount=0;
+        }
     }
     if(drawState == CURSOR) {
         if(selectedItem != NULL) {

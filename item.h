@@ -110,7 +110,8 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
 
     void addWaterColorEffect(int size, float perc);
-
+    void caligraphy(int skew);
+    void spray();
 protected:
     QList<QPointF> vertices;
     QPen *pen;
