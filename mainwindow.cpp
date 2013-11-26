@@ -808,7 +808,7 @@ void MainWindow::openButtonClicked()
 {
     resetDrawState();
     QString s = QFileDialog::getOpenFileName(
-                    0,
+                    this,
                     "Open File",
                     "/home",
                     "Images (*.png *.xpm *.jpg)");
@@ -819,7 +819,7 @@ void MainWindow::saveButtonClicked()
 {
     resetDrawState();
     QString s = QFileDialog::getSaveFileName(
-                    0,
+                    this,
                     "Save File",
                     "/home",
                     "Images (*.png *.xpm *.jpg)");

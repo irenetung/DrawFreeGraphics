@@ -11,6 +11,7 @@ Canvas::Canvas(QUndoStack* undoStack_)
     scene->setSceneRect(0,0,this->frameSize().width(),this->frameSize().height());
     this->setScene(scene);
     this->setRenderHint(QPainter::Antialiasing);
+    this->setRenderHint(QPainter::SmoothPixmapTransform);
 
     shapesPen = new QPen(Qt::black);
     shapesPen->setStyle(Qt::SolidLine);
@@ -126,9 +127,17 @@ void Canvas::saveScene(QString filename)
 
 void Canvas::loadScene(QString filename)
 {
-    qDebug() << "Loading file: " <<  filename;
-    QPixmap bg(filename);
-    scene->addPixmap(bg);
+    //qDebug() << "Loading file: " <<  filename;
+   /* QPixmap bg(filename);
+    scene->addPixmap(bg);*/
+    QImage image(filename);
+    if (image.isNull()) {
+        //QMessageBox::information(this, tr("Image Viewer"),tr("Cannot load %1.").arg(filename));
+        return;
+    }
+    QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(image));
+    item->setPos(mapToScene(QPoint(0,0)));
+    drawPixmapItem(item);
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *e)
