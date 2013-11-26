@@ -14,7 +14,7 @@ ColorsWidget::ColorsWidget()
 
 ColorsWidgetPaintTools::ColorsWidgetPaintTools()
 {
-    borderColor = "QPushButton {border-color: %1;}";
+    borderColor = tr("QPushButton {border-color: %1;}");
 
     outlineButton = new QPushButton(tr("Outline"));
     outlineButton->setStyleSheet(borderColor.arg(QColor(0,0,0).name()));

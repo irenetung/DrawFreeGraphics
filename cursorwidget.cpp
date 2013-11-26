@@ -26,6 +26,8 @@ CursorWidgetCursors::CursorWidgetCursors()
     setButtonProperties(shearButton);
     depthButton = new QPushButton(tr("Change\nDepth"));
     setButtonProperties(depthButton);
+    flipButton = new QPushButton(tr("Flip"));
+    setButtonProperties(flipButton);
     copyButton = new QPushButton(tr("Copy"));
     setButtonProperties(copyButton);
     deleteButton = new QPushButton(tr("Delete"));
@@ -41,6 +43,7 @@ CursorWidgetCursors::CursorWidgetCursors()
     addToGroup(rotateButton);
     addToGroup(shearButton);
     addToGroup(depthButton);
+    addToGroup(flipButton);
     addToGroup(copyButton);
     addToGroup(deleteButton);
 }
@@ -274,6 +277,26 @@ CursorWidgetDepth::CursorWidgetDepth()
     buttonGroup = new QButtonGroup();
     addToButtonGroup(dn1Button);
     addToButtonGroup(dp1Button);
+
+    buttonGroup->setExclusive(true);
+}
+
+CursorWidgetFlip::CursorWidgetFlip()
+{
+    backButton = new QPushButton(tr("< Cursor"));
+    backButton->setStyleSheet(tr("QPushButton{background-color:#FFCC99;}"));
+    setButtonProperties(backButton);
+    fyButton = new QPushButton(tr("Flip On\nVertical\nAxis"));
+    setButtonProperties(fyButton);
+    fxButton = new QPushButton(tr("Flip On\nHorizontal\nAxis"));
+    setButtonProperties(fxButton);
+
+    hLayout->addItem(horizSpacer);
+    this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(fyButton);
+    addToButtonGroup(fxButton);
 
     buttonGroup->setExclusive(true);
 }

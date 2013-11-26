@@ -6,9 +6,9 @@ ShapesWidget::ShapesWidget()
     int w = this->size().width();
     parea = new QPixmap(w,h);
     parea->fill(QColor(153,255,153));
-    this->setStyleSheet("QPushButton{background-color:#CCFFCC; border-color:#00CC66; border-style:solid; border-width:3px; border-radius:3px;}"
+    this->setStyleSheet(tr("QPushButton{background-color:#CCFFCC; border-color:#00CC66; border-style:solid; border-width:3px; border-radius:3px;}"
                         "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
-                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
+                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}"));
 }
 
 ShapesWidgetShapes::ShapesWidgetShapes()
@@ -17,10 +17,15 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     QPen iconPen;
     iconPen.setColor(Qt::black);
     iconPen.setWidth(8);
+    iconPen.setStyle(Qt::SolidLine);
+    iconPen.setCapStyle(Qt::RoundCap);
+    iconPen.setJoinStyle(Qt::RoundJoin);
     QBrush iconBrush(Qt::white);
     QRectF rect(30,50,120,80);
     QPolygon polygon;
     polygon << QPoint(40,140) << QPoint(40,40) << QPoint(100,40) << QPoint(140,90) << QPoint(100,140);
+    QFont iconFont;
+    iconFont.setPixelSize(100);
 
     lineButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     lineButtonIcon->fill(QColor(204,255,204));
@@ -91,20 +96,19 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     iconPainter.end();
     textButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     textButtonIcon->fill(QColor(204,255,204));
-    /*iconPainter.begin(textButtonIcon);
-    iconPainter.setPen(iconPen);
-    iconPainter.setBrush(iconBrush);
-    iconPainter.drawText(QPointF(90,90),"A");
-    iconPainter.end();*/
+    iconPainter.begin(textButtonIcon);
+    iconPainter.setFont(iconFont);
+    iconPainter.drawText(rect,Qt::AlignCenter,tr("A"));
+    iconPainter.end();
 
-    outlineSizeButton = new QPushButton("set\noutline\nsize");
-    outlineSizeButton->setStyleSheet("QPushButton{background-color:#99FFCC;}");
+    outlineSizeButton = new QPushButton(tr("Set\nOutline\nSize"));
+    outlineSizeButton->setStyleSheet(tr("QPushButton{background-color:#99FFCC;}"));
     setButtonProperties(outlineSizeButton);
-    outlineColorButton = new QPushButton("set\noutline\ncolor");
-    outlineColorButton->setStyleSheet("QPushButton{background-color:#99FFCC;}");
+    outlineColorButton = new QPushButton(tr("Set\nOutline\nColor"));
+    outlineColorButton->setStyleSheet(tr("QPushButton{background-color:#99FFCC;}"));
     setButtonProperties(outlineColorButton);
-    fillColorButton = new QPushButton("set\nfill\ncolor");
-    fillColorButton->setStyleSheet("QPushButton{background-color:#99FFCC;}");
+    fillColorButton = new QPushButton(tr("Set\nFill\nColor"));
+    fillColorButton->setStyleSheet(tr("QPushButton{background-color:#99FFCC;}"));
     setButtonProperties(fillColorButton);
 
     lineButton = new QPushButton(QIcon(*lineButtonIcon), tr(""));
@@ -151,10 +155,10 @@ ShapesWidgetShapes::ShapesWidgetShapes()
 
 ShapesWidgetEndPath::ShapesWidgetEndPath()
 {
-    backButton = new QPushButton("< shapes");
-    backButton->setStyleSheet("QPushButton{background-color:#99FFCC;}");
+    backButton = new QPushButton(tr("< Shapes"));
+    backButton->setStyleSheet(tr("QPushButton{background-color:#99FFCC;}"));
     setButtonProperties(backButton);
-    endPathButton = new QPushButton("end path");
+    endPathButton = new QPushButton(tr("end path"));
     setButtonProperties(endPathButton);
 
     hLayout->addItem(horizSpacer);
@@ -163,14 +167,118 @@ ShapesWidgetEndPath::ShapesWidgetEndPath()
 
 ShapesWidgetOutlineSizes::ShapesWidgetOutlineSizes()
 {
-    backButton = new QPushButton("< shapes");
-    backButton->setStyleSheet("QPushButton{background-color:#99FFCC;}");
+    currentSize = tr("The current outline size is: %1. Adjust the outline size. Or click a shape on the canvas to change its outline size. Toggle the sign button to change the increments from positive to negative or vice versa.");
+
+    backButton = new QPushButton(tr("< Shapes"));
+    backButton->setStyleSheet(tr("QPushButton{background-color:#99FFCC;}"));
     setButtonProperties(backButton);
-    on1Button = new QPushButton("-1");
-    setButtonProperties(on1Button);
-    op1Button = new QPushButton("+1");
-    setButtonProperties(op1Button);
+    signButton = new QPushButton(tr("+"));
+    signButton->setStyleSheet(tr("QPushButton{background-color:#99FFCC;}"));
+    setButtonProperties(signButton);
+
+    si1Button = new QPushButton(tr("1"));
+    setButtonProperties(si1Button);
+    si5Button = new QPushButton(tr("5"));
+    setButtonProperties(si5Button);
+    si10Button = new QPushButton(tr("10"));
+    setButtonProperties(si10Button);
+    si20Button = new QPushButton(tr("20"));
+    setButtonProperties(si20Button);
+    si50Button = new QPushButton(tr("50"));
+    setButtonProperties(si50Button);
+    si100Button = new QPushButton(tr("100"));
+    setButtonProperties(si100Button);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToGroup(si1Button);
+    addToGroup(si5Button);
+    addToGroup(si10Button);
+    addToGroup(si20Button);
+    addToGroup(si50Button);
+    addToGroup(si100Button);
+}
+
+
+ShapesWidgetKeyboardLetters::ShapesWidgetKeyboardLetters()
+{
+    qButton = new QPushButton(tr("Q"));
+    setButtonProperties(qButton);
+    wButton = new QPushButton(tr("W"));
+    setButtonProperties(wButton);
+    eButton = new QPushButton(tr("E"));
+    setButtonProperties(eButton);
+    rButton = new QPushButton(tr("R"));
+    setButtonProperties(rButton);
+    tButton = new QPushButton(tr("T"));
+    setButtonProperties(tButton);
+    yButton = new QPushButton(tr("Y"));
+    setButtonProperties(yButton);
+    uButton = new QPushButton(tr("U"));
+    setButtonProperties(uButton);
+    iButton = new QPushButton(tr("I"));
+    setButtonProperties(iButton);
+    oButton = new QPushButton(tr("O"));
+    setButtonProperties(oButton);
+    pButton = new QPushButton(tr("P"));
+    setButtonProperties(pButton);
+
+    aButton = new QPushButton(tr("A"));
+    setButtonProperties(aButton);
+    sButton = new QPushButton(tr("S"));
+    setButtonProperties(sButton);
+    dButton = new QPushButton(tr("D"));
+    setButtonProperties(dButton);
+    fButton = new QPushButton(tr("F"));
+    setButtonProperties(fButton);
+    gButton = new QPushButton(tr("G"));
+    setButtonProperties(gButton);
+    hButton = new QPushButton(tr("H"));
+    setButtonProperties(hButton);
+    jButton = new QPushButton(tr("J"));
+    setButtonProperties(jButton);
+    kButton = new QPushButton(tr("K"));
+    setButtonProperties(lButton);
+    lButton = new QPushButton(tr("L"));
+    setButtonProperties(lButton);
+
+    shiftButton= new QPushButton(tr("Shift"));
+    setButtonProperties(shiftButton);
+    zButton = new QPushButton(tr("Z"));
+    setButtonProperties(zButton);
+    xButton = new QPushButton(tr("X"));
+    setButtonProperties(xButton);
+    cButton = new QPushButton(tr("C"));
+    setButtonProperties(cButton);
+    vButton = new QPushButton(tr("V"));
+    setButtonProperties(vButton);
+    bButton = new QPushButton(tr("B"));
+    setButtonProperties(bButton);
+    nButton = new QPushButton(tr("N"));
+    setButtonProperties(nButton);
+    mButton = new QPushButton(tr("M"));
+    setButtonProperties(mButton);
+    backSpaceButton = new QPushButton(tr("Backspace"));
+    setButtonProperties(backSpaceButton);
+
+    numbersButton = new QPushButton(tr("123"));
+    setButtonProperties(numbersButton);
+    spaceButton = new QPushButton(tr("Space"));
+    setButtonProperties(spaceButton);
+    enterButton = new QPushButton(tr("Enter"));
+    setButtonProperties(enterButton);
+}
+
+
+ShapesWidgetKeyboardNumbers::ShapesWidgetKeyboardNumbers()
+{
+
+}
+
+
+ShapesWidgetKeyboardSymbols::ShapesWidgetKeyboardSymbols()
+{
+
 }

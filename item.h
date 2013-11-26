@@ -16,7 +16,14 @@ enum ItemType{PointItemType = QGraphicsItem::UserType+1,
              ArcItemType = QGraphicsItem::UserType+3,
              ChordItemType = QGraphicsItem::UserType+4,
              PieItemType = QGraphicsItem::UserType+5,
-             PathItemType = QGraphicsItem::UserType+6};
+             PathItemType = QGraphicsItem::UserType+6,
+             PaintItemType = QGraphicsItem::UserType+7,
+             WaterColorItemType = QGraphicsItem::UserType+8,
+             CalligraphyItemType = QGraphicsItem::UserType+9,
+             SprayPaintItemType = QGraphicsItem::UserType+10,
+             PencilItemType = QGraphicsItem::UserType+11,
+             DustItemType = QGraphicsItem::UserType+12,
+             };
 
 class PointItem : public QGraphicsItem
 {
@@ -113,8 +120,9 @@ public:
     explicit DrawItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return DustItemType;}
 
-    void addWaterColorEffect(int size, float perc);
+    //void addWaterColorEffect(int size, float perc);
 
     QList<QPointF> vertices;
     QPen *pen;
@@ -131,8 +139,9 @@ public:
     explicit PaintItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush);
     QRectF boundingRect() const; //must
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //must
+    int type() const {return PaintItemType;}
 
-    void addWaterColorEffect(int size, float perc);
+    //void addWaterColorEffect(int size, float perc);
 
     QList<QPointF> vertices;
     QPen *pen;

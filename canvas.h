@@ -17,9 +17,9 @@
 class Canvas : public QGraphicsView
 {
 public:
-    enum DrawState {NOSTATE,CURSOR,COLOR,SHAPE,STAMP,BRUSHEFFECTS,PICTURE};
-    enum CursorState {NOCURSOR,SCALE,STRETCH,ROTATE,SHEAR,TRANSLATE,DEPTH,OUTLINECOLOR,FILLCOLOR,BRUSHCOLOR,OUTLINESIZE,BRUSHSIZE,COPY,DELETEITEM};
-    enum ColorState {NOCOLOR,OUTLINE,FILL,BRUSH,SILHOUETTESTAMP,BACKGROUND};
+    enum DrawState {NOSTATE,CURSOR,COLOR,SHAPE,STAMP,BRUSHEFFECTS,PICTURE,SIZE};
+    enum CursorState {NOCURSOR,SCALE,STRETCH,ROTATE,SHEAR,TRANSLATE,DEPTH,FLIP,COPY,DELETEITEM};
+    enum ColorState {NOCOLOR,OUTLINE,FILL,BRUSH,SILHOUETTESTAMP,BACKGROUND,OUTLINESIZE,BRUSHSIZE};
     enum ShapeState {LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
     enum StampState {NOSTAMP, SILHOUETTE, STANDARD};
     enum BrushEffectsState {NOBRUSH,PAINT,WATERCOLOR,CALLIGRAPHY,PENCIL,SPRAYPAINT,DUST};
@@ -30,7 +30,8 @@ public:
     QGraphicsScene *scene;
     QPen *shapesPen;
     QBrush *shapesBrush;
-    QColor color;
+    QPen *brushPen;
+    QBrush *brushBrush;
     int mousePressCount;
     QList<QPointF> points;
     QGraphicsItem *selectedItem;
@@ -68,17 +69,19 @@ public:
 
     bool depthPositive;
 
+    bool flipY;
+
     void resetTranslateStretchShear();
     //Colors
     QColor prevCustomColor;
-    void setPenColor(QColor color);
-    void setBrushColor(QColor color);
     QColor silhouetteColor;
-    QColor brushColor;
     void setPenWidth(int width);
     //Shapes
     void drawItem(QGraphicsItem *item);
     void resetShapeState();
+
+    int outlineIncrement;
+    bool outlineSignPositive;
     //Stamps
     QString currentStampPath;
     void setCurrentStamp(QString path);
@@ -86,6 +89,9 @@ public:
 
     void saveScene(QString filename);
     void loadScene(QString filename);
+    //Brush Effects
+    int brushIncrement;
+    bool brushSignPositive;
 
 protected:
     //void paintEvent(QPaintEvent *e);

@@ -74,6 +74,7 @@ private:
     CursorWidgetShear *cursorWidgetShear;
     CursorWidgetDepth *cursorWidgetDepth;
     CursorWidgetBack *cursorWidgetBack;
+    CursorWidgetFlip * cursorWidgetFlip;
 //Colors
     ColorsWidgetPaintTools *colorsWidgetPaintTools;
     ColorsWidgetColors *colorsWidgetColorsOutline;
@@ -95,7 +96,8 @@ private:
     StampsWidgetFaces *stampsWidgetFaces;
     StampsWidgetVehicles *stampsWidgetVehicles;
 //Brush Effects
-    BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;  
+    BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;
+    BrushEffectsWidgetBrushSizes *brushEffectsWidgetBrushSizes;
 //Canvas
     Canvas *canvas;
 //Application Layout
@@ -127,6 +129,7 @@ private slots:
     void cursorRotateButtonGroupClicked(int id);
     void cursorShearButtonGroupClicked(int id);
     void cursorDepthButtonGroupClicked(int id);
+    void cursorFlipButtonGroupClicked(int id);
 //Shapes
     //Shapes
     void outlineSizeButtonClicked();
@@ -138,8 +141,9 @@ private slots:
     //EndPath
     void endPathButtonClicked();
     //OutlineSizes
-    void on1ButtonClicked();
-    void op1ButtonClicked();
+    void sizeBackButtonClicked();
+    void sizeSignButtonClicked();
+    void sizeButtonGroupClicked(int id);
 //Colors
     //PaintTools
     void colorsPaintToolsButtonGroupClicked(int id);
@@ -172,6 +176,7 @@ private:
     void changeButtonProperties(const int &newButtonWidth,const int &newButtonHeight);
     void changeCursorDirectionValue(double v);
     void changePaintToolColor(QColor color);
+    void changePaintToolSize(int size);
     void setShapesPrompt(Canvas::ShapeState shapeState);
     void setColorsPrompt(Canvas::ColorState colorState);
 };

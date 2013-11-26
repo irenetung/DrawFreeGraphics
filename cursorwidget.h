@@ -19,6 +19,7 @@ public:
     QPushButton *rotateButton;
     QPushButton *depthButton;
     QPushButton *shearButton;
+    QPushButton *flipButton;
     QPushButton *copyButton;
     QPushButton *deleteButton;
 };
@@ -111,6 +112,15 @@ public:
     QPushButton *backButton;
     QPushButton *dn1Button;
     QPushButton *dp1Button;
+};
+
+class CursorWidgetFlip : public CursorWidget
+{
+public:
+    explicit CursorWidgetFlip();
+    QPushButton *backButton;
+    QPushButton *fyButton;
+    QPushButton *fxButton;
 };
 
 class CursorWidgetBack : public CursorWidget

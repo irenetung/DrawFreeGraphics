@@ -128,6 +128,8 @@ MainWindow::MainWindow(QWidget *parent) :
     popUps.push_back(cursorWidgetStretch);
     cursorWidgetDepth = new CursorWidgetDepth();
     popUps.push_back(cursorWidgetDepth);
+    cursorWidgetFlip = new CursorWidgetFlip();
+    popUps.push_back(cursorWidgetFlip);
     cursorWidgetBack = new CursorWidgetBack();
     popUps.push_back(cursorWidgetBack);
     //Cursors
@@ -153,9 +155,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(cursorWidgetShear->directionButton, SIGNAL(clicked()), this, SLOT(cursorDirectionButtonClicked()));
     connect(cursorWidgetShear->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(cursorShearButtonGroupClicked(int)));
     //Depth
+    cursorWidgetDepth->dp1Button->setChecked(true);
     connect(cursorWidgetDepth->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
     connect(cursorWidgetDepth->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(cursorDepthButtonGroupClicked(int)));
-
+    //Flip
+    cursorWidgetFlip->fyButton->setChecked(true);
+    connect(cursorWidgetFlip->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
+    connect(cursorWidgetFlip->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(cursorFlipButtonGroupClicked(int)));
     //Back
     connect(cursorWidgetBack->backButton, SIGNAL(clicked()), this, SLOT(cursorBackButtonClicked()));
 //Shapes
@@ -166,6 +172,7 @@ MainWindow::MainWindow(QWidget *parent) :
     shapesWidgetOutlineSizes = new ShapesWidgetOutlineSizes();
     popUps.push_back(shapesWidgetOutlineSizes);
 
+    shapesWidgetShapes->lineButton->setChecked(true);
     connect(shapesWidgetShapes->outlineSizeButton, SIGNAL(clicked()), this, SLOT(outlineSizeButtonClicked()));
     connect(shapesWidgetShapes->outlineColorButton, SIGNAL(clicked()), this, SLOT(outlineColorButtonClicked()));
     connect(shapesWidgetShapes->fillColorButton, SIGNAL(clicked()), this, SLOT(fillColorButtonClicked()));
@@ -174,9 +181,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(shapesWidgetEndPath->backButton, SIGNAL(clicked()), this, SLOT(shapesBackButtonClicked()));
     connect(shapesWidgetEndPath->endPathButton, SIGNAL(clicked()), this, SLOT(endPathButtonClicked()));
 
-    connect(shapesWidgetOutlineSizes->backButton, SIGNAL(clicked()), this, SLOT(shapesBackButtonClicked()));
-    connect(shapesWidgetOutlineSizes->on1Button, SIGNAL(clicked()), this, SLOT(on1ButtonClicked()));
-    connect(shapesWidgetOutlineSizes->op1Button, SIGNAL(clicked()), this, SLOT(op1ButtonClicked()));
+    connect(shapesWidgetOutlineSizes->backButton, SIGNAL(clicked()), this, SLOT(sizeBackButtonClicked()));
+    connect(shapesWidgetOutlineSizes->signButton, SIGNAL(clicked()), this, SLOT(sizeSignButtonClicked()));
+    connect(shapesWidgetOutlineSizes->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(sizeButtonGroupClicked(int)));
 //Colors
     colorsWidgetPaintTools = new ColorsWidgetPaintTools();
     popUps.push_back(colorsWidgetPaintTools);
@@ -193,22 +200,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(colorsWidgetPaintTools->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(colorsPaintToolsButtonGroupClicked(int)));
 
+    colorsWidgetColorsOutline->blackButton->setChecked(true);
     connect(colorsWidgetColorsOutline->colorsBackButton, SIGNAL(clicked()), this, SLOT(colorsBackButtonClicked()));
     connect(colorsWidgetColorsOutline->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(colorsButtonGroupClicked(int)));
     connect(colorsWidgetColorsOutline->customColorButton, SIGNAL(clicked()), this, SLOT(customColorButtonClicked()));
 
+    colorsWidgetColorsFill->whiteButton->setChecked(true);
     connect(colorsWidgetColorsFill->colorsBackButton, SIGNAL(clicked()), this, SLOT(colorsBackButtonClicked()));
     connect(colorsWidgetColorsFill->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(colorsButtonGroupClicked(int)));
     connect(colorsWidgetColorsFill->customColorButton, SIGNAL(clicked()), this, SLOT(customColorButtonClicked()));
 
+    colorsWidgetColorsSilhouette->blackButton->setChecked(true);
     connect(colorsWidgetColorsSilhouette->colorsBackButton, SIGNAL(clicked()), this, SLOT(colorsBackButtonClicked()));
     connect(colorsWidgetColorsSilhouette->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(colorsButtonGroupClicked(int)));
     connect(colorsWidgetColorsSilhouette->customColorButton, SIGNAL(clicked()), this, SLOT(customColorButtonClicked()));
 
+    colorsWidgetColorsBrush->blackButton->setChecked(true);
     connect(colorsWidgetColorsBrush->colorsBackButton, SIGNAL(clicked()), this, SLOT(colorsBackButtonClicked()));
     connect(colorsWidgetColorsBrush->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(colorsButtonGroupClicked(int)));
     connect(colorsWidgetColorsBrush->customColorButton, SIGNAL(clicked()), this, SLOT(customColorButtonClicked()));
 
+    colorsWidgetColorsBackground->whiteButton->setChecked(true);
     connect(colorsWidgetColorsBackground->colorsBackButton, SIGNAL(clicked()), this, SLOT(colorsBackButtonClicked()));
     connect(colorsWidgetColorsBackground->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(colorsButtonGroupClicked(int)));
     connect(colorsWidgetColorsBackground->customColorButton, SIGNAL(clicked()), this, SLOT(customColorButtonClicked()));
@@ -229,10 +241,17 @@ MainWindow::MainWindow(QWidget *parent) :
 //Brush Effects
     brushEffectsWidgetBrushEffects = new BrushEffectsWidgetBrushEffects();
     popUps.push_back(brushEffectsWidgetBrushEffects);
+    brushEffectsWidgetBrushSizes = new BrushEffectsWidgetBrushSizes();
+    popUps.push_back(brushEffectsWidgetBrushSizes);
+
+    brushEffectsWidgetBrushEffects->paintButton->setChecked(true);
     connect(brushEffectsWidgetBrushEffects->brushSizeButton, SIGNAL(clicked()), this, SLOT(brushSizeButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->brushColorButton, SIGNAL(clicked()), this, SLOT(brushColorButtonClicked()));
     connect(brushEffectsWidgetBrushEffects->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(brushEffectsButtonGroupClicked(int)));
 
+    connect(brushEffectsWidgetBrushSizes->backButton, SIGNAL(clicked()), this, SLOT(sizeBackButtonClicked()));
+    connect(brushEffectsWidgetBrushSizes->signButton, SIGNAL(clicked()), this, SLOT(sizeSignButtonClicked()));
+    connect(brushEffectsWidgetBrushSizes->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(sizeButtonGroupClicked(int)));
 //Stamps
     stampsWidgetCategories = new StampsWidgetCategories();
     popUps.push_back(stampsWidgetCategories);
@@ -750,7 +769,7 @@ void MainWindow::toolButtonGroupClicked(int id)
             //Colors
             canvas->drawState = canvas->COLOR;
             canvas->colorState = canvas->NOCOLOR;
-            prompt->promptLabel->setText("Select a paint tool to modify.");
+            prompt->promptLabel->setText("Select a paint tool to modify its color.");
             showPopup(colorsWidgetPaintTools);
             break;
         case 3:
@@ -768,7 +787,7 @@ void MainWindow::toolButtonGroupClicked(int id)
         case 5:
             //Brush Effects
             canvas->drawState = canvas->BRUSHEFFECTS;
-            prompt->promptLabel->setText("Select a brush effect.");
+            prompt->promptLabel->setText(tr("Click a point on the canvas to start drawing and click a second point on the canvas to stop drawing and render the brush stroke. Or select a brush effect."));
             showPopup(brushEffectsWidgetBrushEffects);
             break;
         default:
@@ -824,7 +843,7 @@ void MainWindow::insertPictureButtonClicked()
             return;
         }
         QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(image));
-        item->setPos(0,0);
+        item->setPos(canvas->mapToScene(QPoint(0,0)));
         canvas->drawPixmapItem(item);
     }
 }
@@ -924,12 +943,17 @@ void MainWindow::cursorCursorsButtonGroupClicked(int id)
             showPopup(cursorWidgetDepth);
             break;
         case 6:
+            canvas->cursorState = canvas->FLIP;
+            prompt->promptLabel->setText("Select an axis to flip across. Then click an item on the canvas to flip.");
+            showPopup(cursorWidgetFlip);
+            break;
+        case 7:
             //Copy
             canvas->cursorState = canvas->COPY;
             prompt->promptLabel->setText("Click an item on the canvas to copy.");
             showPopup(cursorWidgetBack);
             break;
-        case 7:
+        case 8:
             //Delete
             canvas->cursorState = canvas->DELETEITEM;
             prompt->promptLabel->setText("Click an item on the canvas to delete.");
@@ -1230,12 +1254,28 @@ void MainWindow::cursorDepthButtonGroupClicked(int id)
     }
 }
 
+void MainWindow::cursorFlipButtonGroupClicked(int id)
+{
+    switch(id) {
+        case 0:
+            canvas->flipY = true;
+            break;
+        case 1:
+            canvas->flipY = false;
+            break;
+        default:
+            break;
+    }
+}
+
 //Shapes
 void MainWindow::outlineSizeButtonClicked()
 {
     hideWidgets();
     canvas->resetShapeState();
-    prompt->promptLabel->setText(tr("Adjust the outline size."));
+    prompt->promptLabel->setText(shapesWidgetOutlineSizes->currentSize.arg(canvas->shapesPen->width()));
+    canvas->drawState = canvas->COLOR;
+    canvas->colorState = canvas->OUTLINESIZE;
     showPopup(shapesWidgetOutlineSizes);
 }
 
@@ -1243,10 +1283,9 @@ void MainWindow::outlineColorButtonClicked()
 {
     hideWidgets();
     canvas->resetShapeState();
-    shapesButton->setChecked(false);
     canvas->drawState = canvas->COLOR;
     canvas->colorState = canvas->OUTLINE;
-    colorsButton->setChecked(true);
+    toolGroup->button(2)->setChecked(true);
 
     setColorsPrompt(canvas->colorState);
     showPopup(colorsWidgetColorsOutline);
@@ -1256,10 +1295,9 @@ void MainWindow::fillColorButtonClicked()
 {
     hideWidgets();
     canvas->resetShapeState();
-    shapesButton->setChecked(false);
     canvas->drawState = canvas->COLOR;
     canvas->colorState = canvas->FILL;
-    colorsButton->setChecked(true);
+    toolGroup->button(2)->setChecked(true);
 
     setColorsPrompt(canvas->colorState);
     showPopup(colorsWidgetColorsFill);
@@ -1317,9 +1355,7 @@ void MainWindow::shapesBackButtonClicked()
     hideWidgets();
     canvas->resetShapeState();
     if(shapesWidgetShapes->polygonButton->isChecked() || shapesWidgetShapes->pathButton->isChecked()) {
-        shapesWidgetShapes->polygonButton->setChecked(false);
-        shapesWidgetShapes->pathButton->setChecked(false);
-        shapesWidgetShapes->lineButton->setChecked(true);
+        shapesWidgetShapes->buttonGroup->button(0)->setChecked(true);
         canvas->shapeState = canvas->LINE;
     }
     setShapesPrompt(canvas->shapeState);
@@ -1342,8 +1378,78 @@ void MainWindow::endPathButtonClicked()
         canvas->drawItem(pathItem);
     } else {
     }
+}
 
-    update();
+void MainWindow::sizeBackButtonClicked()
+{
+    hideWidgets();
+    switch(canvas->colorState) {
+        case canvas->OUTLINESIZE:
+            canvas->drawState = canvas->SHAPE;
+            setShapesPrompt(canvas->shapeState);
+            showPopup(shapesWidgetShapes);
+            break;
+        case canvas->BRUSHSIZE:
+            canvas->drawState = canvas->BRUSHEFFECTS;
+            prompt->promptLabel->setText(tr("Click a point on the canvas to start drawing and click a second point on the canvas to stop drawing and render the brush stroke. Or select a brush effect."));
+            showPopup(brushEffectsWidgetBrushEffects);
+            stampsButton->setChecked(true);
+            break;
+        default:
+            break;
+    }
+}
+
+void MainWindow::sizeSignButtonClicked()
+{
+    switch(canvas->colorState) {
+        case canvas->OUTLINESIZE:
+            if(canvas->outlineSignPositive) {
+                canvas->outlineSignPositive = false;
+                shapesWidgetOutlineSizes->signButton->setText("-");
+            } else {
+                canvas->outlineSignPositive = true;
+                shapesWidgetOutlineSizes->signButton->setText("+");
+            }
+            break;
+        case canvas->BRUSHSIZE:
+            if(canvas->brushSignPositive) {
+                canvas->brushSignPositive = false;
+                brushEffectsWidgetBrushSizes->signButton->setText("-");
+            } else {
+                canvas->brushSignPositive = true;
+                brushEffectsWidgetBrushSizes->signButton->setText("+");
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void MainWindow::sizeButtonGroupClicked(int id)
+{
+    switch(id) {
+        case 0:
+            changePaintToolSize(1);
+            break;
+        case 1:
+            changePaintToolSize(5);
+            break;
+        case 2:
+            changePaintToolSize(10);
+            break;
+        case 3:
+            changePaintToolSize(20);
+            break;
+        case 4:
+            changePaintToolSize(50);
+            break;
+        case 5:
+            changePaintToolSize(100);
+            break;
+        default:
+            break;
+    }
 }
 
 void MainWindow::colorsButtonGroupClicked(int id)
@@ -1400,7 +1506,6 @@ void MainWindow::colorsButtonGroupClicked(int id)
         case 12:
             //PREV CUSTOM
             changePaintToolColor(canvas->prevCustomColor);
-
             break;
         default:
             break;
@@ -1410,7 +1515,7 @@ void MainWindow::colorsButtonGroupClicked(int id)
 void MainWindow::colorsBackButtonClicked()
 {
     hideWidgets();
-    prompt->promptLabel->setText("Select a paint tool to modify");
+    prompt->promptLabel->setText("Select a paint tool to modify its color.");
     showPopup(colorsWidgetPaintTools);
 }
 
@@ -1445,8 +1550,8 @@ void MainWindow::customColorButtonClicked()
 {
     QColorDialog colorDialog;
     QColor color = colorDialog.getColor(Qt::white,this);
-    changePaintToolColor(color);
     canvas->prevCustomColor = color;
+    changePaintToolColor(color);
     colorsWidgetColorsOutline->prevCustomButtonIcon->fill(canvas->prevCustomColor);
     colorsWidgetColorsOutline->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsOutline->prevCustomButtonIcon));
     colorsWidgetColorsFill->prevCustomButtonIcon->fill(canvas->prevCustomColor);
@@ -1457,24 +1562,45 @@ void MainWindow::customColorButtonClicked()
     colorsWidgetColorsBrush->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsBrush->prevCustomButtonIcon));
     colorsWidgetColorsBackground->prevCustomButtonIcon->fill(canvas->prevCustomColor);
     colorsWidgetColorsBackground->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsBackground->prevCustomButtonIcon));
+
+    switch (canvas->colorState) {
+        case canvas->OUTLINE:
+            colorsWidgetColorsOutline->buttonGroup->button(12)->setChecked(true);
+            break;
+        case canvas->FILL:
+            colorsWidgetColorsFill->buttonGroup->button(12)->setChecked(true);
+            break;
+        case canvas->SILHOUETTESTAMP:
+            colorsWidgetColorsSilhouette->buttonGroup->button(12)->setChecked(true);
+            break;
+        case canvas->BRUSH:
+            colorsWidgetColorsBrush->buttonGroup->button(12)->setChecked(true);
+            break;
+        case canvas->BACKGROUND:
+            colorsWidgetColorsBackground->buttonGroup->button(12)->setChecked(true);
+            break;
+        default:
+            break;
+    }
 }
 
 void MainWindow::brushSizeButtonClicked()
 {
     hideWidgets();
     canvas->resetShapeState();
-    prompt->promptLabel->setText(tr("Adjust the brush size."));
-    //shapesWidgetOutlineSizes->show();
+    prompt->promptLabel->setText(brushEffectsWidgetBrushSizes->currentSize.arg(canvas->brushPen->width()));
+    canvas->drawState = canvas->COLOR;
+    canvas->colorState = canvas->BRUSHSIZE;
+    showPopup(brushEffectsWidgetBrushSizes);
 }
 
 void MainWindow::brushColorButtonClicked()
 {
     hideWidgets();
     canvas->resetShapeState();
-    shapesButton->setChecked(false);
     canvas->drawState = canvas->COLOR;
     canvas->colorState = canvas->BRUSH;
-    colorsButton->setChecked(true);
+    toolGroup->button(2)->setChecked(true);
 
     setColorsPrompt(canvas->colorState);
     showPopup(colorsWidgetColorsBrush);
@@ -1505,7 +1631,7 @@ void MainWindow::brushEffectsButtonGroupClicked(int id)
             break;
     }
 }
-
+/*
 void MainWindow::on1ButtonClicked()
 {
     canvas->setPenWidth(-1);
@@ -1514,7 +1640,7 @@ void MainWindow::on1ButtonClicked()
 void MainWindow::op1ButtonClicked()
 {
     canvas->setPenWidth(1);
-}
+}*/
 
 void MainWindow::colorsPaintToolsButtonGroupClicked(int id)
 {
@@ -1603,10 +1729,9 @@ void MainWindow::silhouetteColorButtonClicked()
 {
     hideWidgets();
     canvas->resetShapeState();
-    shapesButton->setChecked(false);
     canvas->drawState = canvas->COLOR;
     canvas->colorState = canvas->SILHOUETTESTAMP;
-    colorsButton->setChecked(true);
+    toolGroup->button(2)->setChecked(true);
 
     setColorsPrompt(canvas->colorState);
     showPopup(colorsWidgetColorsSilhouette);
@@ -1677,11 +1802,13 @@ void MainWindow::changePaintToolColor(QColor color)
 {
     switch (canvas->colorState) {
         case canvas->OUTLINE:
-            canvas->setPenColor(color);
+            canvas->shapesPen->setColor(color);
+            //canvas->setPenColor(color);
             colorsWidgetPaintTools->outlineButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->FILL:
-            canvas->setBrushColor(color);
+            canvas->shapesBrush->setColor(color);
+            //canvas->setBrushColor(color);
             colorsWidgetPaintTools->fillButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->SILHOUETTESTAMP:
@@ -1689,11 +1816,43 @@ void MainWindow::changePaintToolColor(QColor color)
             colorsWidgetPaintTools->silhouetteButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->BRUSH:
+            canvas->brushPen->setColor(color);
+            canvas->brushBrush->setColor(color);
             colorsWidgetPaintTools->brushButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case canvas->BACKGROUND:
             colorsWidgetPaintTools->backgroundButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             canvas->setBackgroundBrush(color);
+            break;
+        default:
+            break;
+    }
+}
+
+void MainWindow::changePaintToolSize(int size)
+{
+    switch (canvas->colorState) {
+        case canvas->OUTLINESIZE:
+            if(canvas->outlineSignPositive) {
+                canvas->shapesPen->setWidth(canvas->shapesPen->width()+size);
+            } else {
+                if(canvas->shapesPen->width()-size >= 1) {
+                    canvas->shapesPen->setWidth(canvas->shapesPen->width()-size);
+                }
+            }
+            prompt->promptLabel->setText(shapesWidgetOutlineSizes->currentSize.arg(canvas->shapesPen->width()));
+            break;
+        case canvas->BRUSHSIZE:
+            if(canvas->brushSignPositive) {
+                canvas->brushPen->setWidth(canvas->brushPen->width()+size);
+                //WHAT TO DO WITH BRUSH
+            } else {
+                if(canvas->brushPen->width()-size >= 1) {
+                    canvas->brushPen->setWidth(canvas->brushPen->width()-size);
+                    //WHAT TO DO WITH BRUSH
+                }
+            }
+            prompt->promptLabel->setText(brushEffectsWidgetBrushSizes->currentSize.arg(canvas->brushPen->width()));
             break;
         default:
             break;

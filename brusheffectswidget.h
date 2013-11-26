@@ -23,4 +23,19 @@ public:
     QPushButton *dustButton;
 };
 
+class BrushEffectsWidgetBrushSizes : public BrushEffectsWidget
+{
+public:
+    explicit BrushEffectsWidgetBrushSizes();
+    QString currentSize;
+    QPushButton *backButton;
+    QPushButton *signButton;
+    QPushButton *si1Button;
+    QPushButton *si5Button;
+    QPushButton *si10Button;
+    QPushButton *si20Button;
+    QPushButton *si50Button;
+    QPushButton *si100Button;
+};
+
 #endif // BRUSHEFFECTSWIDGET_H

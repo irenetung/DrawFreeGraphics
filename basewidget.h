@@ -8,7 +8,7 @@
 #include <QPushButton>
 #include <QVector>
 #include <QButtonGroup>
-#include <QLabel>
+#include <QFont>
 #include "flowlayout.h"
 
 class BaseWidget : public QWidget

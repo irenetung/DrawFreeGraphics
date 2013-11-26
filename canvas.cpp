@@ -13,9 +13,18 @@ Canvas::Canvas(QUndoStack* undoStack_)
     this->setRenderHint(QPainter::Antialiasing);
 
     shapesPen = new QPen(Qt::black);
+    shapesPen->setStyle(Qt::SolidLine);
+    shapesPen->setCapStyle(Qt::RoundCap);
+    shapesPen->setJoinStyle(Qt::RoundJoin);
+    shapesPen->setCosmetic(true);
     shapesBrush = new QBrush(Qt::white);
+
     silhouetteColor = Qt::black;
-    brushColor = Qt::black;
+
+    brushPen = new QPen(Qt::black);
+    shapesPen->setCosmetic(true);
+    brushBrush = new QBrush(Qt::black);
+
     mousePressCount = 0;
     selectedItem = NULL;
 
@@ -33,7 +42,7 @@ Canvas::Canvas(QUndoStack* undoStack_)
     translateVerticalValue = 0;
 
     scaleDirection = RIGHT;
-    scaleFactor = 1.0;
+    scaleFactor = 0;
 
     stretchDirection = RIGHT;
     stretchV = 0;
@@ -49,10 +58,17 @@ Canvas::Canvas(QUndoStack* undoStack_)
     shearVerticalValue = 0;
 
     depthPositive = true;
+    flipY = true;
 //Colors
     prevCustomColor = QColor(255,255,255);
+//Shapes
+    outlineIncrement=0;
+    outlineSignPositive = true;
 //Stamps
     currentStampPath = "";
+//Brush effects
+    brushIncrement=0;
+    brushSignPositive = true;
 }
 
 void Canvas::resetTranslateStretchShear()
@@ -65,23 +81,6 @@ void Canvas::resetTranslateStretchShear()
     shearVerticalValue=0;
 }
 
-void Canvas::setPenColor(QColor color)
-{
-    shapesPen->setColor(color);
-}
-
-void Canvas::setBrushColor(QColor color)
-{
-    shapesBrush->setColor(color);
-}
-
-void Canvas::setPenWidth(int width)
-{
-    if((shapesPen->width())+width > 0) {
-        shapesPen->setWidth(shapesPen->width()+width);
-    }
-}
-
 void Canvas::drawItem(QGraphicsItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
@@ -89,6 +88,7 @@ void Canvas::drawItem(QGraphicsItem *item)
     update();
     mousePressCount = 0;
     points.clear();
+    scene->update();
 }
 
 void Canvas::resetShapeState()
@@ -109,6 +109,7 @@ void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
     update();
     mousePressCount = 0;
     points.clear();
+    scene->update();
 }
 
 void Canvas::saveScene(QString filename)
@@ -159,7 +160,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         if(mousePressCount == 2) {
             switch(brushEffectsState) {
                 case PAINT: {
-                    PaintItem *paintItem = new PaintItem(points,*shapesPen,*shapesBrush);
+                    PaintItem *paintItem = new PaintItem(points,*brushPen,*brushBrush);
                     drawItem(paintItem);
                     break;
                     }
@@ -172,7 +173,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 case SPRAYPAINT:
                     break;
             case DUST: {
-                    DrawItem *draw = new DrawItem(points,*shapesPen,*shapesBrush);
+                    DrawItem *draw = new DrawItem(points,*brushPen,*brushBrush);
                     drawItem(draw);
                     break;
                     }
@@ -273,6 +274,13 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                         selectedItem->setRotation(selectedItem->rotation()-rotateAngle);
                     }
                     break;
+                case FLIP:
+                    if(flipY) {
+                        selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(selectedItem->transformOriginPoint().x(),selectedItem->transformOriginPoint().y()).scale(-1,1).translate(-selectedItem->transformOriginPoint().x(),-selectedItem->transformOriginPoint().y())));
+                    } else {
+                        selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(selectedItem->transformOriginPoint().x(),selectedItem->transformOriginPoint().y()).scale(1,-1).translate(-selectedItem->transformOriginPoint().x(),-selectedItem->transformOriginPoint().y())));
+                    }
+                    break;
                 case DEPTH: {
                     QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
                     qreal maxZValue = 0;
@@ -292,10 +300,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     }
                     break;
                     }
-                case OUTLINESIZE:
-                    break;
-                case BRUSHSIZE:
-                    break;
                 case COPY:
                     if(selectedItem) {
                         switch(selectedItem->type()) {
@@ -394,6 +398,20 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                             copyTransforms(pathItem,selectedPathItem);
                             break;
                             }
+                        case PaintItemType: {
+                            PaintItem *selectedPaintItem = qgraphicsitem_cast<PaintItem *>(selectedItem);
+                            PaintItem *paintItem = new PaintItem(selectedPaintItem->vertices,*(selectedPaintItem->pen),*(selectedPaintItem->brush));
+                            drawItem(paintItem);
+                            copyTransforms(paintItem,selectedPaintItem);
+                            break;
+                            }
+                        case DustItemType: {
+                            DrawItem *selectedDrawItem = qgraphicsitem_cast<DrawItem *>(selectedItem);
+                            DrawItem *dustItem = new DrawItem(selectedDrawItem->vertices,*(selectedDrawItem->pen),*(selectedDrawItem->brush));
+                            drawItem(dustItem);
+                            copyTransforms(dustItem,selectedDrawItem);
+                            break;
+                            }
                         default:
                             qDebug() << "cool";
                             break;
@@ -439,10 +457,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case 6: {
                 //LINE;
                 QGraphicsLineItem *selectedLineItem = qgraphicsitem_cast<QGraphicsLineItem *>(selectedItem);
+                QPen pen = selectedLineItem->pen();
                 switch(colorState) {
-                case OUTLINE:
-                    selectedLineItem->setPen(*shapesPen);
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    selectedLineItem->setPen(pen);
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    selectedLineItem->setPen(pen);
+                    break;
+                    }
                 default:
                     break;
                 }
@@ -451,11 +477,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case PointItemType: {
                 //POINT
                 PointItem *selectedPointItem = qgraphicsitem_cast<PointItem *>(selectedItem);
-                *(selectedPointItem->pen) = *shapesPen;
+                QPen pen = *(selectedPointItem->pen);
                 switch(colorState) {
-                case OUTLINE:
-                    *(selectedPointItem->pen) = *shapesPen;
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    *(selectedPointItem->pen) = pen;
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                     *(selectedPointItem->pen) = pen;
+                    break;
+                    }
                 default:
                     break;
                 }
@@ -465,10 +498,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case ArcItemType: {
                 //ARC
                 ArcItem *selectedArcItem = qgraphicsitem_cast<ArcItem *>(selectedItem);
+                QPen pen = *(selectedArcItem->pen);
                 switch(colorState) {
-                case OUTLINE:
-                    *(selectedArcItem->pen) = *shapesPen;
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    *(selectedArcItem->pen) = pen;
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    *(selectedArcItem->pen) = pen;
+                    break;
+                    }
                 default:
                     break;
                 }
@@ -478,10 +519,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case PathItemType: {
                 //PATH
                 PathItem *selectedPathItem = qgraphicsitem_cast<PathItem *>(selectedItem);
+                QPen pen = *(selectedPathItem->pen);
                 switch(colorState) {
-                case OUTLINE:
-                    *(selectedPathItem->pen) = *shapesPen;
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    *(selectedPathItem->pen) = pen;
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    *(selectedPathItem->pen) = pen;
+                    break;
+                    }
                 default:
                     break;
                 }
@@ -491,10 +540,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case 4: {
                 //CIRCLE
                 QGraphicsEllipseItem *selectedEllipseItem = qgraphicsitem_cast<QGraphicsEllipseItem *>(selectedItem);
+                QPen pen = selectedEllipseItem->pen();
                 switch(colorState) {
-                case OUTLINE:
-                    selectedEllipseItem->setPen(*shapesPen);
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    selectedEllipseItem->setPen(pen);
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    selectedEllipseItem->setPen(pen);
+                    break;
+                    }
                 case FILL:
                     selectedEllipseItem->setBrush(*shapesBrush);
                     break;
@@ -506,10 +563,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case 3: {
                 //RECT
                 QGraphicsRectItem *selectedRectItem = qgraphicsitem_cast<QGraphicsRectItem *>(selectedItem);
+                QPen pen = selectedRectItem->pen();
                 switch(colorState) {
-                case OUTLINE:
-                    selectedRectItem->setPen(*shapesPen);
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    selectedRectItem->setPen(pen);
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    selectedRectItem->setPen(pen);
+                    break;
+                    }
                 case FILL:
                     selectedRectItem->setBrush(*shapesBrush);
                     break;
@@ -521,10 +586,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case 5:{
                 //POLYGON
                 QGraphicsPolygonItem *selectedPolygonItem = qgraphicsitem_cast<QGraphicsPolygonItem *>(selectedItem);
+                QPen pen = selectedPolygonItem->pen();
                 switch(colorState) {
-                case OUTLINE:
-                    selectedPolygonItem->setPen(*shapesPen);
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    selectedPolygonItem->setPen(pen);
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    selectedPolygonItem->setPen(pen);
+                    break;
+                    }
                 case FILL:
                     selectedPolygonItem->setBrush(*shapesBrush);
                     break;
@@ -536,10 +609,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case RoundRectangleItemType: {
                 //ROUND RECT
                 RoundRectangleItem *selectedRoundRectItem = qgraphicsitem_cast<RoundRectangleItem *>(selectedItem);
+                QPen pen = *(selectedRoundRectItem->pen);
                 switch(colorState) {
-                case OUTLINE:
-                    *(selectedRoundRectItem->pen) = *shapesPen;
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    *(selectedRoundRectItem->pen) = pen;
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    *(selectedRoundRectItem->pen) = pen;
+                    break;
+                    }
                 case FILL:
                     *(selectedRoundRectItem->brush) = *shapesBrush;
                     break;
@@ -552,10 +633,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case ChordItemType: {
                 //CHORD
                 ChordItem *selectedChordItem = qgraphicsitem_cast<ChordItem *>(selectedItem);
+                QPen pen = *(selectedChordItem->pen);
                 switch(colorState) {
-                case OUTLINE:
-                    *(selectedChordItem->pen) = *shapesPen;
+                case OUTLINE: {
+                    pen.setColor(shapesPen->color());
+                    *(selectedChordItem->pen) = pen;
                     break;
+                    }
+                case OUTLINESIZE: {
+                    pen.setWidth(shapesPen->width());
+                    *(selectedChordItem->pen) = pen;
+                    break;
+                    }
                 case FILL:
                     *(selectedChordItem->brush) = *shapesBrush;
                     break;
@@ -568,10 +657,18 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             case PieItemType: {
                  //PIE
                  PieItem *selectedPieItem = qgraphicsitem_cast<PieItem *>(selectedItem);
+                 QPen pen = *(selectedPieItem->pen);
                  switch(colorState) {
-                 case OUTLINE:
-                     *(selectedPieItem->pen) = *shapesPen;
+                 case OUTLINE: {
+                     pen.setColor(shapesPen->color());
+                     *(selectedPieItem->pen) = pen;
                      break;
+                    }
+                 case OUTLINESIZE: {
+                     pen.setWidth(shapesPen->width());
+                     *(selectedPieItem->pen) = pen;
+                     break;
+                     }
                  case FILL:
                      *(selectedPieItem->brush) = *shapesBrush;
                      break;
@@ -581,10 +678,61 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                  selectedPieItem->update();
                  break;
             }
+            case PaintItemType: {
+                 PaintItem *selectedPaintItem = qgraphicsitem_cast<PaintItem *>(selectedItem);
+                 QPen pen = *(selectedPaintItem->pen);
+                 QBrush brush = *(selectedPaintItem->brush);
+                 switch(colorState) {
+                 case BRUSH: {
+                     pen.setColor(brushPen->color());
+                     brush.setColor(brushBrush->color());
+                     *(selectedPaintItem->pen) = pen;
+                     *(selectedPaintItem->brush) = brush;
+                     break;
+                    }
+                 case BRUSHSIZE: {
+                     pen.setWidth(brushPen->width());
+                     //WHAT TO DO WITH BRUSH
+                     *(selectedPaintItem->pen) = pen;
+                     *(selectedPaintItem->brush) = brush;
+                     break;
+                     }
+                 default:
+                     break;
+                 }
+                 selectedPaintItem->update();
+                 break;
+            }
+            case DustItemType: {
+                 DrawItem *selectedDrawItem = qgraphicsitem_cast<DrawItem *>(selectedItem);
+                 QPen pen = *(selectedDrawItem->pen);
+                 QBrush brush = *(selectedDrawItem->brush);
+                 switch(colorState) {
+                 case BRUSH: {
+                     pen.setColor(brushPen->color());
+                     brush.setColor(brushBrush->color());
+                     *(selectedDrawItem->pen) = pen;
+                     *(selectedDrawItem->brush) = brush;
+                     break;
+                    }
+                 case BRUSHSIZE: {
+                     pen.setWidth(brushPen->width());
+                     //WHAT TO DO WITH BRUSH
+                     *(selectedDrawItem->pen) = pen;
+                     *(selectedDrawItem->brush) = brush;
+                     break;
+                     }
+                 default:
+                     break;
+                 }
+                 selectedDrawItem->update();
+                 break;
+            }
             default:
                  break;
             }
         }
+        scene->update();
     }
     if(drawState == SHAPE) {
         points.append(clickPoint);
