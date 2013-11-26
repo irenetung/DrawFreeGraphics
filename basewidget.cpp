@@ -32,7 +32,7 @@ void BaseWidget::setButtonProperties(QPushButton *b)
 {
     b->setFixedWidth(buttonWidth);
     b->setFixedHeight(buttonHeight);
-    b->setIconSize(QSize(buttonWidth-6,buttonHeight-6));
+    b->setIconSize(QSize(buttonWidth-10,buttonHeight-10));
 
     buttons.push_back(b);
     hLayout->addWidget(b);
@@ -46,12 +46,19 @@ void BaseWidget::addToButtonGroup(QPushButton *b)
     ++id;
 }
 
+void BaseWidget::addToGroup(QPushButton *b)
+{
+    buttonGroup->addButton(b);
+    buttonGroup->setId(b,id);
+    ++id;
+}
+
 void BaseWidget::changeButtonProperties(int newButtonWidth, int newButtonHeight)
 {
     for(int i = 0; i < buttons.size();++i) {
         buttons[i]->setFixedWidth(newButtonWidth);
         buttons[i]->setFixedHeight(newButtonHeight);
-        buttons[i]->setIconSize(QSize(newButtonWidth-6,newButtonHeight-6));
+        buttons[i]->setIconSize(QSize(newButtonWidth-10,newButtonHeight-10));
     }
     repaint();
     update();

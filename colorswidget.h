@@ -25,7 +25,8 @@ public:
 class ColorsWidgetColors : public ColorsWidget
 {
 public:
-    explicit ColorsWidgetColors();
+    enum WidgetType{SHAPES,STAMPS,BRUSHEFFECTS,BACKGROUND};
+    explicit ColorsWidgetColors(WidgetType widgetType);
     QPixmap *peachButtonIcon;
     QPixmap *pinkButtonIcon;
     QPixmap *redButtonIcon;
@@ -39,7 +40,8 @@ public:
     QPixmap *grayButtonIcon;
     QPixmap *whiteButtonIcon;
 
-    QPushButton *backButton;
+    QPushButton *colorsBackButton;
+    QPushButton *otherBackButton;
     QPushButton *whiteButton;
     QPushButton *peachButton;
     QPushButton *pinkButton;

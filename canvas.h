@@ -17,50 +17,52 @@
 class Canvas : public QGraphicsView
 {
 public:
-    enum DrawState {NOSTATE,CURSOR,SHAPE,STAMP,BRUSHEFFECTS,DRAW,ERASER,PICTURE};
+    enum DrawState {NOSTATE,CURSOR,COLOR,SHAPE,STAMP,BRUSHEFFECTS,PICTURE};
     enum CursorState {NOCURSOR,SCALE,STRETCH,ROTATE,SHEAR,TRANSLATE,DEPTH,OUTLINECOLOR,FILLCOLOR,BRUSHCOLOR,OUTLINESIZE,BRUSHSIZE,COPY,DELETEITEM};
-    enum ColorState {NOCOLOR,OUTLINE,FILL,BRUSH,SILHOUETTECOLOR,BACKGROUND};
-    enum ShapeState {NOSHAPE,LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
+    enum ColorState {NOCOLOR,OUTLINE,FILL,BRUSH,SILHOUETTESTAMP,BACKGROUND};
+    enum ShapeState {LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
     enum StampState {NOSTAMP, SILHOUETTE, STANDARD};
     enum BrushEffectsState {NOBRUSH,PAINT,WATERCOLOR,CALLIGRAPHY,PENCIL,SPRAYPAINT,DUST};
+    enum Direction {RIGHT,LEFT,UP,DOWN};
 
     Canvas(QUndoStack* undoStack_);
+
     QGraphicsScene *scene;
-    int mousePressCount;
-    QPen *pen;
-    QBrush *brush;
+    QPen *shapesPen;
+    QBrush *shapesBrush;
     QColor color;
+    int mousePressCount;
     QList<QPointF> points;
-    QUndoStack *undoStack;
     QGraphicsItem *selectedItem;
 
     DrawState drawState;
-    void resetDrawState();
     CursorState cursorState;
     ColorState colorState;
     ShapeState shapeState;
     StampState stampState;
     BrushEffectsState brushEffectsState;
 
+    //Undo
+    QUndoStack *undoStack;
     //Cursor
-    bool translateSignPositive;
-    bool translateDirectionHorizontal;
+    Direction translateDirection;
+    int translateV;
     int translateHorizontalValue;
     int translateVerticalValue;
 
-    bool scaleSignPositive;
+    Direction scaleDirection;
     double scaleFactor;
 
-    bool stretchSignPositive;
-    bool stretchDirectionHorizontal;
+    Direction stretchDirection;
+    double stretchV;
     double stretchHorizontalValue;
     double stretchVerticalValue;
 
-    bool rotateSignPositive;
+    Direction rotateDirection;
     double rotateAngle;
 
-    bool shearSignPositive;
-    bool shearDirectionHorizontal;
+    Direction shearDirection;
+    double shearV;
     double shearHorizontalValue;
     double shearVerticalValue;
 
@@ -68,12 +70,12 @@ public:
 
     void resetTranslateStretchShear();
     //Colors
-    QColor silhouetteColor;
     void setPenColor(QColor color);
     void setBrushColor(QColor color);
+    QColor silhouetteColor;
+    QColor brushColor;
     void setPenWidth(int width);
     //Shapes
-    QGraphicsItem *prevShape;
     void drawItem(QGraphicsItem *item);
     void resetShapeState();
     //Stamps

@@ -11,6 +11,12 @@ BrushEffectsWidget::BrushEffectsWidget()
 
 BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)
 {
+    brushSizeButton = new QPushButton("Set\nBrush\nSize");
+    brushSizeButton->setStyleSheet("QPushButton{background-color:#C0C0C0;}");
+    setButtonProperties(brushSizeButton);
+    brushColorButton = new QPushButton("Set\nBrush\nColor");
+    brushColorButton->setStyleSheet("QPushButton{background-color:#C0C0C0;}");
+    setButtonProperties(brushColorButton);
     paintButton = new QPushButton("paint");
     setButtonProperties(paintButton);
     waterColorButton = new QPushButton("water\ncolor");

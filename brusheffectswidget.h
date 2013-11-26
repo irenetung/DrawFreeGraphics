@@ -13,6 +13,8 @@ class BrushEffectsWidgetBrushEffects : public BrushEffectsWidget
 {
 public:
     explicit BrushEffectsWidgetBrushEffects(QWidget *parent = 0);
+    QPushButton *brushSizeButton;
+    QPushButton *brushColorButton;
     QPushButton *paintButton;
     QPushButton *waterColorButton;
     QPushButton *calligraphyButton;

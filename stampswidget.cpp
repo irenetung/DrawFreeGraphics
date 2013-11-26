@@ -13,7 +13,7 @@ StampsWidget::StampsWidget()
 // STAMPS WIDGET CATEGORIES
 StampsWidgetCategories::StampsWidgetCategories()
 {
-    silhouetteButton = new QPushButton("Solid\nColor\nButtons");
+    silhouetteButton = new QPushButton("Silhouette\nStamps");
     setButtonProperties(silhouetteButton);
     animalsButton = new QPushButton("Animals");
     setButtonProperties(animalsButton);
@@ -36,8 +36,12 @@ StampsWidgetCategories::StampsWidgetCategories()
 // STAMPS WIDGET SILHOUETTE
 StampsWidgetSilhouette::StampsWidgetSilhouette()
 {
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
+    silhouetteColorButton = new QPushButton("Set\nSilhouette\nColor");
+    silhouetteColorButton->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    setButtonProperties(silhouetteColorButton);
     stampOne = new QPushButton(QIcon(":/Stamps/solidcolorstamps/Stamps/solid_dog_stamp.png"), tr(""));
     setButtonProperties(stampOne);
     stampTwo = new QPushButton(QIcon(":/Stamps/solidcolorstamps/Stamps/solid_cat_stamp.png"), tr(""));
@@ -112,7 +116,8 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
 // STAMPS WIDGET ANIMALS
 StampsWidgetAnimals::StampsWidgetAnimals()
 {
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
     bearStamp = new QPushButton(QIcon(":/Stamps/animals/Stamps/animal_bear_stamp.png"), tr(""));
     setButtonProperties(bearStamp);
@@ -187,7 +192,8 @@ StampsWidgetAnimals::StampsWidgetAnimals()
 
 // STAMPS WIDGET PEOPLE
 StampsWidgetPeople::StampsWidgetPeople(){
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
     stampOne = new QPushButton(QIcon(":/Stamps/people/Stamps/people_angel_stamp.png"), tr(""));
     setButtonProperties(stampOne);
@@ -263,7 +269,8 @@ StampsWidgetPeople::StampsWidgetPeople(){
 // STAMPS WIDGET BUILDINGS
 StampsWidgetBuildings::StampsWidgetBuildings()
 {
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
     homeOneStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_home_one_stamp.png"), tr(""));
     setButtonProperties(homeOneStamp);
@@ -303,7 +310,8 @@ StampsWidgetBuildings::StampsWidgetBuildings()
 // STAMPS WIDGET SCENERY
 StampsWidgetScenery::StampsWidgetScenery()
 {
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
     palmTreeStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_palm_tree_stamp.png"), tr(""));
     setButtonProperties(palmTreeStamp);
@@ -344,7 +352,8 @@ StampsWidgetScenery::StampsWidgetScenery()
 // STAMPS WIDGET FACES
 StampsWidgetFaces::StampsWidgetFaces()
 {
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
     stampOne = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_one_stamp.png"), tr(""));
     setButtonProperties(stampOne);
@@ -418,7 +427,8 @@ StampsWidgetFaces::StampsWidgetFaces()
 // STAMPS WIDGET VEHICLES
 StampsWidgetVehicles::StampsWidgetVehicles()
 {
-    goBack = new QPushButton(QIcon(":/Icons/Icons/undo.png"), tr(""));
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
     setButtonProperties(goBack);
     stampOne = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_one_stamp.png"), tr(""));
     setButtonProperties(stampOne);

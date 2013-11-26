@@ -1,7 +1,6 @@
 #include "canvas.h"
 #include "commanditem.h"
 
-#include <QMessageBox>
 #include <QDebug>
 
 Canvas::Canvas(QUndoStack* undoStack_)
@@ -13,58 +12,45 @@ Canvas::Canvas(QUndoStack* undoStack_)
     this->setScene(scene);
     this->setRenderHint(QPainter::Antialiasing);
 
-    brush = new QBrush(Qt::green);
-    pen = new QPen(Qt::black);
-    pen->setStyle(Qt::SolidLine);
-    pen->setCapStyle(Qt::RoundCap);
-    pen->setJoinStyle(Qt::RoundJoin);
+    shapesPen = new QPen(Qt::black);
+    shapesBrush = new QBrush(Qt::white);
     silhouetteColor = Qt::black;
-    drawState = NOSTATE;
-    colorState = NOCOLOR;
-    cursorState = ROTATE;
-    shapeState = LINE;
+    brushColor = Qt::black;
     mousePressCount = 0;
-
     selectedItem = NULL;
 
+    drawState = NOSTATE;
+    cursorState = TRANSLATE;
+    shapeState = LINE;
+    brushEffectsState = PAINT;
+
+//Undo
+    undoStack = undoStack_;
+//Cursor
+    translateDirection = RIGHT;
+    translateV = 0;
     translateHorizontalValue = 0;
     translateVerticalValue = 0;
-    translateSignPositive = true;
-    translateDirectionHorizontal = true;
 
+    scaleDirection = RIGHT;
     scaleFactor = 1.0;
-    scaleSignPositive = true;
 
-    stretchSignPositive = true;
-    stretchDirectionHorizontal = true;
+    stretchDirection = RIGHT;
+    stretchV = 0;
     stretchHorizontalValue = 1;
     stretchVerticalValue = 1;
 
+    rotateDirection = RIGHT;
     rotateAngle = 0;
-    rotateSignPositive = true;
 
-    shearSignPositive = true;
-    shearDirectionHorizontal = true;
+    shearDirection = RIGHT;
+    shearV = 0;
     shearHorizontalValue = 0;
     shearVerticalValue = 0;
 
     depthPositive = true;
-
-    prevShape = NULL;
-
+//Stamps
     currentStampPath = "";
-    stampState = NOSTAMP;
-
-    brushEffectsState = NOBRUSH;
-
-    undoStack = undoStack_;
-}
-
-void Canvas::resetDrawState()
-{
-    drawState = NOSTATE;
-    mousePressCount = 0;
-    points.clear();
 }
 
 void Canvas::resetTranslateStretchShear()
@@ -79,18 +65,18 @@ void Canvas::resetTranslateStretchShear()
 
 void Canvas::setPenColor(QColor color)
 {
-    pen->setColor(color);
+    shapesPen->setColor(color);
 }
 
 void Canvas::setBrushColor(QColor color)
 {
-    brush->setColor(color);
+    shapesBrush->setColor(color);
 }
 
 void Canvas::setPenWidth(int width)
 {
-    if((pen->width())+width > 0) {
-        pen->setWidth(pen->width()+width);
+    if((shapesPen->width())+width > 0) {
+        shapesPen->setWidth(shapesPen->width()+width);
     }
 }
 
@@ -99,7 +85,6 @@ void Canvas::drawItem(QGraphicsItem *item)
     item->setTransformOriginPoint(item->boundingRect().center());
     undoStack->push(new CommandItem(item, scene));
     update();
-    prevShape = item;
     mousePressCount = 0;
     points.clear();
 }
@@ -118,6 +103,7 @@ void Canvas::setCurrentStamp(QString item)
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
+    item->setScale(0.5);
     undoStack->push(new CommandItem(item, scene));
     update();
     mousePressCount = 0;
@@ -172,7 +158,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         if(mousePressCount == 2) {
             switch(brushEffectsState) {
                 case PAINT: {
-                    PaintItem *paintItem = new PaintItem(points,*pen,*brush);
+                    PaintItem *paintItem = new PaintItem(points,*shapesPen,*shapesBrush);
                     drawItem(paintItem);
                     break;
                     }
@@ -185,7 +171,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 case SPRAYPAINT:
                     break;
             case DUST: {
-                    DrawItem *draw = new DrawItem(points,*pen,*brush);
+                    DrawItem *draw = new DrawItem(points,*shapesPen,*shapesBrush);
                     drawItem(draw);
                     break;
                     }
@@ -199,15 +185,67 @@ void Canvas::mousePressEvent(QMouseEvent *e)
     }
     if(drawState == CURSOR) {
         if(selectedItem != NULL) {
+            resetTranslateStretchShear();
             switch(cursorState) {
                 case TRANSLATE:
+                    switch(translateDirection) {
+                    case RIGHT:
+                        translateHorizontalValue += translateV;
+                        break;
+                    case LEFT:
+                        translateHorizontalValue -= translateV;
+                        break;
+                    case UP:
+                        translateVerticalValue -= translateV;
+                        break;
+                    case DOWN:
+                        translateVerticalValue += translateV;
+                        break;
+                    default:
+                        break;
+                    }
                     selectedItem->moveBy(translateHorizontalValue,translateVerticalValue);
-                    qDebug() << selectedItem->transformOriginPoint().x()<< " "<< selectedItem->transformOriginPoint().y();
                     break;
                 case STRETCH:
+                    switch(stretchDirection) {
+                    case RIGHT:
+                        stretchHorizontalValue += stretchV;
+                        break;
+                    case LEFT:
+                        if(stretchHorizontalValue - stretchV >= 0.01) {
+                            stretchHorizontalValue -= stretchV;
+                        }
+                        break;
+                    case UP:
+                        stretchVerticalValue += stretchV;
+                        break;
+                    case DOWN:
+                        if(stretchVerticalValue - stretchV >= 0.01) {
+                            stretchVerticalValue -= stretchV;
+                        }
+                        break;
+                    default:
+                        break;
+                    }
                     selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(selectedItem->transformOriginPoint().x(),selectedItem->transformOriginPoint().y()).scale(stretchHorizontalValue,stretchVerticalValue).translate(-selectedItem->transformOriginPoint().x(),-selectedItem->transformOriginPoint().y())));
+                    break;
                 case SHEAR:
-                    //selectedItem->setTransform((QTransform().translate(selectedItem->transformOriginPoint().x(),selectedItem->transformOriginPoint().y()).scale(stretchHorizontalValue,stretchVerticalValue).shear(shearHorizontalValue,shearVerticalValue).translate(translateHorizontalValue,translateVerticalValue).translate(-selectedItem->transformOriginPoint().x(),-selectedItem->transformOriginPoint().y())));
+                    switch(shearDirection) {
+                    case RIGHT:
+                        shearHorizontalValue -= shearV;
+                        break;
+                    case LEFT:
+                        shearHorizontalValue += shearV;
+                        break;
+                    case UP:
+                        shearVerticalValue += shearV;
+                        break;
+                    case DOWN:
+                        shearVerticalValue -= shearV;
+                        break;
+                    default:
+                        break;
+                    }
                     selectedItem->setTransform(selectedItem->transform()*(QTransform().translate(selectedItem->transformOriginPoint().x(),selectedItem->transformOriginPoint().y()).shear(shearHorizontalValue,shearVerticalValue).translate(-selectedItem->transformOriginPoint().x(),-selectedItem->transformOriginPoint().y())));
                     break;
                 case SCALE:
@@ -215,21 +253,20 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                         selectedItem->setScale(1.0);
                         break;
                     }
-                    if(scaleSignPositive == true) {
-
+                    if(scaleDirection == RIGHT) {
                         selectedItem->setScale(selectedItem->scale()+scaleFactor);
                     } else {
-                        if(selectedItem->scale()-scaleFactor > 0) {
+                        if(selectedItem->scale()-scaleFactor > 0.01) {
                             selectedItem->setScale(selectedItem->scale()-scaleFactor);
                         }
                     }
                     break;
                 case ROTATE:
                     if(rotateAngle < 0) {
-                        selectedItem->setRotation(0.000);
+                        selectedItem->setRotation(0);
                     }
                     selectedItem->setRotation(fmod(selectedItem->rotation(),360));
-                    if(rotateSignPositive == true) {
+                    if(rotateDirection == RIGHT) {
                         selectedItem->setRotation(selectedItem->rotation()+rotateAngle);
                     } else {
                         selectedItem->setRotation(selectedItem->rotation()-rotateAngle);
@@ -241,137 +278,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     } else {
                         selectedItem->setZValue(selectedItem->zValue()-1);
                     }
-                    break;
-                case OUTLINECOLOR:
-                    if(selectedItem) {
-                        switch(selectedItem->type()) {
-                            case 7:{
-                                //PIXMAP
-                                break;
-                                }
-                            case 6: {
-                                //LINE;
-                                QGraphicsLineItem *selectedLineItem = qgraphicsitem_cast<QGraphicsLineItem *>(selectedItem);
-                                selectedLineItem->setPen(*pen);
-                                break;
-                                }
-                            case PointItemType: {
-                                //POINT
-                                PointItem *selectedPointItem = qgraphicsitem_cast<PointItem *>(selectedItem);
-                                *(selectedPointItem->pen) = *pen;
-                                selectedPointItem->update();
-                                break;
-                                }
-                            case ArcItemType: {
-                                //ARC
-                                ArcItem *selectedArcItem = qgraphicsitem_cast<ArcItem *>(selectedItem);
-                                *(selectedArcItem->pen) = *pen;
-                                selectedArcItem->update();
-                                break;
-                                }
-                            case PathItemType: {
-                                //PATH
-                                PathItem *selectedPathItem = qgraphicsitem_cast<PathItem *>(selectedItem);
-                                *(selectedPathItem->pen) = *pen;
-                                selectedPathItem->update();
-                                break;
-                                }
-                            case 4: {
-                                //CIRCLE
-                                QGraphicsEllipseItem *selectedEllipseItem = qgraphicsitem_cast<QGraphicsEllipseItem *>(selectedItem);
-                                selectedEllipseItem->setPen(*pen);
-                                break;
-                                }
-                            case 3: {
-                                //RECT
-                                QGraphicsRectItem *selectedRectItem = qgraphicsitem_cast<QGraphicsRectItem *>(selectedItem);
-                                selectedRectItem->setPen(*pen);
-                                break;
-                                }
-                            case 5:{
-                                //POLYGON
-                                QGraphicsPolygonItem *selectedPolygonItem = qgraphicsitem_cast<QGraphicsPolygonItem *>(selectedItem);
-                                selectedPolygonItem->setPen(*pen);
-                                break;
-                                }
-                            case RoundRectangleItemType: {
-                                //ROUND RECT
-                                RoundRectangleItem *selectedRoundRectItem = qgraphicsitem_cast<RoundRectangleItem *>(selectedItem);
-                                *(selectedRoundRectItem->pen) = *pen;
-                                selectedRoundRectItem->update();
-                                break;
-                                }
-                            case ChordItemType: {
-                                //CHORD
-                                ChordItem *selectedChordItem = qgraphicsitem_cast<ChordItem *>(selectedItem);
-                                *(selectedChordItem->pen) = *pen;
-                                selectedChordItem->update();
-                                break;
-                                }
-                            case PieItemType: {
-                                //PIE
-                                PieItem *selectedPieItem = qgraphicsitem_cast<PieItem *>(selectedItem);
-                                *(selectedPieItem->pen) = *pen;
-                                selectedPieItem->update();
-                                break;
-                                }
-                            default:
-                                break;
-                        }
-                    }
-                    break;
-                case FILLCOLOR:
-                if(selectedItem) {
-                    switch(selectedItem->type()) {
-                        case 7:{
-                            //PIXMAP
-                            break;
-                            }
-                        case 4: {
-                            //CIRCLE
-                            QGraphicsEllipseItem *selectedEllipseItem = qgraphicsitem_cast<QGraphicsEllipseItem *>(selectedItem);
-                            selectedEllipseItem->setBrush(*brush);
-                            break;
-                            }
-                        case 3: {
-                            //RECT
-                            QGraphicsRectItem *selectedRectItem = qgraphicsitem_cast<QGraphicsRectItem *>(selectedItem);
-                            selectedRectItem->setBrush(*brush);
-                            break;
-                            }
-                        case 5:{
-                            //POLYGON
-                            QGraphicsPolygonItem *selectedPolygonItem = qgraphicsitem_cast<QGraphicsPolygonItem *>(selectedItem);
-                            selectedPolygonItem->setBrush(*brush);
-                            break;
-                            }
-                        case RoundRectangleItemType: {
-                            //ROUND RECT
-                            RoundRectangleItem *selectedRoundRectItem = qgraphicsitem_cast<RoundRectangleItem *>(selectedItem);
-                            *(selectedRoundRectItem->brush) = *brush;
-                            selectedRoundRectItem->update();
-                            break;
-                            }
-                        case ChordItemType: {
-                            //CHORD
-                            ChordItem *selectedChordItem = qgraphicsitem_cast<ChordItem *>(selectedItem);
-                            *(selectedChordItem->brush) = *brush;
-                            selectedChordItem->update();
-                            break;
-                            }
-                        case PieItemType: {
-                            //PIE
-                            PieItem *selectedPieItem = qgraphicsitem_cast<PieItem *>(selectedItem);
-                            *(selectedPieItem->brush) = *brush;
-                            selectedPieItem->update();
-                            break;
-                            }
-                        default:
-                            break;
-                    }
-                }
-                    break;
-                case BRUSHCOLOR:
                     break;
                 case OUTLINESIZE:
                     break;
@@ -492,6 +398,185 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             }
         }
     }
+    if(drawState == COLOR) {
+        if(selectedItem != NULL) {
+            switch(selectedItem->type()) {
+            case 7:{
+                //PIXMAP
+                switch(colorState) {
+                case SILHOUETTESTAMP: {
+                    QGraphicsPixmapItem *selectedPixmapItem = qgraphicsitem_cast<QGraphicsPixmapItem *>(selectedItem);
+                    QImage im = selectedPixmapItem->pixmap().toImage();
+                    QImage alpha = im.alphaChannel();
+                    for(int x=0; x<im.width();x++)
+                    {
+                        for(int y=0; y<im.height();y++)
+                        {
+                            if (qRed(alpha.pixel(x,y)) > 1)
+                            {
+                                im.setPixel( x, y, silhouetteColor.rgb());
+                            }
+                        }
+                    }
+                    selectedPixmapItem->setPixmap(QPixmap::fromImage(im));
+                    break;
+                }
+                default:
+                    break;
+                }
+                break;
+            }
+            case 6: {
+                //LINE;
+                QGraphicsLineItem *selectedLineItem = qgraphicsitem_cast<QGraphicsLineItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    selectedLineItem->setPen(*shapesPen);
+                    break;
+                default:
+                    break;
+                }
+                break;
+            }
+            case PointItemType: {
+                //POINT
+                PointItem *selectedPointItem = qgraphicsitem_cast<PointItem *>(selectedItem);
+                *(selectedPointItem->pen) = *shapesPen;
+                switch(colorState) {
+                case OUTLINE:
+                    *(selectedPointItem->pen) = *shapesPen;
+                    break;
+                default:
+                    break;
+                }
+                selectedPointItem->update();
+                break;
+            }
+            case ArcItemType: {
+                //ARC
+                ArcItem *selectedArcItem = qgraphicsitem_cast<ArcItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    *(selectedArcItem->pen) = *shapesPen;
+                    break;
+                default:
+                    break;
+                }
+                selectedArcItem->update();
+                break;
+            }
+            case PathItemType: {
+                //PATH
+                PathItem *selectedPathItem = qgraphicsitem_cast<PathItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    *(selectedPathItem->pen) = *shapesPen;
+                    break;
+                default:
+                    break;
+                }
+                selectedPathItem->update();
+                break;
+            }
+            case 4: {
+                //CIRCLE
+                qDebug() << "circle";
+                QGraphicsEllipseItem *selectedEllipseItem = qgraphicsitem_cast<QGraphicsEllipseItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    selectedEllipseItem->setPen(*shapesPen);
+                    break;
+                case FILL:
+                    selectedEllipseItem->setBrush(*shapesBrush);
+                    break;
+                default:
+                    break;
+                }
+                break;
+            }
+            case 3: {
+                //RECT
+                QGraphicsRectItem *selectedRectItem = qgraphicsitem_cast<QGraphicsRectItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    selectedRectItem->setPen(*shapesPen);
+                    break;
+                case FILL:
+                    selectedRectItem->setBrush(*shapesBrush);
+                    break;
+                default:
+                    break;
+                }
+                break;
+            }
+            case 5:{
+                //POLYGON
+                QGraphicsPolygonItem *selectedPolygonItem = qgraphicsitem_cast<QGraphicsPolygonItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    selectedPolygonItem->setPen(*shapesPen);
+                    break;
+                case FILL:
+                    selectedPolygonItem->setBrush(*shapesBrush);
+                    break;
+                default:
+                    break;
+                }
+                break;
+                }
+            case RoundRectangleItemType: {
+                //ROUND RECT
+                RoundRectangleItem *selectedRoundRectItem = qgraphicsitem_cast<RoundRectangleItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    *(selectedRoundRectItem->pen) = *shapesPen;
+                    break;
+                case FILL:
+                    *(selectedRoundRectItem->brush) = *shapesBrush;
+                    break;
+                default:
+                    break;
+                }
+                selectedRoundRectItem->update();
+                break;
+            }
+            case ChordItemType: {
+                //CHORD
+                ChordItem *selectedChordItem = qgraphicsitem_cast<ChordItem *>(selectedItem);
+                switch(colorState) {
+                case OUTLINE:
+                    *(selectedChordItem->pen) = *shapesPen;
+                    break;
+                case FILL:
+                    *(selectedChordItem->brush) = *shapesBrush;
+                    break;
+                default:
+                    break;
+                }
+                selectedChordItem->update();
+                break;
+            }
+            case PieItemType: {
+                 //PIE
+                 PieItem *selectedPieItem = qgraphicsitem_cast<PieItem *>(selectedItem);
+                 switch(colorState) {
+                 case OUTLINE:
+                     *(selectedPieItem->pen) = *shapesPen;
+                     break;
+                 case FILL:
+                     *(selectedPieItem->brush) = *shapesBrush;
+                     break;
+                 default:
+                     break;
+                 }
+                 selectedPieItem->update();
+                 break;
+            }
+            default:
+                 break;
+            }
+        }
+    }
     if(drawState == SHAPE) {
         points.append(clickPoint);
         mousePressCount++;
@@ -501,13 +586,13 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 if(mousePressCount == 2) {
                     QLineF line(points[0],points[1]);
                     QGraphicsLineItem *lineItem = new QGraphicsLineItem(line);
-                    lineItem->setPen(*pen);
+                    lineItem->setPen(*shapesPen);
                     drawItem(lineItem);
                 }
                 break;
             case POINT:
                 if(mousePressCount == 1) {
-                    PointItem *pointItem = new PointItem(points[points.size()-1],*pen);
+                    PointItem *pointItem = new PointItem(points[points.size()-1],*shapesPen);
                     drawItem(pointItem);
                 }
                 break;
@@ -515,8 +600,8 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 if(mousePressCount == 2) {
                     QRectF rect(points[0].x(),points[0].y(),points[1].x()-points[0].x(),points[1].y()-points[0].y());
                     QGraphicsEllipseItem *ellipseItem = new QGraphicsEllipseItem(rect);
-                    ellipseItem->setPen(*pen);
-                    ellipseItem->setBrush(*brush);
+                    ellipseItem->setPen(*shapesPen);
+                    ellipseItem->setBrush(*shapesBrush);
                     drawItem(ellipseItem);
                 }
                 break;
@@ -524,32 +609,32 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 if(mousePressCount == 2) {
                     QRectF rect(points[0].x(),points[0].y(),points[1].x()-points[0].x(),points[1].y()-points[0].y());
                     QGraphicsRectItem *rectItem = new QGraphicsRectItem(rect);
-                    rectItem->setPen(*pen);
-                    rectItem->setBrush(*brush);
+                    rectItem->setPen(*shapesPen);
+                    rectItem->setBrush(*shapesBrush);
                     drawItem(rectItem);
                 }
                 break;
             case ROUNDRECT:
                 if(mousePressCount == 2) {
-                    RoundRectangleItem *roundRectItem = new RoundRectangleItem(points,*pen,*brush);
+                    RoundRectangleItem *roundRectItem = new RoundRectangleItem(points,*shapesPen,*shapesBrush);
                     drawItem(roundRectItem);
                 }
                 break;
             case ARC:
                 if(mousePressCount == 2) {
-                    ArcItem *arcItem = new ArcItem(points,*pen,*brush);
+                    ArcItem *arcItem = new ArcItem(points,*shapesPen,*shapesBrush);
                     drawItem(arcItem);
                 }
                 break;
             case CHORD:
                 if(mousePressCount == 2) {
-                    ChordItem *chordItem = new ChordItem(points,*pen,*brush);
+                    ChordItem *chordItem = new ChordItem(points,*shapesPen,*shapesBrush);
                     drawItem(chordItem);
                 }
                 break;
             case PIE:
                 if(mousePressCount == 2) {
-                    PieItem *pieItem = new PieItem(points,*pen,*brush);
+                    PieItem *pieItem = new PieItem(points,*shapesPen,*shapesBrush);
                     drawItem(pieItem);
                 }
                 break;
@@ -579,7 +664,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 }
             }
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
-            item->setScale(0.5);
             item->setPos(clickPoint - item->boundingRect().center());
             drawPixmapItem(item);
         }
@@ -588,7 +672,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             points.append(clickPoint);
             QImage im(currentStampPath);
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
-            item->setScale(0.5);
             item->setPos(clickPoint - item->boundingRect().center());
             drawPixmapItem(item);
         }

@@ -2,15 +2,6 @@
 #include <QDebug>
 
 //POINT
-/*PointItem::PointItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
-{
-    for(int i = 0; i < points.size(); i++) {
-        vertices.append(points[i]);
-    }
-    pen = new QPen(curPen);
-    brush = new QBrush(curBrush);
-}*/
-
 PointItem::PointItem(QPointF &point, QPen &curPen)
 {
     vertex = point;
@@ -238,6 +229,9 @@ PaintItem::PaintItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)
         }
     }
     pen = new QPen(curPen);
+    pen->setStyle(Qt::SolidLine);
+    pen->setCapStyle(Qt::RoundCap);
+    pen->setJoinStyle(Qt::RoundJoin);
     brush = new QBrush(curBrush);
 }
 

@@ -14,7 +14,22 @@ class ShapesWidgetShapes : public ShapesWidget
 {
 public:
     explicit ShapesWidgetShapes();
+
+    QPixmap *lineButtonIcon;
+    QPixmap *pointButtonIcon;
+    QPixmap *circleButtonIcon;
+    QPixmap *rectangleButtonIcon;
+    QPixmap *roundedRectangleButtonIcon;
+    QPixmap *polygonButtonIcon;
+    QPixmap *arcButtonIcon;
+    QPixmap *chordButtonIcon;
+    QPixmap *pieButtonIcon;
+    QPixmap *pathButtonIcon;
+    QPixmap *textButtonIcon;
+
     QPushButton *outlineSizeButton;
+    QPushButton *outlineColorButton;
+    QPushButton *fillColorButton;
     QPushButton *lineButton;
     QPushButton *pointButton;
     QPushButton *circleButton;

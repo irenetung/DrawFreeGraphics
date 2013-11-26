@@ -8,7 +8,7 @@ ColorsWidget::ColorsWidget()
     parea->fill(QColor(204,255,153));
     this->setStyleSheet("QPushButton{background-color:#E5FFCC; border-color:#66CC00; border-style:solid; border-width:3px; border-radius:3px;}"
                         "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
-                        );
+                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
 }
 
 ColorsWidgetPaintTools::ColorsWidgetPaintTools()
@@ -17,18 +17,25 @@ ColorsWidgetPaintTools::ColorsWidgetPaintTools()
     setButtonProperties(outlineButton);
     fillButton = new QPushButton("fill");
     setButtonProperties(fillButton);
-    brushButton = new QPushButton("brush");
-    setButtonProperties(brushButton);
     silhouetteButton = new QPushButton("silhouette");
     setButtonProperties(silhouetteButton);
+    brushButton = new QPushButton("brush");
+    setButtonProperties(brushButton);
     backgroundButton = new QPushButton("back\nground");
     setButtonProperties(backgroundButton);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToGroup(outlineButton);
+    addToGroup(fillButton);
+    addToGroup(silhouetteButton);
+    addToGroup(brushButton);
+    addToGroup(backgroundButton);
 }
 
-ColorsWidgetColors::ColorsWidgetColors()
+ColorsWidgetColors::ColorsWidgetColors(ColorsWidgetColors::WidgetType widgetType)
 {
     peachButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     peachButtonIcon->fill(QColor(255,239,213));
@@ -45,7 +52,7 @@ ColorsWidgetColors::ColorsWidgetColors()
     blueButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     blueButtonIcon->fill(QColor(0,128,255));
     purpleButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
-    purpleButtonIcon->fill(QColor(153,51,255));
+    purpleButtonIcon->fill(QColor(153,0,153));
     brownButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     brownButtonIcon->fill(QColor(102,51,0));
     blackButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
@@ -55,8 +62,30 @@ ColorsWidgetColors::ColorsWidgetColors()
     whiteButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     whiteButtonIcon->fill(QColor(255,255,255));
 
-    backButton = new QPushButton(QIcon(":/ButtonIcons/ButtonIcons/back.png"), tr(""));
-    setButtonProperties(backButton);
+    colorsBackButton = new QPushButton(tr("< paint\ntools"));
+    colorsBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+    setButtonProperties(colorsBackButton);
+
+    switch(widgetType) {
+        case SHAPES:
+            otherBackButton = new QPushButton(tr("< shapes"));
+            otherBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+            setButtonProperties(otherBackButton);
+            break;
+        case STAMPS:
+            otherBackButton = new QPushButton(tr("< silhouette\nstamps"));
+            otherBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+            setButtonProperties(otherBackButton);
+            break;
+        case BRUSHEFFECTS:
+            otherBackButton = new QPushButton(tr("< brush\neffects"));
+            otherBackButton->setStyleSheet("QPushButton{background-color:#99FF99;}");
+            setButtonProperties(otherBackButton);
+            break;
+        default:
+            break;
+    }
+
     whiteButton = new QPushButton(QIcon(*whiteButtonIcon), tr(""));
     setButtonProperties(whiteButton);
     peachButton = new QPushButton(QIcon(*peachButtonIcon), tr(""));

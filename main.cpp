@@ -8,6 +8,10 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
+
+    //a.setOverrideCursor(QCursor(QPixmap(":/Icons/Icons/cursor.png")));
+
+
     MainWindow w;
     w.showFullScreen();
 

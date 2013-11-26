@@ -33,6 +33,7 @@ protected:
     QSpacerItem *horizSpacer;
     void setButtonProperties(QPushButton *b);
     void addToButtonGroup(QPushButton *b);
+    void addToGroup(QPushButton *b);
     QPixmap *parea;
 };
 
