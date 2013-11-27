@@ -48,6 +48,8 @@ Clone this repository onto your computer to view the source code of this applica
 RUNNING THE APPLICATION:
 To run the application, you can either build and run via Qt Creator, or execute the executable file included with this package (the latter is recommended).
 
+The executable is called “DrawFreeApplication.exe”
+
 
 
 INTERACTING WITH THE APPLICATION:
