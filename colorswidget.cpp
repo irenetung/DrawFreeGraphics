@@ -72,28 +72,49 @@ ColorsWidgetColors::ColorsWidgetColors(ColorsWidgetColors::WidgetType widgetType
     prevCustomButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
     prevCustomButtonIcon->fill(QColor(255,255,255));
 
-    colorsBackButton = new QPushButton(tr("< paint\ntools"));
+    colorsBackButton = new QPushButton(tr("< Paint\nTools"));
     colorsBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
     setButtonProperties(colorsBackButton);
 
     switch(widgetType) {
-        case SHAPES:
-            otherBackButton = new QPushButton(tr("< shapes"));
-            otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
-            setButtonProperties(otherBackButton);
-            break;
-        case STAMPS:
-            otherBackButton = new QPushButton(tr("< silhouette\nstamps"));
-            otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
-            setButtonProperties(otherBackButton);
-            break;
-        case BRUSHEFFECTS:
-            otherBackButton = new QPushButton(tr("< brush\neffects"));
-            otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
-            setButtonProperties(otherBackButton);
-            break;
-        default:
-            break;
+    case OUTLINE:
+        otherBackButton = new QPushButton(tr("< Shapes"));
+        otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(otherBackButton);
+
+        alphaButton = new QPushButton(tr("Set Outline\nTransparency"));
+        alphaButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(alphaButton);
+        break;
+    case FILL:
+        otherBackButton = new QPushButton(tr("< Shapes"));
+        otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(otherBackButton);
+
+        alphaButton = new QPushButton(tr("Set Fill\nTransparency"));
+        alphaButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(alphaButton);
+        break;
+    case STAMPS:
+        otherBackButton = new QPushButton(tr("< Silhouette\nStamps"));
+        otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(otherBackButton);
+
+        alphaButton = new QPushButton(tr("Set\nSilhouette\nTransparency"));
+        alphaButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(alphaButton);
+        break;
+    case BRUSHEFFECTS:
+        otherBackButton = new QPushButton(tr("< Brush\nEffects"));
+        otherBackButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(otherBackButton);
+
+        alphaButton = new QPushButton(tr("Set Brush\nTransparency"));
+        alphaButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(alphaButton);
+        break;
+    default:
+        break;
     }
 
     whiteButton = new QPushButton(QIcon(*whiteButtonIcon), tr(""));
@@ -123,6 +144,7 @@ ColorsWidgetColors::ColorsWidgetColors(ColorsWidgetColors::WidgetType widgetType
     prevCustomButton = new QPushButton(QIcon(*prevCustomButtonIcon), tr(""));
     setButtonProperties(prevCustomButton);
     customColorButton = new QPushButton("Custom\nColor");
+    customColorButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
     setButtonProperties(customColorButton);
 
     hLayout->addItem(horizSpacer);
@@ -144,4 +166,70 @@ ColorsWidgetColors::ColorsWidgetColors(ColorsWidgetColors::WidgetType widgetType
     addToButtonGroup(prevCustomButton);
 
     buttonGroup->setExclusive(true);
+}
+
+ColorsWidgetAlpha::ColorsWidgetAlpha(ColorsWidgetAlpha::AlphaWidgetType widgetType)
+{
+    switch(widgetType) {
+    case OUTLINE:
+        currentAlpha = tr("The current shape outline alpha value is: %1. Adjust the alpha value. Or click a shape on the canvas to change its outline transparency. Toggle the sign button to change the increments from positive to negative or vice versa.");
+        backButton = new QPushButton(tr("< Set\nOutline\nColor"));
+        backButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(backButton);
+        break;
+    case FILL:
+        currentAlpha = tr("The current shape fill alpha value is: %1. Adjust the alpha value. Or click a shape on the canvas to change its fill transparency. Toggle the sign button to change the increments from positive to negative or vice versa.");
+        backButton = new QPushButton(tr("< Set\nFill\nColor"));
+        backButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(backButton);
+        break;
+    case STAMPS:
+        currentAlpha = tr("The current silhouette stamp alpha value is: %1. Adjust the alpha value. Or click a silhouette stamp on the canvas to change its transparency. Toggle the sign button to change the increments from positive to negative or vice versa.");
+        backButton = new QPushButton(tr("< Set\nSilhouette\nColor"));
+        backButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(backButton);
+        break;
+    case BRUSHEFFECTS:
+        currentAlpha = tr("The current brush alpha value is: %1. Adjust the alpha value. Or click a brush stroke on the canvas to change its transparency. Toggle the sign button to change the increments from positive to negative or vice versa.");
+        backButton = new QPushButton(tr("< Set\nBrush\nColor"));
+        backButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+        setButtonProperties(backButton);
+        break;
+    default:
+        break;
+    }
+
+    signButton = new QPushButton(tr("+"));
+    signButton->setStyleSheet(tr("QPushButton{background-color:#99FF99;}"));
+    setButtonProperties(signButton);
+
+    transparentButton = new QPushButton(tr("Transparent"));
+    setButtonProperties(transparentButton);
+    opaqueButton = new QPushButton(tr("Opaque"));
+    setButtonProperties(opaqueButton);
+    a1Button = new QPushButton(tr("1"));
+    setButtonProperties(a1Button);
+    a5Button = new QPushButton(tr("5"));
+    setButtonProperties(a5Button);
+    a10Button = new QPushButton(tr("10"));
+    setButtonProperties(a10Button);
+    a20Button = new QPushButton(tr("20"));
+    setButtonProperties(a20Button);
+    a50Button = new QPushButton(tr("50"));
+    setButtonProperties(a50Button);
+    a100Button = new QPushButton(tr("100"));
+    setButtonProperties(a100Button);
+
+    hLayout->addItem(horizSpacer);
+    this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToGroup(transparentButton);
+    addToGroup(opaqueButton);
+    addToGroup(a1Button);
+    addToGroup(a5Button);
+    addToGroup(a10Button);
+    addToGroup(a20Button);
+    addToGroup(a50Button);
+    addToGroup(a100Button);
 }

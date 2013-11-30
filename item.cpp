@@ -44,8 +44,7 @@ void RoundRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     painter->setBrush(*brush);
     painter->setPen(*pen);
-    painter->drawRoundRect(rect);
-
+    painter->drawRoundRect(rect,20,20);
 }
 
 ArcItem::ArcItem(QList<QPointF> &points,QPen &curPen,QBrush &curBrush)

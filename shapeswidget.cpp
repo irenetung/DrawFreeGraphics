@@ -94,12 +94,6 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     iconPainter.setBrush(iconBrush);
     iconPainter.drawPolyline(polygon);
     iconPainter.end();
-    textButtonIcon = new QPixmap(buttonWidth*3,buttonHeight*3);
-    textButtonIcon->fill(QColor(204,255,204));
-    iconPainter.begin(textButtonIcon);
-    iconPainter.setFont(iconFont);
-    iconPainter.drawText(rect,Qt::AlignCenter,tr("A"));
-    iconPainter.end();
 
     outlineSizeButton = new QPushButton(tr("Set\nOutline\nSize"));
     outlineSizeButton->setStyleSheet(tr("QPushButton{background-color:#99FFCC;}"));
@@ -131,8 +125,6 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     setButtonProperties(pieButton);
     pathButton = new QPushButton(QIcon(*pathButtonIcon), tr(""));
     setButtonProperties(pathButton);
-    textButton = new QPushButton(QIcon(*textButtonIcon), tr(""));
-    setButtonProperties(textButton);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
@@ -148,7 +140,6 @@ ShapesWidgetShapes::ShapesWidgetShapes()
     addToButtonGroup(chordButton);
     addToButtonGroup(pieButton);
     addToButtonGroup(pathButton);
-    addToButtonGroup(textButton);
 
     buttonGroup->setExclusive(true);
 }
@@ -202,79 +193,10 @@ ShapesWidgetOutlineSizes::ShapesWidgetOutlineSizes()
 }
 
 
-ShapesWidgetKeyboardLetters::ShapesWidgetKeyboardLetters()
+
+/*ShapesWidgetKeyboardNumbers::ShapesWidgetKeyboardNumbers()
 {
-    qButton = new QPushButton(tr("Q"));
-    setButtonProperties(qButton);
-    wButton = new QPushButton(tr("W"));
-    setButtonProperties(wButton);
-    eButton = new QPushButton(tr("E"));
-    setButtonProperties(eButton);
-    rButton = new QPushButton(tr("R"));
-    setButtonProperties(rButton);
-    tButton = new QPushButton(tr("T"));
-    setButtonProperties(tButton);
-    yButton = new QPushButton(tr("Y"));
-    setButtonProperties(yButton);
-    uButton = new QPushButton(tr("U"));
-    setButtonProperties(uButton);
-    iButton = new QPushButton(tr("I"));
-    setButtonProperties(iButton);
-    oButton = new QPushButton(tr("O"));
-    setButtonProperties(oButton);
-    pButton = new QPushButton(tr("P"));
-    setButtonProperties(pButton);
-
-    aButton = new QPushButton(tr("A"));
-    setButtonProperties(aButton);
-    sButton = new QPushButton(tr("S"));
-    setButtonProperties(sButton);
-    dButton = new QPushButton(tr("D"));
-    setButtonProperties(dButton);
-    fButton = new QPushButton(tr("F"));
-    setButtonProperties(fButton);
-    gButton = new QPushButton(tr("G"));
-    setButtonProperties(gButton);
-    hButton = new QPushButton(tr("H"));
-    setButtonProperties(hButton);
-    jButton = new QPushButton(tr("J"));
-    setButtonProperties(jButton);
-    kButton = new QPushButton(tr("K"));
-    setButtonProperties(lButton);
-    lButton = new QPushButton(tr("L"));
-    setButtonProperties(lButton);
-
-    shiftButton= new QPushButton(tr("Shift"));
-    setButtonProperties(shiftButton);
-    zButton = new QPushButton(tr("Z"));
-    setButtonProperties(zButton);
-    xButton = new QPushButton(tr("X"));
-    setButtonProperties(xButton);
-    cButton = new QPushButton(tr("C"));
-    setButtonProperties(cButton);
-    vButton = new QPushButton(tr("V"));
-    setButtonProperties(vButton);
-    bButton = new QPushButton(tr("B"));
-    setButtonProperties(bButton);
-    nButton = new QPushButton(tr("N"));
-    setButtonProperties(nButton);
-    mButton = new QPushButton(tr("M"));
-    setButtonProperties(mButton);
-    backSpaceButton = new QPushButton(tr("Backspace"));
-    setButtonProperties(backSpaceButton);
-
-    numbersButton = new QPushButton(tr("123"));
-    setButtonProperties(numbersButton);
-    spaceButton = new QPushButton(tr("Space"));
-    setButtonProperties(spaceButton);
-    enterButton = new QPushButton(tr("Enter"));
-    setButtonProperties(enterButton);
-}
-
-
-ShapesWidgetKeyboardNumbers::ShapesWidgetKeyboardNumbers()
-{
-    /*n1Button = new QPushButton(tr("1"));
+    n1Button = new QPushButton(tr("1"));
     setButtonProperties(n1Button);
     n2Button = new QPushButton(tr("2"));
     setButtonProperties(n1Button);
@@ -322,12 +244,11 @@ ShapesWidgetKeyboardNumbers::ShapesWidgetKeyboardNumbers()
 
     QPushButton *lettersButton;
     QPushButton *spaceButton;
-    QPushButton *enterButton;*/
-
+    QPushButton *enterButton;
 }
 
 
 ShapesWidgetKeyboardSymbols::ShapesWidgetKeyboardSymbols()
 {
 
-}
+}*/

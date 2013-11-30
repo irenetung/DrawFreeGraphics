@@ -12,6 +12,7 @@
 #include <QUndoStack>
 #include <QVector>
 #include <QCursor>
+#include <QFontDialog>
 
 #include "prompt.h"
 #include "settingswidget.h"
@@ -20,6 +21,7 @@
 #include "shapeswidget.h"
 #include "brusheffectswidget.h"
 #include "stampswidget.h"
+#include "textwidget.h"
 #include "item.h"
 #include "canvas.h"
 
@@ -56,6 +58,7 @@ private:
     QToolButton *shapesButton;
     QToolButton *stampsButton;
     QToolButton *brushEffectsButton;
+    QToolButton *textButton;
     QToolButton *insertPictureButton;
     QToolButton *closeButton;
     QToolButton *showHidePopupButton;
@@ -82,6 +85,12 @@ private:
     ColorsWidgetColors *colorsWidgetColorsSilhouette;
     ColorsWidgetColors *colorsWidgetColorsBrush;
     ColorsWidgetColors *colorsWidgetColorsBackground;
+
+    ColorsWidgetAlpha *colorsWidgetAlphaOutline;
+    ColorsWidgetAlpha *colorsWidgetAlphaFill;
+    ColorsWidgetAlpha *colorsWidgetAlphaSilhouette;
+    ColorsWidgetAlpha *colorsWidgetAlphaBrush;
+
 //Shapes
     ShapesWidgetShapes *shapesWidgetShapes;
     ShapesWidgetEndPath *shapesWidgetEndPath;
@@ -100,6 +109,9 @@ private:
 //Brush Effects
     BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;
     BrushEffectsWidgetBrushSizes *brushEffectsWidgetBrushSizes;
+//Text
+    TextWidgetLetters *textWidgetLetters;
+    TextWidgetSpecialKeys *textWidgetSpecialKeys;
 //Canvas
     Canvas *canvas;
 //Application Layout
@@ -152,8 +164,13 @@ private slots:
     //Colors
     void colorsButtonGroupClicked(int id);
     void colorsBackButtonClicked();
+    void colorsAlphaButtonClicked(int widgetType);
     void otherBackButtonClicked(int widgetType);
     void customColorButtonClicked();
+
+    void alphaBackButtonClicked();
+    void alphaSignButtonClicked();
+    void alphaButtonGroupClicked(int id);
 //Brush Effects
     void brushSizeButtonClicked();
     void brushColorButtonClicked();
@@ -172,14 +189,26 @@ private slots:
     void silhouetteColorButtonClicked();
     void silhouetteStampClicked(const QString stamp_name);
     void standardStampClicked(const QString stamp_name);
+//Text
+    void lettersSpecialKeysButtonClicked();
+    void textChangeFontButtonClicked();
+    void lettersShiftButtonClicked();
+    void lettersButtonGroupClicked(int id);
+    void textBackSpaceButtonClicked();
+    void textClearButtonClicked();
+    void textOkButtonClicked();
 
+    void specialKeysLettersButtonClicked();
+    void specialKeysButtonGroupClicked(int id);
 private:
     void resetDrawState();
     void showPopup(BaseWidget *p);
     void changeButtonProperties(const int &newButtonWidth,const int &newButtonHeight);
     void changeCursorDirectionValue(double v);
     void changePaintToolColor(QColor color);
+    void changePaintToolAlpha(int alpha);
     void changePaintToolSize(int size);
+    void changeKeyboard();
     void setShapesPrompt(Canvas::ShapeState shapeState);
     void setColorsPrompt(Canvas::ColorState colorState);
 };

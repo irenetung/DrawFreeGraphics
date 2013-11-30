@@ -20,10 +20,12 @@ Canvas::Canvas(QUndoStack* undoStack_)
     shapesPen->setCosmetic(true);
     shapesBrush = new QBrush(Qt::white);
 
-    silhouetteColor = Qt::black;
+    silhouetteColor = QColor(0,0,0);
 
     brushPen = new QPen(Qt::black);
-    shapesPen->setCosmetic(true);
+    brushPen->setStyle(Qt::DashLine);
+    brushPen->setCapStyle(Qt::RoundCap);
+    brushPen->setJoinStyle(Qt::RoundJoin);
     brushBrush = new QBrush(Qt::black);
 
     mousePressCount = 0;
@@ -62,14 +64,28 @@ Canvas::Canvas(QUndoStack* undoStack_)
     flipY = true;
 //Colors
     prevCustomColor = QColor(255,255,255);
+
+    alphaOutlineSignPositive = true;
+    alphaFillSignPositive = true;
+    alphaSilhouetteSignPositive = true;
+    alphaBrushSignPositive = true;
 //Shapes
     outlineIncrement=0;
     outlineSignPositive = true;
+
+    shapePointsPen.setWidth(5);
 //Stamps
     currentStampPath = "";
 //Brush effects
     brushIncrement=0;
     brushSignPositive = true;
+
+    myPath = new QGraphicsPathItem();
+    myPath->setPen(*brushPen);
+    scene->addItem(myPath);
+//Text
+    text = "";
+    shiftOn = true;
 }
 
 void Canvas::resetTranslateStretchShear()
@@ -83,7 +99,9 @@ void Canvas::resetTranslateStretchShear()
 }
 
 void Canvas::drawItem(QGraphicsItem *item)
-{
+{   
+    QPainterPath path;
+    myPath->setPath(path);
     item->setTransformOriginPoint(item->boundingRect().center());
     undoStack->push(new CommandItem(item, scene));
     update();
@@ -106,6 +124,7 @@ void Canvas::setCurrentStamp(QString item)
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
+    item->setScale(0.5);
     undoStack->push(new CommandItem(item, scene));
     update();
     mousePressCount = 0;
@@ -146,12 +165,47 @@ void Canvas::mouseMoveEvent(QMouseEvent *e)
         if(mousePressCount == 1) {
             QPointF movePoint = mapToScene(e->pos());
             points.append(movePoint);
-            /*PointItem *pointItem = new PointItem(points[points.size()-1],*pen);
-            drawItem(pointItem);
-            update();
-            int rad = (pen->width()/2) + 2;*/
 
-            //update(QRect(points[points.size()-2].toPoint(),(QPoint)points[points.size()-1].toPoint()).normalized().adjusted(-rad,-rad,+rad,+rad));
+            QPainterPath path = myPath->path();
+            path.lineTo(movePoint);
+            myPath->setPath(path);
+            scene->update();
+        }
+    } else if (drawState == SHAPE) {
+        if(mousePressCount > 0) {
+            QPointF movePoint = mapToScene(e->pos());
+            QPainterPath path;
+            path.moveTo(points[0]);
+            QRectF rect = QRectF(points[0].x(),points[0].y(), movePoint.x()-points[0].x(), movePoint.y()-points[0].y());
+            switch(shapeState) {
+            case LINE:
+                path.lineTo(movePoint);
+                break;
+            case POLYGON:
+            case PATH:
+                for(int i = 1; i < points.size(); i++) {
+                    path.lineTo(points[i]);
+                }
+                path.lineTo(movePoint);
+                break;
+            case CIRCLE:
+                path.addEllipse(rect);
+                break;
+            case RECT:
+                path.addRect(rect);
+                break;
+            case ROUNDRECT:
+                path.addRoundedRect(rect,20,20);
+                break;
+            case ARC:
+            case CHORD:
+            case PIE:
+                path.arcMoveTo(rect,30);
+                path.arcTo(rect,30,120);
+                break;
+            }
+            myPath->setPath(path);
+            scene->update();
         }
     }
 }
@@ -161,51 +215,52 @@ void Canvas::mousePressEvent(QMouseEvent *e)
     QPointF clickPoint = mapToScene(e->pos());
     QGraphicsItem *selectedItem = itemAt(e->pos());
 
-    if(drawState == BRUSHEFFECTS) {
-        mousePressCount++;
+    switch(drawState) {
+        case BRUSHEFFECTS: {//-----------------------------------------------------------------
+        ++mousePressCount;
         points.append(clickPoint);
-        //PointItem *pointItem = new PointItem(points[points.size()-1],*pen);
-        //drawItem(pointItem);
-        if(mousePressCount == 2) {
+        if(mousePressCount == 1) {
+            QPainterPath p;
+            p.moveTo(clickPoint);
+            myPath->setPath(p);
+        } else if(mousePressCount == 2) {
+            QPainterPath path;
+            myPath->setPath(path);
             switch(brushEffectsState) {
-                case PAINT: {
-                    PaintItem *paintItem = new PaintItem(points,*brushPen,*brushBrush);
-                    drawItem(paintItem);
-                    break;
-                    }
-                case WATERCOLOR: {
-                    //DrawItem *watercolor = new DrawItem(points, *brushPen, *brushBrush);
-                    //watercolor->addWaterColorEffect(25,0.3);
-                    WatercolorItem *watercolor = new WatercolorItem(points, *brushPen, *brushBrush);
-                    drawItem(watercolor);
-                    break;
-                    }
-                case CALLIGRAPHY: {
-                    CalligraphyItem *calligraphyItem = new CalligraphyItem(points, *brushPen, *brushBrush);
-                    drawItem(calligraphyItem);
-                    break;
+            case PAINT: {
+                PaintItem *paintItem = new PaintItem(points, *brushPen, *brushBrush);
+                drawItem(paintItem);
+                break;
                 }
-                case PENCIL:
-                    break;
+            case WATERCOLOR: {
+                WatercolorItem *watercolor = new WatercolorItem(points, *brushPen, *brushBrush);
+                drawItem(watercolor);
+                break;
+            }
+            case CALLIGRAPHY: {
+                CalligraphyItem *calligraphyItem = new CalligraphyItem(points, *brushPen, *brushBrush);
+                drawItem(calligraphyItem);
+                break;
+            }
+            case PENCIL:
+                break;
             case SPRAYPAINT: {
-                    SprayPaintItem *sprayPaintItem = new SprayPaintItem(points, *brushPen, *brushBrush);
-                    drawItem(sprayPaintItem);
-                    break;
+                SprayPaintItem *sprayPaintItem = new SprayPaintItem(points, *brushPen, *brushBrush);
+                drawItem(sprayPaintItem);
+                break;
             }
             case DUST: {
-                    DrawItem *draw = new DrawItem(points,*brushPen,*brushBrush);
-                    drawItem(draw);
-                    break;
-                    }
-                default:
-                    break;
-
-                 //draw->addWaterColorEffect(100, 0.1);
+                DrawItem *draw = new DrawItem(points,*brushPen,*brushBrush);
+                drawItem(draw);
+                break;
+                }
+            default:
+                break;
             }
-            mousePressCount = 0;
         }
+        break;
     }
-    if(drawState == CURSOR) {
+    case CURSOR: {//---------------------------------------------------------------------------
         if(selectedItem != NULL) {
             resetTranslateStretchShear();
             switch(cursorState) {
@@ -445,8 +500,9 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     break;
             }
         }
+        break;
     }
-    if(drawState == COLOR) {
+    case COLOR: {//-------------------------------------------------------
         if(selectedItem != NULL) {
             switch(selectedItem->type()) {
             case 7:{
@@ -456,16 +512,19 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     QGraphicsPixmapItem *selectedPixmapItem = qgraphicsitem_cast<QGraphicsPixmapItem *>(selectedItem);
                     QImage im = selectedPixmapItem->pixmap().toImage();
                     QImage alpha = im.alphaChannel();
+                    im.convertToFormat(QImage::Format_ARGB32_Premultiplied);
                     for(int x=0; x<im.width();x++)
                     {
                         for(int y=0; y<im.height();y++)
                         {
                             if (qRed(alpha.pixel(x,y)) > 1)
                             {
-                                im.setPixel( x, y, silhouetteColor.rgb());
+                                im.setPixel(x,y,silhouetteColor.rgba());
+                                alpha.setPixel(x,y,silhouetteColor.alpha());
                             }
                         }
                     }
+                    im.setAlphaChannel(alpha);
                     selectedPixmapItem->setPixmap(QPixmap::fromImage(im));
                     break;
                 }
@@ -826,14 +885,20 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             }
         }
         scene->update();
+        break;
     }
-    if(drawState == SHAPE) {
+    case SHAPE: {
         points.append(clickPoint);
         mousePressCount++;
 
+        if(mousePressCount == 1) {
+            QPainterPath p;
+            p.moveTo(clickPoint);
+            myPath->setPath(p);
+        }
         switch(shapeState) {
-            case LINE:
-                if(mousePressCount == 2) {
+        case LINE:
+            if(mousePressCount == 2) {
                     QLineF line(points[0],points[1]);
                     QGraphicsLineItem *lineItem = new QGraphicsLineItem(line);
                     lineItem->setPen(*shapesPen);
@@ -895,8 +960,9 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 mousePressCount = 0;
                 break;
         }
+        break;
     }
-    if (drawState == STAMP)
+    case STAMP://--------------------------------------------
     {
         if (stampState == SILHOUETTE)
         {
@@ -914,7 +980,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 }
             }
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
-            item->setScale(0.25);
 
             item->setPos(clickPoint - item->boundingRect().center());
             drawPixmapItem(item);
@@ -925,8 +990,6 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             QImage im(currentStampPath);
             QGraphicsPixmapItem *item = new QGraphicsPixmapItem(QPixmap::fromImage(im));
 
-            item->setScale(0.25);
-
             item->setPos(clickPoint - item->boundingRect().center());
             drawPixmapItem(item);
         }
@@ -935,6 +998,9 @@ void Canvas::mousePressEvent(QMouseEvent *e)
             qDebug() << "EXCEPTION: draw stamp occurred without stamp state being set";
         }
     }
+        break;
+    }
+
 }
 
 void Canvas::copyTransforms(QGraphicsItem *copyItem, QGraphicsItem *selectedItem)
@@ -943,13 +1009,5 @@ void Canvas::copyTransforms(QGraphicsItem *copyItem, QGraphicsItem *selectedItem
     copyItem->setRotation(selectedItem->rotation());
     copyItem->setScale(selectedItem->scale());
     copyItem->setTransform(selectedItem->transform());
+    copyItem->setZValue(selectedItem->zValue());
 }
-
-/*void Canvas::drawForeground(QPainter *painter, const QRectF &rect)
-{
-    /*int startAngle = 30*16;
-    int spanAngle = 120*16;
-    painter->drawArc(rect, startAngle, spanAngle);
-}*/
-
-

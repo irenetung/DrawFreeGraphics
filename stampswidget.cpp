@@ -6,8 +6,8 @@ StampsWidget::StampsWidget()
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(153,204,255));
-    this->setStyleSheet("QPushButton{background-color:#CCE5FF; border-color:#0080FF; border-style:solid; border-width:3px; border-radius:3px;}"
+    parea->fill(QColor(153,255,204));
+    this->setStyleSheet("QPushButton{background-color:#CCFFFF; border-color:#009999; border-style:solid; border-width:3px; border-radius:3px;}"
                         "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
                         "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
 }
@@ -17,9 +17,7 @@ StampsWidgetCategories::StampsWidgetCategories()
 {
 
     hLayout = new FlowLayout;
-    buttonWidth = 200;
 
-    silhouetteButton = new QPushButton("Solid Color Buttons");
     silhouetteButton = new QPushButton("Silhouette\nStamps");
     setButtonProperties(silhouetteButton);
     animalsButton = new QPushButton("Animals");
@@ -46,10 +44,10 @@ StampsWidgetCategories::StampsWidgetCategories()
 StampsWidgetSilhouette::StampsWidgetSilhouette()
 {
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
     silhouetteColorButton = new QPushButton("Set\nSilhouette\nColor");
-    silhouetteColorButton->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    silhouetteColorButton->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(silhouetteColorButton);
     stampOne = new QPushButton(QIcon(":/Stamps/solidcolorstamps/Stamps/solid_dog_stamp.png"), tr(""));
     setButtonProperties(stampOne);
@@ -126,7 +124,7 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
 StampsWidgetAnimals::StampsWidgetAnimals()
 {
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
     bearStamp = new QPushButton(QIcon(":/Stamps/animals/Stamps/animal_bear_stamp.png"), tr(""));
     setButtonProperties(bearStamp);
@@ -202,7 +200,7 @@ StampsWidgetAnimals::StampsWidgetAnimals()
 // STAMPS WIDGET PEOPLE
 StampsWidgetPeople::StampsWidgetPeople(){
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
     stampOne = new QPushButton(QIcon(":/Stamps/people/Stamps/people_angel_stamp.png"), tr(""));
     setButtonProperties(stampOne);
@@ -279,7 +277,7 @@ StampsWidgetPeople::StampsWidgetPeople(){
 StampsWidgetBuildings::StampsWidgetBuildings()
 {
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
     homeOneStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_home_one_stamp.png"), tr(""));
     setButtonProperties(homeOneStamp);
@@ -320,7 +318,7 @@ StampsWidgetBuildings::StampsWidgetBuildings()
 StampsWidgetScenery::StampsWidgetScenery()
 {
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
     palmTreeStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_palm_tree_stamp.png"), tr(""));
     setButtonProperties(palmTreeStamp);
@@ -362,7 +360,7 @@ StampsWidgetScenery::StampsWidgetScenery()
 StampsWidgetFaces::StampsWidgetFaces()
 {
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
     stampOne = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_one_stamp.png"), tr(""));
     setButtonProperties(stampOne);
@@ -437,7 +435,7 @@ StampsWidgetFaces::StampsWidgetFaces()
 StampsWidgetVehicles::StampsWidgetVehicles()
 {
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
     stampOne = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_one_stamp.png"), tr(""));
     setButtonProperties(stampOne);
@@ -500,7 +498,7 @@ StampsWidgetFood::StampsWidgetFood()
     hLayout = new FlowLayout;
 
     goBack = new QPushButton(tr("< Stamps"));
-    goBack->setStyleSheet("QPushButton{background-color:#9999FF;}");
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
     setButtonProperties(goBack);
 
     stampOne = new QPushButton(QIcon(":/Stamps/food/Stamps/food_one_stamp.png"), tr(""));

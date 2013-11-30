@@ -17,6 +17,7 @@
         <file>Icons/settings.png</file>
         <file>Icons/hidePopup.png</file>
         <file>Icons/showPopup.png</file>
+        <file>Icons/text.png</file>
     </qresource>
     <qresource prefix="/Stamps/solidcolorstamps">
         <file>Stamps/solid_airplane_stamp.png</file>

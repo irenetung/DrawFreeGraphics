@@ -7,6 +7,7 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsRectItem>
+#include <QGraphicsPathItem>
 #include <QMouseEvent>
 #include <QList>
 #include <QPoint>
@@ -17,10 +18,10 @@
 class Canvas : public QGraphicsView
 {
 public:
-    enum DrawState {NOSTATE,CURSOR,COLOR,SHAPE,STAMP,BRUSHEFFECTS,PICTURE,SIZE};
+    enum DrawState {NOSTATE,CURSOR,COLOR,SHAPE,STAMP,BRUSHEFFECTS,TEXTTYPE};
     enum CursorState {NOCURSOR,SCALE,STRETCH,ROTATE,SHEAR,TRANSLATE,DEPTH,FLIP,COPY,DELETEITEM};
     enum ColorState {NOCOLOR,OUTLINE,FILL,BRUSH,SILHOUETTESTAMP,BACKGROUND,OUTLINESIZE,BRUSHSIZE};
-    enum ShapeState {LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH,TEXTTYPE};
+    enum ShapeState {LINE,POINT,CIRCLE,RECT,ROUNDRECT,POLYGON,ARC,CHORD,PIE,PATH};
     enum StampState {NOSTAMP, SILHOUETTE, STANDARD};
     enum BrushEffectsState {NOBRUSH,PAINT,WATERCOLOR,CALLIGRAPHY,PENCIL,SPRAYPAINT,DUST};
     enum Direction {RIGHT,LEFT,UP,DOWN};
@@ -76,12 +77,27 @@ public:
     QColor prevCustomColor;
     QColor silhouetteColor;
     void setPenWidth(int width);
+
+    /*int alphaOutline;
+    int alphaFill;
+    int alphaSilhouette;
+    int alphaBrush;*/
+
+    bool alphaOutlineSignPositive;
+    bool alphaFillSignPositive;
+    bool alphaSilhouetteSignPositive;
+    bool alphaBrushSignPositive;
+
     //Shapes
     void drawItem(QGraphicsItem *item);
     void resetShapeState();
 
     int outlineIncrement;
     bool outlineSignPositive;
+
+    QList<QPointF> shapePoints;
+    QPen shapePointsPen;
+    QGraphicsPathItem clickPath;
     //Stamps
     QString currentStampPath;
     void setCurrentStamp(QString path);
@@ -92,6 +108,13 @@ public:
     //Brush Effects
     int brushIncrement;
     bool brushSignPositive;
+
+    QPointF previous;
+    QGraphicsPathItem *myPath;
+//Text
+    QString text;
+    QFont font;
+    bool shiftOn;
 
 protected:
     //void paintEvent(QPaintEvent *e);

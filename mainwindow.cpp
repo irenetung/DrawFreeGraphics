@@ -71,6 +71,11 @@ MainWindow::MainWindow(QWidget *parent) :
     brushEffectsButton->setText("Brush Effects");
     setToolButtonProperties(brushEffectsButton);
 
+    textButton = new QToolButton();
+    textButton->setIcon(QIcon(":/Icons/Icons/text.png"));
+    textButton->setText("Text");
+    setToolButtonProperties(textButton);
+
     insertPictureButton = new QToolButton();
     insertPictureButton->setIcon(QIcon(":/Icons/Icons/insertPicture.png"));
     insertPictureButton->setText("Insert Picture");
@@ -93,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent) :
     addToToolGroup(shapesButton);
     addToToolGroup(stampsButton);
     addToToolGroup(brushEffectsButton);
+    addToToolGroup(textButton);
 
     toolGroup->setExclusive(true);
 
@@ -187,9 +193,10 @@ MainWindow::MainWindow(QWidget *parent) :
 //Colors
     colorsWidgetPaintTools = new ColorsWidgetPaintTools();
     popUps.push_back(colorsWidgetPaintTools);
-    colorsWidgetColorsOutline = new ColorsWidgetColors(ColorsWidgetColors::SHAPES);
+
+    colorsWidgetColorsOutline = new ColorsWidgetColors(ColorsWidgetColors::OUTLINE);
     popUps.push_back(colorsWidgetColorsOutline);
-    colorsWidgetColorsFill = new ColorsWidgetColors(ColorsWidgetColors::SHAPES);
+    colorsWidgetColorsFill = new ColorsWidgetColors(ColorsWidgetColors::FILL);
     popUps.push_back(colorsWidgetColorsFill);
     colorsWidgetColorsSilhouette = new ColorsWidgetColors(ColorsWidgetColors::STAMPS);
     popUps.push_back(colorsWidgetColorsSilhouette);
@@ -197,6 +204,15 @@ MainWindow::MainWindow(QWidget *parent) :
     popUps.push_back(colorsWidgetColorsBrush);
     colorsWidgetColorsBackground = new ColorsWidgetColors(ColorsWidgetColors::BACKGROUND);
     popUps.push_back(colorsWidgetColorsBackground);
+
+    colorsWidgetAlphaOutline = new ColorsWidgetAlpha(ColorsWidgetAlpha::OUTLINE);
+    popUps.push_back(colorsWidgetAlphaOutline);
+    colorsWidgetAlphaFill = new ColorsWidgetAlpha(ColorsWidgetAlpha::FILL);
+    popUps.push_back(colorsWidgetAlphaFill);
+    colorsWidgetAlphaSilhouette = new ColorsWidgetAlpha(ColorsWidgetAlpha::STAMPS);
+    popUps.push_back(colorsWidgetAlphaSilhouette);
+    colorsWidgetAlphaBrush = new ColorsWidgetAlpha(ColorsWidgetAlpha::BRUSHEFFECTS);
+    popUps.push_back(colorsWidgetAlphaBrush);
 
     connect(colorsWidgetPaintTools->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(colorsPaintToolsButtonGroupClicked(int)));
 
@@ -231,12 +247,41 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(colorsWidgetColorsSilhouette->otherBackButton, SIGNAL(clicked()), otherBackButtonSignalMapper, SLOT(map()));
     connect(colorsWidgetColorsBrush->otherBackButton, SIGNAL(clicked()), otherBackButtonSignalMapper, SLOT(map()));
 
-    otherBackButtonSignalMapper->setMapping(colorsWidgetColorsOutline->otherBackButton, ColorsWidgetColors::SHAPES);
-    otherBackButtonSignalMapper->setMapping(colorsWidgetColorsFill->otherBackButton, ColorsWidgetColors::SHAPES);
+    otherBackButtonSignalMapper->setMapping(colorsWidgetColorsOutline->otherBackButton, ColorsWidgetColors::OUTLINE);
+    otherBackButtonSignalMapper->setMapping(colorsWidgetColorsFill->otherBackButton, ColorsWidgetColors::FILL);
     otherBackButtonSignalMapper->setMapping(colorsWidgetColorsSilhouette->otherBackButton, ColorsWidgetColors::STAMPS);
     otherBackButtonSignalMapper->setMapping(colorsWidgetColorsBrush->otherBackButton, ColorsWidgetColors::BRUSHEFFECTS);
 
     connect(otherBackButtonSignalMapper, SIGNAL(mapped(int)), this, SLOT(otherBackButtonClicked(int)));
+
+    QSignalMapper *alphaButtonSignalMapper = new QSignalMapper(this);
+    connect(colorsWidgetColorsOutline->alphaButton, SIGNAL(clicked()), alphaButtonSignalMapper, SLOT(map()));
+    connect(colorsWidgetColorsFill->alphaButton, SIGNAL(clicked()), alphaButtonSignalMapper, SLOT(map()));
+    connect(colorsWidgetColorsSilhouette->alphaButton, SIGNAL(clicked()), alphaButtonSignalMapper, SLOT(map()));
+    connect(colorsWidgetColorsBrush->alphaButton, SIGNAL(clicked()), alphaButtonSignalMapper, SLOT(map()));
+
+    alphaButtonSignalMapper->setMapping(colorsWidgetColorsOutline->alphaButton, ColorsWidgetColors::OUTLINE);
+    alphaButtonSignalMapper->setMapping(colorsWidgetColorsFill->alphaButton, ColorsWidgetColors::FILL);
+    alphaButtonSignalMapper->setMapping(colorsWidgetColorsSilhouette->alphaButton, ColorsWidgetColors::STAMPS);
+    alphaButtonSignalMapper->setMapping(colorsWidgetColorsBrush->alphaButton, ColorsWidgetColors::BRUSHEFFECTS);
+
+    connect(alphaButtonSignalMapper, SIGNAL(mapped(int)), this, SLOT(colorsAlphaButtonClicked(int)));
+    //Alpha
+    connect(colorsWidgetAlphaOutline->backButton, SIGNAL(clicked()), this, SLOT(alphaBackButtonClicked()));
+    connect(colorsWidgetAlphaOutline->signButton, SIGNAL(clicked()), this, SLOT(alphaSignButtonClicked()));
+    connect(colorsWidgetAlphaOutline->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(alphaButtonGroupClicked(int)));
+
+    connect(colorsWidgetAlphaFill->backButton, SIGNAL(clicked()), this, SLOT(alphaBackButtonClicked()));
+    connect(colorsWidgetAlphaFill->signButton, SIGNAL(clicked()), this, SLOT(alphaSignButtonClicked()));
+    connect(colorsWidgetAlphaFill->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(alphaButtonGroupClicked(int)));
+
+    connect(colorsWidgetAlphaSilhouette->backButton, SIGNAL(clicked()), this, SLOT(alphaBackButtonClicked()));
+    connect(colorsWidgetAlphaSilhouette->signButton, SIGNAL(clicked()), this, SLOT(alphaSignButtonClicked()));
+    connect(colorsWidgetAlphaSilhouette->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(alphaButtonGroupClicked(int)));
+
+    connect(colorsWidgetAlphaBrush->backButton, SIGNAL(clicked()), this, SLOT(alphaBackButtonClicked()));
+    connect(colorsWidgetAlphaBrush->signButton, SIGNAL(clicked()), this, SLOT(alphaSignButtonClicked()));
+    connect(colorsWidgetAlphaBrush->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(alphaButtonGroupClicked(int)));
 
 //Brush Effects
     brushEffectsWidgetBrushEffects = new BrushEffectsWidgetBrushEffects();
@@ -252,6 +297,27 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(brushEffectsWidgetBrushSizes->backButton, SIGNAL(clicked()), this, SLOT(sizeBackButtonClicked()));
     connect(brushEffectsWidgetBrushSizes->signButton, SIGNAL(clicked()), this, SLOT(sizeSignButtonClicked()));
     connect(brushEffectsWidgetBrushSizes->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(sizeButtonGroupClicked(int)));
+//Text
+    textWidgetLetters = new TextWidgetLetters();
+    popUps.push_back(textWidgetLetters);
+    textWidgetSpecialKeys = new TextWidgetSpecialKeys();
+    popUps.push_back(textWidgetSpecialKeys);
+
+    connect(textWidgetLetters->specialKeysButton, SIGNAL(clicked()), this, SLOT(lettersSpecialKeysButtonClicked()));
+    connect(textWidgetLetters->changeFontButton, SIGNAL(clicked()), this, SLOT(textChangeFontButtonClicked()));
+    connect(textWidgetLetters->shiftButton, SIGNAL(clicked()), this, SLOT(lettersShiftButtonClicked()));
+    connect(textWidgetLetters->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(lettersButtonGroupClicked(int)));
+    connect(textWidgetLetters->backSpaceButton, SIGNAL(clicked()), this, SLOT(textBackSpaceButtonClicked()));
+    connect(textWidgetLetters->clearButton, SIGNAL(clicked()), this, SLOT(textClearButtonClicked()));
+    connect(textWidgetLetters->okButton, SIGNAL(clicked()), this, SLOT(textOkButtonClicked()));
+
+    connect(textWidgetSpecialKeys->lettersButton, SIGNAL(clicked()), this, SLOT(specialKeysLettersButtonClicked()));
+    connect(textWidgetSpecialKeys->changeFontButton, SIGNAL(clicked()), this, SLOT(textChangeFontButtonClicked()));
+    connect(textWidgetSpecialKeys->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(specialKeysButtonGroupClicked(int)));
+    connect(textWidgetSpecialKeys->backSpaceButton, SIGNAL(clicked()), this, SLOT(textBackSpaceButtonClicked()));
+    connect(textWidgetSpecialKeys->clearButton, SIGNAL(clicked()), this, SLOT(textClearButtonClicked()));
+    connect(textWidgetSpecialKeys->okButton, SIGNAL(clicked()), this, SLOT(textOkButtonClicked()));
+
 //Stamps
     stampsWidgetCategories = new StampsWidgetCategories();
     popUps.push_back(stampsWidgetCategories);
@@ -849,11 +915,15 @@ void MainWindow::toolButtonGroupClicked(int id)
             showPopup(stampsWidgetCategories);
             break;
         case 5:
-            //Brush Effects
             canvas->drawState = canvas->BRUSHEFFECTS;
             prompt->promptLabel->setText(tr("Click a point on the canvas to start drawing and click a second point on the canvas to stop drawing and render the brush stroke. Or select a brush effect."));
             showPopup(brushEffectsWidgetBrushEffects);
             break;
+    case 6:
+        canvas->drawState = canvas->TEXTTYPE;
+        //prompt->promptLabel->setText(tr("Click a point on the canvas to start drawing and click a second point on the canvas to stop drawing and render the brush stroke. Or select a brush effect."));
+        showPopup(textWidgetLetters);
+        break;
         default:
             break;
     }
@@ -1405,10 +1475,6 @@ void MainWindow::shapesButtonGroupClicked(int id)
             shapesWidgetShapes->hide();
             showPopup(shapesWidgetEndPath);
             break;
-        case 10:
-            QMessageBox::information(this, "title", "Text");
-            canvas->shapeState = canvas->TEXTTYPE;
-            break;
         default:
             break;
     }
@@ -1584,12 +1650,35 @@ void MainWindow::colorsBackButtonClicked()
     showPopup(colorsWidgetPaintTools);
 }
 
+void MainWindow::colorsAlphaButtonClicked(int widgetType)
+{
+    hideWidgets();
+    switch(widgetType) {
+    case ColorsWidgetColors::OUTLINE:
+        //prompt->promptLabel->setText(colorsWidgetAlphaOutline->currentAlpha.arg(outlineCol);
+        showPopup(colorsWidgetAlphaOutline);
+        break;
+    case ColorsWidgetColors::FILL:
+        showPopup(colorsWidgetAlphaFill);
+        break;
+    case ColorsWidgetColors::STAMPS:
+        showPopup(colorsWidgetAlphaSilhouette);
+        break;
+    case ColorsWidgetColors::BRUSHEFFECTS:
+        showPopup(colorsWidgetAlphaBrush);
+        break;
+    default:
+        break;
+    }
+}
+
 void MainWindow::otherBackButtonClicked(int widgetType)
 {
     hideWidgets();
     colorsButton->setChecked(false);
     switch(widgetType) {
-        case ColorsWidgetColors::SHAPES:
+        case ColorsWidgetColors::OUTLINE:
+        case ColorsWidgetColors::FILL:
             canvas->drawState = canvas->SHAPE;
             setShapesPrompt(canvas->shapeState);
             showPopup(shapesWidgetShapes);
@@ -1646,6 +1735,104 @@ void MainWindow::customColorButtonClicked()
             break;
         default:
             break;
+    }
+}
+
+void MainWindow::alphaBackButtonClicked()
+{
+    hideWidgets();
+    setColorsPrompt(canvas->colorState);
+    switch(canvas->colorState) {
+    case canvas->OUTLINE:
+        showPopup(colorsWidgetColorsOutline);
+        break;
+    case canvas->FILL:
+        showPopup(colorsWidgetColorsFill);
+        break;
+    case canvas->SILHOUETTESTAMP:
+        showPopup(colorsWidgetColorsSilhouette);
+        break;
+    case canvas->BRUSH:
+        showPopup(colorsWidgetColorsBrush);
+        break;
+    default:
+        break;
+    }
+}
+
+void MainWindow::alphaSignButtonClicked()
+{
+    switch(canvas->colorState) {
+    case Canvas::OUTLINE:
+        if(canvas->alphaOutlineSignPositive) {
+            canvas->alphaOutlineSignPositive = false;
+            colorsWidgetAlphaOutline->signButton->setText("-");
+        } else {
+            canvas->alphaOutlineSignPositive = true;
+            colorsWidgetAlphaOutline->signButton->setText("+");
+        }
+        break;
+    case Canvas::FILL:
+        if(canvas->alphaFillSignPositive) {
+            canvas->alphaFillSignPositive = false;
+            colorsWidgetAlphaFill->signButton->setText("-");
+        } else {
+            canvas->alphaFillSignPositive = true;
+            colorsWidgetAlphaFill->signButton->setText("+");
+        }
+        break;
+    case Canvas::SILHOUETTESTAMP:
+        if(canvas->alphaSilhouetteSignPositive) {
+            canvas->alphaSilhouetteSignPositive = false;
+            colorsWidgetAlphaSilhouette->signButton->setText("-");
+        } else {
+            canvas->alphaSilhouetteSignPositive = true;
+            colorsWidgetAlphaSilhouette->signButton->setText("+");
+        }
+        break;
+    case Canvas::BRUSH:
+        if(canvas->alphaBrushSignPositive) {
+            canvas->alphaBrushSignPositive = false;
+            colorsWidgetAlphaBrush->signButton->setText("-");
+        } else {
+            canvas->alphaBrushSignPositive = true;
+            colorsWidgetAlphaBrush->signButton->setText("+");
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+void MainWindow::alphaButtonGroupClicked(int id)
+{
+    switch(id) {
+    case 0:
+        changePaintToolAlpha(0);
+        break;
+    case 1:
+        changePaintToolAlpha(255);
+        break;
+    case 2:
+        changePaintToolAlpha(1);
+        break;
+    case 3:
+        changePaintToolAlpha(5);
+        break;
+    case 4:
+        changePaintToolAlpha(10);
+        break;
+    case 5:
+        changePaintToolAlpha(20);
+        break;
+    case 6:
+        changePaintToolAlpha(50);
+        break;
+    case 7:
+        changePaintToolAlpha(100);
+        break;
+    default:
+        break;
     }
 }
 
@@ -1834,6 +2021,426 @@ void MainWindow::standardStampClicked(const QString stamp_name)
     canvas->setCurrentStamp(stamp_path);
 }
 
+void MainWindow::lettersSpecialKeysButtonClicked()
+{
+    hideWidgets();
+    showPopup(textWidgetSpecialKeys);
+    textWidgetSpecialKeys->textEdit->setText(canvas->text);
+}
+
+void MainWindow::textChangeFontButtonClicked()
+{
+    bool ok;
+    QFont newFont = QFontDialog::getFont(&ok,canvas->font, this);
+    if (ok) {
+        canvas->font = newFont;
+    }
+    textWidgetLetters->textEdit->setFont(canvas->font);
+    textWidgetSpecialKeys->textEdit->setFont(canvas->font);
+}
+
+void MainWindow::lettersShiftButtonClicked()
+{
+    if(canvas->shiftOn) {
+        canvas->shiftOn = false;
+        textWidgetLetters->shiftButton->setChecked(false);
+    } else {
+        canvas->shiftOn = true;
+        textWidgetLetters->shiftButton->setChecked(true);
+    }
+    changeKeyboard();
+}
+
+void MainWindow::lettersButtonGroupClicked(int id)
+{
+    QString c;
+    switch(id) {
+    case 0:
+        if(canvas->shiftOn) {
+            c = "A";
+        } else {
+            c = "a";
+        }
+        break;
+    case 1:
+        if(canvas->shiftOn) {
+            c = "B";
+        } else {
+            c = "b";
+        }
+        break;
+    case 2:
+        if(canvas->shiftOn) {
+            c = "C";
+        } else {
+            c = "c";
+        }
+        break;
+    case 3:
+        if(canvas->shiftOn) {
+            c = "D";
+        } else {
+            c = "d";
+        }
+        break;
+    case 4:
+        if(canvas->shiftOn) {
+            c = "E";
+        } else {
+            c = "e";
+        }
+        break;
+    case 5:
+        if(canvas->shiftOn) {
+            c = "F";
+        } else {
+            c = "f";
+        }
+        break;
+    case 6:
+        if(canvas->shiftOn) {
+            c = "G";
+        } else {
+            c = "g";
+        }
+        break;
+    case 7:
+        if(canvas->shiftOn) {
+            c = "H";
+        } else {
+            c = "h";
+        }
+        break;
+    case 8:
+        if(canvas->shiftOn) {
+            c = "I";
+        } else {
+            c = "i";
+        }
+        break;
+    case 9:
+        if(canvas->shiftOn) {
+            c = "J";
+        } else {
+            c = "j";
+        }
+        break;
+    case 10:
+        if(canvas->shiftOn) {
+            c = "K";
+        } else {
+            c = "k";
+        }
+        break;
+    case 11:
+        if(canvas->shiftOn) {
+            c = "L";
+        } else {
+            c = "l";
+        }
+        break;
+    case 12:
+        if(canvas->shiftOn) {
+            c = "M";
+        } else {
+            c = "m";
+        }
+        break;
+    case 13:
+        if(canvas->shiftOn) {
+            c = "N";
+        } else {
+            c = "n";
+        }
+        break;
+    case 14:
+        if(canvas->shiftOn) {
+            c = "O";
+        } else {
+            c = "o";
+        }
+        break;
+    case 15:
+        if(canvas->shiftOn) {
+            c = "P";
+        } else {
+            c = "p";
+        }
+        break;
+    case 16:
+        if(canvas->shiftOn) {
+            c = "Q";
+        } else {
+            c = "q";
+        }
+        break;
+    case 17:
+        if(canvas->shiftOn) {
+            c = "R";
+        } else {
+            c = "r";
+        }
+        break;
+    case 18:
+        if(canvas->shiftOn) {
+            c = "S";
+        } else {
+            c = "s";
+        }
+        break;
+    case 19:
+        if(canvas->shiftOn) {
+            c = "T";
+        } else {
+            c = "t";
+        }
+        break;
+    case 20:
+        if(canvas->shiftOn) {
+            c = "U";
+        } else {
+            c = "u";
+        }
+        break;
+    case 21:
+        if(canvas->shiftOn) {
+            c = "V";
+        } else {
+            c = "v";
+        }
+        break;
+    case 22:
+        if(canvas->shiftOn) {
+            c = "W";
+        } else {
+            c = "w";
+        }
+        break;
+    case 23:
+        if(canvas->shiftOn) {
+            c = "X";
+        } else {
+            c = "x";
+        }
+        break;
+    case 24:
+        if(canvas->shiftOn) {
+            c = "Y";
+        } else {
+            c = "y";
+        }
+        break;
+    case 25:
+        if(canvas->shiftOn) {
+            c = "Z";
+        } else {
+            c = "z";
+        }
+        break;
+    case 26:
+        c = ".";
+        break;
+    case 27:
+        c = ",";
+        break;
+    case 28:
+        c = "?";
+        break;
+    case 29:
+        c = "!";
+        break;
+    case 30:
+        c = "\'";
+        break;
+    case 31:
+        c = " ";
+        break;
+    case 32:
+        c = "\n";
+        break;
+    default:
+        break;
+    }
+    canvas->text += c;
+    if(canvas->shiftOn) {
+        canvas->shiftOn = false;
+        textWidgetLetters->shiftButton->setChecked(false);
+        changeKeyboard();
+    }
+    textWidgetLetters->textEdit->setText(canvas->text);
+}
+
+void MainWindow::textBackSpaceButtonClicked()
+{
+    canvas->text.resize(canvas->text.size()-1);
+    if(canvas->shiftOn) {
+        canvas->shiftOn = false;
+        textWidgetLetters->shiftButton->setChecked(false);
+        changeKeyboard();
+    }
+    textWidgetLetters->textEdit->setText(canvas->text);
+    textWidgetSpecialKeys->textEdit->setText(canvas->text);
+}
+
+void MainWindow::textClearButtonClicked()
+{
+    canvas->text = "";
+    textWidgetLetters->textEdit->setText(canvas->text);
+    textWidgetSpecialKeys->textEdit->setText(canvas->text);
+}
+
+void MainWindow::textOkButtonClicked()
+{
+    QGraphicsTextItem *textItem = new QGraphicsTextItem(canvas->text);
+    textItem->setPos(canvas->mapToScene(QPoint(0,0)));
+    textItem->setFont(canvas->font);
+    canvas->drawItem(textItem);
+}
+
+void MainWindow::specialKeysLettersButtonClicked()
+{
+    hideWidgets();
+    showPopup(textWidgetLetters);
+    textWidgetLetters->textEdit->setText(canvas->text);
+}
+
+void MainWindow::specialKeysButtonGroupClicked(int id)
+{
+    QString c;
+    switch(id) {
+    case 0:
+        c = "1";
+        break;
+    case 1:
+        c = "2";
+        break;
+    case 2:
+        c = "3";
+        break;
+    case 3:
+        c = "4";
+        break;
+    case 4:
+        c = "5";
+        break;
+    case 5:
+        c = "6";
+        break;
+    case 6:
+        c = "7";
+        break;
+    case 7:
+        c = "8";
+        break;
+    case 8:
+        c = "9";
+        break;
+    case 9:
+        c = "0";
+        break;
+    case 10:
+        c = "-";
+        break;
+    case 11:
+        c = "+";
+        break;
+    case 12:
+        c = "~";
+        break;
+    case 13:
+        c = "@";
+        break;
+    case 14:
+        c = "#";
+        break;
+    case 15:
+        c = "$";
+        break;
+    case 16:
+        c = "%";
+        break;
+    case 17:
+        c = "^";
+        break;
+    case 18:
+        c = "&";
+        break;
+    case 19:
+        c = "(";
+        break;
+    case 20:
+        c = ")";
+        break;
+    case 21:
+        c = "_";
+        break;
+    case 22:
+        c = "=";
+        break;
+    case 23:
+        c = "{";
+        break;
+    case 24:
+        c = "}";
+        break;
+    case 25:
+        c = "[";
+        break;
+    case 26:
+        c = "]";
+        break;
+    case 27:
+        c = "|";
+        break;
+    case 28:
+        c = "\\";
+        break;
+    case 29:
+        c = ":";
+        break;
+    case 30:
+        c = ";";
+        break;
+    case 31:
+        c = "\"";
+        break;
+    case 32:
+        c = "<";
+        break;
+    case 33:
+        c = ">";
+        break;
+    case 34:
+        c = "/";
+        break;
+    case 35:
+        c = ".";
+        break;
+    case 36:
+        c = ",";
+        break;
+    case 37:
+        c = "?";
+        break;
+    case 38:
+        c = "!";
+        break;
+    case 39:
+        c = "\'";
+        break;
+    case 40:
+        c = " ";
+        break;
+    case 41:
+        c = "\n";
+        break;
+    default:
+        break;
+    }
+    canvas->text += c;
+    textWidgetSpecialKeys->textEdit->setText(canvas->text);
+}
+
 void MainWindow::resetDrawState()
 {
     canvas->mousePressCount = 0;
@@ -1877,30 +2484,115 @@ void MainWindow::changePaintToolColor(QColor color)
 {
     switch (canvas->colorState) {
         case Canvas::OUTLINE:
+            color.setAlpha(canvas->shapesPen->color().alpha());
             canvas->shapesPen->setColor(color);
-            //canvas->setPenColor(color);
             colorsWidgetPaintTools->outlineButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case Canvas::FILL:
+            color.setAlpha(canvas->shapesBrush->color().alpha());
             canvas->shapesBrush->setColor(color);
-            //canvas->setBrushColor(color);
             colorsWidgetPaintTools->fillButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case Canvas::SILHOUETTESTAMP:
+            color.setAlpha(canvas->silhouetteColor.alpha());;
             canvas->silhouetteColor = color;
             colorsWidgetPaintTools->silhouetteButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
         case Canvas::BRUSH:
+            color.setAlpha(canvas->brushPen->color().alpha());
             canvas->brushPen->setColor(color);
             canvas->brushBrush->setColor(color);
             colorsWidgetPaintTools->brushButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
             break;
-        case Canvas::BACKGROUND:
-            colorsWidgetPaintTools->backgroundButton->setStyleSheet(colorsWidgetPaintTools->borderColor.arg(color.name()));
-            canvas->setBackgroundBrush(color);
-            break;
+    case Canvas::BACKGROUND:
+        canvas->scene->setBackgroundBrush(color);
+        break;
         default:
             break;
+    }
+}
+
+void MainWindow::changePaintToolAlpha(int alpha)
+{
+    QColor color;
+    switch (canvas->colorState) {
+    case Canvas::OUTLINE: {
+        color = canvas->shapesPen->color();
+        if(alpha == 0) {
+            color.setAlpha(0);
+        } else if (alpha == 255) {
+            color.setAlpha(255);
+        } else {
+            if(canvas->alphaOutlineSignPositive) {
+                color.setAlpha(color.alpha()+alpha);
+            } else {
+                if(color.alpha()-alpha >= 0) {
+                    color.setAlpha(color.alpha()-alpha);
+                }
+            }
+            prompt->promptLabel->setText(colorsWidgetAlphaOutline->currentAlpha.arg(color.alpha()));
+        }
+        canvas->shapesPen->setColor(color);
+        break;
+        }
+    case Canvas::FILL: {
+        color = canvas->shapesBrush->color();
+        if(alpha == 0) {
+            color.setAlpha(0);
+        } else if (alpha == 255) {
+            color.setAlpha(255);
+        } else {
+            if(canvas->alphaFillSignPositive) {
+                color.setAlpha(color.alpha()+alpha);
+            } else {
+                if(color.alpha()-alpha >= 0) {
+                    color.setAlpha(color.alpha()-alpha);
+                }
+            }
+            prompt->promptLabel->setText(colorsWidgetAlphaFill->currentAlpha.arg(color.alpha()));
+        }
+        canvas->shapesBrush->setColor(color);
+        break;
+        }
+    case Canvas::SILHOUETTESTAMP: {
+        if(alpha == 0) {
+            canvas->silhouetteColor.setAlpha(0);
+        } else if (alpha == 255) {
+            canvas->silhouetteColor.setAlpha(255);
+        } else {
+            if(canvas->alphaSilhouetteSignPositive) {
+                canvas->silhouetteColor.setAlpha(canvas->silhouetteColor.alpha()+alpha);
+            } else {
+                if(canvas->silhouetteColor.alpha()-alpha >= 0) {
+                    canvas->silhouetteColor.setAlpha(canvas->silhouetteColor.alpha()-alpha);
+                }
+            }
+            prompt->promptLabel->setText(colorsWidgetAlphaSilhouette->currentAlpha.arg(canvas->silhouetteColor.alpha()));
+        }
+        break;
+        }
+    case Canvas::BRUSH: {
+        color = canvas->brushPen->color();
+        if(alpha == 0) {
+            color.setAlpha(0);
+        } else if (alpha == 255) {
+            color.setAlpha(255);
+        } else {
+            if(canvas->alphaBrushSignPositive) {
+                color.setAlpha(color.alpha()+alpha);
+            } else {
+                if(color.alpha()-alpha >= 0) {
+                    color.setAlpha(color.alpha()-alpha);
+                }
+            }
+            prompt->promptLabel->setText(colorsWidgetAlphaBrush->currentAlpha.arg(color.alpha()));
+        }
+        canvas->brushPen->setColor(color);
+        canvas->brushBrush->setColor(color);
+        break;
+        }
+    default:
+        break;
     }
 }
 
@@ -1931,6 +2623,65 @@ void MainWindow::changePaintToolSize(int size)
             break;
         default:
             break;
+    }
+}
+
+void MainWindow::changeKeyboard()
+{
+    if(canvas->shiftOn) {
+        textWidgetLetters->aButton->setText(tr("A"));
+        textWidgetLetters->bButton->setText(tr("B"));
+        textWidgetLetters->cButton->setText(tr("C"));
+        textWidgetLetters->dButton->setText(tr("D"));
+        textWidgetLetters->eButton->setText(tr("E"));
+        textWidgetLetters->fButton->setText(tr("F"));
+        textWidgetLetters->gButton->setText(tr("G"));
+        textWidgetLetters->hButton->setText(tr("H"));
+        textWidgetLetters->iButton->setText(tr("I"));
+        textWidgetLetters->jButton->setText(tr("J"));
+        textWidgetLetters->kButton->setText(tr("K"));
+        textWidgetLetters->lButton->setText(tr("L"));
+        textWidgetLetters->mButton->setText(tr("M"));
+        textWidgetLetters->nButton->setText(tr("N"));
+        textWidgetLetters->oButton->setText(tr("O"));
+        textWidgetLetters->pButton->setText(tr("P"));
+        textWidgetLetters->qButton->setText(tr("Q"));
+        textWidgetLetters->rButton->setText(tr("R"));
+        textWidgetLetters->sButton->setText(tr("S"));
+        textWidgetLetters->tButton->setText(tr("T"));
+        textWidgetLetters->uButton->setText(tr("U"));
+        textWidgetLetters->vButton->setText(tr("V"));
+        textWidgetLetters->wButton->setText(tr("W"));
+        textWidgetLetters->xButton->setText(tr("X"));
+        textWidgetLetters->yButton->setText(tr("Y"));
+        textWidgetLetters->zButton->setText(tr("Z"));
+    } else {
+        textWidgetLetters->aButton->setText(tr("a"));
+        textWidgetLetters->bButton->setText(tr("b"));
+        textWidgetLetters->cButton->setText(tr("c"));
+        textWidgetLetters->dButton->setText(tr("d"));
+        textWidgetLetters->eButton->setText(tr("e"));
+        textWidgetLetters->fButton->setText(tr("f"));
+        textWidgetLetters->gButton->setText(tr("g"));
+        textWidgetLetters->hButton->setText(tr("h"));
+        textWidgetLetters->iButton->setText(tr("i"));
+        textWidgetLetters->jButton->setText(tr("j"));
+        textWidgetLetters->kButton->setText(tr("k"));
+        textWidgetLetters->lButton->setText(tr("l"));
+        textWidgetLetters->mButton->setText(tr("m"));
+        textWidgetLetters->nButton->setText(tr("n"));
+        textWidgetLetters->oButton->setText(tr("o"));
+        textWidgetLetters->pButton->setText(tr("p"));
+        textWidgetLetters->qButton->setText(tr("q"));
+        textWidgetLetters->rButton->setText(tr("r"));
+        textWidgetLetters->sButton->setText(tr("s"));
+        textWidgetLetters->tButton->setText(tr("t"));
+        textWidgetLetters->uButton->setText(tr("u"));
+        textWidgetLetters->vButton->setText(tr("v"));
+        textWidgetLetters->wButton->setText(tr("w"));
+        textWidgetLetters->xButton->setText(tr("x"));
+        textWidgetLetters->yButton->setText(tr("y"));
+        textWidgetLetters->zButton->setText(tr("z"));
     }
 }
 
@@ -1966,8 +2717,6 @@ void MainWindow::setShapesPrompt(Canvas::ShapeState shapeState)
             break;
         case Canvas::PATH:
              prompt->promptLabel->setText(tr("Click points on the canvas to be included in your polyline path and click the 'end path' button to render the polyline. Or go back to shapes."));
-            break;
-        case Canvas::TEXTTYPE:
             break;
         default:
             break;

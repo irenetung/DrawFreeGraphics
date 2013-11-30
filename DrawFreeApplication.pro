@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     colorswidget.cpp \
     flowlayout.cpp \
     settingswidget.cpp \
-    basewidget.cpp
+    basewidget.cpp \
+    textwidget.cpp
 
 HEADERS  += mainwindow.h \
     prompt.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     colorswidget.h \
     flowlayout.h \
     settingswidget.h \
-    basewidget.h
+    basewidget.h \
+    textwidget.h
 
 FORMS    += mainwindow.ui
 

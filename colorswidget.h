@@ -27,7 +27,7 @@ public:
 class ColorsWidgetColors : public ColorsWidget
 {
 public:
-    enum WidgetType{SHAPES,STAMPS,BRUSHEFFECTS,BACKGROUND};
+    enum WidgetType{OUTLINE,FILL,STAMPS,BRUSHEFFECTS,BACKGROUND};
     explicit ColorsWidgetColors(WidgetType widgetType);
     QPixmap *peachButtonIcon;
     QPixmap *pinkButtonIcon;
@@ -45,6 +45,7 @@ public:
 
     QPushButton *colorsBackButton;
     QPushButton *otherBackButton;
+    QPushButton *alphaButton;
     QPushButton *whiteButton;
     QPushButton *peachButton;
     QPushButton *pinkButton;
@@ -60,6 +61,24 @@ public:
     QPushButton *prevCustomButton;
     QPushButton *customColorButton;
 
+};
+
+class ColorsWidgetAlpha : public ColorsWidget
+{
+public:
+    enum AlphaWidgetType{OUTLINE,FILL,STAMPS,BRUSHEFFECTS,BACKGROUND};
+    explicit ColorsWidgetAlpha(ColorsWidgetAlpha::AlphaWidgetType widgetType);
+    QString currentAlpha;
+    QPushButton *backButton;
+    QPushButton *signButton;
+    QPushButton *transparentButton;
+    QPushButton *a1Button;
+    QPushButton *a5Button;
+    QPushButton *a10Button;
+    QPushButton *a20Button;
+    QPushButton *a50Button;
+    QPushButton *a100Button;
+    QPushButton *opaqueButton;
 };
 
 #endif // COLORSWIDGET_H

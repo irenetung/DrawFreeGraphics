@@ -5,19 +5,19 @@ BrushEffectsWidget::BrushEffectsWidget()
     int h = this->size().height();
     int w = this->size().width();
     parea = new QPixmap(w,h);
-    parea->fill(QColor(184,184,233));
-    this->setStyleSheet(tr("QPushButton{background-color:#CCCCFF; border-color:#6666FF; border-style:solid; border-width:3px; border-radius:3px;}"
+    parea->fill(QColor(153,204,255));
+    this->setStyleSheet("QPushButton{background-color:#CCE5FF; border-color:#0080FF; border-style:solid; border-width:3px; border-radius:3px;}"
                         "QPushButton:checked{background-color:#E5CCFF; border-color:#9933FF;}"
-                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}"));
+                        "QPushButton:hover{background-color:#FF99FF; border-color:#CC00CC;}");
 }
 
 BrushEffectsWidgetBrushEffects::BrushEffectsWidgetBrushEffects(QWidget *parent)
 {
     brushSizeButton = new QPushButton(tr("Set\nBrush\nSize"));
-    brushSizeButton->setStyleSheet(tr("QPushButton{background-color:#C0C0C0;}"));
+    brushSizeButton->setStyleSheet(tr("QPushButton{background-color:#9999FF;}"));
     setButtonProperties(brushSizeButton);
     brushColorButton = new QPushButton(tr("Set\nBrush\nColor"));
-    brushColorButton->setStyleSheet(tr("QPushButton{background-color:#C0C0C0;}"));
+    brushColorButton->setStyleSheet(tr("QPushButton{background-color:#9999FF;}"));
     setButtonProperties(brushColorButton);
 
     paintButton = new QPushButton(tr("Paint"));
@@ -52,10 +52,10 @@ BrushEffectsWidgetBrushSizes::BrushEffectsWidgetBrushSizes()
     currentSize = tr("The current brush size is: %1. Adjust the brush size. Or click a brush stroke on the canvas to change its brush size. Toggle the sign button to change the increments from positive to negative or vice versa.");
 
     backButton = new QPushButton(tr("< Brush\nEffects"));
-    backButton->setStyleSheet(tr("QPushButton{background-color:#C0C0C0;}"));
+    backButton->setStyleSheet(tr("QPushButton{background-color:#9999FF;}"));
     setButtonProperties(backButton);
     signButton = new QPushButton(tr("+"));
-    signButton->setStyleSheet(tr("QPushButton{background-color:#C0C0C0;}"));
+    signButton->setStyleSheet(tr("QPushButton{background-color:#9999FF;}"));
     setButtonProperties(signButton);
 
     si1Button = new QPushButton(tr("1"));
