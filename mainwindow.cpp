@@ -981,6 +981,12 @@ void MainWindow::insertPictureButtonClicked()
 {
     QMessageBox::information(this, "title", "Insert Picture");
     canvas->resetDrawState();
+    QString s = QFileDialog::getSaveFileName(
+                    0,
+                    "Save File",
+                    "/home",
+                    "Images (*.png *.xpm *.jpg)");
+    canvas->insertImage(s);
 }
 
 

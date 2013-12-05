@@ -360,6 +360,13 @@ void Canvas::mousePressEvent(QMouseEvent *e)
     }
 }
 
+void Canvas::insertImage(QString filename)
+{
+    qDebug() << "Inserting file: " <<  filename;
+    QPixmap bg(filename);
+    scene->addPixmap(bg);
+}
+
 /*void Canvas::drawForeground(QPainter *painter, const QRectF &rect)
 {
     /*int startAngle = 30*16;

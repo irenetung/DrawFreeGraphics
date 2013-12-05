@@ -82,6 +82,8 @@ public:
     void saveScene(QString filename);
     void loadScene(QString filename);
 
+    void insertImage(QString filename);
+
 protected:
     //void paintEvent(QPaintEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
