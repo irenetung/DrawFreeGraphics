@@ -100,6 +100,7 @@ void StampsWidgetRecents::refresh()
         qDebug() << recentStampsPathList.at(i);
         setButtonProperties(recentStampsButtonList.at(i));
     }
+    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 
 }
