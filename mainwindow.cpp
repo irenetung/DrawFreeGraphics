@@ -1942,8 +1942,8 @@ void MainWindow::recentsButtonClicked()
 
     prompt->promptLabel->setText("Select a stamp.");
 
-    // resize buttons
-    changeButtonProperties(buttonWidth,buttonHeight);
+    // resize buttons -> CAUSES BUG (stamp one, stamp two, stamp one, open recent tab)
+    //changeButtonProperties(buttonWidth,buttonHeight);
 
     showPopup(stampsWidgetRecents);
 }

@@ -60,7 +60,7 @@ void StampsWidgetRecents::refresh()
 {
 
     // cycle through buttons to test for duplicates
-    int index = recentStampsPathList.indexOf(recentStampsPathList.front(), 2);
+    int index = recentStampsPathList.indexOf(recentStampsPathList.front(), 1);
     if (index != -1)
     {
         qDebug() << "Duplicate Found...";
@@ -99,7 +99,6 @@ void StampsWidgetRecents::refresh()
         qDebug() << recentStampsPathList.at(i);
         setButtonProperties(recentStampsButtonList.at(i));
     }
-    hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 
 }
