@@ -2029,6 +2029,15 @@ void MainWindow::silhouetteStampClicked(const QString stamp_name)
     stamp_path.append(".png");
     canvas->stampState = canvas->SILHOUETTE;
     canvas->setCurrentStamp(stamp_path);
+
+    //update recents
+    QPushButton *newRecentButton = new QPushButton(QIcon(stamp_path), tr(""));
+
+    stampsWidgetRecents->recentStampsButtonList.push_front(newRecentButton);
+    stampsWidgetRecents->recentStampsPathList.push_front(stamp_name);
+    Canvas::StampState newState = Canvas::SILHOUETTE;
+    stampsWidgetRecents->recentStampsTypeList.push_front(newState);
+    stampsWidgetRecents->refresh(); //refresh
 }
 void MainWindow::standardStampClicked(const QString stamp_name)
 {
@@ -2039,8 +2048,11 @@ void MainWindow::standardStampClicked(const QString stamp_name)
 
     //update recents
     QPushButton *newRecentButton = new QPushButton(QIcon(stamp_path), tr(""));
+
     stampsWidgetRecents->recentStampsButtonList.push_front(newRecentButton);
     stampsWidgetRecents->recentStampsPathList.push_front(stamp_name);
+    Canvas::StampState newState = Canvas::STANDARD;
+    stampsWidgetRecents->recentStampsTypeList.push_front(newState);
     stampsWidgetRecents->refresh(); //refresh
 }
 

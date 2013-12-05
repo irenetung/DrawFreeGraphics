@@ -2,6 +2,7 @@
 #define STAMPSWIDGET_H
 
 #include "basewidget.h"
+#include "canvas.h"
 
 class StampsWidget : public BaseWidget
 {
@@ -34,6 +35,7 @@ public:
     QPushButton *goBack;
     QList<QPushButton*> recentStampsButtonList;
     QList<QString> recentStampsPathList;
+    QList<Canvas::StampState> recentStampsTypeList;
 
     int buttonCount;
     int buttonLimit;

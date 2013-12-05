@@ -69,10 +69,12 @@ void StampsWidgetRecents::refresh()
         hLayout->removeWidget(recentStampsButtonList.back());
         recentStampsButtonList.removeLast();
         recentStampsPathList.removeLast();
+        recentStampsTypeList.removeLast();
         buttons.removeLast();
 
     }
 
+    // rebuild layout
     for (int i = 0; i < recentStampsButtonList.size(); i++)
     {
         qDebug() << recentStampsPathList.at(i);
