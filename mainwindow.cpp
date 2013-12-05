@@ -344,6 +344,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(stampsWidgetCategories->recentsButton, SIGNAL(clicked()), this, SLOT(recentsButtonClicked()));
         // Recents Stamps
         connect(stampsWidgetRecents->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
+        recentSilhouetteSignalMapper = new QSignalMapper(this);
+        recentStandardSignalMapper = new QSignalMapper(this);
 
 
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
@@ -2032,6 +2034,9 @@ void MainWindow::silhouetteStampClicked(const QString stamp_name)
 
     //update recents
     QPushButton *newRecentButton = new QPushButton(QIcon(stamp_path), tr(""));
+    connect(newRecentButton, SIGNAL(clicked()), recentSilhouetteSignalMapper, SLOT(map()));
+    recentSilhouetteSignalMapper->setMapping(newRecentButton, stamp_name);
+    connect(recentSilhouetteSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(recentSilhouetteStampClicked(const QString)));
 
     stampsWidgetRecents->recentStampsButtonList.push_front(newRecentButton);
     stampsWidgetRecents->recentStampsPathList.push_front(stamp_name);
@@ -2048,12 +2053,32 @@ void MainWindow::standardStampClicked(const QString stamp_name)
 
     //update recents
     QPushButton *newRecentButton = new QPushButton(QIcon(stamp_path), tr(""));
+    connect(newRecentButton, SIGNAL(clicked()), recentStandardSignalMapper, SLOT(map()));
+    recentStandardSignalMapper->setMapping(newRecentButton, stamp_name);
+    connect(recentStandardSignalMapper, SIGNAL(mapped(const QString)), this, SLOT(recentStandardStampClicked(const QString)));
 
     stampsWidgetRecents->recentStampsButtonList.push_front(newRecentButton);
     stampsWidgetRecents->recentStampsPathList.push_front(stamp_name);
     Canvas::StampState newState = Canvas::STANDARD;
     stampsWidgetRecents->recentStampsTypeList.push_front(newState);
     stampsWidgetRecents->refresh(); //refresh
+}
+void MainWindow::recentSilhouetteStampClicked(const QString stamp_name)
+{
+    QString stamp_path = stamp_name;
+    stamp_path.append(".png");
+    canvas->stampState = canvas->SILHOUETTE;
+    canvas->setCurrentStamp(stamp_path);
+
+}
+
+void MainWindow::recentStandardStampClicked(const QString stamp_name)
+{
+    QString stamp_path = stamp_name;
+    stamp_path.append(".png");
+    canvas->stampState = canvas->STANDARD;
+    canvas->setCurrentStamp(stamp_path);
+
 }
 
 void MainWindow::lettersSpecialKeysButtonClicked()

@@ -107,6 +107,9 @@ private:
     StampsWidgetVehicles *stampsWidgetVehicles;
     StampsWidgetFood *stampsWidgetFood;
 
+    QSignalMapper *recentSilhouetteSignalMapper;
+    QSignalMapper *recentStandardSignalMapper;
+
 //Brush Effects
     BrushEffectsWidgetBrushEffects *brushEffectsWidgetBrushEffects;
     BrushEffectsWidgetBrushSizes *brushEffectsWidgetBrushSizes;
@@ -191,6 +194,8 @@ private slots:
     void silhouetteColorButtonClicked();
     void silhouetteStampClicked(const QString stamp_name);
     void standardStampClicked(const QString stamp_name);
+    void recentSilhouetteStampClicked(const QString stamp_name);
+    void recentStandardStampClicked(const QString stamp_name);
 //Text
     void lettersSpecialKeysButtonClicked();
     void textChangeFontButtonClicked();
