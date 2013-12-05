@@ -2538,7 +2538,9 @@ void MainWindow::changeButtonProperties(const int &newButtonWidth,const int &new
     showHidePopupButton->setIcon(QIcon(":/Icons/Icons/hidePopup.png"));
 
     int size = popUps.size();
+    qDebug() << "Number of popUps: " << size;
     for(int i = 0; i < size; ++i) {
+        qDebug() << "At Popup #: " << i;
         popUps[i]->changeButtonProperties(newButtonWidth, newButtonHeight);
     }
 

@@ -55,7 +55,9 @@ void BaseWidget::addToGroup(QPushButton *b)
 
 void BaseWidget::changeButtonProperties(int newButtonWidth, int newButtonHeight)
 {
+    qDebug() << "Button Array Size: " << buttons.size();
     for(int i = 0; i < buttons.size();++i) {
+        //qDebug() << "Button at i: " << buttons[i];
         buttons[i]->setFixedWidth(newButtonWidth);
         buttons[i]->setFixedHeight(newButtonHeight);
         buttons[i]->setIconSize(QSize(newButtonWidth-10,newButtonHeight-10));

@@ -59,6 +59,13 @@ StampsWidgetRecents::StampsWidgetRecents()
 void StampsWidgetRecents::refresh()
 {
 
+    // retrieve button sizing
+    if (buttonWidth != goBack->width() || buttonHeight != goBack->height())
+    {
+        buttonWidth = goBack->width();
+        buttonHeight = goBack->height();
+    }
+
     // cycle through buttons to test for duplicates
     int index = recentStampsPathList.indexOf(recentStampsPathList.front(), 1);
     if (index != -1)
@@ -72,7 +79,6 @@ void StampsWidgetRecents::refresh()
         recentStampsButtonList.removeAt(index);
         recentStampsPathList.removeAt(index);
         recentStampsTypeList.removeAt(index);
-        buttons.remove(index);
     }
 
     buttonCount = recentStampsButtonList.size();
@@ -86,19 +92,30 @@ void StampsWidgetRecents::refresh()
         QLayoutItem *item = hLayout->takeAt(index);
         delete item->widget();
         delete item;
+
         recentStampsButtonList.removeLast();
         recentStampsPathList.removeLast();
         recentStampsTypeList.removeLast();
-        buttons.removeFirst();
 
     }
 
+    qDebug() << "Button size before removal: " << buttons.size();
+    // destroy buttons array
+    int size = buttons.size();
+    for (int i = 1; i < size; i++)
+    {
+        qDebug() << "Removal at i: " << i;
+        buttons.remove(1); // plus one for go back button
+    }
+    qDebug() << "Button size after removal: " << buttons.size();
     // rebuild layout
     for (int i = 0; i < recentStampsButtonList.size(); i++)
     {
         qDebug() << recentStampsPathList.at(i);
         setButtonProperties(recentStampsButtonList.at(i));
     }
+    qDebug() << "Button size after readdition: " << buttons.size();
+
     this->setLayout(hLayout);
 
 }
