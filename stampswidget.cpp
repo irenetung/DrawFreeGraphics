@@ -1,4 +1,6 @@
 #include "stampswidget.h"
+#include <QDebug>
+
 
 // STAMPS WIDGET
 StampsWidget::StampsWidget()
@@ -18,6 +20,8 @@ StampsWidgetCategories::StampsWidgetCategories()
 
     hLayout = new FlowLayout;
 
+    recentsButton = new QPushButton("Recent\nStamps");
+    setButtonProperties(recentsButton);
     silhouetteButton = new QPushButton("Silhouette\nStamps");
     setButtonProperties(silhouetteButton);
     animalsButton = new QPushButton("Animals");
@@ -37,6 +41,45 @@ StampsWidgetCategories::StampsWidgetCategories()
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+}
+
+// STAMPS WIDGET RECENTS
+StampsWidgetRecents::StampsWidgetRecents()
+{
+    buttonCount = 0;
+    buttonLimit = 5;
+
+    goBack = new QPushButton(tr("< Stamps"));
+    goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
+    setButtonProperties(goBack);
+
+    hLayout->addItem(horizSpacer);
+    this->setLayout(hLayout);
+}
+void StampsWidgetRecents::refresh()
+{
+    buttonCount = recentStampsButtonList.size();
+    qDebug() << buttonCount;
+
+    // test button limit
+    if (buttonCount > buttonLimit)
+    {
+        qDebug() << "Button Count is greater than limit. Popping back...";
+        qDebug() << recentStampsPathList.back();
+        hLayout->removeWidget(recentStampsButtonList.back());
+        recentStampsButtonList.removeLast();
+        recentStampsPathList.removeLast();
+        buttons.removeLast();
+
+    }
+
+    for (int i = 0; i < recentStampsButtonList.size(); i++)
+    {
+        qDebug() << recentStampsPathList.at(i);
+        setButtonProperties(recentStampsButtonList.at(i));
+    }
+    this->setLayout(hLayout);
+
 }
 
 

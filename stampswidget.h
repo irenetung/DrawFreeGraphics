@@ -14,6 +14,7 @@ class StampsWidgetCategories : public StampsWidget
 {
 public:
     explicit StampsWidgetCategories();
+    QPushButton *recentsButton;
     QPushButton *silhouetteButton;
     QPushButton *animalsButton;
     QPushButton *peopleButton;
@@ -24,6 +25,23 @@ public:
     QPushButton *foodButton;
 
 };
+
+//Stamp Category: Recents
+class StampsWidgetRecents : public StampsWidget
+{
+public:
+    explicit StampsWidgetRecents();
+    QPushButton *goBack;
+    QList<QPushButton*> recentStampsButtonList;
+    QList<QString> recentStampsPathList;
+
+    int buttonCount;
+    int buttonLimit;
+
+    void refresh();
+
+};
+
 
 //Stamp Category: Silhouette
 class StampsWidgetSilhouette : public StampsWidget

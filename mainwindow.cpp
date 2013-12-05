@@ -319,6 +319,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(textWidgetSpecialKeys->okButton, SIGNAL(clicked()), this, SLOT(textOkButtonClicked()));
 
 //Stamps
+    stampsWidgetRecents = new StampsWidgetRecents();
+    popUps.push_back(stampsWidgetRecents);
     stampsWidgetCategories = new StampsWidgetCategories();
     popUps.push_back(stampsWidgetCategories);
     stampsWidgetSilhouette = new StampsWidgetSilhouette();
@@ -337,6 +339,11 @@ MainWindow::MainWindow(QWidget *parent) :
     popUps.push_back(stampsWidgetVehicles);
     stampsWidgetFood = new StampsWidgetFood();
     popUps.push_back(stampsWidgetFood);
+
+
+    connect(stampsWidgetCategories->recentsButton, SIGNAL(clicked()), this, SLOT(recentsButtonClicked()));
+        // Recents Stamps
+        connect(stampsWidgetRecents->goBack, SIGNAL(clicked()), this, SLOT(goBackButtonClicked()));
 
 
     connect(stampsWidgetCategories->silhouetteButton, SIGNAL(clicked()), this, SLOT(silhouetteButtonClicked()));
@@ -1743,16 +1750,16 @@ void MainWindow::alphaBackButtonClicked()
     hideWidgets();
     setColorsPrompt(canvas->colorState);
     switch(canvas->colorState) {
-    case canvas->OUTLINE:
+    case Canvas::OUTLINE:
         showPopup(colorsWidgetColorsOutline);
         break;
-    case canvas->FILL:
+    case Canvas::FILL:
         showPopup(colorsWidgetColorsFill);
         break;
-    case canvas->SILHOUETTESTAMP:
+    case Canvas::SILHOUETTESTAMP:
         showPopup(colorsWidgetColorsSilhouette);
         break;
-    case canvas->BRUSH:
+    case Canvas::BRUSH:
         showPopup(colorsWidgetColorsBrush);
         break;
     default:
@@ -1927,6 +1934,16 @@ void MainWindow::colorsPaintToolsButtonGroupClicked(int id)
 }
 
 // STAMPS
+void MainWindow::recentsButtonClicked()
+{
+    hideWidgets();
+
+    prompt->promptLabel->setText("Select a stamp.");
+    showPopup(stampsWidgetRecents);
+}
+
+
+
 void MainWindow::silhouetteButtonClicked()
 {
     hideWidgets();
@@ -2019,6 +2036,12 @@ void MainWindow::standardStampClicked(const QString stamp_name)
     stamp_path.append(".png");
     canvas->stampState = canvas->STANDARD;
     canvas->setCurrentStamp(stamp_path);
+
+    //update recents
+    QPushButton *newRecentButton = new QPushButton(QIcon(stamp_path), tr(""));
+    stampsWidgetRecents->recentStampsButtonList.push_front(newRecentButton);
+    stampsWidgetRecents->recentStampsPathList.push_front(stamp_name);
+    stampsWidgetRecents->refresh(); //refresh
 }
 
 void MainWindow::lettersSpecialKeysButtonClicked()

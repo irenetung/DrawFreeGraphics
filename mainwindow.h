@@ -96,6 +96,7 @@ private:
     ShapesWidgetEndPath *shapesWidgetEndPath;
     ShapesWidgetOutlineSizes *shapesWidgetOutlineSizes;
 //Stamps
+    StampsWidgetRecents *stampsWidgetRecents;
     StampsWidgetCategories *stampsWidgetCategories;
     StampsWidgetSilhouette *stampsWidgetSilhouette;
     StampsWidgetPeople *stampsWidgetPeople;
@@ -177,6 +178,7 @@ private slots:
     void brushEffectsButtonGroupClicked(int id);
  //Stamps
     void goBackButtonClicked();
+    void recentsButtonClicked();
     void silhouetteButtonClicked();
     void peopleButtonClicked();
     void animalsButtonClicked();
