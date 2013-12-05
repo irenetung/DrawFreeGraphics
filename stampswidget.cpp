@@ -58,6 +58,20 @@ StampsWidgetRecents::StampsWidgetRecents()
 }
 void StampsWidgetRecents::refresh()
 {
+
+    // cycle through buttons to test for duplicates
+    int index = recentStampsPathList.indexOf(recentStampsPathList.front(), 2);
+    if (index != -1)
+    {
+        qDebug() << "Duplicate Found...";
+        qDebug() << recentStampsPathList.back();
+        hLayout->removeWidget(recentStampsButtonList.at(index));
+        recentStampsButtonList.removeAt(index);
+        recentStampsPathList.removeAt(index);
+        recentStampsTypeList.removeAt(index);
+        buttons.remove(index);
+    }
+
     buttonCount = recentStampsButtonList.size();
     qDebug() << buttonCount;
 
@@ -65,12 +79,11 @@ void StampsWidgetRecents::refresh()
     if (buttonCount > buttonLimit)
     {
         qDebug() << "Button Count is greater than limit. Popping back...";
-        qDebug() << recentStampsPathList.back();
         hLayout->removeWidget(recentStampsButtonList.back());
         recentStampsButtonList.removeLast();
         recentStampsPathList.removeLast();
         recentStampsTypeList.removeLast();
-        buttons.removeLast();
+        buttons.removeFirst();
 
     }
 
