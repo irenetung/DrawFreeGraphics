@@ -60,7 +60,6 @@ void StampsWidgetRecents::refresh()
 {
 
     // cycle through buttons to test for duplicates
-
     int index = recentStampsPathList.indexOf(recentStampsPathList.front(), 2);
     if (index != -1)
     {

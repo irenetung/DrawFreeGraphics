@@ -1941,6 +1941,10 @@ void MainWindow::recentsButtonClicked()
     hideWidgets();
 
     prompt->promptLabel->setText("Select a stamp.");
+
+    // resize buttons
+    changeButtonProperties(buttonWidth,buttonHeight);
+
     showPopup(stampsWidgetRecents);
 }
 
@@ -2537,6 +2541,7 @@ void MainWindow::changeButtonProperties(const int &newButtonWidth,const int &new
     for(int i = 0; i < size; ++i) {
         popUps[i]->changeButtonProperties(newButtonWidth, newButtonHeight);
     }
+
     repaint();
 }
 
