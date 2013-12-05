@@ -47,7 +47,7 @@ StampsWidgetCategories::StampsWidgetCategories()
 StampsWidgetRecents::StampsWidgetRecents()
 {
     buttonCount = 0;
-    buttonLimit = 5;
+    buttonLimit = 20;
 
     goBack = new QPushButton(tr("< Stamps"));
     goBack->setStyleSheet("QPushButton{background-color:#99CCFF;}");
