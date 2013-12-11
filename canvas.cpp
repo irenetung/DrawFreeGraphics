@@ -170,7 +170,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *e)
             QPainterPath path = myPath->path();
             path.lineTo(movePoint);
             myPath->setPath(path);
-            scene->update();
+            //scene->update();
         }
     } else if (drawState == SHAPE) {
         if(mousePressCount > 0) {

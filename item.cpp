@@ -279,7 +279,7 @@ WatercolorItem::WatercolorItem(QList<QPointF> &points,QPen &curPen,QBrush &curBr
     pen->setStyle(Qt::DashLine);
     pen->setCapStyle(Qt::RoundCap);
     pen->setJoinStyle(Qt::RoundJoin);
-    pen->setWidth(10);
+    //pen->setWidth(10);
     brush = new QBrush(curBrush);
     brush->setStyle(Qt::CrossPattern);
 }
@@ -291,6 +291,7 @@ QRectF WatercolorItem::boundingRect() const
 
 void WatercolorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    qDebug() << pen->width();
     int size = pen->width();
     float perc = 0.3;
 
