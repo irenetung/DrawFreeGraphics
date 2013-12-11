@@ -865,8 +865,6 @@ MainWindow::~MainWindow()
 void MainWindow::setToolButtonProperties(QToolButton *b)
 {
     b->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-   // b->setFixedSize(QSize(100,100));
-   // b->setIconSize(QSize(100,100));
     ui->mainToolBar->addWidget(b);
     tools.push_back(b);
 }
@@ -943,14 +941,9 @@ void MainWindow::toolButtonGroupClicked(int id)
 void MainWindow::newButtonClicked()
 {
     resetDrawState();
-    /*MainWindow *newApplication;
+    MainWindow *newApplication;
     newApplication = new MainWindow();
-    newApplication -> show();*/
-    canvas->scene->clear();
-    canvas->myPath = new QGraphicsPathItem();
-    //canvas->myPath->setPen(*brushPen);
-    //canvas->scene->addItem(myPath);
-    canvas->scene->update();
+    newApplication -> showFullScreen();
 }
 
 void MainWindow::openButtonClicked()
