@@ -167,9 +167,13 @@ void Canvas::mouseMoveEvent(QMouseEvent *e)
             QPointF movePoint = mapToScene(e->pos());
             points.append(movePoint);
 
+            scene->removeItem(myPath);
+            scene->addItem(myPath);
+
             QPainterPath path = myPath->path();
             path.lineTo(movePoint);
             myPath->setPath(path);
+
             //scene->update();
         }
     } else if (drawState == SHAPE) {
@@ -206,6 +210,16 @@ void Canvas::mouseMoveEvent(QMouseEvent *e)
                 break;
             }
             myPath->setPath(path);
+           /* QList<QGraphicsItem *> overlapItems = myPath->collidingItems();
+            qreal maxZValue = selectedItem->zValue();
+
+            foreach(QGraphicsItem *item, overlapItems) {
+                if(item->zValue() >= maxZValue) {
+                    maxZValue = item->zValue()+0.1;
+                }
+            }
+
+            myPath->setZValue(maxZValue);*/
             scene->update();
         }
     }
@@ -221,6 +235,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         ++mousePressCount;
         points.append(clickPoint);
         if(mousePressCount == 1) {
+
             QPainterPath p;
             p.moveTo(clickPoint);
             myPath->setPath(p);
@@ -368,9 +383,7 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                         if(item->zValue() <= minZValue) {
                             minZValue = item->zValue()-0.1;
                         }
-                        qDebug() << "a " <<maxZValue << " " << minZValue;
                     }
-                    qDebug() << "eeeee " <<maxZValue << " " << minZValue;
                     if(depthPositive) {
                         selectedItem->setZValue(maxZValue);
                     } else {
@@ -897,6 +910,8 @@ void Canvas::mousePressEvent(QMouseEvent *e)
         mousePressCount++;
 
         if(mousePressCount == 1) {
+            scene->removeItem(myPath);
+            scene->addItem(myPath);
             QPainterPath p;
             p.moveTo(clickPoint);
             myPath->setPath(p);

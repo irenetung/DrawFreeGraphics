@@ -78,11 +78,6 @@ public:
     QColor silhouetteColor;
     void setPenWidth(int width);
 
-    /*int alphaOutline;
-    int alphaFill;
-    int alphaSilhouette;
-    int alphaBrush;*/
-
     bool alphaOutlineSignPositive;
     bool alphaFillSignPositive;
     bool alphaSilhouetteSignPositive;
