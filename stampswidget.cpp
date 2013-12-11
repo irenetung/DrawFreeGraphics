@@ -41,6 +41,7 @@ StampsWidgetCategories::StampsWidgetCategories()
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
 }
 
 // STAMPS WIDGET RECENTS
@@ -196,9 +197,50 @@ StampsWidgetSilhouette::StampsWidgetSilhouette()
     setButtonProperties(stampThirtyTwo);
     stampThirtyThree = new QPushButton(QIcon(":/Stamps/solidcolorstamps/Stamps/solid_rain_stamp.png"), tr(""));
     setButtonProperties(stampThirtyThree);
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(stampOne);
+    addToButtonGroup(stampTwo);
+    addToButtonGroup(stampThree);
+    addToButtonGroup(stampFour);
+    addToButtonGroup(stampFive);
+    addToButtonGroup(stampSix);
+    addToButtonGroup(stampSeven);
+    addToButtonGroup(stampEight);
+    addToButtonGroup(stampNine);
+    addToButtonGroup(stampTen);
+    addToButtonGroup(stampEleven);
+    addToButtonGroup(stampTwelve);
+    addToButtonGroup(stampThirteen);
+    addToButtonGroup(stampFourteen);
+    addToButtonGroup(stampFifteen);
+    addToButtonGroup(stampSixteen);
+    addToButtonGroup(stampSeventeen);
+    addToButtonGroup(stampEighteen);
+    addToButtonGroup(stampNineteen);
+    addToButtonGroup(stampTwenty);
+    addToButtonGroup(stampTwentyOne);
+    addToButtonGroup(stampTwentyTwo);
+    addToButtonGroup(stampTwentyThree);
+    addToButtonGroup(stampTwentyFour);
+    addToButtonGroup(stampTwentyFive);
+    addToButtonGroup(stampTwentySix);
+    addToButtonGroup(stampTwentySeven);
+    addToButtonGroup(stampTwentyEight);
+    addToButtonGroup(stampTwentyNine);
+    addToButtonGroup(stampThirty);
+    addToButtonGroup(stampThirtyOne);
+    addToButtonGroup(stampThirtyTwo);
+    addToButtonGroup(stampThirtyThree);
+    addToButtonGroup(invisibleButton);
+
+    buttonGroup->setExclusive(true);
 }
 
 // STAMPS WIDGET ANIMALS
@@ -273,9 +315,50 @@ StampsWidgetAnimals::StampsWidgetAnimals()
     setButtonProperties(turkeyStamp);
     wolfStamp = new QPushButton(QIcon(":/Stamps/animals/Stamps/animal_wolf_stamp.png"), tr(""));
     setButtonProperties(wolfStamp);
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(bearStamp);
+    addToButtonGroup(beeStamp);
+    addToButtonGroup(birdStamp);
+    addToButtonGroup(bullStamp);
+    addToButtonGroup(catStamp);
+    addToButtonGroup(cowStamp);
+    addToButtonGroup(crabStamp);
+    addToButtonGroup(crocodileStamp);
+    addToButtonGroup(deerStamp);
+    addToButtonGroup(dogStamp);
+    addToButtonGroup(donkeyStamp);
+    addToButtonGroup(eagleStamp);
+    addToButtonGroup(elephantStamp);
+    addToButtonGroup(foxStamp);
+    addToButtonGroup(giraffeStamp);
+    addToButtonGroup(gorillaStamp);
+    addToButtonGroup(hippoStamp);
+    addToButtonGroup(horseStamp);
+    addToButtonGroup(lionStamp);
+    addToButtonGroup(monkeyStamp);
+    addToButtonGroup(mooseStamp);
+    addToButtonGroup(mouseStamp);
+    addToButtonGroup(owlStamp);
+    addToButtonGroup(pandaStamp);
+    addToButtonGroup(penguinStamp);
+    addToButtonGroup(pigStamp);
+    addToButtonGroup(rabbitStamp);
+    addToButtonGroup(rhinoStamp);
+    addToButtonGroup(roosterStamp);
+    addToButtonGroup(sheepStamp);
+    addToButtonGroup(snakeStamp);
+    addToButtonGroup(turkeyStamp);
+    addToButtonGroup(wolfStamp);
+    addToButtonGroup(invisibleButton);
+
+    buttonGroup->setExclusive(true);
 }
 
 // STAMPS WIDGET PEOPLE
@@ -349,9 +432,50 @@ StampsWidgetPeople::StampsWidgetPeople(){
     setButtonProperties(stampThirtyTwo);
     stampThirtyThree = new QPushButton(QIcon(":/Stamps/people/Stamps/people_zombie_stamp.png"), tr(""));
     setButtonProperties(stampThirtyThree);
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(stampOne);
+    addToButtonGroup(stampTwo);
+    addToButtonGroup(stampThree);
+    addToButtonGroup(stampFour);
+    addToButtonGroup(stampFive);
+    addToButtonGroup(stampSix);
+    addToButtonGroup(stampSeven);
+    addToButtonGroup(stampEight);
+    addToButtonGroup(stampNine);
+    addToButtonGroup(stampTen);
+    addToButtonGroup(stampEleven);
+    addToButtonGroup(stampTwelve);
+    addToButtonGroup(stampThirteen);
+    addToButtonGroup(stampFourteen);
+    addToButtonGroup(stampFifteen);
+    addToButtonGroup(stampSixteen);
+    addToButtonGroup(stampSeventeen);
+    addToButtonGroup(stampEighteen);
+    addToButtonGroup(stampNineteen);
+    addToButtonGroup(stampTwenty);
+    addToButtonGroup(stampTwentyOne);
+    addToButtonGroup(stampTwentyTwo);
+    addToButtonGroup(stampTwentyThree);
+    addToButtonGroup(stampTwentyFour);
+    addToButtonGroup(stampTwentyFive);
+    addToButtonGroup(stampTwentySix);
+    addToButtonGroup(stampTwentySeven);
+    addToButtonGroup(stampTwentyEight);
+    addToButtonGroup(stampTwentyNine);
+    addToButtonGroup(stampThirty);
+    addToButtonGroup(stampThirtyOne);
+    addToButtonGroup(stampThirtyTwo);
+    addToButtonGroup(stampThirtyThree);
+    addToButtonGroup(invisibleButton);
+
+    buttonGroup->setExclusive(true);
 }
 
 // STAMPS WIDGET BUILDINGS
@@ -390,9 +514,31 @@ StampsWidgetBuildings::StampsWidgetBuildings()
     setButtonProperties(shopFourStamp);
     castleStamp = new QPushButton(QIcon(":/Stamps/buildings/Stamps/buildings_castle_stamp.png"), tr(""));
     setButtonProperties(castleStamp);
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(homeOneStamp);
+    addToButtonGroup(homeTwoStamp);
+    addToButtonGroup(homeThreeStamp);
+    addToButtonGroup(homeFourStamp);
+    addToButtonGroup(bankStamp);
+    addToButtonGroup(schoolStamp);
+    addToButtonGroup(hospitalStamp);
+    addToButtonGroup(skyscraperStamp);
+    addToButtonGroup(buildingStamp);
+    addToButtonGroup(multiplexStamp);
+    addToButtonGroup(shopOneStamp);
+    addToButtonGroup(shopTwoStamp);
+    addToButtonGroup(shopThreeStamp);
+    addToButtonGroup(shopFourStamp);
+    addToButtonGroup(castleStamp);
+
+    buttonGroup->setExclusive(true);
 }
 
 // STAMPS WIDGET SCENERY
@@ -431,9 +577,32 @@ StampsWidgetScenery::StampsWidgetScenery()
     setButtonProperties(bouquetStamp);
     statueStamp = new QPushButton(QIcon(":/Stamps/scenery/Stamps/scenery_statue_stamp.png"), tr(""));
     setButtonProperties(statueStamp);
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(palmTreeStamp);
+    addToButtonGroup(treeOneStamp);
+    addToButtonGroup(treeTwoStamp);
+    addToButtonGroup(christmasTreeStamp);
+    addToButtonGroup(sunStamp);
+    addToButtonGroup(moonStamp);
+    addToButtonGroup(cloudStamp);
+    addToButtonGroup(stormyCloudStamp);
+    addToButtonGroup(starsStamp);
+    addToButtonGroup(balloonStamp);
+    addToButtonGroup(flowerOneStamp);
+    addToButtonGroup(flowerTwoStamp);
+    addToButtonGroup(flowerThreeStamp);
+    addToButtonGroup(bouquetStamp);
+    addToButtonGroup(statueStamp);
+    addToButtonGroup(invisibleButton);
+
+    buttonGroup->setExclusive(true);
 }
 
 
@@ -507,9 +676,49 @@ StampsWidgetFaces::StampsWidgetFaces()
     setButtonProperties(stampThirtyOne);
     stampThirtyTwo = new QPushButton(QIcon(":/Stamps/faces/Stamps/faces_thirtytwo_stamp.png"), tr(""));
     setButtonProperties(stampThirtyTwo);
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(stampOne);
+    addToButtonGroup(stampTwo);
+    addToButtonGroup(stampThree);
+    addToButtonGroup(stampFour);
+    addToButtonGroup(stampFive);
+    addToButtonGroup(stampSix);
+    addToButtonGroup(stampSeven);
+    addToButtonGroup(stampEight);
+    addToButtonGroup(stampNine);
+    addToButtonGroup(stampTen);
+    addToButtonGroup(stampEleven);
+    addToButtonGroup(stampTwelve);
+    addToButtonGroup(stampThirteen);
+    addToButtonGroup(stampFourteen);
+    addToButtonGroup(stampFifteen);
+    addToButtonGroup(stampSixteen);
+    addToButtonGroup(stampSeventeen);
+    addToButtonGroup(stampEighteen);
+    addToButtonGroup(stampNineteen);
+    addToButtonGroup(stampTwenty);
+    addToButtonGroup(stampTwentyOne);
+    addToButtonGroup(stampTwentyTwo);
+    addToButtonGroup(stampTwentyThree);
+    addToButtonGroup(stampTwentyFour);
+    addToButtonGroup(stampTwentyFive);
+    addToButtonGroup(stampTwentySix);
+    addToButtonGroup(stampTwentySeven);
+    addToButtonGroup(stampTwentyEight);
+    addToButtonGroup(stampTwentyNine);
+    addToButtonGroup(stampThirty);
+    addToButtonGroup(stampThirtyOne);
+    addToButtonGroup(stampThirtyTwo);
+    addToButtonGroup(invisibleButton);
+
+    buttonGroup->setExclusive(true);
 }
 
 // STAMPS WIDGET VEHICLES
@@ -568,9 +777,42 @@ StampsWidgetVehicles::StampsWidgetVehicles()
     setButtonProperties(stampTwentyFour);
     stampTwentyFive = new QPushButton(QIcon(":/Stamps/vehicles/Stamps/vehicles_twentyfive_stamp.png"), tr(""));
     setButtonProperties(stampTwentyFive);
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
+
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(stampOne);
+    addToButtonGroup(stampTwo);
+    addToButtonGroup(stampThree);
+    addToButtonGroup(stampFour);
+    addToButtonGroup(stampFive);
+    addToButtonGroup(stampSix);
+    addToButtonGroup(stampSeven);
+    addToButtonGroup(stampEight);
+    addToButtonGroup(stampNine);
+    addToButtonGroup(stampTen);
+    addToButtonGroup(stampEleven);
+    addToButtonGroup(stampTwelve);
+    addToButtonGroup(stampThirteen);
+    addToButtonGroup(stampFourteen);
+    addToButtonGroup(stampFifteen);
+    addToButtonGroup(stampSixteen);
+    addToButtonGroup(stampSeventeen);
+    addToButtonGroup(stampEighteen);
+    addToButtonGroup(stampNineteen);
+    addToButtonGroup(stampTwenty);
+    addToButtonGroup(stampTwentyOne);
+    addToButtonGroup(stampTwentyTwo);
+    addToButtonGroup(stampTwentyThree);
+    addToButtonGroup(stampTwentyFour);
+    addToButtonGroup(stampTwentyFive);
+    addToButtonGroup(invisibleButton);
+
+    buttonGroup->setExclusive(true);
 }
 
 //STAMPS WIDGET FOOD
@@ -636,10 +878,43 @@ StampsWidgetFood::StampsWidgetFood()
     setButtonProperties(stampTwentySix);
     stampTwentySeven = new QPushButton(QIcon(":/Stamps/food/Stamps/food_twentyseven_stamp.png"), tr(""));
     setButtonProperties(stampTwentySeven);
-
+    invisibleButton = new QPushButton("");
+    setButtonProperties(invisibleButton);
+    invisibleButton->setVisible(false);
 
     QSpacerItem *horizSpacer = new QSpacerItem(0,0,QSizePolicy::Expanding, QSizePolicy::Minimum);
     hLayout->addItem(horizSpacer);
     this->setLayout(hLayout);
 
+    buttonGroup = new QButtonGroup();
+    addToButtonGroup(stampOne);
+    addToButtonGroup(stampTwo);
+    addToButtonGroup(stampThree);
+    addToButtonGroup(stampFour);
+    addToButtonGroup(stampFive);
+    addToButtonGroup(stampSix);
+    addToButtonGroup(stampSeven);
+    addToButtonGroup(stampEight);
+    addToButtonGroup(stampNine);
+    addToButtonGroup(stampTen);
+    addToButtonGroup(stampEleven);
+    addToButtonGroup(stampTwelve);
+    addToButtonGroup(stampThirteen);
+    addToButtonGroup(stampFourteen);
+    addToButtonGroup(stampFifteen);
+    addToButtonGroup(stampSixteen);
+    addToButtonGroup(stampSeventeen);
+    addToButtonGroup(stampEighteen);
+    addToButtonGroup(stampNineteen);
+    addToButtonGroup(stampTwenty);
+    addToButtonGroup(stampTwentyOne);
+    addToButtonGroup(stampTwentyTwo);
+    addToButtonGroup(stampTwentyThree);
+    addToButtonGroup(stampTwentyFour);
+    addToButtonGroup(stampTwentyFive);
+    addToButtonGroup(stampTwentySix);
+    addToButtonGroup(stampTwentySeven);
+    addToButtonGroup(invisibleButton);
+
+    buttonGroup->setExclusive(true);
 }

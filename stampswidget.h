@@ -85,8 +85,7 @@ public:
     QPushButton *stampThirtyOne;
     QPushButton *stampThirtyTwo;
     QPushButton *stampThirtyThree;
-
-
+    QPushButton *invisibleButton;
 };
 
 //Stamp Category: Animals
@@ -128,7 +127,7 @@ public:
     QPushButton *snakeStamp;
     QPushButton *turkeyStamp;
     QPushButton *wolfStamp;
-
+    QPushButton *invisibleButton;
 
 };
 
@@ -171,8 +170,7 @@ public:
     QPushButton *stampThirtyOne;
     QPushButton *stampThirtyTwo;
     QPushButton *stampThirtyThree;
-
-
+    QPushButton *invisibleButton;
 };
 
 //Stamp Category: Buildings
@@ -196,7 +194,7 @@ public:
     QPushButton *shopThreeStamp;
     QPushButton *shopFourStamp;
     QPushButton *castleStamp;
-
+    QPushButton *invisibleButton;
 };
 
 //Stamp Category: Scenery
@@ -220,7 +218,7 @@ public:
     QPushButton *flowerThreeStamp;
     QPushButton *bouquetStamp;
     QPushButton *statueStamp;
-
+    QPushButton *invisibleButton;
 };
 
 //Stamp Category: Faces
@@ -261,7 +259,7 @@ public:
     QPushButton *stampThirty;
     QPushButton *stampThirtyOne;
     QPushButton *stampThirtyTwo;
-
+    QPushButton *invisibleButton;
 };
 
 //Stamp Category: Vehicles
@@ -295,7 +293,7 @@ public:
     QPushButton *stampTwentyThree;
     QPushButton *stampTwentyFour;
     QPushButton *stampTwentyFive;
-
+    QPushButton *invisibleButton;
 };
 
 
@@ -332,7 +330,7 @@ public:
     QPushButton *stampTwentyFive;
     QPushButton *stampTwentySix;
     QPushButton *stampTwentySeven;
-
+    QPushButton *invisibleButton;
 };
 
 

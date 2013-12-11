@@ -928,11 +928,13 @@ void MainWindow::toolButtonGroupClicked(int id)
             prompt->promptLabel->setText(tr("Click a point on the canvas to start drawing and click a second point on the canvas to stop drawing and render the brush stroke. Or select a brush effect."));
             showPopup(brushEffectsWidgetBrushEffects);
             break;
-    case 6:
-        canvas->drawState = canvas->TEXTTYPE;
-        //prompt->promptLabel->setText(tr("Click a point on the canvas to start drawing and click a second point on the canvas to stop drawing and render the brush stroke. Or select a brush effect."));
-        showPopup(textWidgetLetters);
-        break;
+        case 6:
+            canvas->drawState = canvas->TEXTTYPE;
+            prompt->promptLabel->setText(tr("Type a caption and click 'Ok' to add it to the canvas."));
+            textWidgetLetters->textEdit->setFont(canvas->font);
+            textWidgetSpecialKeys->textEdit->setFont(canvas->font);
+            showPopup(textWidgetLetters);
+            break;
         default:
             break;
     }
@@ -945,6 +947,10 @@ void MainWindow::newButtonClicked()
     newApplication = new MainWindow();
     newApplication -> show();*/
     canvas->scene->clear();
+    canvas->myPath = new QGraphicsPathItem();
+    //canvas->myPath->setPen(*brushPen);
+    //canvas->scene->addItem(myPath);
+    canvas->scene->update();
 }
 
 void MainWindow::openButtonClicked()
@@ -1713,8 +1719,11 @@ void MainWindow::customColorButtonClicked()
 {
     QColorDialog colorDialog;
     QColor color = colorDialog.getColor(Qt::white,this);
-    canvas->prevCustomColor = color;
-    changePaintToolColor(color);
+    if(color.isValid()) {
+        canvas->prevCustomColor = color;
+        changePaintToolColor(color);
+    }
+
     colorsWidgetColorsOutline->prevCustomButtonIcon->fill(canvas->prevCustomColor);
     colorsWidgetColorsOutline->prevCustomButton->setIcon(QIcon(*colorsWidgetColorsOutline->prevCustomButtonIcon));
     colorsWidgetColorsFill->prevCustomButtonIcon->fill(canvas->prevCustomColor);
@@ -1953,6 +1962,14 @@ void MainWindow::recentsButtonClicked()
 void MainWindow::silhouetteButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp. The color tool can be used as well.");
     showPopup(stampsWidgetSilhouette);
@@ -1960,6 +1977,14 @@ void MainWindow::silhouetteButtonClicked()
 void MainWindow::peopleButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp.");
     showPopup(stampsWidgetPeople);
@@ -1968,6 +1993,14 @@ void MainWindow::peopleButtonClicked()
 void MainWindow::animalsButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp.");
     showPopup(stampsWidgetAnimals);
@@ -1975,6 +2008,14 @@ void MainWindow::animalsButtonClicked()
 void MainWindow::buildingsButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp.");
     showPopup(stampsWidgetBuildings);
@@ -1982,6 +2023,14 @@ void MainWindow::buildingsButtonClicked()
 void MainWindow::sceneryButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp:");
     showPopup(stampsWidgetScenery);
@@ -1989,6 +2038,14 @@ void MainWindow::sceneryButtonClicked()
 void MainWindow::facesButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp. The color tool can be used as well:");
     showPopup(stampsWidgetFaces);
@@ -1997,6 +2054,14 @@ void MainWindow::facesButtonClicked()
 void MainWindow::vehiclesButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp:");
     showPopup(stampsWidgetVehicles);
@@ -2005,6 +2070,15 @@ void MainWindow::vehiclesButtonClicked()
 void MainWindow::silhouetteColorButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
+
     canvas->resetShapeState();
     canvas->drawState = canvas->COLOR;
     canvas->colorState = canvas->SILHOUETTESTAMP;
@@ -2017,6 +2091,14 @@ void MainWindow::silhouetteColorButtonClicked()
 void MainWindow::foodButtonClicked()
 {
     hideWidgets();
+    stampsWidgetSilhouette->invisibleButton->setChecked(true);
+    stampsWidgetAnimals->invisibleButton->setChecked(true);
+    stampsWidgetPeople->invisibleButton->setChecked(true);
+    stampsWidgetBuildings->invisibleButton->setChecked(true);
+    stampsWidgetScenery->invisibleButton->setChecked(true);
+    stampsWidgetFaces->invisibleButton->setChecked(true);
+    stampsWidgetVehicles->invisibleButton->setChecked(true);
+    stampsWidgetFood->invisibleButton->setChecked(true);
 
     prompt->promptLabel->setText("Select a stamp:");
     stampsWidgetFood->show();

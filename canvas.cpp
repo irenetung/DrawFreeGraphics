@@ -36,6 +36,8 @@ Canvas::Canvas(QUndoStack* undoStack_)
     shapeState = LINE;
     brushEffectsState = PAINT;
 
+    font.setPointSize(16);
+
 //Undo
     undoStack = undoStack_;
 //Cursor
@@ -124,7 +126,6 @@ void Canvas::setCurrentStamp(QString item)
 void Canvas::drawPixmapItem(QGraphicsPixmapItem *item)
 {
     item->setTransformOriginPoint(item->boundingRect().center());
-    item->setScale(0.5);
     undoStack->push(new CommandItem(item, scene));
     update();
     mousePressCount = 0;
@@ -358,17 +359,19 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     break;
                 case DEPTH: {
                     QList<QGraphicsItem *> overlapItems = selectedItem->collidingItems();
-                    qreal maxZValue = 0;
-                    qreal minZValue = 0;
+                    qreal maxZValue = selectedItem->zValue();
+                    qreal minZValue = selectedItem->zValue();
                     foreach(QGraphicsItem *item, overlapItems) {
                         if(item->zValue() >= maxZValue) {
                             maxZValue = item->zValue()+0.1;
-                        } else {
+                        }
+                        if(item->zValue() <= minZValue) {
                             minZValue = item->zValue()-0.1;
                         }
+                        qDebug() << "a " <<maxZValue << " " << minZValue;
                     }
-
-                    if(depthPositive == true) {
+                    qDebug() << "eeeee " <<maxZValue << " " << minZValue;
+                    if(depthPositive) {
                         selectedItem->setZValue(maxZValue);
                     } else {
                         selectedItem->setZValue(minZValue);
@@ -500,7 +503,9 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                     break;
             }
         }
+        scene->update();
         break;
+
     }
     case COLOR: {//-------------------------------------------------------
         if(selectedItem != NULL) {
