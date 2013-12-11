@@ -412,10 +412,22 @@ QRectF CalligraphyItem::boundingRect() const
 
 void CalligraphyItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    int skew = 5;
-    p->setBrush(*brush);
-    p->setPen(*pen);
+
+    qDebug()<<pen->width();
+    int size1=pen->width();
+    //p->setBrush(*brush);
+    //p->setPen(*pen);
     int size = vertices.size();
+    int skew = 5*(size1); // `groove thinner or gap wider
+    QPen *newPen = new QPen(*pen);
+    newPen->setStyle(Qt::DashLine);
+    newPen->setCapStyle(Qt::RoundCap);
+    newPen->setJoinStyle(Qt::RoundJoin);
+    newPen->setWidth(1);
+    p->setPen(*newPen);
+
+
+
 
     for(int i = 1; i < size; i++) {
         QPointF xy1=vertices.at(i-1);
@@ -423,20 +435,20 @@ void CalligraphyItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option,
         //p->drawLine(xy1.x()-skew,xy1.y()-skew,xy1.x()+skew,xy1.y()+skew);
         p->drawLine(xy1.x()-skew,xy1.y()-skew,xy1.x()+skew,xy1.y()+skew);// by narrowing the skew it becomes less caligraphy more pen
         int counter;
-        counter=10;
+        counter=2*skew;
         int begin1;
-        begin1=xy1.x()-5;
+        begin1=xy1.x()-skew;
         int end1;
-        end1=xy2.x()-5;
+        end1=xy2.x()-skew;
         int begin2;
-        begin2=xy1.y()-5;
+        begin2=xy1.y()-skew;
         int end2;
-        end2=xy2.y()-5;
+        end2=xy2.y()-skew;
         while(counter>=0)
         {
             p->drawLine(begin1,begin2,end1,end2);
             begin1++;
-            end1++;
+            end1++;;
             begin2++;
             end2++;
             counter--;
@@ -478,10 +490,17 @@ return QRectF(left,top,right-left,bottom-top);
 
 void SprayPaintItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-p->setBrush(*brush);
-p->setPen(*pen);
+    qDebug()<<pen->width();
+  //  p->setBrush(*brush);
+  //  p->setPen(*pen);
 int size = vertices.size();
-
+int size1=pen->width();
+QPen *newPen = new QPen(*pen);
+newPen->setStyle(Qt::DashLine);
+newPen->setCapStyle(Qt::RoundCap);
+newPen->setJoinStyle(Qt::RoundJoin);
+newPen->setWidth(1);
+p->setPen(*newPen);
 for(int i = 1; i < size; i++) {
     QPointF xy1=vertices.at(i-1);
     int gx=xy1.x();
@@ -496,46 +515,46 @@ for(int i = 1; i < size; i++) {
               // if(randVal%2==0)
                //  {
                    p->drawPoint(gx,gy);
-                   p->drawPoint(gx-2,gy-9);
-                   p->drawPoint(gx-5,gy-7);
-                   p->drawPoint(gx-9,gy-2);
-                   p->drawPoint(gx-7,gy-2);
-                   p->drawPoint(gx-2,gy-5);
-                   p->drawPoint(gx+2,gy+9);
-                   p->drawPoint(gx+5,gy+7);
-                   p->drawPoint(gx+9,gy+2);
-                   p->drawPoint(gx+7,gy+2);
-                   p->drawPoint(gx+2,gy+5);
-                   p->drawPoint(gx-2,gy+9);
-                   p->drawPoint(gx-5,gy+7);
-                   p->drawPoint(gx-9,gy+2);
-                   p->drawPoint(gx-7,gy+2);
-                   p->drawPoint(gx-2,gy+5);
-                   p->drawPoint(gx+2,gy-9);
-                   p->drawPoint(gx+5,gy-7);
-                   p->drawPoint(gx+9,gy-2);
-                   p->drawPoint(gx+7,gy-2);
-                   p->drawPoint(gx+2,gy-5);
-                   p->drawPoint(gx+7,gy+7);
-                   p->drawPoint(gx-7,gy-7);
-                   p->drawPoint(gx+7,gy-7);
-                   p->drawPoint(gx-7,gy+7);
-                   p->drawPoint(gx+4,gy+4);
-                   p->drawPoint(gx-4,gy-4);
-                   p->drawPoint(gx+4,gy-4);
-                   p->drawPoint(gx-4,gy+4);
-                   p->drawPoint(gx+2,gy);
-                   p->drawPoint(gx+5,gy);
-                   p->drawPoint(gx+9,gy);
-                   p->drawPoint(gx,gy+2);
-                   p->drawPoint(gx,gy+5);
-                   p->drawPoint(gx,gy+9);
-                   p->drawPoint(gx-2,gy);
-                   p->drawPoint(gx-5,gy);
-                   p->drawPoint(gx-9,gy);
-                   p->drawPoint(gx,gy-2);
-                   p->drawPoint(gx,gy-5);
-                   p->drawPoint(gx,gy-9);
+                   p->drawPoint(gx-2*(size1),gy-9*(size1));
+                   p->drawPoint(gx-5*(size1),gy-7*(size1));
+                   p->drawPoint(gx-9*(size1),gy-2*(size1));
+                   p->drawPoint(gx-7*(size1),gy-2*(size1));
+                   p->drawPoint(gx-2*(size1),gy-5*(size1));
+                   p->drawPoint(gx+2*(size1),gy+9*(size1));
+                   p->drawPoint(gx+5*(size1),gy+7*(size1));
+                   p->drawPoint(gx+9*(size1),gy+2*(size1));
+                   p->drawPoint(gx+7*(size1),gy+2*(size1));
+                   p->drawPoint(gx+2*(size1),gy+5*(size1));
+                   p->drawPoint(gx-2*(size1),gy+9*(size1));
+                   p->drawPoint(gx-5*(size1),gy+7*(size1));
+                   p->drawPoint(gx-9*(size1),gy+2*(size1));
+                   p->drawPoint(gx-7*(size1),gy+2*(size1));
+                   p->drawPoint(gx-2*(size1),gy+5*(size1));
+                   p->drawPoint(gx+2*(size1),gy-9*(size1));
+                   p->drawPoint(gx+5*(size1),gy-7*(size1));
+                   p->drawPoint(gx+9*(size1),gy-2*(size1));
+                   p->drawPoint(gx+7*(size1),gy-2*(size1));
+                   p->drawPoint(gx+2*(size1),gy-5*(size1));
+                   p->drawPoint(gx+7*(size1),gy+7*(size1));
+                   p->drawPoint(gx-7*(size1),gy-7*(size1));
+                   p->drawPoint(gx+7*(size1),gy-7*(size1));
+                   p->drawPoint(gx-7*(size1),gy+7*(size1));
+                   p->drawPoint(gx+4*(size1),gy+4*(size1));
+                   p->drawPoint(gx-4*(size1),gy-4*(size1));
+                   p->drawPoint(gx+4*(size1),gy-4*(size1));
+                   p->drawPoint(gx-4*(size1),gy+4*(size1));
+                   p->drawPoint(gx+2*(size1),gy);
+                   p->drawPoint(gx+5*(size1),gy);
+                   p->drawPoint(gx+9*(size1),gy);
+                   p->drawPoint(gx,gy+2*(size1));
+                   p->drawPoint(gx,gy+5*(size1));
+                   p->drawPoint(gx,gy+9*(size1));
+                   p->drawPoint(gx-2*(size1),gy);
+                   p->drawPoint(gx-5*(size1),gy);
+                   p->drawPoint(gx-9*(size1),gy);
+                   p->drawPoint(gx,gy-2*(size1));
+                   p->drawPoint(gx,gy-5*(size1));
+                   p->drawPoint(gx,gy-9*(size1));
                /*   }
                //  else if(randVal%2==1)
                //    {
@@ -621,8 +640,16 @@ void PencilItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWid
 {
 p->setBrush(*brush);
 p->setPen(*pen);
-int size = vertices.size();
 
+    qDebug()<< pen->width();
+    int size1=pen->width();
+int size = vertices.size();
+QPen *newPen = new QPen(*pen);
+newPen->setStyle(Qt::DashLine);
+newPen->setCapStyle(Qt::RoundCap);
+newPen->setJoinStyle(Qt::RoundJoin);
+newPen->setWidth(1);
+p->setPen(*newPen);
 for(int i = 1; i < size; i++) {
     QPointF xy1=vertices.at(i-1);
     QPointF xy2=vertices.at(i);
@@ -637,39 +664,39 @@ for(int i = 1; i < size; i++) {
              //while(counter!=100)
              //{
                 // int random=rand();
-                 p->drawLine(gx,gy,gx+2,gy);
-                 p->drawLine(gx2,gy2,gx2+2,gy2);
-                 p->drawLine(gx+2,gy,gx2,gy2);
+    p->drawLine(gx,gy,gx+2*(size1),gy);
+                 p->drawLine(gx2,gy2,gx2+2*(size1),gy2);
+                 p->drawLine(gx+2*(size1),gy,gx2,gy2);
 
-                 p->drawLine(gx-3,gy,gx-2,gy);
-                 p->drawLine(gx2-3,gy2,gx2-2,gy2);
-                 p->drawLine(gx-2,gy,gx2-3,gy2);
-
-
-                 p->drawPoint(gx-1,gy+1);
-                 p->drawPoint(gx+3,gy+1);
-                 p->drawPoint(gx-4,gy+1);
-                 p->drawLine(gx,gy+2,gx+2,gy+2);
-                 p->drawLine(gx2,gy2+2,gx2+2,gy2+2);
-                 p->drawLine(gx+2,gy+2,gx2,gy2+2);
+                 p->drawLine(gx-3*(size1),gy,gx-2*(size1),gy);
+                 p->drawLine(gx2-3*(size1),gy2,gx2-2*(size1),gy2);
+                 p->drawLine(gx-2*(size1),gy,gx2-3*(size1),gy2);
 
 
-                 p->drawLine(gx-3,gy+2,gx-2,gy+2);
-                 p->drawLine(gx2-3,gy2+2,gx2-2,gy2+2);
-                 p->drawLine(gx-2,gy+2,gx2-3,gy2+2);
+                 p->drawPoint(gx-1*(size1),gy+1*(size1));
+                 p->drawPoint(gx+3*(size1),gy+1*(size1));
+                 p->drawPoint(gx-4*(size1),gy+1*(size1));
+                 p->drawLine(gx,gy+2*(size1),gx+2*(size1),gy+2*(size1));
+                 p->drawLine(gx2,gy2+2*(size1),gx2+2*(size1),gy2+2*(size1));
+                 p->drawLine(gx+2*(size1),gy+2*(size1),gx2,gy2+2*(size1));
 
 
-                 p->drawPoint(gx-1,gy+3);
-                 p->drawPoint(gx+3,gy+3);
-                 p->drawPoint(gx-4,gy+3);
-                 p->drawLine(gx,gy+4,gx+2,gy+4);
-                 p->drawLine(gx2,gy2+4,gx2+2,gy2+4);
-                 p->drawLine(gx+2,gy+4,gx2,gy2+4);
+                 p->drawLine(gx-3*(size1),gy+2*(size1),gx-2*(size1),gy+2*(size1));
+                 p->drawLine(gx2-3*(size1),gy2+2*(size1),gx2-2*(size1),gy2+2*(size1));
+                 p->drawLine(gx-2*(size1),gy+2*(size1),gx2-3*(size1),gy2+2*(size1));
 
 
-                 p->drawLine(gx-3,gy+4,gx-2,gy+4);
-                 p->drawLine(gx2-3,gy2+4,gx2-2,gy2+4);
-                 p->drawLine(gx-2,gy+4,gx2-3,gy2+4);
+                 p->drawPoint(gx-1*(size1),gy+3*(size1));
+                 p->drawPoint(gx+3*(size1),gy+3*(size1));
+                 p->drawPoint(gx-4*(size1),gy+3*(size1));
+                 p->drawLine(gx,gy+4*(size1),gx+2*(size1),gy+4*(size1));
+                 p->drawLine(gx2,gy2+4*(size1),gx2+2*(size1),gy2+4*(size1));
+                 p->drawLine(gx+2*(size1),gy+4*(size1),gx2,gy2+4*(size1));
+
+
+                 p->drawLine(gx-3*(size1),gy+4*(size1),gx-2*(size1),gy+4*(size1));
+                 p->drawLine(gx2-3*(size1),gy2+4*(size1),gx2-2*(size1),gy2+4*(size1));
+                 p->drawLine(gx-2*(size1),gy+4*(size1),gx2-3*(size1),gy2+4*(size1));
 
 
                //  counter++;
