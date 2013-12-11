@@ -1890,7 +1890,7 @@ void MainWindow::brushEffectsButtonGroupClicked(int id)
             canvas->brushEffectsState = canvas->CALLIGRAPHY;
             break;
         case 3:
-            QMessageBox::information(this, tr("title"),tr("Not implemented yet"));
+            //QMessageBox::information(this, tr("title"),tr("Not implemented yet"));
             canvas->brushEffectsState = canvas->PENCIL;
             break;
         case 4:

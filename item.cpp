@@ -316,8 +316,9 @@ void WatercolorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         int *cols = new int[numRowsCols];
         for (int r = 0; r < numRowsCols; r++)
         {
-            rows[r] = rand() % size;
-            cols[r] = rand() % size;
+
+            rows[r] = r % size;
+            cols[r] = r % size; // replace rand with hardcode 5
         }
 
         // deque center point
@@ -485,15 +486,15 @@ for(int i = 1; i < size; i++) {
     QPointF xy1=vertices.at(i-1);
     int gx=xy1.x();
     int gy=xy1.y();
-            int randVal;
-            int counter;
-             randVal=rand()+1;
-             counter=0;
-             while(counter!=100)
-             {
+           // int randVal;
+            //int counter;
+            // randVal=rand()+1;
+            // counter=0;
+            // while(counter!=100)
+            // {
                 // int random=rand();
-               if(randVal%2==0)
-                 {
+              // if(randVal%2==0)
+               //  {
                    p->drawPoint(gx,gy);
                    p->drawPoint(gx-2,gy-9);
                    p->drawPoint(gx-5,gy-7);
@@ -535,9 +536,9 @@ for(int i = 1; i < size; i++) {
                    p->drawPoint(gx,gy-2);
                    p->drawPoint(gx,gy-5);
                    p->drawPoint(gx,gy-9);
-                  }
-                 else if(randVal%2==1)
-                   {
+               /*   }
+               //  else if(randVal%2==1)
+               //    {
                    p->drawPoint(gx,gy);
                    p->drawPoint(gx-1,gy-2);
                    p->drawPoint(gx-3,gy-8);
@@ -579,10 +580,102 @@ for(int i = 1; i < size; i++) {
                    p->drawPoint(gx,gy-2);
                    p->drawPoint(gx,gy-5);
                    p->drawPoint(gx,gy-9);
-                   }
-                 counter++;
-             }
+                   }*/
+              //   counter++;
+             //}
 }
 }
+
+PencilItem::PencilItem(QList<QPointF> &points, QPen &curPen, QBrush &curBrush)
+{
+left = points[0].x();
+right = points[0].x();
+top = points[0].y();
+bottom = points[0].y();
+
+for(int i = 0; i < points.size(); i++) {
+    vertices.append(points[i]);
+    if(points[i].x() < left) {
+        left = points[i].x();
+    }
+    if(points[i].x() > right) {
+        right = points[i].x();
+    }
+    if(points[i].y() < top) {
+        top = points[i].y();
+    }
+    if(points[i].y() > bottom) {
+        bottom = points[i].y();
+    }
+}
+pen = new QPen(curPen);
+brush = new QBrush(curBrush);
+}
+
+QRectF PencilItem::boundingRect() const
+{
+return QRectF(left,top,right-left,bottom-top);
+}
+
+void PencilItem::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+p->setBrush(*brush);
+p->setPen(*pen);
+int size = vertices.size();
+
+for(int i = 1; i < size; i++) {
+    QPointF xy1=vertices.at(i-1);
+    QPointF xy2=vertices.at(i);
+    int gx=xy1.x();
+    int gy=xy1.y();
+    int gx2=xy2.x();
+    int gy2=xy2.y();
+
+            //int counter;
+
+             //counter=0;
+             //while(counter!=100)
+             //{
+                // int random=rand();
+                 p->drawLine(gx,gy,gx+2,gy);
+                 p->drawLine(gx2,gy2,gx2+2,gy2);
+                 p->drawLine(gx+2,gy,gx2,gy2);
+
+                 p->drawLine(gx-3,gy,gx-2,gy);
+                 p->drawLine(gx2-3,gy2,gx2-2,gy2);
+                 p->drawLine(gx-2,gy,gx2-3,gy2);
+
+
+                 p->drawPoint(gx-1,gy+1);
+                 p->drawPoint(gx+3,gy+1);
+                 p->drawPoint(gx-4,gy+1);
+                 p->drawLine(gx,gy+2,gx+2,gy+2);
+                 p->drawLine(gx2,gy2+2,gx2+2,gy2+2);
+                 p->drawLine(gx+2,gy+2,gx2,gy2+2);
+
+
+                 p->drawLine(gx-3,gy+2,gx-2,gy+2);
+                 p->drawLine(gx2-3,gy2+2,gx2-2,gy2+2);
+                 p->drawLine(gx-2,gy+2,gx2-3,gy2+2);
+
+
+                 p->drawPoint(gx-1,gy+3);
+                 p->drawPoint(gx+3,gy+3);
+                 p->drawPoint(gx-4,gy+3);
+                 p->drawLine(gx,gy+4,gx+2,gy+4);
+                 p->drawLine(gx2,gy2+4,gx2+2,gy2+4);
+                 p->drawLine(gx+2,gy+4,gx2,gy2+4);
+
+
+                 p->drawLine(gx-3,gy+4,gx-2,gy+4);
+                 p->drawLine(gx2-3,gy2+4,gx2-2,gy2+4);
+                 p->drawLine(gx-2,gy+4,gx2-3,gy2+4);
+
+
+               //  counter++;
+             //}
+}
+}
+
 
 

@@ -243,8 +243,11 @@ void Canvas::mousePressEvent(QMouseEvent *e)
                 drawItem(calligraphyItem);
                 break;
             }
-            case PENCIL:
+            case PENCIL:{
+                PencilItem *pencilItem =new PencilItem(points,*brushPen,*brushBrush);
+                drawItem(pencilItem);
                 break;
+             }
             case SPRAYPAINT: {
                 SprayPaintItem *sprayPaintItem = new SprayPaintItem(points, *brushPen, *brushBrush);
                 drawItem(sprayPaintItem);
